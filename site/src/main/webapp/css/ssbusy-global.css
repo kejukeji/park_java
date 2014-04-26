@@ -1,0 +1,594 @@
+/**** icomoon.css ****/
+@font-face {
+	font-family: 'icomoon';
+	src:url('/fonts/icomoon.eot');
+	src:url('/fonts/icomoon.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Quicksand';
+	src:url('/fonts/Quicksand-Regular.otf');
+	font-weight: normal;
+	font-style: normal;
+}
+li{
+list-style: none;
+}
+.icon-android {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-android:before {
+	content: "\e004";
+}
+
+
+a:hover { 
+	text-decoration:none !important;
+	cursor: pointer;
+	color: #e65c5c !important;
+}
+.header {
+	font-size:1em;
+	background-color:#f8f8f8;
+}
+.header a{
+	text-decoration: none;
+	color:#7d7d7d;
+}
+.head{
+	color: #7d7d7d;
+	line-height:40px;
+	background-color: #f8f8f8;
+}
+.vline{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -805px -151px;
+	width:20px;
+	height:15px;
+	display: inline-block;
+	vertical-align:middle;
+}
+.mobile{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png)  -394px -23px;
+	padding-left:20px !important;
+	height:30px;
+	display: inline-block;
+}
+.mobile:hover{
+	background-position: -394px -73px;
+}
+.notices{
+	display:inline-block;
+	position:relative;
+}
+.notice{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -310px -53px;
+	width:20px;
+	height:25px;
+	display: inline-block;
+	margin-left: 5px;
+	margin-bottom: -5px;
+}
+.notices:hover .notice{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -310px -79px;
+}
+.notices .notice-hidden{
+	display:none;
+	border: 2px solid #f8f8f8;
+	padding-left:1em;
+}
+.notices:hover .notice-hidden,.notice-hidden:hover{
+	display:inline-block;
+    position:absolute;
+	right:0em;
+	width:25em;
+}
+.setting{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -338px -58px;
+	width:20px;
+	height:20px;
+	display: inline-block;
+	margin-left: 5px;
+	margin-bottom: -5px;
+}
+.setting:hover{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -338px -84px;
+}
+.exit{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -362px -58px;
+	width:20px;
+	height:20px;
+	display: inline-block;
+	margin-left: 5px;
+	margin-bottom: -5px;
+}
+.exit:hover{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -362px -84px;
+}
+.tiny.avatar {
+	width: 36px;
+	height: 36px;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius:25px;
+	border: #e2e2e2 solid 2px;
+	margin-bottom: 1px;
+}
+
+.hover-show{
+	position: relative;
+	z-index: 1;
+}
+.hover-showed {
+	display: none;
+	position: absolute;
+	z-index: 5000;
+	background-color: white;
+}
+.signon,.signin{
+	display: inline-block;
+}
+.signin{
+	margin-left: 5px;
+}
+.hover-show:hover .hover-showed,.hover-showed:hover
+	{
+	display: block;
+	
+}
+/* ���ֵ�½��ʽ��css �� ʼ  */
+
+.menu input.oauth {
+	height:30px;
+	width: 100%;
+	border-bottom:1px solid #CCC;	
+}
+input.oauth {
+	border: 0;
+	padding-left:28px;
+}
+
+.menu input.oauth_wb {
+	background: url(//img.onxiao.com/img/login-icon.png) 0px 0px no-repeat;
+}
+.menu input.oauth_qq{
+	background: url(//img.onxiao.com/img/login-icon.png) 0px -33px no-repeat;
+}
+.menu input.oauth_rr {
+	background: url(//img.onxiao.com/img/login-icon.png) 0px -63px no-repeat;
+}
+.menu input.oauth:hover{
+	color:#fff;
+}
+.menu input.oauth_wb:hover{
+	background: url(//img.onxiao.com/img/login-icon.png) -25px 0px no-repeat #cc3333;
+}
+.menu input.oauth_rr:hover{
+	background: url(//img.onxiao.com/img/login-icon.png) -25px -63px  no-repeat #1f82c8;
+	
+}
+.menu input.oauth_qq:hover{
+	background: url(//img.onxiao.com/img/login-icon.png) -25px -33px  no-repeat #46b6dc;
+}
+
+/*** search box***/
+.search-bar input {
+	outline: none;
+}
+.search-box {
+	height: 46px;
+	border: solid #f15151 3px;
+	border-right: 0;
+}
+.header-middle-s .search-box {
+	height: 40px;
+	border-width: 5px;
+}
+.header-middle-s .search-button {
+	height: 40px;
+}
+.search-button{
+	height: 46px;
+	background-color:#f15151 ;
+	border:solid #f15151  3px;
+	
+	font-size:1.6em;
+	color:#fff;
+}
+.search-button:hover{
+	background-color:#e84e4e;
+}
+.header-middle-s .search-bar-bg {
+	height:40px;
+}
+.search-bar-bg {
+	position:absolute;
+	background-color: #e5e5e5;
+	bottom:-4px;
+	height:46px;
+	right:-4px;
+	left:4px;
+	z-index:-1;
+	display:none;
+}
+.search-bar:hover .search-bar-bg{
+	display: block;
+}
+.v2 .header-middle-s .cart{
+line-height: 38px;
+background-position-y:-433px;
+}
+.v2 .header-middle-s .cart:hover {
+background-position-y:-387px;
+}
+.v2 .cart{
+	line-height: 44px;
+	font-size: 1.3em;
+	background-color: #fafafa;
+	border: solid 1px #efefef;
+	padding-left: 52px;
+	display: block;
+	color: #b7b7b7;
+	width: 110px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -460px -430px;
+}
+@media screen and (max-width: 1024px) {
+.v2 .cart{
+	padding-left: 46px;
+	width: 98px;
+}
+}
+
+.v2 .cart:hover {
+	color: #7d7d7d;
+	background-position: -460px -384px;
+	text-decoration: none;
+}
+.v2 .cart:hover #cartItemCount {
+	background-color: #f15151;
+}
+.v2 #cartItemCount {
+	display: inline-block;
+	background-color: #857c7c;
+	width: 2em;
+	color:#fff;
+	font-weight: bold;
+	float: right;
+	text-align: center;
+	margin-right: .6em;
+}
+.d11-ad #shine {
+	position: absolute;
+	top: 0px;
+	left: -262px;
+}
+
+
+/******** home ************/
+.bboard {
+	border: 1px solid #f1f1f1;
+}
+.bboard dl.tabs {
+	margin: 0;
+	height: 23px;
+	background-color: #fafafa;
+}
+.bboard .tabs dd {
+	float: left;
+	margin: 0;
+	padding: 0 12px;
+	height: 23px;
+	line-height: 23px;
+	cursor: pointer;
+}
+.bboard .tabs dd.active {
+	border-right: 1px solid #f1f1f1;
+	border-left: 1px solid #f1f1f1;
+	height: 24px;
+	background-color: #fff;
+	cursor: default;
+}
+.bboard .tab-contents {
+	border-top: 1px solid #f1f1f1;
+	height: 80px;
+}
+.tab-contents .tab-content {
+	display: none;
+}
+.tab-contents .tab-content.active {
+	display: block;
+}
+.bboard p {
+	margin: 4px 8px;
+}
+/******** home end ********/
+/* category */
+.category-list, .grid-container .category-list a,
+.product-main,.grid-container .product-main a {
+color: #b0b0b0;
+}
+.cat-scrumb {
+border-top: 3px solid #fafafa;
+line-height: 3em;
+position: relative;
+z-index: 100;
+}
+.product-main .cat-scrumb {
+border-bottom: 3px solid #fafafa;
+margin-bottom: 14px;
+}
+.category-list #options {
+border: 1px solid #efefef;
+border-width: 3px 0 0 1px;
+}
+.category-list table {
+width: 100%;
+}
+.category-list #options table .th {
+text-indent: 2em;
+width: 10%;
+background-color: #fafafa;
+}
+.category-list #options table .facet-values {
+width:80%;
+border-right: 0;
+}
+.category-list #options table .facet-values div {
+height: 2.4em;
+overflow: hidden;
+}
+.category-list #options table .facet-values a:hover {
+color:#f15151;
+}
+.category-list #options table .facet-values a {
+color:#b0b0b0;
+margin: .4em 1.5em;
+padding: 0 .3em;
+border: 1px dashed #fff;
+}
+.category-list #options table .facet-values .active {
+color:#f15151;
+border-color: #f15151;
+}
+.category-list #options table .facet-mores {
+border-left: 0;
+padding-right: 2em;
+vertical-align: top;
+line-height: 3em;
+}
+.category-list table .facet-mores span {
+display: inline-block;
+width: 14px;
+height: 10px;
+background: url(//img.onxiao.com/img/Sprites.png) -313px -122px no-repeat;
+}
+.category-list table .facet-mores .active span {
+background-position: -313px -107px;
+}
+.category-list #options table td {
+border: 1px solid #efefef;
+}
+.category-list #products li {
+list-style: none;
+position: relative;
+height: 322px;
+margin-bottom: 1em;
+}
+.category-list .product-item {
+border: 1px solid #fff;
+padding-top: 0;
+margin-top: 1em;
+position: absolute;
+top:0;
+}
+.category-list .product-item0 {
+border: 1px solid #efefef;
+padding: 0 1em 1em 1em;
+}
+.category-list .product-item:hover .product-item0 {
+border-width: 0;
+}
+.category-list .product-item:hover {
+margin-top: 0;
+padding-top: 1em;
+box-shadow: 3px 4px 0 #ededed;
+border: 2px solid #f15151;
+}
+.category-list .prod-img {
+display: block;line-height: 0;
+max-height: 175px;
+overflow: hidden;
+padding-top: 10px;
+}
+.category-list .prod-more {
+display: none;
+background-color: #fafafa;
+width: 100%;
+padding: .4em 0;
+border-top: 1px solid #efefef;
+}
+.category-list .prod-more span {
+text-align: center;
+color: #979797;
+border-right: 1px dashed #979797;
+}
+.category-list .product-item .price {
+font-family: "Comic Sans MS";
+border-top: 1px solid #efefef;
+line-height: 3em;
+}
+.price .sale {
+font-size: 1.5em !important;
+color: #f15151 !important;
+font-weight: normal;
+}
+.category-list .product-item .prod-name {
+display:block;
+line-height: 1.7em;
+height: 3.4em;
+min-height: 3.4em;
+overflow: hidden;
+color: #7d7d7d;
+margin-bottom: 8px;
+}
+.category-list .product-item:hover .prod-name {
+overflow: visible;
+height: auto;
+}
+.grid-container .prod-qty a {
+background: url(//img.onxiao.com/img/Sprites.png) -313px -107px no-repeat;
+}
+.grid-container .prod-qty {
+width: 50px;
+float: left;
+display: block;
+}
+.category-list .product-item .btn-cart {
+display: inline-block;
+line-height: 29px;
+height: 29px;
+background-color: #f15151;
+border-radius: 2px;
+border: 0;
+color: #fff;
+padding: 0 6px;
+cursor: pointer;
+float: left;
+}
+.grid-container span a.qty-minus {
+border-top-width: 0;
+background-position: -294px -122px;
+}
+.grid-container span a.qty-minus:hover {
+background-position: -313px -122px;
+}
+.grid-container .prod-qty .disabled {
+background-position: -294px -122px !important;
+}
+.category-list .prod-bar a,.scrumb {
+display: inline-block;
+background: url(//img.onxiao.com/img/Sprites.png) -313px -107px no-repeat;
+float: left;
+}
+.scrumb {
+padding-left: 26px;
+background-position: -524px -165px;
+}
+.product-main .scrumb {
+background-position: -522px -195px;
+}
+.scrumb ul.menu {
+	line-height: 2em;
+	padding: 0;
+	margin: 0;
+	top: 1.5em;
+	white-space: nowrap;
+	box-shadow: rgba(184, 184, 184, 0.498039) 3px 3px 0px;
+	border: 1px solid #E65C5C;
+}
+.scrumb .menu a {
+	padding: 0 1em;
+	display: block;
+}
+.scrumb .menu a:hover {
+	color: #fff !important;
+	background-color: #E65C5C;
+}
+.category-list .product-item:hover .prod-more {
+display: block;
+}
+.grid-container a.prod-like {
+position:relative;
+background-position: -346px -98px;
+}
+.grid-container a.prod-like div {
+position: absolute;
+color: red;
+}
+.grid-container a.prod-like:hover,
+.grid-container a.prod-like.active {
+background-position: -346px -120px;
+}
+.grid-container a.prod-stats {
+cursor:text;
+background-position: -309px -152px;
+}
+/* .grid-container a.prod-stats:hover {
+background-position: -312px -135px;
+} */
+.grid-container a.prod-pack {
+cursor:text;
+background-position: -285px -152px;
+}
+/* .grid-container a.prod-pack:hover {
+background-position: -289px -133px;
+} */
+.category-list .product-item .prod-sold font {
+color: #e39314;
+}
+.category-list .product-item .prod-ps font {
+color: #41aae6;
+}
+.category-list .product-item .prod-star {
+border-right: 0;
+}
+.category-list .product-item .prod-more {
+}
+.grid-container a.prod-btn {
+width: 29px;
+height: 29px;
+line-height: 29px;
+border-radius:2px;
+background-color: #f6f6f6;
+display: inline-block;
+background-image: url(//img.onxiao.com/img/Sprites.png);
+}
+.category-list .pager{
+text-align: center;
+padding: 3em;
+}
+.category-list .pager a {
+padding: 8px 12px;
+border: 1px solid #e8e8e8;
+margin: 4px;
+}
+.category-list .pager a:hover {
+border-color: #fe7d7d;
+background-color: #feeded;
+color: #fe7d7d;
+}
+.category-list div.pager a.active,
+.category-list div.pager a.near-page:hover {
+border-color: #fe7d7d;
+color:#fff;
+background-color: #f15151;
+}
+/* category end */
+.height-helf{height: 47% !important;margin-bottom: 1% !important;}
+.height-helf-special{margin-bottom: 0.5% !important;}
+.overflow_hidden{overflow:hidden;}
+.resetheight{height:175px !important}
+@media screen and (min-width: 1025px){
+	.flr-grid {margin:0 .5%;height:100%;}
+	.height-helf{margin:0 0.5% 0;}
+	.first-margin-right{margin-right:0.5%;}
+	.flr-grid-s {width:16%;height:100%;margin:0 0 0 .5%; overflow:hidden;}
+	.flr-grid-two{width:41%;}
+	.flr-grid-three{width:62%;}
+	.clear_padding{padding-left:0;padding-right:0;height:100%;}
+	.clear_left_padding{padding-left:0;}
+	.clear_right_padding{padding-right:0;}
+	.margin_right{margin-right:1%;}
+}
+@media screen and (max-width: 1024px){
+	.clear_left_padding{padding-left:0;}
+	.clear_right_padding{padding-right:0;}
+	.smal_height{height:175px !important;margin-right: 1%;padding-right: 0;width:24%;}
+}

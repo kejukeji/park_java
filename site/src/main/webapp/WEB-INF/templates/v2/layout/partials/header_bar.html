@@ -1,0 +1,94 @@
+<div class="header">
+	<div class="grid-container head user-info">
+		<div style="float: left;">
+			<span
+				th:text="${customer.region eq null ? '' : customer.region.regionName}" />
+				[<a class="sel-region" th:href="@{/region}" style="color: #f15151;">切换校区</a>]
+		</div>
+		<a class="local-weather">
+			<span id="weatherImg"></span>
+			<span id="cityShow" th:unless="${#lists.isEmpty(customer.region.fulfillmentLocations)}" th:text="${customer.region.fulfillmentLocations[0].id eq -1 ? '杭州':'丽水'}"></span>
+			<span id="weather"></span>
+			<span id="temperature"></span>
+			<script>/*<![CDATA[*/
+			function Weather(data){
+				document.getElementById("weather").innerHTML=data.future.wea_0;
+				document.getElementById("temperature").innerHTML=data.future.tmin_0+"-"+data.future.tmax_0+"°C";
+				document.getElementById("weatherImg").innerHTML='<img src="http://cache.soso.com/30d/img/web/haoqq_'+data.future.bwea_0_icon+'" />';
+			}
+			lastScripts[lastScripts.length]= function() {
+				var city=document.getElementById("cityShow").innerHTML;
+				var url = "http://sou.qq.com/online/get_weather.php?callback=Weather&city="+city;
+				var script = document.createElement('script');  
+				script.setAttribute('src', url);  
+				document.getElementsByTagName('head')[0].appendChild(script);
+			};
+			/*]]>*/</script>
+		</a>
+		<div style="float: right;">
+			<a class="mobile"  th:href="@{/d/app}">掌中在校</a> <a class="vline"></a>
+			<a th:href="@{/customer/like/show}">我喜欢的</a><a class="vline"></a><!-- <a>我关注的品牌</a>
+			<a class="vline"></a>  -->
+			<span th:if="${customer.anonymous}" class="hover-show"> <a class="signon"> <span style="color: #f15151;"
+					th:text="#{home.login}"></span>
+			</a><a class="signin" onclick="$$.register();"> <span
+					style="margin-left: 5px;" th:text="#{home.register}"></span>
+			</a>
+			 <div class="hover-showed menu">
+					<blc:form th:action="@{/signin/qq}" method="POST" class="oauth"><input class="oauth oauth_qq" type="submit" value="QQ帐号" /></blc:form>
+					<blc:form th:action="@{/signin/weibo}" method="POST" class="oauth"><input class="oauth oauth_wb" type="submit" value="微博帐号" /></blc:form>
+					<blc:form th:action="@{/signin/renren}" method="POST" class="oauth"><input class="oauth oauth_rr" type="submit" value="人人帐号" /></blc:form>
+			</div>
+			</span> 
+			<span th:unless="${customer.anonymous}">
+			<span> 
+			<a th:href="@{/account}" th:if="*{customer.avatarUrl==null}"><img class="tiny avatar" src="//img.onxiao.com/img/Onxiao_userimg.png"/>
+			</a>
+			<a th:href="@{/account}" th:unless="*{customer.avatarUrl==null}"><img
+						th:src="*{customer.avatarUrl}" class="tiny avatar" /></a>
+			</span> <a th:href="@{/account}" style="margin-left: 5px;"
+				th:text="${customer.firstName ne null and customer.firstName.length() gt 10} ? ${#strings.substring(customer.firstName, 0, 10)}+'..':${customer.firstName}"></a>
+				<div class="notices">
+					<a class="notice"></a>
+					<!--
+					<div class="notice-hidden">
+						<a>我的赞 +3</a>&nbsp;&nbsp; <a>站内信 +1</a>&nbsp; &nbsp; <a>活动信息+2</a>&nbsp;&nbsp;
+						<a>榜上有名 +1</a>
+					</div>-->
+				</div> <a class="setting"></a> <a class="exit" th:href="@{/logout}"></a> </span>
+		</div>
+	</div>
+</div>
+<div id="right-float" class="float-right clearfix">
+	<div class="up ico" id="back-to-top">
+		<div class="font-hint">回到顶部</div>
+	</div>
+	<div th:if="${!(customer.region eq null) and customer.region.id==2}" th:remove="tag">
+		<a class="kefu ico" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1327643878&amp;site=qq&amp;menu=yes" title="在校网客服QQ">
+			<span class="font-hint">联系客服</span>
+		</a>
+		<a class="qqqun ico" target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=127de3f872cea3016d85898e6d1ad93ae617ebab353e64d018fc9f9eafbacc90">
+			<span class="font-hint">加在校群</span>
+		</a>
+	</div>
+	<div th:if="${!(customer.region eq null) and customer.region.id!=2}"  th:remove="tag">
+		<a class="kefu ico" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2961715148&amp;site=qq&amp;menu=yes">
+			<span class="font-hint">联系客服</span>
+		</a>
+		<a class="qqqun ico" target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=c69d08bc6c501e94480ff5c72253c5d1ab23b978d1e65c847b50a47f8f7a0cff">
+			<span class="font-hint">加在校群</span>
+		</a>
+	</div>
+	<a class="sina ico" href="http://weibo.com/onxiao" target="_blank" style="text-decoration:none;color:white"><div class="font-hint">新浪微博</div></a>
+	<a class="renren ico" href="http://page.renren.com/601805898" target="_blank" style="text-decoration:none;color:white"><div class="font-hint">人人主页</div></a>
+	<!-- <div class="weixin">
+		<div class="font-hint">扫二维码</div>
+		<div class="qrcode_for_wexin">
+		<a></a><p>快来关注在校微信吧！</p></div>
+	</div> -->
+</div>
+
+<div class="register_box grid-container">
+</div>
+<div class="login_box grid-container">
+</div>

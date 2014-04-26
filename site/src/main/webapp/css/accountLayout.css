@@ -1,0 +1,217 @@
+
+a{
+	color:#000000;
+}
+.account-content{
+	padding-top:2em;
+	padding-left:2em;
+	float:left;
+}
+.account-menu{
+	float:left;
+	padding-top:2em;
+	width: 230px;
+	border:1px dashed #ccc;
+	margin-top:-1px;
+}
+.menu-list{
+	margin:0px;
+	padding:0px;
+}
+.menu-list .title-line{
+	height:2.6em;
+	width:100%;
+	clear:left;
+}
+.menu-list .title-hover{
+	color:#ffffff;
+	background-color:#a9c651;
+}
+.menu-list .title{
+	width:60%;
+	font-size:1.2em;
+	padding-left:10%;
+	line-height:2.5em;
+	float:left;
+}
+.menu-list .title span{
+	font-size:1.4em;
+}
+
+.menu-list .link-line{
+	width:100%;
+	height:2.5em;
+	clear:left;
+} 
+.menu-list .link-hover{
+	color:#ffffff;
+	background-color:#86cad5;
+}
+.menu-list .link-hover a{
+	color:#ffffff;
+}
+.menu-list .link {
+	width:40%;
+	font-size:1.2em;
+	padding-left:20%;
+	line-height:2.6em;
+	float:left;
+}
+.menu-list .link>a {
+display: inline-block;
+width: 100%;
+text-decoration: none;
+}
+.menu-list .link-sharp{
+	float:left;
+	
+	width:0px;
+	height:0px;
+	border:1.5em #86cad5 solid;
+	border-top:1.5em #ffffff solid;
+	border-bottom:1.5em #ffffff solid;
+	border-right:1.5em #ffffff solid;
+}
+.menu-list .title-sharp{
+	overflow:hidden;
+	float:left;
+	
+	width:0px;
+	height:0px;
+	border:1.6em #a9c651 solid;
+	border-top:1.6em #ffffff solid;
+	border-bottom:1.6em #ffffff solid;
+	border-right:1.6em #ffffff solid;
+}    
+
+.change-password-form {
+	line-height:4em;
+}
+.change-password-form .title,.update-account-form .title,.integral-form .title,.manage-address-form .title{
+	font-size:2em;
+	color:#66cc00;
+	font-family:"Microsoft YaHei";
+	font-weight:bold;
+}
+.change-password-form .label,.integral-form .label,.manage-address-form .label,.recharge-form .label{
+	display:block;
+	float:left;
+	font-size:1.2em;
+	font-family:"Microsoft YaHei";
+	width:6em;
+}
+input.inbox {
+	height: 2.5em;
+	width: 14em;
+	border-radius: 3px;
+	color: gray;
+	border: 1px solid #ccc;
+	padding: 0 1em;
+}
+.change-password-form .button{
+	font-size:1.5em;
+	line-height:2em;
+	text-align:center;
+	margin-top:1.66em;
+	width:5em;
+	height:2em;
+	margin-right:0.68em;
+	float:left;
+	color:#ffffff;
+	cursor:pointer;
+}
+.change-password-form .submit{
+	margin-left:4.8em;
+	background-color:#ff6600;
+}
+.change-password-form  .reset{
+	background-color:#66cc00;
+	float:left;
+}
+.update-account-form {
+	float:left;
+}
+.update-account-form .label{
+	display:block;
+	float:left;
+	font-size:1.2em;
+	font-family:"Microsoft YaHei";
+	width:5em;
+}
+.update-account-form .basic-info {
+
+	line-height:4em;
+	float:left;
+}
+.update-account-form .contact-info{
+	clear:left;
+	width:100%;
+	line-height:4em;
+}
+.update-account-form .button,.manage-address-form .button{
+	font-size:1.5em;
+	line-height:2em;
+	text-align:center;
+	margin-top:1.66em;
+	width:5em;
+	height:2em;
+	margin-right:0.68em;
+	float:left;
+	color:#ffffff;
+	cursor:pointer;
+	margin-left:4em;
+	background-color:#ff6600;
+}
+.manage-address-form .panel,.integral-form .panel{
+	margin-top:1em;
+	width:100%;
+	border:1px #999999 solid;
+}
+.manage-address-form .head,.integral-form .head{
+	font-size:1.3em;
+	line-height:2.5em;
+	text-align:center;
+	background-color:#f5f5f5;
+}
+.manage-address-form .head{
+	border-bottom:1px #999999 solid;
+} 
+.manage-address-form .content-line div{
+border-top:1px #999999 solid;
+margin-top:-1px;
+}
+.manage-address-form .content-line div,.integral-form .content-line div{
+	border-left:1px #999999 solid;
+	font-size:1em;
+	line-height:3em;
+	text-align:center;	
+}
+.manage-address-form .infoline{
+	margin-top:1.5em;
+}
+.manage-address-form .infoline .label{
+	line-height:2.5em;
+}
+.full-square{
+	 position: relative;
+}
+.full-square:hover .full-square-img{
+	display:block;
+}
+.full-square .full-square-img{
+	position:absolute;
+	display:none;
+	color:#fff;
+	font-size:20px;
+	right: 5px;
+	top:5px;
+	text-shadow: 0 0 5px #000;
+	z-index:1;
+}
+.full-square .full-square-img:hover{
+	text-shadow: 0 0 2px #000;
+	
+}
+.v2 .manage-account-container {
+padding-top: 2em;
+}

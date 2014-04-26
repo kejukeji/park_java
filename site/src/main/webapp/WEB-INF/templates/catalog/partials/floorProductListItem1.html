@@ -1,0 +1,46 @@
+<div th:each="floorProd: ${scoreProducts}" th:object="${floorProd}">
+ <div class="grid-25 tablet-grid-25">
+ <div style="margin:0 1px" th:object="*{relatedProduct}" class="FEATURED">
+	<div>
+    	<a th:href="@{*{url}}" target="_blank">
+            <div class="product-img">
+        		<div class="full-square">
+                    <div class="show-back-image clearfix">
+                        <div class="like-cart-share">
+            				<ul>
+            				<span th:data="*{id}" style="cursor:pointer" onclick="return tagLike(this);">
+        						<li class="like-png" ><div th:id="*{id}" class="floatMsg" style="right: 9px;"></div></li>
+        					</span>
+            				<span href="#">
+            					<blc:form method="GET" th:action="@{/cart/add}">
+            						<input type="hidden" name="quantity" value="1" />
+            						<input type="hidden" name="skuId" id="skuId" th:value="*{defaultSku.id}" />
+            						<li class="addToCart cart-png"><div class="floatMsg" style="right: 0px;">+1</div></li>
+           						</blc:form>
+        					</span>
+            				<span href="#"><li class="share-png">&nbsp;</li></span>
+            				</ul>
+                        </div>
+                        <div class="title-name">
+        					<div class="name long-txt" th:title="*{name}" th:text="*{name}"></div>
+            				<div class="price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+                                <div blc:price="*{onSale?salePrice:retailPrice}" class="sale"></div>
+                            </div>
+                            <div class="price" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+                                <div blc:price="*{defaultSku.onSale?defaultSku.salePrice:defaultSku.retailPrice}" class="sale"></div>
+                            </div>
+            			</div>
+            		</div>
+        			<div class="product-tag">
+                        <div class="image-left"></div>
+        				<div class="image-tag">仙丹换购</div>
+        				<div class="image-bottom"></div>
+        			</div>
+            		<img th:if="*{media['primary']}" th:alt="*{name}" th:src="@{*{media['primary'].url} + '?browse'}" />
+           		</div>
+            </div> 
+    	</a>
+    </div>
+ </div>
+ </div>
+</div>

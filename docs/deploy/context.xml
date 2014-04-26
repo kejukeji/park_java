@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<ResourceLink global="jdbc/web" name="jdbc/web" type="javax.sql.DataSource"/>
+	<ResourceLink global="jdbc/storage" name="jdbc/storage" type="javax.sql.DataSource"/>
+	<ResourceLink global="jdbc/secure" name="jdbc/secure" type="javax.sql.DataSource"/>
+</Context>

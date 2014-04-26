@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+    <blc:form id="form" th:action="@{${'/signin/'+param.p}}" method="POST">
+    	<input type="hidden" name="display" th:value="${param.d[0]}" />
+    	<input type="hidden" name="termtype" value="app" />
+	</blc:form>
+	<script type="text/javascript">
+		document.getElementById('form').submit();
+	</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<table th:unless="${facets.empty}">
+	<tr th:each="facetDto : ${facets}" th:unless="${facetDto.facetValues.empty}">
+		<td th:text="${facetDto.facet.label}" class="th">品牌</td>
+		<td class="facet-values">
+		 <div class="clearfix">
+			<a blc:togglefacetlink="${facetValue}" th:each="facetValue : ${facetDto.facetValues}" class="grid-parent grid-15 tablet-grid-15 mobile-grid-15" th:classappend="${facetValue.active?'active':''}" th:if="${facetValue.quantity gt 0}">
+				<span th:if="${facetValue.value != null}" th:remove="tag" th:text="${facetValue.value}"></span>
+				<span th:unless="${facetValue.value != null}" th:remove="tag">
+					<span blc:price="${facetValue.minValue}" th:remove="tag"></span>
+					<span th:text="${facetValue.maxValue == null ? ' __#{facet.orMore}__ ' : ' - '}" th:remove="tag"></span>
+					<span th:if="${facetValue.maxValue != null}" blc:price="${facetValue.maxValue}" th:remove="tag"></span>
+				</span>
+				<!-- <span th:text="${facetValue.quantity}" th:remove="tag"></span> -->
+				<span th:if="${facetValue.active}" class="right">X</span>
+			</a>
+		 </div>
+		</td>
+		<td class="facet-mores">
+			<a class="right" onclick="$$.toggleFacetFilter(this);">更多 <span /></a>
+		</td>
+	</tr>
+</table>
+<script>
+$$.toggleFacetFilter = function(e){
+	var self=$(e);
+	var div=self.closest('tr').find('div');
+	if(self.hasClass('active')){
+		div.css('overflow','hidden');
+		self.removeClass('active');
+	}else{
+		div.css('overflow','initial');
+		self.addClass('active');
+	}
+}
+</script>

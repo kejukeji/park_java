@@ -1,0 +1,185 @@
+<section role="main">
+	<div class="row" id="box1">
+		<div class="twelve columns">
+			<div class="listgrid-container">
+				<div class="tabs-container">
+					<dl class="tabs entity-form">
+						<dd class="">
+							<a href="#tab1">已提交订单</a>
+						</dd>
+						<dd class="active">
+							<a href="#tab2">已配货订单</a>
+						</dd>
+						<dd class="">
+							<a href="#tab3">已发货订单</a>
+						</dd>
+					</dl>
+				</div>
+				<ul class="tabs-content">
+					<li class="tab1Tab" style="display: none;">
+						<div class="listgrid-toolbar"></div> <blc:form
+							th:action="@{/order-process/order-distribute-show}" method="post">
+							<div class="listgrid-header-wrapper">
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-currenturl="https://localhost:8444/order"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" /></th>
+											<th scope="col" style="width: 100px;">订单号</th>
+											<th scope="col" style="width: 100px;">订单状态</th>
+											<th scope="col" style="width: 100px;">订单金额</th>
+											<th scope="col" style="width: 100px;">提交日期</th>
+										</tr>
+									</thead>
+								</table>
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-currenturl="https://localhost:8444/order"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr th:each="order:${submittedOrders}" th:object="${order}">
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" name="order_id" th:value="*{id}" /></th>
+											<th scope="col" style="width: 100px;" th:text="*{id}"></th>
+											<th scope="col" style="width: 100px;"
+												th:text="*{status.friendlyType}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{subTotal}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{submitDate}"></th>
+										</tr>
+
+									</thead>
+								</table>
+							</div>
+							<span class="listgrid-table-footer"><input type='submit'
+								value='订单配货' /></span>
+						</blc:form>
+					</li>
+					<li class="tab2Tab active" style="display: block;">
+						<div class="listgrid-toolbar"></div> <blc:form
+							th:action="@{/order-process/order-delivery}" method="post">
+							<div class="listgrid-header-wrapper">
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-currenturl="https://localhost:8444/order"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" /></th>
+											<th scope="col" style="width: 100px;">订单号</th>
+											<th scope="col" style="width: 100px;">订单状态</th>
+											<th scope="col" style="width: 100px;">订单金额</th>
+											<th scope="col" style="width: 100px;">提交日期</th>
+										</tr>
+									</thead>
+								</table>
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-currenturl="https://localhost:8444/order"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr th:each="order:${distributeOrders}" th:object="${order}">
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" name="order_id" th:value="*{id}" /></th>
+											<th scope="col" style="width: 100px;" th:text="*{id}"></th>
+											<th scope="col" style="width: 100px;"
+												th:text="*{status.friendlyType}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{subTotal}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{submitDate}"></th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<span class="listgrid-table-footer"><input type='submit'
+								value='订单发货' /></span>
+						</blc:form>
+					</li>
+					<li class="tab3Tab" style="display: none;">
+						<div class="listgrid-toolbar"></div> <blc:form
+							th:action="@{/order-process/order-complete}" method="post">
+							<div class="listgrid-header-wrapper">
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-currenturl="https://localhost:8444/order"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" /></th>
+											<th scope="col" style="width: 100px;">订单号</th>
+											<th scope="col" style="width: 100px;">订单状态</th>
+											<th scope="col" style="width: 100px;">订单金额</th>
+											<th scope="col" style="width: 100px;">提交日期</th>
+										</tr>
+									</thead>
+								</table>
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-currenturl="https://localhost:8444/order"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr th:each="order:${deliveryOrders}" th:object="${order}">
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" name="order_id" th:value="*{id}" /></th>
+											<th scope="col" style="width: 100px;" th:text="*{id}"></th>
+											<th scope="col" style="width: 100px;"
+												th:text="*{status.friendlyType}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{subTotal}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{submitDate}"></th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<span class="listgrid-table-footer"><input type='submit'
+								value='完成订单' /></span>
+						</blc:form>
+					</li>
+				</ul>
+			<div class="seven columns">
+				<form action="" method="GET" class="custom-entity-search">
+				    <div class="row">
+					<div class="six columns">
+					    <input type="search" placeholder="OrderNumber" style="height: 28px; width: 100%"/>
+					</div>
+					<div class="four columns">
+					    <a class="button small dark radius" href="#">
+							<i class="icon-search"></i>&nbsp;搜索
+					    </a>
+					</div>
+					<div class="two columns">&nbsp;</div>
+				    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<audio id="media" src="aa.mp3"></audio>
+</section>
+<script type="text/javascript" th:inline="text">
+	self.setInterval(warn, 30000);
+	function warn() {
+		var lastTime = new Date();
+		var ms = lastTime.getTime();
+		$.ajax({
+			type : "get",
+			url : '[[@{/order-warn}]]',
+			data : {
+				lastTime : ms - 30000
+			},
+			dataType : "html"
+		}).done(function(data) {
+			if (data > 0) {
+				document.getElementById("media").play();
+				alert("有" + data + "张新订单");
+			} 
+		});
+	}
+</script>

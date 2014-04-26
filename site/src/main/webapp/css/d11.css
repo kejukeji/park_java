@@ -1,0 +1,349 @@
+body {
+	overflow:hidden;
+	background:url(//img.onxiao.com/img/activities/d11-main-bg.jpg) center top no-repeat;
+	background-color: #000;
+}
+.bg1 {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background:url(//img.onxiao.com/img/activities/d11-main-bg1.png) repeat;
+}
+.d11-logo {
+	position: absolute;
+	right: 100%;
+	padding-right: 80px;
+	top: 135px;
+}
+.d11-date {
+	position: absolute;
+	left: 50%;
+	margin-left: -5px;
+	top: -170px;
+}
+.d11-txt {
+	position: absolute;
+	left: 100%;
+	padding-left: 80px;
+	top: 170px;
+}
+.d11-ad {
+	display:block;
+	position: absolute;
+	left: 50%;
+	margin-left: -145px;
+	top: 100%;
+	width:290px;
+	height:110px;
+	overflow: hidden;
+}
+#page2 {
+	position: absolute;
+	width: 100%;
+	top: 100%;
+	background:url(//img.onxiao.com/img/activities/d11-main-bg2.png) repeat;
+	background-color: #171717;
+	display: none;
+}
+#days {
+	width:100%;
+	background-color: #24211d;
+}
+#day9 {
+	float: left;
+	padding: 30px 25px 0 0;
+}
+#day10 {
+	float: left;
+	padding: 30px 25px;
+}
+#day11 {
+	float: left;
+	padding: 30px 0 0 25px;
+}
+.day-center {
+	margin: auto;
+	width:1027px;
+	height:100px;
+}
+.day, #days .d-off .day {
+	background: url(//img.onxiao.com/img/activities/d11-sprites.png) -317px 18px no-repeat;
+	width: 309px;
+	height: 64px;
+	cursor: pointer;
+}
+#day10 .day {
+	background-position: -325px -61px;
+}
+#day11 .day {
+	background-position: -309px -144px;
+}
+.d-9 .day, .d-on .day {
+	background-position: 23px 18px;
+}
+.d-10 #day10 .day, #day10.d-on .day {
+	background-position: 16px -62px;
+}
+.d-11 #day11 .day, #day11.d-on .day {
+	background-position: 32px -145px;
+}
+.day-bd {
+	display: none;
+	background: url(//img.onxiao.com/img/activities/d11-sprites.png) -7px -236px no-repeat;width: 309px;height: 60px;
+}
+#hr {
+	height:10px;
+	width:100%;
+	background:url(//img.onxiao.com/img/activities/d11-hr-bg.png) repeat;
+}
+#main {
+	position:relative;
+	width:1109px;
+	margin: auto;
+	margin-top: 105px;
+	background:url(//img.onxiao.com/img/activities/d11-main-bg3.jpg) center 0;
+}
+.jia {
+	position:absolute;
+	width: 118px;
+	height: 108px;
+	top: -73px;
+	background: url(//img.onxiao.com/img/activities/d11-sprites.png) -482px -233px no-repeat;
+}
+.jia-l {
+	left: 80px;
+}
+.jia-r {
+	right: 80px;
+}
+.ruler {
+	position:absolute;
+	width: 21px;
+	height: 100%;
+	top: 0;
+	left:-21px;
+	background: url(//img.onxiao.com/img/activities/d11-ruler.png) repeat;
+}
+.d11-flag {
+position: absolute;
+width: 356px;
+height: 71px;
+top: 86px;
+left: 50%;
+margin-left: -178px;
+background: url(//img.onxiao.com/img/activities/d11-sprites.png) 0px -309px no-repeat;
+color: #fff;
+text-align: center;
+line-height: 51px;
+font-size: 16px;
+}
+.qg-block {
+width: 1008px;
+margin: auto;
+padding-top: 190px;
+display: none;
+}
+.d-7 .blc-day9, .d-8 .blc-day9, .d-9 .blc-day9,.d-10 .blc-day10, .d-11 .blc-day11 {
+	display: block;
+}
+.qg-section {
+position: relative;
+margin-bottom: 10px;
+}
+#d91 {
+background: url(//img.onxiao.com/img/activities/prods11.png) 9px 9px no-repeat;
+}
+#d92 {
+background: url(//img.onxiao.com/img/activities/prods12.png) 9px 9px no-repeat;
+}
+#d93 {
+background: url(//img.onxiao.com/img/activities/prods13.png) 9px 9px no-repeat;
+}
+#d101 {
+background: url(//img.onxiao.com/img/activities/prods21.png) 9px 9px no-repeat;
+}
+#d102 {
+background: url(//img.onxiao.com/img/activities/prods22.png) 9px 9px no-repeat;
+}
+#d103 {
+background: url(//img.onxiao.com/img/activities/prods23.png) 9px 9px no-repeat;
+}
+#d111 {
+background: url(//img.onxiao.com/img/activities/prods31.png) 9px 9px no-repeat;
+}
+#d112 {
+background: url(//img.onxiao.com/img/activities/prods32.png) 9px 9px no-repeat;
+}
+#d113 {
+background: url(//img.onxiao.com/img/activities/prods333.png) 9px 9px no-repeat;
+}
+.dtime {
+position: absolute;
+width: 46px;
+height: 23px;
+top: -9px;
+left: -137px;
+background: url(//img.onxiao.com/img/activities/d11-sprites.png) -364px -283px no-repeat;
+}
+.dtime2 {
+	background-position: -364px -310px;
+}
+.dtime3 {
+	background-position: -364px -336px;
+}
+.dnow .dtime {
+	background-position: -428px -283px;
+}
+.dnow .dtime2 {
+	background-position: -428px -308px;
+}
+.dnow .dtime3 {
+	background-position: -427px -334px;
+}
+.dprod-b {
+float: left;
+border: solid 4px #7f0000;
+margin:5px;
+width: 182px;
+height: 352px;
+display: block;
+}
+.dprod {
+float: left;
+border: solid 4px #7f0000;
+width: 184px;
+height: 167px;
+margin:5px;
+position: relative;
+overflow: hidden;
+}
+.dnow .dprod {
+	background: url(//img.onxiao.com/img/activities/d11-sprites.png) -400px -353px no-repeat;
+}
+.dprod-desc {
+position: absolute;
+left: 0;
+right: 0;
+bottom: -28px;
+line-height: 28px;
+padding: 0 6px;
+color: #fff;
+background-color: #ca281d;
+opacity: 0.8;
+display: block;
+}
+.dprod-desc .left {
+white-space: nowrap;
+width: 92px;
+overflow: hidden;
+}
+.dprod-cover {
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+opacity: .8;
+background-image: none;
+background: url(//img.onxiao.com/img/activities/d11-sprites.png) 0 -404px no-repeat;
+}
+.dnow .dprod-cover {
+opacity: 0;
+background-position: -209px -403px;
+}
+.dnow .sold-out .dprod-cover {
+	opacity: .8;
+	background-position: 0px -404px;
+}
+.dprod-btn {
+background: url(//img.onxiao.com/img/activities/d11-sprites.png) -188px -570px no-repeat;
+position: absolute;
+top: -136px;
+left: 35px;
+width: 119px;
+height: 136px;
+text-align: center;
+line-height: 175px;
+font-size: 14px;
+color: #fff;
+}
+.sold-out .dprod-btn {
+	background-position: -307px -572px;
+	cursor: inherit;
+}
+.dprod-more {
+display:block;
+background: url(//img.onxiao.com/img/activities/d11-sprites.png) -187px -711px no-repeat;
+width: 178px;
+height: 65px;
+float: left;
+margin: 59px 0px 0 12px;
+cursor: pointer;
+}
+.dprod-more:hover {
+	background-position: -188px -791px;
+}
+.dtime-down {
+float: left;
+margin: 56px 20px 0;
+color: #fff;
+font-size: 18px;
+}
+#dtime-down {
+font-size: 38px;
+}
+.ft-fold1, .ft-fold2 {
+position:relative;
+width: 100%;
+height: 165px;
+background-color: #9b1b1b;
+}
+.ft-fold2 {
+background-color: #6e0000;
+height: 286px;
+}
+.fd-bd {
+position: absolute;
+width: 0;
+height: 0;
+border-style: solid;
+}
+.foldl {
+left: -41px;
+border-width: 165px 41px 0 0;
+border-color: transparent #9b1b1b;
+}
+.foldr {
+right: -41px;
+border-width: 165px 0 0  41px;
+border-color: transparent #9b1b1b;
+}
+.foldl2 {
+left: -41px;
+border-width: 0 41px 286px 0;
+border-color: transparent #6e0000;
+}
+.foldr2 {
+right: -41px;
+border-width: 0 0 286px 41px;
+border-color: transparent #6e0000;
+}
+.ft-fold2 .d11-flag {
+	top: 15px;
+}
+.ft-fold1 ol {
+color: #fff;
+margin: auto;
+width: 60%;
+font-size: 15px;
+line-height: 25px;
+padding-top: 17px;
+}
+.ft-copy {
+color: #fff;
+font-size: 14px;
+text-align: center;
+padding-top: 76px;
+}

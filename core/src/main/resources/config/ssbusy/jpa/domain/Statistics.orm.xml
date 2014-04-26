@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	<named-query name="PRODUCT_SALES_INFO">
+		<query>
+        select oi.name,avg(oi.salePrice) as price, sum(oi.quantity) as quantity ,avg(invoicing.purchasePrice) from org.broadleafcommerce.core.order.domain.MyDiscreteOrderItemImpl oi left join oi.order o,
+		com.ssbusy.core.invoicing.domain.InvoicingImpl invoicing inner join invoicing.inventory inventory
+		where o.status='COMPLETED' and oi.sku=inventory.sku
+		and oi.location.id=:id and inventory.fulfillmentLocation.id=:id
+		and oi.salePrice is not null
+		and o.date is not null
+		and (UNIX_TIMESTAMP(o.date) >UNIX_TIMESTAMP(:startDate)) 
+		and (UNIX_TIMESTAMP(:endDate) > UNIX_TIMESTAMP(o.date))
+		group by oi.name order by quantity
+       </query>
+	</named-query>
+	<named-query name="TOTAL_SALES_INFO">
+		<query>
+		SELECT DATE(o.date) as date,sum(pi.amount) as amount,pi.type as type FROM org.broadleafcommerce.core.payment.domain.PaymentInfo pi,
+		org.broadleafcommerce.core.order.domain.FulfillmentGroup as fg left join fg.order o,
+		com.ssbusy.core.domain.MyAddressImpl as ma
+		where o.status='COMPLETED' and pi.order.id=o.id 
+		and ma.id=fg.address.id and ma.dormitory.areaAddress.region.id in(:regionIds)
+		and o.date is not null
+		and (UNIX_TIMESTAMP(o.date) >UNIX_TIMESTAMP(:startDate)) 
+		and (UNIX_TIMESTAMP(:endDate) > UNIX_TIMESTAMP(o.date))
+		group by DATE(o.date),pi.type order by DATE(o.date)
+       </query>
+	</named-query>
+	
+	<named-query name="ADMIN_USER_INFO">
+		<query>
+		SELECT c.id,count(c.id) as count,sum(o.total) as total, c.integral,c.firstName from org.broadleafcommerce.core.order.domain.Order o left join o.customer c
+		where o.status='COMPLETED' and c.region.id=:id and o.date is not null and c.registered = true
+		and (UNIX_TIMESTAMP(o.date) >UNIX_TIMESTAMP(:startDate)) 
+		and (UNIX_TIMESTAMP(:endDate) > UNIX_TIMESTAMP(o.date))
+		group by c.id order by total
+       </query>
+	</named-query>
+	
+	<named-query name="ADMIN_ORDER_INFO">
+		<query>
+		SELECT o.orderNumber, c.firstName,o.total ,c.id from org.broadleafcommerce.core.order.domain.Order o left join o.customer c
+		where o.status='COMPLETED' and c.region.id=:id and o.date is not null
+		and (UNIX_TIMESTAMP(o.date) >UNIX_TIMESTAMP(:startDate)) 
+		and (UNIX_TIMESTAMP(:endDate) > UNIX_TIMESTAMP(o.date))
+       </query>
+	</named-query>
+</entity-mappings>

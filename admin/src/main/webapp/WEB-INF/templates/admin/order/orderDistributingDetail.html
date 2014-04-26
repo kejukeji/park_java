@@ -1,0 +1,141 @@
+<section role="main">
+	<blc:form th:action="@{/order-distributing-do}" method="post">
+		<div class="row" id="box1">		
+			<div class="twelve columns" style="padding:0" th:each="form:${forms}" th:object="${form}">
+				<span>----------------------</span><br/>
+				<span>在校生活，从此开始!</span><br/>
+				<span>http://www.onxiao.com</span><br/><br/>
+				<span><input type="hidden" name="order_id" th:value="*{orderId}" /></span>
+				<span>订单号码：</span><br/><span th:text="*{orderNumber}"></span><br /><br/>
+				<span>送货地址：</span><span th:text="*{myAddress}"></span><br /> <br/>
+				<span>提交时间：</span><span th:text="*{#dates.format(submitDate,'yy-MM-dd HH:mm')}"></span><br />
+				<span>送货时间：</span><span th:text="*{#dates.format(deliveryDate,'yy-MM-dd HH:mm')}"></span><br /> <br/>
+				<span>用户名：</span><span th:text="*{customerUserName}"></span><br/>
+				<span>姓名：</span><span th:text="*{myAddress.firstName}"></span><br/>
+				<span>联系电话：</span><span th:text="*{phone}"></span><br /><br/>
+				<span>商品明细：[总<b th:text="*{quantitySum}"></b>]</span><br />
+				<span>
+					<span>数量</span>*<span>#单价 </span><span>商品名称</span>
+				</span><br/>
+				<span>~~~~~~~~~~~~~~~~~</span><br/>
+				<span th:each="item:${form.items}" th:object="${item}">
+					[<b th:text="*{quantity}"></b>]*<span th:text="*{salePrice}"></span>&nbsp;<span th:text="*{name}"></span><br/>
+				</span>
+				<span>~~~~~~~~~~~~~~~~~</span><br/><br/>
+				<span>小计：</span><span blc:price="*{subTotal}"></span>&nbsp;
+				<span>运费：</span><span th:text="*{shipping}"></span><br/>
+				<span>优惠：</span><span blc:price="*{totalAdjustmentsValue}"></span>&nbsp;
+				<span>订单总价：</span><b blc:price="*{total}"></b><br /><br/>
+				<span th:each="paymentInfo : *{paymentInfos}" th:object="${paymentInfo}">
+					<span th:text="*{type.friendlyType}+'：'"></span><span blc:price="*{amount}"></span><br />
+				</span>
+				<span th:unless="*{detail eq null || #strings.length(detail) eq 0}">
+					<span>----------------------</span>
+					<br/>
+					<span th:text="*{'留言：' + detail}"></span><br/>
+				</span>
+				<br/><span>----------------------</span><br />
+				<blc_admin:admin_user resultVar="adminUser" />
+				<div th:if="${adminUser.fulfillmentLocation ne null and adminUser.fulfillmentLocation.id==-1}">
+					<span>客服 QQ：2961715148</span><br/>
+					<span>客服电话：0571-88035175</span>
+				</div>
+				<div th:if="${adminUser.fulfillmentLocation ne null and adminUser.fulfillmentLocation.id==-2}">
+					<span>客服 QQ：1327643878</span><br/>
+					<span>客服：15706803733(663733)</span>
+				</div>
+				<span>微博关注：@在校网</span>
+				<br/><span>人人关注：@在校网</span>
+				<!--<br/><br/><span>快来体验在校手机客户端吧！</span>-->
+				<br/>
+				<br/>
+				<!--<img th:src="@{/image/qrcode.png}" />
+				<span>【卡当网(http://www.KaDang.com)联合在校网，强势推出“圣诞情人礼物”专场！在校用户专享圣诞惊爆价基础上，再包邮+返利8%！！！更多 详情见网站 首页公告】</span>
+				<br /><br/>
+				<div th:if="*{(rechargeableCard ne null)}" th:object="*{rechargeableCard}" th:inline="text">
+<blc_admin:admin_user resultVar="adminUser" />
+					<span>|*** 开学季,惠馈大行动 ***|</span><br/>
+					<span>|　　　　　 　　　 　　 |</span><br/>
+					<span>| 充值卡号：[[*{card_id}]]　|</span><br />
+					<span>| 充值卡密：[[*{card_password}]]　|</span><br />
+					<span>| 过期时间：[[*{#dates.format(expireDate,'MM-dd HH:mm')}]]|</span><br />
+					<span>|　　　　　 　　　 　　 |</span><br/>
+					<span>********************************</span><br/>
+					<span>使用说明：登录账号，进入个人信息中心点击账户充值，输入卡密即可，轻轻松松，简简单单哟。
+						自己不想用？送给密友吧，同样可以使用。
+					</span>
+				</div>
+				<br/>
+				<br/><br/> -->
+
+				<br/><br/><br/>
+				<span>----------------------</span><br/>
+				<span>订单号码：</span><br/><span th:text="*{orderNumber}"></span><br /><br/>
+				<span>送货地址：</span><span th:text="*{myAddress}"></span><br /> <br/>
+				<span>提交时间：</span><span th:text="*{#dates.format(submitDate,'yy-MM-dd HH:mm')}"></span><br />
+				<span>送货时间：</span><span th:text="*{#dates.format(deliveryDate,'yy-MM-dd HH:mm')}"></span><br /> <br/>
+				<span>用户名：</span><span th:text="*{customerUserName}"></span><br/>
+				<span>姓名：</span><span th:text="*{myAddress.firstName}"></span><br/>
+				<span>联系电话：</span><span th:text="*{phone}"></span><br /><br/>
+				<span>商品明细：[总<b th:text="*{quantitySum}"></b>]</span><br />
+				<span>
+					<span>数量</span>*<span>#单价 </span><span>商品名称</span>
+				</span><br/>
+				<span>~~~~~~~~~~~~~~~~~</span><br/>
+				<span th:each="item:${form.items}" th:object="${item}">
+					[<b th:text="*{quantity}"></b>]*<span th:text="*{salePrice}"></span>&nbsp;<span th:text="*{name}"></span>
+					<br/>
+				</span>
+				<span>~~~~~~~~~~~~~~~~~</span><br/><br/>
+				<span>小计：</span><span blc:price="*{subTotal}"></span>&nbsp;
+				<span>运费：</span><span th:text="*{shipping}"></span><br/>
+				<span>优惠：</span><span blc:price="*{totalAdjustmentsValue}"></span>&nbsp;
+				<span>订单总价：</span><b blc:price="*{total}"></b><br /><br/>
+				<span th:each="paymentInfo : *{paymentInfos}" th:object="${paymentInfo}">
+					<span th:text="*{type.friendlyType}+'：'"></span><span blc:price="*{amount}"></span><br />
+				</span>
+				<span th:unless="*{detail eq null || #strings.length(detail) eq 0}">
+					<span>----------------------</span>
+					<br/>
+					<span th:text="*{'留言：' + detail}"></span><br/>
+				</span>
+				<br/><span>----------------------</span><br />
+				<br /><br/>
+
+				<!-- 超市存根联 -->
+				<div th:if="${adminUser.fulfillmentLocation ne null and adminUser.fulfillmentLocation.id==-2}">
+					<br/><br/><br/>
+					<span>----------------------</span><br/>
+					<span>订单号码：</span><br/><span th:text="*{orderNumber}"></span><br />
+					<span>提交时间：</span><span th:text="*{#dates.format(submitDate,'yy-MM-dd HH:mm')}"></span><br />
+					<span>商品明细：[总<b th:text="*{quantitySum}"></b>]</span><br />
+					<span>
+						<span>数量</span>*<span>#单价 </span><span>商品名称</span>
+					</span><br/>
+					<span>~~~~~~~~~~~~~~~~~</span><br/>
+					<span th:each="item:${form.items}" th:object="${item}">
+						[<b th:text="*{quantity}"></b>]*<span th:text="*{salePrice}"></span>&nbsp;<span th:text="*{name}"></span>
+						<br/>
+					</span>
+					<span>~~~~~~~~~~~~~~~~~</span><br/><br/>
+					<span>小计：</span><span blc:price="*{subTotal}"></span>&nbsp;
+					<span>运费：</span><span th:text="*{shipping}"></span><br/>
+					<span>优惠：</span><span blc:price="*{totalAdjustmentsValue}"></span>&nbsp;
+					<span>订单总价：</span><b blc:price="*{total}"></b><br /><br/>
+				</div>
+			</div>
+		</div>
+		<input type="button" value="打印" onclick="printme();" class="button"  />
+		<a th:href="@{/order-distribute}"><input type="button" class="button" id="return_button" value="返回" style="display:none;" /></a>
+	</blc:form>
+</section>
+<script>
+	function printme(){
+		document.getElementById('return_button').style.display="inline";
+		var obj1 = document.getElementById('box1').innerHTML;
+		var obj2 =document.body.innerHTML
+		document.body.innerHTML=obj1
+		window.print();
+		document.body.innerHTML=obj2
+	}
+</script>

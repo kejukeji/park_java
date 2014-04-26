@@ -1,0 +1,309 @@
+<link rel="stylesheet" href="//img.onxiao.com/css/product1.css" />
+<div class="grid-container product-main">
+	<div class="cat-scrumb grid-100 tablet-grid-100 mobile-grid-100">
+		<span class="left scrumb" th:with="cat=${product.defaultCategory}" th:if="${product.defaultCategory ne null}">
+			<span th:substituteby="v2/catalog/partials/scrumbCat" />
+		</span>
+	</div>
+	<div class="p-detail grid-85 tablet-grid-85 grid-parent" th:object="${product}">
+		<div id="product_main_image" th:if="*{media['primary']}" class="grid-35 tablet-grid-35">
+			<a th:href="@{*{media['primary'].url}}"  class="jqzoom clearfix" id='zoom1' rel="gal1">
+				<div>
+					<div class="show-back-image clearfix">
+						<ul>
+							<span th:data="*{id}" style="cursor:pointer" onclick="return tagLike(this);">
+								<li class="like-png" ><div th:id="*{id}" class="floatMsg" style="right: 9px;"></div></li>
+							</span>
+						</ul>
+					</div>
+					<div class="border clearfix prod_img">
+						<span><img class="orig" th:src="@{*{media['primary'].url}+ '?browse&amp;resize-height-amount=290&amp;resize-width-amount=1'}" th:alt="*{name}" /></span>
+						<input id="iml" type="hidden" th:value="@{*{media['primary'].url}}"></input>
+					</div>
+				</div>
+			</a>
+			<ul id="product_thumbs" class="clearfix">
+				<li class="grid-25 tablet-grid-25" th:if="*{media['primary']}">
+					<a href="javascript:;" th:rel="${'{ gallery: ''gal1'', smallimage: ''__@{*{media['primary'].url}+'?browse'}__'', largeimage: ''__@{*{media['primary'].url}}__'' }'}"
+						th:attr="data-tags=*{media['primary'].tags}" class="zoomThumbActive clearfix">
+						<div>
+							<div class="border clearfix">
+								<span><img class="orig" th:src="@{*{media['primary'].url+'?thumbnail'}}" th:alt="*{media['primary'].altText}" /></span>
+							</div>
+						</div>
+					</a>
+				</li>
+				<li class="grid-25 tablet-grid-25" th:each="media, iterStat : *{media}" th:if="${iterStat.index lt 3 and media.key ne 'primary'}">
+				 	<a href="javascript:;" th:rel="${'{ gallery: ''gal1'', smallimage: ''__@{${media.value.url}+'?browse'}__'', largeimage: ''__@{${media.value.url}}__'' }'}"
+						th:attr="data-tags=${media.value.tags}" class="clearfix">
+						<div>
+							<div class="border clearfix">			
+								<img class="orig" th:src="@{${media.value.url+'?thumbnail'}}" th:alt="${media.value.altText}" />
+							</div>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="grid-65 tablet-grid-65 product_main_info">
+			<div class="feature_detial_0">
+				<div class="last_notice">
+					<div class="grid-5 l_notice"></div>
+					<div class="grid-85 l_detial">
+						<span class="l_text">距离团购结束：</span><span class="last_time last_time0"></span><span class="last_time_0" th:text="*{defaultSku.activeEndDate}" style="display: none;"></span>
+						<span style="margin-left: 5em;">已经被抢：<font th:text="*{totalSaled == 0?'-':totalSaled+'件'}"></font></span>
+						<span style="margin-left: 2em;">剩余数量：<span th:text="${inventories eq null?'-':inventories[product.defaultSku].quantityAvailable}"></span>份</span>
+					</div>
+				</div>
+			</div>
+			<h2 style="padding: 8px 0;" th:inline="text">[[*{name}]]</h2>
+			<div th:text="*{description}" style="color:#8b8b8b;"></div>
+			<input type="hidden" id="pname" th:value="*{productAttributes['tuan_name'] eq null ? name: productAttributes['tuan_name'].value}"></input>
+			<form method="GET" action="/cart/add">
+				<table class="clearfix">
+					<tr id="prodPrice"><td width="50"><label class="nowrap">团购</label></td><td>
+						<span class="price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+							<span blc:price="*{salePrice}" th:if="*{onSale}" th:classappend="*{onSale}? 'sale'"></span>
+							<span blc:price="*{retailPrice}" th:classappend="*{onSale}? 'has-sale'"></span>
+						</span>
+						<div class="price" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+							<span blc:price="*{defaultSku.salePrice}" th:if="*{defaultSku.onSale}" th:classappend="*{defaultSku.onSale}? 'sale'"></span>
+						</div>
+					</td></tr>
+					<tr><td>市场价：</td><td><strike blc:price="*{defaultSku.retailPrice}" th:classappend="*{defaultSku.onSale}? 'has-sale':'sale'"></strike></td></tr>
+					<tr><td>净含量</td><td th:text="*{productAttributes['spec'] ne null?productAttributes['spec'].value:'暂无'}">暂无</td></tr>
+					<tr th:if="*{defaultSku.currency}" th:object="*{defaultSku.currency}"><td>
+						支 &nbsp; 付</td><td>
+						<span th:if="*{currencyCode}=='CNY'"><a>货到付款</a> <a>余额支付</a> <a>支付宝</a> </span>
+						<span th:unless="*{currencyCode}=='CNY'"><a>仙丹换购</a></span>
+					</td></tr>
+					<tr><td>配 &nbsp; 送</td><td>
+						<span th:text="${customer.region eq null ? '' : customer.region.regionName}"></span>
+						<a class="sel-region" th:href="@{/region}">[切换校区]</a>
+					</td></tr>
+					<tr><td>规 &nbsp; 格</td><td class="specs">
+						<input type="hidden" name="skuId" id="skuId" th:value="*{defaultSku.id}" />
+						<input type="hidden" name="locationId" id="locationId" th:value="${inventories eq null?'':inventories[product.defaultSku].fulfillmentLocation.id}" />
+						<span th:attr="sid=*{defaultSku.id}" class="spec active" onclick="skuSelect(this, '.spec');">
+							<span th:text="*{defaultSku.name}" class="nowrap" />
+							<ins style="display:none" blc:price="*{defaultSku.onSale?defaultSku.salePrice:defaultSku.retailPrice}" />
+						 	<s style="display:none" th:text="${inventories eq null?'-':inventories[product.defaultSku].quantityAvailable}" />
+						 	<b style="display:none" th:text="${inventories eq null?'-':inventories[product.defaultSku].fulfillmentLocation.id}" />
+						</span>
+						<span th:unless="${#lists.isEmpty(skus)}" th:each="sku : ${skus}" th:object="${sku}" th:attr="sid=*{id}" class="spec" onclick="skuSelect(this, '.spec');">
+						 	<span th:text="*{name}" class="nowrap">2盒</span>
+						 	<ins style="display:none" blc:price="*{onSale?salePrice:retailPrice}" />
+						 	<s style="display:none" th:text="${inventories eq null?'-':inventories[sku].quantityAvailable}" />
+						 	<b style="display:none" th:text="${inventories eq null?'-':inventories[product.defaultSku].fulfillmentLocation.id}" />
+				  		 	</span>
+					</td></tr>
+				</table>
+				<div class="prod-main-qty grid-parent clearfix">
+					<span style="width: 50px;" class="left">购买数</span> <span class="prod-qty">
+						<input type="number" name="quantity" value="1" class="itemQuantity" />
+						<a class="icon_btn qty-plus" title="加1个" onclick="plus(this)"></a>
+						<a class="icon_btn qty-minus disabled" title="减1个" onclick="minus(this)"></a>
+					</span>&nbsp;&nbsp;件&nbsp; &nbsp; &nbsp;库存<span id="inventoryCnt" th:text="${inventories eq null?'-':inventories[product.defaultSku].quantityAvailable}" />件
+				</div>
+				<div th:class="*{'productActions productActions' + id}">
+					<input type="submit" value="快速抢购" class="btn_buy shop_btn" />
+					<a class="addToCart shop_btn">加入购物车<div class="floatMsg">+1</div></a>
+					<a class="prod-like prod-btn" onclick="return tagLike(this);" title="喜欢" th:attr="data=*{id}">&nbsp;<div/></a>
+					<a class="prod-stats prod-btn" title="榜单">&nbsp;</a>
+					<a class="prod-pack prod-btn" title="套餐">&nbsp;</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<blc:related_products type="'UP_SALE'" productId="${product.id}" quantity="4" />
+	<div class="grid-85 alsobuy tablet-grid-85" th:unless="${#lists.isEmpty(relatedProducts)}">
+		<h2>买过该商品的还买了。。。</h2>
+		<div class="clearfix">
+			<!-- <div class="grid-10 tablet-grid-10 arrow" style="float:left;width:2%;">&nbsp;</div> -->
+			<div class="grid-20 tablet-grid-20 grid-parent" style="margin-left:20px;float:left;width:20%;"
+				 th:each="upSale : ${relatedProducts}" th:object="${upSale.relatedProduct}">
+				<div>
+				 <a th:href="@{*{url}}">
+					<img width="100%" th:if="*{media['primary']}" th:src="@{*{media['primary'].url} + '?thumbnail&amp;resize-width-amount=187&amp;resize-height-amount=187'}"  />
+				 </a>
+				</div>
+				 <ul style="margin-left:-40px;">
+						<li class="long-txt" th:text="*{name}">Aji 纯手工牛轧糖 花生味 </li>
+						<li>
+							<span class="left">
+								已售出 <span th:text="*{totalSaled le 0?'-':totalSaled}" class="sale"></span> 笔
+							</span>
+							<span class="right">
+								<span blc:price="*{defaultSku.onSale?defaultSku.salePrice:defaultSku.retailPrice}" class="sale"></span>
+							</span>
+						</li>
+				 </ul>
+			</div>
+			<!-- <div class="grid-10 tablet-grid-10 arrowright" style="float:left;width:3%;">&nbsp;</div> -->
+		</div>
+	</div>
+	<div id="sidebar" class="grid-15 tablet-grid-15 grid-parent">
+		<h2>精品推荐<br/>Recommend</h2>
+		<blc:related_products productId="${product.id}" quantity="5" />
+		<div class="related-product grid-100 tablet-grid-100 hide-on-mobile"
+		 th:each="relatedProduct,stats : ${relatedProducts}"
+		 th:title="${relatedProduct.promotionMessage}"
+		 th:object="${relatedProduct.relatedProduct}"> 
+			<div class="clearfix">
+				<div class="border clearfix"><a th:href="@{*{url}}" target="_blank">
+					<img th:if="*{media['primary']}" th:src="@{*{media['primary'].url} + '?thumbnail&amp;resize-width-amount=158&amp;resize-height-amount=158'}" />
+					<label class="long-txt prodname" th:text="*{name}"></label>
+				</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="slidingBlock" class="grid-85 tablet-grid-85 grid-parent">
+		<div class="grid-parent title">
+			<h2 class="menuOn" id="mod1" style="margin-bottom: 0;"
+				onclick="switchmodTag('mod','slidingList','1');">
+				<span>商品详情</span>
+			</h2>
+			<h2 class="menuNo" id="mod2" style="margin-bottom: 0;"
+				onclick="switchmodTag('mod','slidingList','2');">
+				<span>商品评价</span>
+			</h2>
+			<h2 class="menuNo" id="mod3" style="margin-bottom: 0;"
+				onclick="switchmodTag('mod','slidingList','3');">
+				<span>团购须知</span>
+			</h2>
+		</div>
+		<div class="clearfix" style="min-height:180px;padding-top: 1.5em;" id="slidingList1">
+			<style>
+.redactor_editor table {
+border-collapse: collapse;
+font-size: 1em!important;
+width: 100%;
+}
+.redactor_editor div, .redactor_editor p, .redactor_editor ul, .redactor_editor ol, .redactor_editor table, .redactor_editor dl, .redactor_editor blockquote, .redactor_editor pre {
+box-shadow: none!important;
+background: none!important;
+margin: 0!important;
+margin-bottom: 15px!important;
+border: 0;
+}
+.redactor_editor table tbody tr:nth-child(even) {
+background: #f9f9f9;
+}
+.redactor_editor table td {
+border: 1px solid #ddd;
+padding: 10px!important;
+vertical-align: top;
+line-height: 2em;
+}
+.redactor_editor img{
+float:left;
+margin:5px;
+width:100%;
+}
+				</style>
+			<div th:utext="${product.longDescription}" id="description" style="color: #000;" class="redactor_editor"></div>
+		</div>
+		<div class="slidingList_none clearfix" style="min-height:180px;padding-top: 1.5em;" id="slidingList2">
+			<blc:ratings itemId="${product.id}" />
+			<div th:if="${ratingSummary}" th:object="${ratingSummary}">
+				<div class="helpful-reviews">
+					<div class="customer-reviews">
+						<div style="border-top: 1px solid #ccc;"
+							th:each="review, iterStat : *{reviews}" th:object="${review}"
+							th:if="${iterStat.count} lt 4">
+							<p class="voting-summary"
+								th:if="*{notHelpfulCount()} + *{helpfulCount()} > 0">
+								<span th:text="*{helpfulCount()}">9</span> of <span
+									th:text="*{notHelpfulCount()} + *{helpfulCount()}">10</span>
+								found the following review helpful
+							</p>
+							<div style="line-height:5em">
+								<img th:src="@{${product.media['primary'].url}+ '?thumbnail'}"
+									alt='' align="left" style="height: 5em; width: 5em;margin-right:10px;" />
+								<blockquote style="vertical-align: middle;"
+									th:if="!*{#strings.isEmpty(reviewText)}"
+									th:text="'&quot;' + *{reviewText} + '&quot;'">Review
+									Text</blockquote>
+							</div>
+							<div class="clearfix"></div>
+							<div style="padding-top: 1em;margin-bottom:15px;">
+								<span class="penname" th:text="${review.customer.firstName}">John</span>
+								<span class="reviewer-info"> - 发表于 <span
+									th:text="*{#dates.format(reviewSubmittedDate, 'yyyy-M-d')}">1-2-2010</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="slidingList_none clearfix" style="min-height:180px;padding-top: 1.5em;" id="slidingList3">
+		<span>在校网团购须知：</span>
+		<ol>
+		<li>配送时间。若您团购的食品或者卫生巾，在校网即时配送（除特殊标记外），如若不是食品或者卫生巾则根据指定的团购时间一结束的第二天为送货时间！</li>
+		<li>由于在校网的团购还不成熟，目前都为两日团！请各位消费者谅解。</li>
+		</ol>
+		</div>
+	</div>
+	<script type="text/javascript">
+	if(window.$)$.browser={
+		msie: /msie/.test(navigator.userAgent.toLowerCase()),
+		version: $('html.lt-ie7').length>1?6:($('html.lt-ie8').length>1?7:8)
+	};
+	</script>
+	<!-- <script th:unless="${session.uiv2 ne null and session.uiv2}" type='text/javascript' src='/js/libs/jquery.jqzoom-core-pack.js'></script> -->
+	<script type="text/javascript" th:inline="text">
+	/*<![CDATA[*/
+	if(window.lazyJs)
+		lazyJs[lazyJs.length] = ['/js/libs/jquery.jqzoom-core-pack.js'];
+
+	// [[${session.uiv2 ne null and session.uiv2?'':''}]]
+	lastScripts[lastScripts.length] = function(){
+	$('#zoom1').jqzoom({
+		zoomType: 'innerzoom',
+		title: false
+	});
+	$("#tx-weibo").click(function sina() {
+	var _appkey ='100515120';
+	var _t1=encodeURI("前几天终于看了传说中的舌尖上的中国，感觉当个吃货也蛮不错的。吃好了才能心情好么，这让我又想起了--");
+	var _site = encodeURI;  
+	var con=$("#pname").val();
+	 var _pic="onxiao.com"+$("#iml").val();
+	 var _t = encodeURI(document.title+ ' '); 
+	var _url = encodeURI(window.location); 
+	var _u ='http://v.t.qq.com/share/share.php?title='+_t1+_t+'&url='+_url+'&appkey='+_appkey+'&site='+_site+'&pic'+_pic; 
+	window.open( _u,'转播到腾讯微博', 'width=700, height=580, top=180, left=320, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' ); 
+	});
+	$("#qq").click(function qq() {
+	var con=$("#pname").val();
+	var _t = encodeURI(con+ ' ');
+	var _t1=encodeURI("前几天终于看了传说中的舌尖上的中国，感觉当个吃货也蛮不错的。吃好了才能心情好么，这让我又想起了--");
+	var _url = encodeURI(window.location); 
+	var _u ='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+_url+'&title='+_t1+_t;
+	window.open( _u,'转播到QQ空间', 'width=700, height=580, top=180, left=320, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' ); 
+	});
+	$("#sina").click(function sina(){
+		var _t1=encodeURI("前几天终于看了传说中的舌尖上的中国，感觉当个吃货也蛮不错的。吃好了才能心情好么，这让我又想起了--");
+		var con=$("#pname").val();
+		var _t=encodeURI(con+ ' ');
+		var appkey="1500853607";
+		var _url=encodeURI(window.location);
+		var _u='http://v.t.sina.com.cn/share/share.php?appkey='+appkey+'&title='+_t1+_t+_url;
+		window.open( _u,'转播到新浪微博', 'width=700, height=580, top=180, left=320, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' ); 
+	}
+	);
+	$("#renren").click(function renren(){
+		var _t1=encodeURI("前几天终于看了传说中的舌尖上的中国，感觉当个吃货也蛮不错的。吃好了才能心情好么，这让我又想起了--");
+		var con=$("#pname").val();
+		var _t=encodeURI(con+ ' ');
+		var _url = encodeURI(window.location); 
+		var _u='http://share.renren.com/share/buttonshare.do?link='+_url+'&title='+_t1+_t;
+		window.open( _u,'转播到人人', 'width=700, height=580, top=180, left=320, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' ); 
+	})
+
+	$(".last_time0").countdown($('.last_time_0').text());
+	}
+	/*]]>*/
+	</script>
+</div>

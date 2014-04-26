@@ -1,0 +1,250 @@
+<style>
+.piao .trave_piaolayer{
+	position:relative;
+	color:white;
+	overflow:hidden;
+}
+.piao .trave_piaolayer .piao_msk{
+	display:none;
+	position:absolute;
+	width:100%;
+	height:98%;
+	left:0;
+	top:0;
+	opacity:0.9;
+}
+.piao .trave_piaolayer .piao_detial{
+	display:none;
+}
+.trave_piaolayer:hover .piao_detial{
+	display:block;
+}
+
+.trave_piaolayer:hover .piao_msk{
+	display:block;
+}
+.trave_piaolayer:hover .name_msk{
+	display:none;
+}
+.trave_piaolayer:hover .piao_name{
+	display:none;
+}
+.piao0 .piao_msk{
+	background: url(//img.onxiao.com/img/Sprites.png) 0px -1333px no-repeat;
+}
+.piao3 .piao_msk{
+	background: url(//img.onxiao.com/img/Sprites.png) 0px -1713px no-repeat;
+}
+.piao4 .piao_msk{
+	position:absolute;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	background: url(//img.onxiao.com/img/Sprites.png) 0px -1519px no-repeat;
+}
+.piao0 .piao_detial{
+	color:white
+	position:absolute;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+}
+.piao_detial .piao_left{
+	position:absolute;
+	text-align:right;
+	right:140px;
+	top:60px;
+}
+.piao_detial .piao_right{
+	position:absolute;
+	text-align:right;
+	right:38px;
+	top:52px;
+	color:white;
+}
+.piao_detial .piao_left .title{
+	font-size:2em;
+	color:white;
+	padding-right:5px;
+}
+.piao_detial .font_class{
+	font-size:2em;
+	color:white;
+}
+.piao_detial .piao_left .sub_title{
+	color:white;
+}
+.piao .piao_price{
+	color:white;
+	font-size:3em;
+	font-family: 'Quicksand';
+}
+@media screen and (min-width: 1025px){
+.margin_left_5{
+	margin-left:0.5%;
+}
+}
+.piao .name_msk{
+	width:125px;
+	height:33px;
+	background-color:#000;
+	opacity:0.5;
+	position:absolute;
+	left:0;
+	bottom:22px;
+}
+.piao .piao_name{
+	padding-left:10px;
+	width:115px;
+	height:33px;
+	position:absolute;
+	left:0;
+	bottom:22px;
+	text-align:left;
+	line-height:33px;
+	color:white;
+	overflow:hidden;
+}
+.trave_piaolayer .piao_msk1{
+	background-color:#242424;
+	opacity:0.9;
+	position:absolute;
+	left:0;
+	top:0;
+	width:200px;
+	height:100%;
+	display:none;
+	overflow:hidden;
+}
+.piao .piao_detial1{
+	text-align:right;
+	color:white;
+	position:absolute;
+	height:65%;
+	right:45px;
+	top:45px;
+	display:none;
+}
+.piao_detial1 .font_class{
+	font-size:2em;
+	color:white;
+}
+.trave_piaolayer:hover .piao_msk1{
+	display:block;
+}
+.trave_piaolayer:hover .piao_detial1{
+	display:block;
+}
+.trave_piaolayer .right_arrow{
+	position:absolute;
+	width:35px;
+	height:35px;
+	right:15px;
+	top:70px;
+	background: url(//img.onxiao.com/img/Sprites.png) -5px -1284px no-repeat;
+	display:none;
+}
+.trave_piaolayer:hover .right_arrow{
+	display:block;
+}
+</style>
+        
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+<div class="piao">
+	<blc:related_products relatedProductsResultVar="floorProducts" type="'CROSS_SALE'" categoryId="*{flrTab.subCategory.id}" quantity="5" />
+	<div th:each="floorProducts,floorStats:${floorProducts}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}">  
+		<div th:if="${floorStats.index==0}" class="grid-40 tablet-grid-50 grid-parent flr-grid-two first-margin-right trave_piaolayer piao0">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+				<div class="name_msk"></div>
+                <div class="piao_name" th:text="*{name}"></div>
+				<div class="piao_msk"></div>
+				<div class="piao_detial">
+					<div class="piao_left">
+                        <div class="title" th:if="*{productAttributes['title']}" th:utext="*{productAttributes['title'].value}"></div>
+						<div class="sub_title" th:if="*{productAttributes['subtitle']}" th:utext="*{productAttributes['subtitle'].value}"></div>
+					</div>
+					<div class="piao_right right">￥
+						<span class="piao_price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(retailPrice)),0,'POINT')}"></span>
+        				<span class="piao_price" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*{#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(defaultSku.retailPrice)),0,'POINT')}"></span>
+						<br /><span class="font_class">购买</span></div>
+				</div>
+			</a>
+    	</div>
+		<div th:if="${floorStats.index==1}" class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent trave_piaolayer piao1">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+				<div class="name_msk"></div>
+                <div class="piao_name" th:text="*{name}"></div>
+                <div class="piao_msk1"></div>
+				<div class="piao_detial1">￥
+					<span class="piao_price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(retailPrice)),0,'POINT')}"></span>
+        			<span class="piao_price" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*{#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(defaultSku.retailPrice)),0,'POINT')}"></span>
+    				<br />
+					<span class="font_class" th:if="*{productAttributes['title']}" th:utext="*{productAttributes['title'].value}"></span>
+				</div>
+				<div class="right_arrow"></div>
+			</a>
+    	</div>
+		<div th:if="${floorStats.index==2}" class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent trave_piaolayer piao2">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+				<div class="name_msk"></div>
+                <div class="piao_name" th:text="*{name}"></div>
+				<div class="piao_msk1"></div>
+				<div class="piao_detial1">￥
+					<span class="piao_price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(retailPrice)),0,'POINT')}"></span>
+        			<span class="piao_price" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*{#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(defaultSku.retailPrice)),0,'POINT')}"></span>
+    				<br />
+					<span class="font_class" th:if="*{productAttributes['title']}" th:utext="*{productAttributes['title'].value}"></span>
+				</div>
+				<div class="right_arrow"></div>
+			</a>
+    	</div>
+		<div th:if="${floorStats.index==3}" class="grid-40 tablet-grid-50 grid-parent flr-grid-two first-margin-right trave_piaolayer piao3">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+				<div class="name_msk"></div>
+                <div class="piao_name" th:text="*{name}"></div>
+				<div class="piao_msk"></div>
+				<div class="piao_detial">
+					<div class="piao_left">
+                        <div class="title" th:if="*{productAttributes['title']}" th:utext="*{productAttributes['title'].value}"></div>
+						<div class="sub_title" th:if="*{productAttributes['subtitle']}" th:utext="*{productAttributes['subtitle'].value}"></div>
+					</div>
+					<div class="piao_right right">￥
+					<span class="piao_price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(retailPrice)),0,'POINT')}"></span>
+        			<span class="piao_price" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*{#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(defaultSku.retailPrice)),0,'POINT')}"></span>
+    				<br />
+					<span class="font_class">购买</span></div>
+				</div>
+			</a>
+    	</div>
+		<div th:if="${floorStats.index==4}" class="grid-40 tablet-grid-50 grid-parent flr-grid-two first-margin-right margin_left_5 trave_piaolayer piao4">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+				<div class="name_msk"></div>
+                <div class="piao_name" th:text="*{name}"></div>
+				<div class="piao_msk"></div>
+				<div class="piao_detial">
+					<div class="piao_left">
+                        <div class="title" th:if="*{productAttributes['title']}" th:utext="*{productAttributes['title'].value}"></div>
+						<div class="sub_title" th:if="*{productAttributes['subtitle']}" th:utext="*{productAttributes['subtitle'].value}"></div>
+					</div>
+					<div class="piao_right right">￥
+					<span class="piao_price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(retailPrice)),0,'POINT')}"></span>
+        			<span class="piao_price" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*{#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(defaultSku.retailPrice)),0,'POINT')}"></span>
+    				<br />
+					<span class="font_class">购买</span></div>
+				</div>
+			</a>
+    	</div>
+		
+    </div>
+</div>

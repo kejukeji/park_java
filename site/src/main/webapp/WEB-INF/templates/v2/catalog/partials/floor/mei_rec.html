@@ -1,0 +1,63 @@
+<style>
+.margin-left-hidd{
+	margin-left:0;
+}
+.mei_reclayer{
+	position:relative;
+	text-align:center;
+}
+.mei_reclayer:hover .name_msk{
+	display:block;
+}
+.mei_reclayer:hover .meizhuang_name{
+	display:block;
+}
+.mei_reclayer .name_msk{
+	width:200px;
+	height:40px;
+	background-color:#f6f6f6;
+	opacity:0.9;
+	position:absolute;
+	left:0;
+	bottom:0;
+	display:none;
+}
+.mei_reclayer .meizhuang_name{
+	text-align:center;
+	position:absolute;
+	bottom:0;
+	padding-left:10px;
+	height:40px;
+	line-height:40px;
+	color:#aaaaaa;
+	display:none;
+	overflow:hidden;
+}
+.mei_reclayer .tag_bg{
+	position:absolute;
+	width:41px;
+	height:41px;
+	right:0;
+	top:0;
+	background: url(//img.onxiao.com/img/Sprites.png) -432px -1251px no-repeat;
+}
+</style>
+        
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+<div class="meizhuang">
+	<blc:related_products relatedProductsResultVar="floorProducts" type="'CROSS_SALE'" categoryId="*{flrTab.subCategory.id}" quantity="8" />
+	<div th:each="floorProducts,floorStats:${floorProducts}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}" th:remove="tag">  
+		<div class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent mei_reclayer" th:classappend="${floorStats.index==0 || floorStats.index==4?'margin-left-hidd':''}">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+                <div class="tag_bg"></div>
+				<div class="name_msk"></div>
+				<div class="meizhuang_name" ><span th:text="*{name}"></span></div>
+			</a>
+    	</div>
+    </div>
+</div>

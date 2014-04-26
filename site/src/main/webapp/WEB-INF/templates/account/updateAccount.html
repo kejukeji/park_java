@@ -1,0 +1,39 @@
+<div class="manage-account-form-wrapper update-account-form">
+	<span class="title">个人基本信息</span>
+	<span class="success" th:if="${successMessage}" th:text="${successMessage}"></span>
+	<blc:form name="form1" class="manage-account" action="#" th:action="@{/account}" th:object="${updateAccountBasicInfoForm}" method="post" enctype="multipart/form-data" >
+		<div class="basic-info grid-55 tablet-grid-55 grid-parent">
+			<div class="infoLine">
+				<span class="label">邮箱：</span>
+				<span name="useremail" th:text="*{useremail}" ></span>
+			</div>
+			<div class="infoLine">
+				<span class="label">会员类型：</span>
+				<span>普通会员</span>
+			</div>
+			<div class="infoLine">
+				<span class="label">昵称：</span>
+				<input type="text" class="inbox" name="firstName" th:value="*{firstName}" maxlength="10"/>
+			</div>
+			<div class="infoLine">
+				<span class="label">性别：</span>
+				<input type="radio" style="width:5em;" name="sex" value="male" th:checked="*{sex=='male'?1:0}"/>男
+				<input type="radio" style="width:5em;" name="sex" value="female" th:checked="*{sex=='female'?1:0}"  />女
+			</div>
+			<div class="contact-info">
+			<div class="infoLine">
+				<span class="label">手机号码：</span>
+				<input type = "text" class="inbox" name="phone" th:value="*{phone}" maxlength="20" />
+			</div>
+			</div>
+			<div class="button submit" onclick="form1.submit();">修改</div>
+		</div>
+	
+		<div class="basic-info grid-40 tablet-grid-40 grid-parent">
+			<div class="grid-75" style="padding-left:25%;">
+				<img th:src="*{avatarUrl == null ? '/img/Onxiao_userimg.png' : avatarUrl}" style="width:100%; height:10em;"/>
+				<input type="file" name="file" style="width:300px;" />
+			</div>
+		</div>
+	</blc:form>
+</div>

@@ -1,0 +1,79 @@
+<style>
+	@media screen and (min-width: 1025px){
+	.youyu_layer.margin-left-1per{
+		margin-left:1%;
+	}
+	}
+	.youyu_layer{
+		overflow:hidden;
+		position:relative;
+		border:1px solid #f1f1f1;
+		height:362px;
+	}
+	.youyu_layer .name_msk{
+		position:absolute;
+		background-color:#f6f6f6;
+		opacity:0.9;
+		bottom:-50px;
+		left:0;
+		height:40px;
+		width:100%;
+	}
+	.youyu_layer .youyu_name{
+		position:absolute;
+		height:40px;
+		line-height:40px;
+		width:100%;
+		overflow:hidden;
+		bottom:-50px;
+		left:0;
+		color:#aaaaaa;
+		text-align:center;
+	}
+	.youyu_layer .tag_msk1,.youyu_layer .tag_msk2,.youyu_layer .tag_msk3{
+		position:absolute;
+    	width:41px;
+    	height:41px;
+	}
+	.youyu_layer .tag_msk1{
+		background: url(//img.onxiao.com/img/Sprites.png) -432px -1323px no-repeat;
+		top:0;
+		right:0;
+	}
+	.youyu_layer .tag_msk2{
+		background: url(//img.onxiao.com/img/Sprites.png) -432px -1460px no-repeat;
+		top:0;
+		right:46px;
+	}
+	.youyu_layer .tag_msk3{
+		background: url(//img.onxiao.com/img/Sprites.png) -432px -1384px no-repeat;
+		top:0;
+		right:92px;
+	}
+	.right_border{
+		overflow:hidden;
+		border:1px solid #f1f1f1;
+		height:362px;
+	}
+</style>
+        
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right right_border" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+<div>
+	<blc:related_products relatedProductsResultVar="floorProducts" type="'CROSS_SALE'" categoryId="*{flrTab.subCategory.id}" quantity="2" />
+	<div th:each="floorProducts,floorStats:${floorProducts}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}" th:remove="tag">  
+		<div class="grid-40 tablet-grid-50 grid-parent flr-grid-two youyu_layer" th:classappend="${floorStats.index==1 ?'margin-left-1per':''}">
+    		<a th:if="*{media['primary']}" th:href="@{*{url}}">
+				<img th:if="*{media['primary']}" th:alt="*{name}" th:src="@{*{media['primary'].url}}" width="100%"/>
+				<div class="tag_msk1"></div>
+				<div class="tag_msk2"></div>
+				<div class="tag_msk3"></div>
+				<div class="name_msk"></div>
+				<div class="youyu_name" ><span th:text="*{name}"></span></div>
+			</a>
+    	</div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>	<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>	<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<blc:head pageTitle="Account - 在校网" head="v2/layout/partials/head" additionalCss="/css/accountLayout.css?v=9.css" />
+
+<body class="v2">
+	<header th:substituteby="v2/layout/partials/header_s" />
+	<div id="content" class="width_setter group" role="main">   
+		<!--  <nav th:substituteby="layout/partials/nav" />-->
+		<div class="manage-account-container clearfix">
+			<div class="grid-container grid-parent">
+				<div class="grid-25 tablet-grid-25 account-menu grid-parent">
+					<ul th:substituteby="account/partials/accountMenu" />
+				</div>
+				<div class="grid-75 tablet-grid-75 account-content grid-parent">
+					<div th:substituteby="${templateName}" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:substituteby="${session.uiv2 ne null and session.uiv2?'v2/layout/partials/footer' : 'layout/partials/footer'}" />
+	<script th:inline="text">
+	[[${session.uiv2 ne null and session.uiv2?'lastScripts[lastScripts.length] = function()':''}]]
+	{
+	$(".menu-list .link").mouseover(function(){
+			
+			$(".menu-list div").find(".link-sharp").remove();
+			$(".menu-list div").removeClass("link-hover");
+			//清楚痕迹
+			$(this).addClass("link-hover");//link
+			var sharpDiv = $("<div></div>");
+			sharpDiv.attr("class","link-sharp");
+			$(this).after(sharpDiv);//link-sharp	
+			$(".menu-list div").find(".title-sharp").remove();
+			$(".menu-list div").removeClass("title-hover");
+			$(this).parent().parent(".menu-list").find("div .title").addClass("title-hover");
+			var sharpDiv = $("<div></div>");
+			sharpDiv.attr("class","title-sharp");
+			$(this).parent().parent(".menu-list").find("div .title").after(sharpDiv);//title-sharp
+		});
+	}
+</script>
+<script>
+function cancelLike(obj){
+	
+	var p = $(obj);
+	$.ajax({
+		type : "get",
+		url : "/customer/cancel-like",
+		data : {pid : p.attr("data")}
+	}).done(function(data) {
+		p.closest(".product-data").remove();
+	});
+	return false;	
+}
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc5950a1860bb774d0085d23cdb30a5aa' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

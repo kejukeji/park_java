@@ -1,0 +1,18 @@
+<section role="main">
+	<div class="row" id="box1">
+			<div class="twelve columns">
+				共有<span th:text="${#lists.size(productSalesform)}"></span>条记录
+                <table style="width: 100%;">
+                	<thead><th>商品名称</th><th>平均售价</th><th>平均进价</th><th>毛利</th><th>销售量</th><th>毛利和</th></thead>
+                	<tr th:each="form:${productSalesform}" th:object="${form}">
+                        <td th:text="*{productName}"></td>
+                		<td th:text="*{avgSalesprice}"></td>
+                		<td th:text="*{avgInvoicingPrice}"></td>
+                		<td th:text="*{totalPrice}"></td>
+                		<td th:text="*{saleQuantity}"></td>
+                		<td th:text="*{allTotalPrice}"></td>
+                	</tr>
+                </table>
+			</div>
+		</div>
+</section>

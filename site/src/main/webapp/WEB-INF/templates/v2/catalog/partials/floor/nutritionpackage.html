@@ -1,0 +1,63 @@
+<style>
+	@media screen and (min-width: 1025px){
+	.flr-grid-two-margin{
+		margin-right:1.5%;
+		margin-bottom:0.5%;
+	}
+	}
+	.hover_bg{position:relative;width:100%;height:100%;}
+	.hover_bg:hover .hover_show{display:block;}
+	.hover_show{position:absolute;top:0;left:0;text-align:center;width:100%;height:100%;color:white;display:none;}
+	.inner_div_box{margin: 30px auto auto;text-align:left;}
+	.onrderonline_lay{overflow:hidden;}
+	.big_title{font-size:2em;}
+	.smal_title{font-size:1.1em;}
+	.margin-left-hidd {
+    margin-left: 0;
+}
+</style>
+        
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+
+<div th:each="gridCat,gridStats:*{flrTab.subCategory.childCategoryXrefs}" th:if="${gridStats.index lt 4}" th:remove="tag">
+	<div th:if="${gridCat.subCategory.url ne null}" class="grid-40 tablet-grid-50 grid-parent flr-grid-two height-helf height-helf-special onrderonline_lay" th:classappend="${gridStats.index==0 || gridStats.index==2?'margin-left-hidd':''}">
+    	<a th:if="${gridCat.subCategory.url ne null}" th:href="${gridCat.subCategory.url}">
+    		<div class="hover_bg" >
+				<img class="hidden_layer" th:if="${gridCat.subCategory.categoryMedia['alt6']}" th:src="@{${gridCat.subCategory.categoryMedia['alt6'].url}}"/>
+				<div class="hover_show">
+                    <table class="inner_div_box">
+						<tr class="big_title"><td th:text="${gridCat.subCategory.name}"></td></tr>
+						<tr class="smal_title" th:each="catproduct,productStats:*{gridCat.subCategory.allProductXrefs}" th:if="${productStats.index lt 4}">
+							<td th:text="${catproduct.product.name}"></td>
+						</tr>
+					</table>
+    			</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+
+
+<!--<div th:each="catproduct,productStats:*{flrTab.subCategory.allProductXrefs}" th:if="${productStats.index lt 4}" th:remove="tag">
+	<div th:if="${catproduct.product.defaultSku.product.url ne null}" class="grid-40 tablet-grid-50 grid-parent flr-grid-two height-helf height-helf-special onrderonline_lay" th:classappend="${productStats.index==0 || productStats.index==2?'margin-left-hidd':''}">
+    	<a th:if="${catproduct.product.defaultSku.product.url ne null}" th:href="${catproduct.product.defaultSku.product.url}">
+            <div class="hover_bg" >
+    			<img th:if="${catproduct.product.media['alt4']}" th:src="@{${catproduct.product.media['alt4'].url}}"/>
+                <div class="hover_show">
+                    <table class="inner_div_box">
+						<tr class="big_title"><td>大标题在这里</td></tr>
+						<tr class="smal_title"><td>小标题</td></tr>
+						<tr class="smal_title"><td>小小标题</td></tr>
+						<tr class="smal_title"><td>小小喜爱标题</td></tr>
+						<tr class="smal_title"><td>标题</td></tr>
+					</table>
+    			</div>
+			</div>
+		</a>
+	</div>
+</div>-->

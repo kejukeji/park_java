@@ -1,0 +1,20 @@
+<div id="bonus-envlope" style="display:none;position:relative;height: 240px;overflow: hidden;">
+	<img alt="恭喜获得光棍节红包" src="/img/activities/hongbao-dlg.gif" />
+	<div style="position:absolute;top:63px;left:188px;">
+		<div id="bonusOfferCode" style="font-size: 1.5em; letter-spacing: 5px; text-indent: 1.3em; line-height: 3.4em;"></div>
+		<div id="bonusOfferCodeInfo" style="line-height: 1.8em;"></div>
+	</div>
+</div>
+<script type="text/javascript">
+	function showBonus(offerCode, offerCodeInfo, anonymous) {
+		$.fancybox({
+			content: $('#bonus-envlope'),
+			autoCenter: true, padding: 0
+		});
+		$('#bonusOfferCode').html(offerCode);
+		$('#bonusOfferCodeInfo').html(
+				'<big style="color:red">'+offerCodeInfo+'</big><br/>' + (
+				anonymous ? '请点击<a href="/login"> 注册/登录 </a>领取，<br/>你也可以复制券号送予好友' :
+					'请在下单时直接选择并抵用，<br/>你也可以复制券号送予好友'));
+	}
+</script>

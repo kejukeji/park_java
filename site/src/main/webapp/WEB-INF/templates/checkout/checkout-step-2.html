@@ -1,0 +1,113 @@
+<div class="step-2-cart tablet-grid-75 grid-75" style="background:#fff;">
+	<div class="main-nav-step">
+    	<div class="step-1">
+    		<div class="step-1-middle step-2-color"><i class="step-i">1</i> 我的购物车</div>
+    		<div class="step-1-right "></div>
+    	</div>
+    	<div class="step-2">
+    		<div class="step-2-middle"><i class="step-i">2</i> 填写订单信息</div>
+    		<div class="step-2-right"></div>
+    	</div>
+    	<div class="step-3">
+    		<div class="step-3-middle"><i class="step-i">3</i> 成功提交订单</div>
+    		<div class="step-3-right"></div>
+    	</div>
+	</div>
+	<br/><br/>
+    <div th:if="${validOrderInfo}">
+        <div>
+            <div th:substituteby="checkout/partials/shippingInfoForm"></div>
+        </div>  
+     </div>
+</div>
+<div class="preferential tablet-grid-25 grid-25 grid-parent">
+	<div class="grid-95 tablet-grid-95 grid-parent bg">
+	<h2 th:if="${customer.anonymous}" class="discount"><a th:href="@{/register}">注册</a>优惠</h2>
+	<h2 th:unless="${customer.anonymous}" class="discount"><a th:href="@{/register}">您的</a>优惠</h2>
+	<ul th:if="*{!#lists.isEmpty(cart.orderAdjustments)}" class="grid-100 tablet-grid-100">
+      <li th:each="orderAdjustment:${cart.orderAdjustments}" th:object="${orderAdjustment}">
+		<p th:if="${orderAdjustment}" th:text="*{offer.description}"></p>
+	  </li>
+    </ul>
+</div>
+</div>
+<input type="hidden" id="errorMessage" th:if="${param.inventoryError}" th:value="${param.errorMessage[0]}"/>
+<script type="text/javascript">
+/*<![CDATA[*/
+		lastScripts.selRegion = function() {
+			window.regionSelect = function(e){
+				e = $(e);
+			    BLC.ajax({url: e.attr('href'),
+			        type: "get"
+			    }, function(data) {
+			    	$('#curr-region').text(e.text());
+			    	var region_ajax = false;
+			    	$('.region_ajax').each(function(i, e){region_ajax = region_ajax || ('true' == e.value);});
+					window.location.reload()
+			    });
+			    return false;
+			};
+		};
+/*]]>*/
+</script>
+<script type="text/javascript" th:if="${param.flag}">
+lastScripts[lastScripts.length] = function(){
+	if(confirm("亲，您指定的时间不在我们的配送范围！确定提交吗？")){
+		$('.forcedSubmit').val("yes");
+		$('#shipping_info').submit();
+	}
+};
+</script>
+
+
+
+<script type="text/javascript" th:if="${param.inventoryError}">
+lastScripts[lastScripts.length] = function(){
+	 var fancyErrorOptions = {
+        maxWidth    : 500,
+        maxHeight   : 500,
+        fitToView   : false,
+        width       : '100%',
+        height      : '100%',
+        autoSize    : true,
+        closeClick  : false,
+        topRatio    : 0,
+        openEffect  : 'none',
+        closeEffect : 'none',
+        padding     : 20
+    };
+	var errorMessage = $("#errorMessage").val();
+  	$.fancybox.open($.extend(fancyErrorOptions, { content : errorMessage, afterShow: function() {
+        return true;
+    }}));
+};
+</script>
+
+
+<script type="text/javascript" th:if="${param.alipayerrorCode}" th:inline="javascript">
+lastScripts[lastScripts.length] = function(){
+	 var fancyErrorOptions = {
+        maxWidth    : 500,
+        maxHeight   : 500,
+        fitToView   : false,
+        width       : '100%',
+        height      : '100%',
+        autoSize    : true,
+        closeClick  : false,
+        topRatio    : 0,
+        openEffect  : 'none',
+        closeEffect : 'none',
+        padding     : 20
+    };
+	var error = [[${param.alipayerrorCode[0]}]];
+	if(error=='1'){
+      	$.fancybox.open($.extend(fancyErrorOptions, { content : "支付宝支付出现异常；<br/>请检查支付宝是否付款成功，如果付款成功；<br/>请联系我们网站的客服，我们会以最快的速度来为你解决问题。", afterShow: function() {
+            return true;
+        }}));
+	}else if(error=='2'){
+		$.fancybox.open($.extend(fancyErrorOptions, { content : "支付宝支付出现异常；<br/>支付宝支付金额已经反充到你的账户；<br/>如果有任何疑问，请联系我们的客服。谢谢；", afterShow: function() {
+            return true;
+        }}));
+	}
+};
+</script>

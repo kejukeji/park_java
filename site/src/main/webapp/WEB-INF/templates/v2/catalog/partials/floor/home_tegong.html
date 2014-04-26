@@ -1,0 +1,97 @@
+<style>
+	.zatg_layer{
+		position:relative;
+		overflow:hidden !important;
+	}
+	.zatg_layer:hover .border_show{
+		display:block;
+	}
+	.zatg_layer:hover .zxtg_hover{
+		display:block;
+	}
+	.border_show{
+		position:absolute;
+		top:0;
+		left:0;
+		width:97.6%;
+		height:96.4%;
+		border:5px solid #f8f8f8;
+		display:none;
+	}
+	.zxtg_hover{
+		position:absolute;
+		top:5px;
+		left:5px;
+		width:97.6%;
+		height:96.4%;
+		background-color:#f38f53;
+		opacity:0.7;
+		display:none;
+	}
+	.zxtg_logo{
+		position:absolute;
+		width:117px;
+		height:117px;
+		top:50px;
+		left:137px;
+		background: url(//img.onxiao.com/img/Sprites.png) -270px -888px no-repeat;
+		opacity:0.1;
+	}
+	.zxtg_tag{
+		color: #FFFFFF;
+        left: 50px;
+        position: absolute;
+        text-align: left;
+        top: 295px;
+		opacity:0.1;
+	}
+	.zxtg_line{
+		display:inline-block;
+		width:15px;
+		height:15px;
+		background: url(//img.onxiao.com/img/Sprites.png) -417px -905px no-repeat;
+	}
+	
+</style>
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+<div class="tegong">
+	<blc:related_products relatedProductsResultVar="floorProducts" type="'CROSS_SALE'" categoryId="*{flrTab.subCategory.id}" quantity="4" />
+	<div th:each="floorProducts,floorStats:${floorProducts}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}">  
+		<div th:if="${floorStats.index==0}" class="flr-grid-two grid-40 tablet-grid-50 grid-parent first-margin-right zatg_layer">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+                <div class="border_show"></div>
+                <div class="zxtg_hover">
+                    <div class="zxtg_logo"></div>
+                    <div class="zxtg_tag">
+                        <span th:text="*{name}"></span>
+    					<span class="zxtg_line"></span>
+    					<span>原价:</span>
+        				<span th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" blc:price="*{retailPrice}"></span>
+        				<span th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" blc:price="*{defaultSku.retailPrice}"></span>
+        				<span class="zxtg_line"></span>
+    					<span>在校价:</span>
+        				<span th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" blc:price="*{salePrice}"></span>
+        				<span th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" blc:price="*{defaultSku.salePrice}"></span>
+                        <br />
+                        <span>标签:</span><span th:if="*{productAttributes['tag']}" th:utext="*{productAttributes['tag'].value}"></span>
+    				</div>
+    			</div>
+			</a>
+    	</div>
+		<div th:if="${floorStats.index==1||floorStats.index==2}" class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+			</a>
+    	</div>
+		<div th:if="${floorStats.index==3}" class="flr-grid-two grid-40 height-helf tablet-grid-50 grid-parent">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+			</a>
+    	</div>
+    </div>
+</div>

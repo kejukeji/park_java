@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+ <head>
+    <meta charset="utf-8"/>
+    <title>在校生活，从此开始 - 在校网</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="在校生活，从此开始" />
+	<meta name="author" content="乐校网络" />
+    <meta name="viewport" content="width=device-width"/>
+    <!--[if (gt IE 8) | (IEMobile)]><!-->
+		<blc:bundle name="gr.css" mapping-prefix="/css/" files="grid-responsive.css" />
+	<!--<![endif]-->
+	<!--[if (lt IE 9) & (!IEMobile)]>
+		<link rel="stylesheet" href="/css/grid-ie.css" />
+	<![endif]-->
+	<blc:bundle name="stylea.css" mapping-prefix="/css/" files="normalize.min.css,nivo-slider.css,jquery.fancybox.css,ssbusy_main.css,checkout.css,icomoon.css" />
+	<script th:src="@{/js/libs/modernizr-2.6.2.min.js}"></script> <!-- TODO customize -->
+</head>
+<body class="bregion">
+<div class="grid-container" style="margin:0 auto;padding:0 auto;">
+	<div class="grid-100 tablet-grid-100">
+		<div class="logoa grid-20 tablet-grid-20" style="width: 200px;"></div>
+		<h1 class="nowrap grid-50 tablet-grid-50" style="font-size: 1.8em; color: #99cc33; margin-top: 3em; font-weight: normal;">为了更好的享受在校服务，请选择您的校区</h1>
+		<a class="logob grid-15 tablet-grid-15" href="/d/app">
+		</a>
+	</div>
+		<div class="region grid-100 tablet-grid-100 grid-parent">
+			<div th:substituteby="${templateName}" />
+		</div>
+	</div>
+<blc:bundle name="ssbusya.js" mapping-prefix="/js/"
+            files="libs/jquery-1.10.1.min.js,
+            BLC.js,
+            libs/jquery.fancybox.pack.js,
+			jquery.validate.js,
+            innerAddress.js,
+	   		ssbusy.js" />
+<script type="text/javascript">
+/*<![CDATA[*/
+	window.regionSelect = function(){return true;};
+/*]]>*/
+</script>
+	<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc5950a1860bb774d0085d23cdb30a5aa' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<div>
+	<div th:unless="${#lists.isEmpty(orders)}">
+    	<div class="cart-inner cart-inner-his">
+			<div class="cart-tbody" id="product-list">
+    			  <div class="item_form item_form_orderhis clearfix" th:each="order : ${orders}" th:object="${order}" th:attr="data-order-number=*{orderNumber}">
+					<div class="order-history-title grid-100">
+    					<div class="order-cell grid-33" th:title="${order.orderNumber}">
+							<span>订单编号：</span> <span th:if="${order.orderNumber}" th:text="${order.orderNumber}"></span>
+                        </div>
+						<div class="order-cell grid-33" style="text-align:right">
+							<span>成交时间：</span><span th:text="*{#dates.format(submitDate, 'yy-M-d HH:mm')}"></span>
+						</div>
+    					<div class="order-cell grid-33" style="text-align:right">
+							<span >订单操作：</span>
+    						<a th:if="*{status.friendlyType=='Submitted'}" th:href="@{/customer/orders/cancel/} + *{orderNumber}">取消订单</a>
+    						<a th:unless="*{status.friendlyType=='Submitted'}">已完成</a>
+    					</div>
+                    </div>
+					<div class="item_form grid-100 clearfix" th:each="item : ${order.orderItems}" th:object="${item}">
+                    	<div class="cell grid-40 grid-parent" style="text-align:left">
+                            <div class="grid-30">
+            					<a th:if="*{sku.product.url}" th:href="@{*{sku.product.url}}" target="_blank">
+            					<img th:if="*{sku.product.media['primary']}" th:src="@{*{sku.product.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{name}" />
+								</a>
+            				</div> 
+							<div class="grid-70 clearfix nowrap long-name-txt">
+            					<a th:href="@{*{sku.product.url}}" target="_blank">
+            						<span th:text="*{name}"></span>
+            					</a>
+            				</div>  
+                        </div>
+                        <div class="cell p-price grid-10"><span class="price" blc:price="*{getPriceBeforeAdjustments(true)}"></span></div>
+                        <div class="cell grid-5">
+                            <span th:text="*{quantity}"/>
+                        </div>
+            			<div class="cell grid-25" style="color:rgb(0, 148, 0);">
+                            <span>送积分：</span><span>-　</span><span>优惠：</span><span th:text="*{'-' + (totalAdjustmentValue.zero?'':totalAdjustmentValue.amount)}"></span>
+						</div>
+						<div class="cell grid-10">
+                            <a th:href="@{'/reviews/product/' + *{sku.product.id}}" th:data="*{id}" onclick="return reviewTheProduct(this);" class="create-review">发表评价</a>
+						</div>
+            			<div class="cell price grid-10" style="text-align:right" blc:price="*{totalPrice}">
+                        </div> 
+                        <div th:id="*{id}" class="review-box grid-100 grid-parent">
+						</div>
+					</div>
+    				<div class="order-history-title grid-100">
+    					<div class="order-cell price-float"> 
+    						<span class="price total-price" blc:price="*{total}"></span>
+                        </div>
+                        <div class="order-cell price-float">
+                            <span>收货人：</span>
+                            <span th:if="${#lists.size(order.fulfillmentGroups) > 0}"  th:object="${order.fulfillmentGroups[0]}" th:inline="text">
+    							[[*{address.firstName}]]　
+    						</span>
+							<span>订单总价：</span>
+    					</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 th:if="${#lists.isEmpty(orders)}">你目前还没有订单，赶快去买点东西吧。</h3>
+</div>

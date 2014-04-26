@@ -1,0 +1,946 @@
+.product-img{
+	position: relative;
+}
+/**featureProductListItem**/
+.FEATURED .product-img .product-tag {
+float:right;
+height:38px;
+width:74px;
+top:10px;
+right:-10px;
+position: absolute;
+}
+.FEATURED .product-img  .product-tag .image-left{
+clear:both;
+float:left;
+width:0;
+height:0;
+border-width:15px 5px;
+border-color:transparent #33ccff #33ccff transparent;
+border-style:solid;
+}
+.FEATURED .product-img  .product-tag .image-tag {
+clear:both;
+float:left;
+width:64px;
+height:30px;
+line-height:30px;
+font-size: 1em;
+color:#fff;
+font-family: "Microsoft YaHei";
+text-align:center;
+background-color:#33ccff;
+left:10px;
+position: absolute;
+}
+.FEATURED .product-img  .product-tag .image-bottom{
+clear:both;
+float:right;
+width:0;
+height:0;
+border-width:2px 5px;
+border-color:#0066cc transparent transparent #0066cc;
+border-style:solid;
+}
+
+.FEATURED .show-back-image {
+border:10px solid #3cf;
+}
+.full-square:hover .image-bottom{
+display:none;
+}
+
+/**corssproductListItem**/
+.CROSS_SALE .product-tag {
+float:right;
+height:38px;
+width:74px;
+top:10px;
+right:-10px;
+position: absolute;
+}
+.CROSS_SALE .product-tag .image-left{
+clear:both;
+float:left;
+width:0;
+height:0;
+border-width:15px 5px;
+border-color:transparent #ff6600 #ff6600 transparent;
+border-style:solid;
+}
+.CROSS_SALE .product-tag .image-tag {
+clear:both;
+float:left;
+width:64px;
+height:30px;
+line-height:30px;
+font-size: 1em;
+color:#fff;
+font-family: "Microsoft YaHei";
+text-align:center;
+background-color:#ff6600;
+left:10px;
+position: absolute;
+}
+.CROSS_SALE .product-tag .image-bottom {
+clear:both;
+float:right;
+width:0;
+height:0;
+border-width:2px 5px;
+border-color:#993300 transparent transparent #993300;
+border-style:solid;
+}
+.CROSS_SALE .show-back-image {
+border:10px solid #f60 !important;
+}
+
+/**UP_SALEsproductlistitem**/
+
+.UP_SALE .product-tag {
+float:right;
+height:38px;
+width:74px;
+top:10px;
+right:-10px;
+position: absolute;
+}
+.UP_SALE .product-tag .image-left{
+clear:both;
+float:left;
+width:0;
+height:0;
+border-width:15px 5px;
+border-color:transparent #ff0000 #ff0000 transparent;
+border-style:solid;
+}
+.UP_SALE .product-tag .image-tag{
+clear:both;
+float:left;
+width:64px;
+height:30px;
+line-height:30px;
+font-size: 1em;
+color:#fff;
+font-family: "Microsoft YaHei";
+text-align:center;
+background-color:#ff0000;
+left:10px;
+position: absolute;
+}
+.UP_SALE .product-tag .image-bottom{
+clear:both;
+float:right;
+width:0;
+height:0;
+border-width:2px 5px;
+border-color:#990000 transparent transparent #990000;
+border-style:solid;
+}
+
+
+.show-back-image {
+background-color:#000000;
+border:10px solid #f00;
+width:100%;
+height:100%;
+display:none;
+top:-10px;
+left:-10px;
+position: absolute;
+}
+.UP_SALE .full-square:hover .image-bottom{
+display:none;
+}
+.full-square:hover .show-back-image{
+opacity:0.6;
+display:block;
+}
+ .like-cart-share{
+	padding-top:74px;
+	height:140px;
+	position:relative;
+}
+.v2 .like-cart-share{
+	padding-top:104px;
+	padding-left:21px;
+	height:140px;
+	position:relative;
+}
+.show-back-image .like-png{
+	background: url(/img/ssb-sprites.png) 10px -3476px no-repeat;
+	line-height:60px;
+	height:60px;
+}
+/**.show-back-image .like-png:hover{
+	background: url(/img/ssb-sprites.png) -152px -3476px no-repeat;
+	line-height:60px;
+	height:60px;
+}**/
+.show-back-image .cart-png{
+	background: url(/img/ssb-sprites.png) 0px -3550px no-repeat;
+	line-height:60px;
+	height:60px;
+}
+.show-back-image .share-png{
+	background: url(/img/ssb-sprites.png) 3px -3635px no-repeat;
+	line-height:60px;
+	height:60px;
+}
+.show-back-image ul{
+	margin:0;
+	padding:0;
+	padding-left:23px;
+	list-style: none outside none;
+}
+.show-back-image ul li{
+	text-align:center;
+	color:white;
+	margin:0;
+	padding:0;
+	width:60px;
+	float: left;
+}
+.show-back-image .title-name .name{
+	padding-left:10px;
+	position: absolute;
+	bottom: 0;
+	left:0;
+	width:150px;
+	color:white;
+	line-height:40px;
+	white-space: nowrap;
+}
+.show-back-image .title-name .price{
+	z-index:1000;
+	clear:both;
+	line-height:40px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color:#f60;
+	font-size: 1em;
+	font-family: "Microsoft YaHei";
+}
+
+/*addborder**/
+.add-border{
+border:1px solid #ccc;
+}
+
+.add-border:hover .name-price{
+display:none;
+}
+.add-border:hover .name-price:hover{
+display:block !important;
+}
+.name-price{
+background-color: #f5f5f5;
+padding:10px 0;
+}
+.long-text{
+padding-left:10px;
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
+display: inline-block;
+width: 60%;
+}
+/*===============*/
+.banner .hot-items.active{
+	background: url(/img/ssb-sprites.png) -72px -3146px no-repeat;
+}	
+.banner .brand-nav.active{
+	background: url(/img/ssb-sprites.png) -178px -3146px no-repeat;
+}
+.banner .floor-entry.active{
+	background: url(/img/ssb-sprites.png) 5px -80px no-repeat;
+}
+.banner .pictorial.active{
+	background: url(/img/ssb-sprites.png) -174px -3352px no-repeat;
+}
+.banner .shares.active{
+	background: url(/img/ssb-sprites.png) -86px -3349px no-repeat;
+}
+.mainmenu{
+	float:left;
+}
+.shares-main-tx:hover {
+	background: url(/img/ssb-sprites.png) 62px -1009px no-repeat;
+	
+}
+.shares-main-tx{
+	background: url(/img/ssb-sprites.png) 62px -2012px no-repeat;
+
+}
+.shares-main-qz:hover{
+	background: url(/img/ssb-sprites.png) 60px -1257px no-repeat;
+
+}
+.shares-main-qz{
+	background: url(/img/ssb-sprites.png) 60px -2288px no-repeat;
+
+}
+.shares-main-xinlang:hover {
+	background: url(/img/ssb-sprites.png) 60px -1500px no-repeat;
+		
+}
+.shares-main-xinlang {
+	background: url(/img/ssb-sprites.png) 60px -2512px no-repeat;
+
+}
+.shares-main-renren:hover {
+	background: url(/img/ssb-sprites.png) 40px -1744px no-repeat;
+	
+}
+.shares-main-renren{
+	background: url(/img/ssb-sprites.png) 40px -2761px  no-repeat;
+
+}
+.pictorial-main-book img {
+	width:100%;
+}
+.pictorial-main-content{
+	padding-top:4em;
+	padding-left:4em;
+	font-family:MicrosoftYaHei;	
+}
+.pictorial-main-content .head{
+	font-weight:bold;
+	font-size:2em;
+}
+.pictorial-main-content .word{
+	font-size:1em;
+	line-height:2em;
+	color:#bababa;
+}
+.pictorial-main-content .important{
+	color:#ff6e17;
+	cursor:pointer;
+}
+.pictorial-main-content .input{
+border-radius: 15px;
+width: 10em;
+height: 2.5em;
+font-size: 2em;
+float: left;
+padding: 0 .5em;
+}
+.pictorial-main-content .button{
+	text-align:center;
+	border-radius:0.25em;
+	background-color:#ff6e17;
+	margin-left:0.5em;
+	height:1.3em;
+	width:2.25em;
+	float:left;
+	font-family:MicrosoftYaHei;
+	font-size:4em;
+	line-height:1.25em;
+	color:white;
+	cursor:pointer;
+}
+.floor-entry-main .window{
+	margin-top:2em;
+	height:7em;
+	width:90%;
+	border:1px solid #bababa;
+	border-radius:0.75em;
+	color:#ff6e17;
+}
+.floor-entry-main .window:hover{
+	margin-top:2em;
+	height:7em;
+	width:90%;
+	border:1px solid #ff6e17;
+	background-color:#ff6e17;
+	border-radius:0.75em;
+	color:#ffffff;
+}
+
+.floor-entry-main .window .title{
+	display:block;
+	text-align:center;
+	margin-top:1.5em;
+	font-weight:bold;
+	font-size:1.5em;
+	cursor:pointer;
+}
+.floor-entry-main .window .description{
+	display:block;
+	margin:0em;
+	text-align:center; 
+	font-size:1em;
+	color:#bababa;
+	
+}
+/*brand-nav-main*/
+.brand-nav-main .title{
+	margin-top:5px;
+	border-right:1px solid #bababa;
+}
+.brand-nav-main .title span{
+	font-weight:bold;
+	display:block;
+	text-align:center;
+	line-height:6.5em;
+	font-family:RTWSYueGoTrial;
+	font-size:1.5em;
+	color:#ff6e17;
+	cursor:pointer;
+}
+.brand-nav-main .content{
+	margin-top:5px;
+}
+.brand-nav-main .brand-item {
+	padding: 1.3em;
+	overflow: hidden;
+	height: 0;
+	padding-bottom: 17%;
+}
+.brand-nav-main img{
+	padding-top:6px;
+	margin-left:1em;
+	width:100%;
+	cursor:pointer;	
+}
+.hot-items-main{
+	margin:0px;
+	padding:0px;
+	width:100%;
+}
+.hot-items-main img{
+	width:100%;
+	cursor:pointer;
+}
+.hot-items-main .hot-image{
+margin-top:10%;
+}
+/*.hot-items-main .more{
+	display:block;
+	margin-left:3%;
+	cursor:pointer;
+	float:left;
+	height:295px;
+	background: url(/img/ssb-sprites.png) 20px -3000px no-repeat;
+	background-color:#ededed;
+}
+.hot-items-main .more:hover,.more:active{
+	display:block;
+	cursor:pointer;
+	float:left;
+	height:297px;
+	background: url(/img/ssb-sprites.png) 20px -3000px no-repeat;
+	background-color:#ff6e17;
+}*/
+/*end*/
+
+#slider {
+max-height: 500px;
+}
+.hot-bg{
+	width:5%;
+	height:100%;
+}
+.hot-more{
+	position: relative;
+	height:94.5%;
+	background-color: #ff6e17;
+	margin-top: 25.5%;
+	text-align:center;
+	color:#FFFFFF;
+	font-size:1.5em;
+}
+.v2 .hot-more {
+	background-color: #e65c5c;
+}
+.hot-middle{
+	position: absolute;
+	left:25%;
+	top:46%;
+	text-align:center;
+}
+.hot-bg:hover{
+ cursor: pointer
+}
+#page-left{
+text-decoration:none;
+}
+#page-right{
+text-decoration:none;
+}
+.share-menu{
+float:left;
+height:300px;
+cursor:pointer;
+}
+
+
+
+
+
+/*v2 css*/
+.main-content{
+	font-size:1em;
+	}
+.category-title{
+	height:44px;
+	line-height:44px;
+	color:white;
+	text-align:center;
+	font-size: 1.15em;
+	border-radius: 3px 3px 0 0;
+	font-family: "Microsoft YaHei";
+	background-color:#e65c5c;
+	margin-top: 20px;
+}
+.category-nav{
+padding:0;
+margin:0px;
+border:1px solid #ebebeb;
+height: 400px;
+}
+.category-nav ul{
+	padding:0;
+	margin:0;
+	background-color: #fbfbfb;
+}
+.category-nav ul li{
+	height:40px;
+	line-height:40px;
+	padding:0;
+	white-space: nowrap;
+	border: 1px solid #fbfbfb;
+	border-right: 0;
+}
+.category-nav ul li.active{
+border-color: #e65c5c;
+box-shadow: 0 1px 1px #bbb;
+}
+.category-nav ul .active .menu-item{
+background-color: #fff;
+position: relative;
+z-index: 5001;
+}
+.category-nav .menu-item a{
+	display:inline-block;height:39px;width:80%;text-align: center;color: #999;
+	margin: 0 10%;
+	border-bottom: 1px solid #ebebeb;
+}
+.category-nav li .submenu{
+	border: 1px solid #e65c5c;
+	top: -1px;
+	padding-left: .5em;
+	margin-left: -1px;
+	box-shadow: 3px 3px 0 rgba(120,120,120,.5);
+}
+.submenu .m-header{
+border-bottom: 1px solid #f1f1f1;
+margin-left: 1.2em;
+height: 42px;
+}
+.m-header img {
+position: absolute;
+right: 0;
+}
+.submenu .cols-2 {
+	width: 36em;
+}
+.submenu .cols-3 {
+	width: 54em;
+}
+.submenu .m-col {
+float: left;
+}
+.submenu .mcol {
+border-right: 1px solid #f1f1f1;
+margin: 1.2em 0 1.2em 1.2em;
+line-height: 2.4em;
+}
+.cols-1 .m-col {
+width: 100%;
+}
+.cols-2 .m-col {
+width: 50%;
+}
+.cols-3 .m-col {
+width: 33.33%;
+}
+.cols-1 .col1,.cols-2 .col2, .cols-3 .col3 {
+	border-right: 0;
+}
+.submenu a.sub-title {
+font-weight: bold;
+color: #525252;
+}
+.submenu a {
+color: #999;
+padding: 0 1em 0 0;
+}
+.subsub a {
+float: left;
+}
+.subsub {
+border-bottom: 1px solid #f1f1f1;
+padding-bottom: 1em;
+margin-right: 1.5em;
+}
+.category-nav li a span {
+display: inline-block;
+padding-left: 30px;
+}
+.category-nav ul li a s {
+display: inline-block;
+width: 18px;
+height: 10px;
+background: url(//img.onxiao.com/img/Sprites.png) -382px -106px no-repeat;
+}
+.detial-time{
+	font-weight: bold;
+	line-height: 1.8em;
+	font-size: 1.8em;
+	text-align: center;
+	color: #ff6000;
+}
+.send-detial {
+	text-align: center;
+	color: #ff6000;
+}
+/**.peisong-left{
+	height:100%;
+	width:70px;
+	display:inline-block;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -816px -577px repeat;
+}
+.peisong-right{
+	height:100%;
+	width:70px;
+	display:inline-block;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -942px -577px repeat;
+}	**/
+.send-time .time-title{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) center -343px  repeat;
+	margin-top:10px;
+	font-weight:bold;
+}
+.send-time .send-detial{
+	padding: 0 15px 0 10px;
+	overflow: hidden;
+	z-index: 1;
+}
+.send-time .send-bg{
+	height:58px;
+	width:71px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png)  -1033px -559px repeat;
+	position: absolute;
+	right:0;
+	top:47px;
+}
+.grid-padding-left{
+	padding-left:0 !important;
+}
+.grid-padding-right{
+	padding-right:0 !important;
+}
+
+.bboard {
+	border: 1px solid #f1f1f1;
+	position: relative;
+	z-index: 100;
+}
+.bboard dl.tabs {
+	margin: 0;
+	height: 23px;
+	background-color: #fafafa;
+}
+.bboard .tabs dd {
+	float: left;
+	margin: 0;
+	padding: 0 12px;
+	height: 23px;
+	line-height: 23px;
+	cursor: pointer;
+}
+.bboard .tabs dd.active {
+	border-right: 1px solid #f1f1f1;
+	border-left: 1px solid #f1f1f1;
+	height: 24px;
+	background-color: #fff;
+	cursor: default;
+}
+.bboard .tab-contents {
+	border-top: 1px solid #f1f1f1;
+	height: 80px;
+}
+.tab-contents .tab-content {
+	overflow: hidden;
+	height: 72px;
+	min-height: 72px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #f1f1f1;
+	display: none;
+	background-color: #fff;
+}
+.tab-contents .tab-content.active {
+	display: block;
+}
+.bboard .tab-contents .tab-content.active:hover {
+	box-shadow: 0 0 6px rgba(50,50,50,0.3);
+	height: auto;
+}
+
+.bboard p {
+	margin: 4px 8px;
+}
+.home-offer{
+	position:relative;
+	margin-top:10px;
+	height:120px;
+	border:1px solid #f1f1f1;
+	position: relative;
+	z-index: 10;
+	overflow: hidden;
+	overflow-x:hidden;
+}
+.home-offer .offer-title {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+line-height: 40px;
+background-color: #aaa;
+opacity: 0.8;
+padding-left: 115px;
+color: #fff;
+}
+.home-offer .offer-bg{
+	position:absolute;
+	top:53px;
+	left:0;
+	padding-left:10px;
+	padding-top:37px;
+	height:30px;
+	width:100px;
+	color:white;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png)  -303px -912px repeat;
+	z-index: 2
+}
+.other-service{
+	margin-top:10px;
+	height:141px;
+	border:1px solid #f1f1f1;
+	position: relative;
+	z-index: 1;
+}
+.other-service .phone-service{
+	text-align:center;
+	padding-top:80px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png)  -555px -543px repeat;
+}
+.other-service .print-service{
+	text-align:center;
+	padding-top:80px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png)  -644px -543px repeat;
+}
+.other-service .new-service{
+	text-align:center;
+	padding-top:80px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png)  -732px -543px repeat;
+}
+.other-service .more-service .more-service-service{
+	text-align:right;
+	margin-top: 7.5px;
+	padding-right: 16px;
+}
+.other-service .more-service{
+	width:125px;
+	float:right;
+	height:24px;
+	padding-right:10px;
+	margin-top: 12px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -1344px -589px  repeat;
+}
+
+/*nav css*/
+.pindao{
+	height:64px;
+	font-size: 1.15em;
+	font-family: "Microsoft YaHei";
+	border-bottom: 3px solid #f57878;
+	padding-bottom:1px;
+	margin-bottom:10px;
+}
+.text-padding{
+	padding-top:40px;
+	position: relative;
+}
+.nav-height{
+	height:60px;
+	vertical-align: bottom;
+}
+a.icon-padding{
+	padding-left:52px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.pindao .bajie a{
+	color:#f17428;
+}
+.pindao .bajie-bg{
+	position:absolute;
+	width:55px;
+	height:60px;
+	top:0px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -815px -645px repeat;
+}
+.pindao .bajie:hover .bajie-bg{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -815px -708px repeat;
+}
+.pindao .zixia a {
+	color:#cc52bf !important;
+	
+}
+.pindao .zixia-bg{
+	position:absolute;
+	width:55px;
+	height:60px;
+	top:0px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -945px -645px repeat;
+}
+.pindao .zixia:hover .zixia-bg{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -945px -707px repeat;
+}
+.pindao .shifu a{
+	color:#c45151;
+}
+.pindao .shifu-bg{
+	position:absolute;
+	width:55px;
+	height:60px;
+	top:0px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -1071px -645px repeat;
+}
+.pindao .shifu:hover .shifu-bg{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -1071px -706px repeat;
+}
+.pindao .shaseng a{
+	color:#4f8721;
+}
+.pindao .shaseng-bg{
+	position:absolute;
+	width:53px;
+	height:60px;
+	top:0px;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -1210px -645px repeat;
+}
+.pindao .shaseng:hover .shaseng-bg{
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -1210px -707px repeat;
+}
+.other-text{
+	width:2px;
+	height:100%;
+	margin-left:0;
+	margin-right:7px;
+	display:inline-block;
+	background: url(//img.onxiao.com/img/Onxiao_Web_Sprits.png) -813px -662px repeat;
+}
+/* http://responsiveslides.com/ */
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+  display: block;
+  height: 391px;
+  float: left;
+  border: 0;
+}
+.rslidesdiv {
+	position: relative;
+}
+.rslides1_tabs {
+position: absolute;
+bottom: -4px;
+right: 15px;
+z-index: 100;
+}
+.rslides1_tabs li {
+	float:left;
+}
+.rslides1_tabs a {
+display: inline-block;
+width: 22px;
+height: 22px;
+line-height: 22px;
+margin: 0 1px;
+background: #999;
+text-align: center;
+cursor: pointer;
+border-radius: 12px;
+-moz-border-radius: 12px;
+-webkit-border-radius: 12px;
+}
+.rslides1_tabs li.rslides_here a {
+background: #E4393C;
+}
+.rslides1_tabs li a,.rslides1_tabs li a:hover {
+color: #FFF !important;
+}
+.d11-ad {
+	display: block;
+	width: 255px;
+	height: 274px;
+	margin-top:10px;
+	position: relative;
+	background: url(//img.onxiao.com/img/activities/d11_ad.jpg) center no-repeat;
+}
+.v2 .banner {
+	padding-top: 2em;
+}
+.head-ad {
+	width: 100%;
+	height:0;
+	overflow: hidden;
+	background:url(//img.onxiao.com/img/activities/d11.gif) center no-repeat;
+	background-color: #292929;
+	display: block;
+}
+.head-ad img {
+	margin-left: 75%;
+	padding: 15px;
+	cursor: pointer;
+}
+#head-ad-s0 {
+	background-image:url(//img.onxiao.com/img/activities/d11_b0.jpg)
+}
+#head-ad-s1 {
+	background-image:url(//img.onxiao.com/img/activities/d11_b1.jpg)
+}
+#head-ad{
+cursor:pointer;
+}
+.below-menu {
+	position: relative;
+	z-index: 0;
+}

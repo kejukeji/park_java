@@ -1,0 +1,113 @@
+<style>
+	.time-zeor{height: 99px;margin:0;padding:0;}
+	.eat-title{height:95px;margin-top:30px;}
+	.eat-name{position:relative;height:46px;width:100%;background: url(//img.onxiao.com/img/Sprites.png) -13px -416px;}
+	.circle-dot{position:absolute;right:0px;bottom:0px;width:10px;height:10px;background: url(//img.onxiao.com/img/Sprites.png) -509.5px -554px;}
+	.eat-title-nothing{background-color: #F8F8F8;border-top: 1px solid #F1F1F1;height: 52px;width: 97%;float:left;}
+	.circle-dot-left{width:3%;height:53px;float:right;background: url(//img.onxiao.com/img/Sprites.png) -514.5px -564.5px;background-color: #F8F8F8;}
+	.befor-open-top{background: url(//img.onxiao.com/img/Sprites.png) -519.5px -518px;}
+	.eat-text{text-align: center;height: 46px;}
+	.eat-text .tab0{visibility: hidden;}
+	.eat-text .tab1{visibility: hidden;}
+	.eat-text .tab2{visibility: hidden;}
+	.eat-text .tab3{visibility: hidden;}
+	.eat-time{background-color:#f8f8f8;height:57px;}
+	.eat-time .befor-open,.eat-time .tab0,.eat-time .tab1,.eat-time .tab2,.eat-time .tab3,.eat-time .stop-open{border-top:5px solid #e7e7e7; }
+	.eat-time .tab0,.eat-time .tab1,.eat-time .tab2,.eat-time .tab3{cursor:pointer;}
+	.eat-time .befor-open{background: url(//img.onxiao.com/img/Sprites.png) -519.5px -566px;}
+	.eat-time .tab0,.eat-time .tab1,.eat-time .tab2,.eat-time .tab3,.eat-time .stop-open{background: url(//img.onxiao.com/img/Sprites.png) -245px -557px;}
+	.eat-time .tab0.active{border-top:5px solid #25af05; }
+	.eat-time .tab1.active{border-top:5px solid #eb7d3c; }
+	.eat-time .tab2.active{border-top:5px solid #ff7a8a; }
+	.eat-time .tab3.active{border-top:5px solid #838585;}
+	.time-number{float:right;}
+	.eattabs .tab0{background: url(//img.onxiao.com/img/Sprites.png) -372px -627px;}
+	.eattabs .tab1{background: url(//img.onxiao.com/img/Sprites.png) -372px -680px;}
+	.eattabs .tab2{background: url(//img.onxiao.com/img/Sprites.png) -372px -733px;}
+	.eattabs .tab3{background: url(//img.onxiao.com/img/Sprites.png) -372px -786px;}
+	.eattabs .tab0.active{background: url(//img.onxiao.com/img/Sprites.png) -244px -627px;}
+	.eattabs .tab1.active{background: url(//img.onxiao.com/img/Sprites.png) -244px -680px;}
+	.eattabs .tab2.active{background: url(//img.onxiao.com/img/Sprites.png) -244px -733px;}
+	.eattabs .tab3.active{background: url(//img.onxiao.com/img/Sprites.png) -244px -786px;}
+	.eat-text div{height: 40px;line-height: 40px;display:inline-block;padding-left:25px;}
+	.eat-text .break{background: url(//img.onxiao.com/img/Sprites.png) -469px -366px no-repeat;color:#25af05;}
+	.eat-text .lunch{background: url(//img.onxiao.com/img/Sprites.png) -469px -413px no-repeat;color:#eb7d3c;}
+	.eat-text .tea{color:#ff7a8a; background: url(//img.onxiao.com/img/Sprites.png) -469px -457px no-repeat;}
+	.eat-text .dinner{color:#838585; background: url(//img.onxiao.com/img/Sprites.png) -469px -505px no-repeat;}
+	
+	.eat-floor {background-color:#f8f8f8;border:1px solid #f1f1f1;padding:0;height:335px;border-top:none;}
+	.eat-floor nav {margin-top:2em;padding-left: 2.7%;}
+	.eat-floor nav .tab {margin-bottom:18px; width:110px;height:35px;cursor:pointer;}
+	.eat-floor nav .tab.active {color:#35c535;}
+	.eat-floor .tab-content {width:100%;height:100%;position:absolute}
+	.eat-floor .flr-content {background-color:#fff;box-shadow: -2px 0 2px 0px #ccc;height:100%;position:relative;overflow:hidden;}
+	.pageup_bg,.pagedown_bg{position:absolute;width:73px;height:313px;z-index:1;display:none;}
+	.pageup_bg{top:0;left:10px;background: url(//img.onxiao.com/img/Sprites.png) -467px -873px no-repeat;}
+	.pagedown_bg{top:0;right:10px;background: url(//img.onxiao.com/img/Sprites.png) 0px -873px no-repeat;}
+	.pageup_bg:hover,.pagedown_bg:hover{cursor:pointer;}
+	.absolute_div{height: 100%;overflow: hidden;position: relative;width: 100%;}
+	.last_pic{
+		width:16%;
+		margin-right:0;
+	}
+	.food_lost_0{padding-left:0;}
+</style>
+<div class="eat-title">
+	<div class="grid-15 tablet-grid-15 grid-parent">
+        <div class="eat-name"><div class="circle-dot"></div></div>
+        <div class="eat-title-nothing"></div><div class="circle-dot-left"></div>
+	</div>
+	<div class="grid-85 tablet-grid-85 time-zeor">
+        <table width="100%">
+			<tr class="eat-text">
+				<td width="3%" class="befor-open-top"></td>
+				<td width="19.4%" class="tab0"><div class="break">早安，美好的一天!</div></td>
+				<td width="19.4%" class="tab1"><div class="lunch">午餐后,看看吃什么?</div></td>
+				<td width="19.4%" class="tab2"><div class="tea">懒惰的猫,咖啡,甜点.</div></td>
+				<td width="19.4%" class="tab3"><div class="dinner">星空,音乐 ,在来点零食吧.</div></td>
+				<td width="19.4%" class="stop-open-top"></td>
+			</tr>
+			<tr class="eat-time">
+				<td width="3%" class="befor-open" style="text-align:right">8</td>
+				<td width="19.4%" class="tab0" key="tab0">:00<span class="time-number">11</span></td>
+				<td width="19.4%" class="tab1" key="tab1">:00<span class="time-number">14</span></td>
+				<td width="19.4%" class="tab2" key="tab2">:00<span class="time-number">16</span></td>
+				<td width="19.4%" class="tab3" key="tab3">:00<span class="time-number">22</span></td>
+				<td width="19.4%" class="stop-open">:00</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="eat-floor grid-100 tablet-grid-100">
+	<nav class="grid-15 tablet-grid-15 eattabs">
+		<div class="tab tab0" key="tab0">
+		</div>
+		<div class="tab tab1" key="tab1">
+		</div>
+		<div class="tab tab2" key="tab2">
+		</div>
+		<div class="tab tab3" key="tab3">
+		</div>
+	</nav>
+	<div class="flr-content tab-contents grid-85 tablet-grid-85">
+		<div class="pageup active">
+			<div class="pageup_bg">
+            </div>
+        </div>
+		<div class="absolute_div">
+    		<div th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}" class="clearfix tab-content" th:classappend="${'tab' + tabStats.index}">
+				<blc:categories resultVar="eatCategories" th:attr="parentCategory=*{name}"/>
+                <div th:each="category,stats: ${eatCategories}" th:object="${category}">
+					<div class="grid-20 tablet-grid-25 clear_padding margin_right overflow_hidden" th:classappend="${stats.index==4?'last_pic hide-on-tablet hide-on-mobile food_lost_'+stats.index:'food_lost_'+stats.index}">
+						<a th:if="*{url ne null}" th:href="*{url}">
+							<img th:if="*{categoryMedia['alt6']}" th:alt="*{name}" th:src="@{*{categoryMedia['alt6'].url}}"/>
+						</a>
+        			</div>
+				</div>
+        	</div>
+        </div>
+		<div class="pagedown active">
+            <div class="pagedown_bg"></div>
+        </div>
+	</div>
+</div>

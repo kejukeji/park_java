@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
+
+    <named-query name="SSB_READ_RECHARGEABLECARDS" >
+        <query>
+        FROM com.ssbusy.core.rechargeablecard.domain.RechargeableCard rechargeableCard 
+        where rechargeableCard.id = :customerid</query>
+    </named-query>
+    <named-query name="SSB_FIND_RECHARGEABLECARDS_NOT_USED">
+    	<query>
+    	FROM com.ssbusy.core.rechargeablecard.domain.RechargeableCard rechargeableCard 
+    	where rechargeableCard.card_id = :card_id and rechargeableCard.card_password =:card_password
+    	and rechargeableCard.id is null
+    	</query>
+    </named-query> 
+    <named-query name="TAG_CARD_TO_CUSTOMER">
+    	<query>
+    	<![CDATA[
+    	UPDATE com.ssbusy.core.rechargeablecard.domain.RechargeableCard rechargeableCard 
+    	SET rechargeableCard.id=:customerId, rechargeableCard.recharge_time=now()
+    	where rechargeableCard.card_id = :card_id and rechargeableCard.id is null
+    	and (rechargeableCard.expireDate is null OR rechargeableCard.expireDate > now())
+    	]]>
+    	</query>
+    </named-query>
+    <named-query name="SSB_READ_RECHARGECOUNT_BY_ID_AND_TYPE">
+    	<query>
+    		select count(*) as count from com.ssbusy.core.rechargeablecard.domain.RechargeableCard card 
+    		where card.id=:customerId
+    		and card.cardType=:type
+    	</query>
+    </named-query> 
+</entity-mappings>

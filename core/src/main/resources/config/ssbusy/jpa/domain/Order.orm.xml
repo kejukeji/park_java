@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	<!-- FIXME only DiscreteOrderItem considered -->
+	<named-query name="BC_READ_ORDER_BY_TIME_AND_FULFILLMENTLOCATION">
+		<query>
+			select count(distinct o) FROM org.broadleafcommerce.core.order.domain.MyDiscreteOrderItemImpl doi
+			 left join doi.order as o
+			where o.status='SUBMITTED' and doi.location.id=:fulfillmentLocationId
+				and((3600 + UNIX_TIMESTAMP(:lastTime)) > UNIX_TIMESTAMP(o.date))
+			 order by o.date, o.submitDate
+		</query>
+	</named-query>
+	<named-query name="SSB_READ_ORDER_FOR_PROCESS">
+		<query>
+        FROM org.broadleafcommerce.core.order.domain.Order od
+         where od.status='SUBMITTED' or od.status='DISTRIBUTE' or od.status='DELIVERY'
+         order by od.submitDate desc
+       </query>
+	</named-query>
+	<named-query name="SSB_READ_ORDER_BY_ORDERIDS_AND_ADMINUSERID">
+		<query>
+			SELECT orders FROM org.broadleafcommerce.core.order.domain.Order orders
+			WHERE orders.id in(:orderIds) and orders.auditable.updatedBy =:adminUserId
+		</query>
+	</named-query>
+	<!-- FIXME only DiscreteOrderItem considered -->
+	<named-query name="SSB_READ_ORDER_BY_STATUS">
+		<query>
+			select distinct o FROM org.broadleafcommerce.core.order.domain.MyDiscreteOrderItemImpl doi
+			 left join doi.order as o
+			where o.status=:status and doi.location.id=:fulfillmentLocationId
+			 order by o.date, o.submitDate
+		</query>
+	</named-query>
+	<named-query name="SSB_UPDATE_ORDERSTATUS_BY_ORDERIDS">
+		<query>
+			UPDATE org.broadleafcommerce.core.order.domain.Order od
+			set od.status =:status where id in(:orderIds)
+		</query>
+	</named-query>
+
+	<named-query name="SSB_UPDATE_ORDER_UPDATE_BY_BY_ORDERIDS">
+		<query>
+			UPDATE org.broadleafcommerce.core.order.domain.Order od
+			SET od.auditable.updatedBy =:adminUserId,od.status='DISTRIBUTING' where od.id in(:orderIds) 
+			and od.status='SUBMITTED'
+		</query>
+	</named-query>
+	<named-query name="SSB_READ_ORDER_BY_STATUS_AND_ADMINUSERID">
+		<query>
+			FROM org.broadleafcommerce.core.order.domain.Order od WHERE od.status=:status and od.auditable.updatedBy =:adminUserId
+		</query>
+	</named-query>
+	<named-query name="SSB_READ_ORDER_AFTER_SUBMITTED">
+		<query>
+        	FROM org.broadleafcommerce.core.order.domain.Order od
+         where (od.status='SUBMITTED' or od.status='DISTRIBUTED' or od.status='DELIVERY' or od.status='COMPLETED' or od.status='DISTRIBUTING' or od.status='CANCELLED')
+         and od.customer.id =:customerId order by od.submitDate desc
+       </query>
+	</named-query>
+	<named-query name="SSB_READ_ORDER_BY_ORDERIDS">
+		<query>
+			FROM org.broadleafcommerce.core.order.domain.Order od
+			where od.id in(:orderIds)
+		</query>
+	</named-query>
+	<named-query name="SSB_READ_ORDER_SUBMITTED_IN">
+	<query>
+	FROM org.broadleafcommerce.core.order.domain.Order od 
+	where (od.status!='CANCELLED' and od.status!='IN_PROCESS')
+	and od.customer.id =:customerId and od.submitDate between :begintime and :endtime
+	</query>
+	</named-query>
+</entity-mappings>

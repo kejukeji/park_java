@@ -1,0 +1,6 @@
+# robotstxt.org/
+User-agent: *
+Disallow:/account
+Disallow:/css
+Disallow:/img
+Disallow:/checkout

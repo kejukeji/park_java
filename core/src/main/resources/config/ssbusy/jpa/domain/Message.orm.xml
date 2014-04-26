@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
+    <named-query name="SSB_READ_MESSAGES_FOR_CUSTOMER" >
+        <query>
+        SELECT message
+        FROM com.ssbusy.core.message.domain.Message message
+        WHERE message.customer.id= :customerId</query>
+    </named-query>
+  
+   <named-query name="SSB_READ_MESSAGES_BY_CUSTOMER_ID_AND_MESSAGETYPE" >
+        <query>
+        SELECT message
+        FROM com.ssbusy.core.message.domain.Message message
+        WHERE message.customer.id= :customerId And message.type=:messageType</query>
+    </named-query>  
+</entity-mappings>

@@ -1,0 +1,32 @@
+<div>
+    <div th:unless="${validOrderInfo}">
+        <div class="group order-info edit-order-info">          
+            <p>
+                <span >你还没有登录..</span>
+                <a th:href="@{/login(successUrl='/checkout')}"><span th:text="#{cart.logIntoYourAccount}">log in to your account</span></a>.
+                <span th:text="#{cart.youCanAlso}">You can also</span>
+                <a th:href="@{/register(successUrl='/checkout')}"><span th:text="#{cart.registerNewAccount}">register a new account</span></a>.
+            </p>
+        
+            <blc:form th:object="${orderInfoForm}" th:action="@{/checkout/savedetails}" method="post" id="order_info" novalidate="novalidate">
+        
+                <div class="form50"> 
+                    <input type="hidden" th:field="*{emailAddress}" value="admin@onxiao.com" class="field50" />
+                </div>
+                
+                <div style="clear: both;"></div>
+                
+                <div class="form50 submit-row">
+                    <input class="small red" type="submit" th:value="#{cart.checkoutAsGuest}" />
+                </div>
+            </blc:form>
+        </div>
+    </div>
+    
+    <div th:if="${validOrderInfo}" th:object="${orderInfoForm}" th:inline="text" class="clearfix">
+        <div class="group order-info">          
+            <h3><span th:text="#{cart.emailAddress}">EmailAddress</span></h3>
+            <p th:text="*{emailAddress}"></p>
+        </div>
+    </div>
+</div>

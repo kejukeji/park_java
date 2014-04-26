@@ -1,0 +1,50 @@
+<head>
+	<meta charset="utf-8"/>
+	<title th:with="ttle=#{${pageTitle}}" th:text="${#strings.replace(ttle, '??', '')+' - 在校网'}"></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="description" content="在校网，在校生活，从此开始" />
+	<meta name="author" content="乐校网络" />
+	<meta name="viewport" content="width=device-width"/>
+
+	<link rel="dns-prefetch" href="//img.onxiao.com" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png-72x72.png"	sizes="72x72"/>
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png-114x114.png" sizes="114x114"/>
+
+	<!--[if (gt IE 8) | (IEMobile)]><!-->
+	<link rel="stylesheet" href="//img.onxiao.com/css/grid-responsive.css" />
+	<!--<![endif]-->
+	<!--[if (lt IE 9) & (!IEMobile)]>
+		<link rel="stylesheet" href="//img.onxiao.com/css/grid-ie.css" />
+	<![endif]-->
+	<link rel="stylesheet" href="//img.onxiao.com/css/normalize.min.css" />
+	<link rel="stylesheet" href="//img.onxiao.com/css/ssbusy-global.css?v=10.css" />
+	<link rel="stylesheet" href="//img.onxiao.com/css/ssbusy_main.css?v=10.css" />
+	<link rel="stylesheet" href="//img.onxiao.com/css/checkout.css?v=a.css" />
+	<link rel="stylesheet" href="//img.onxiao.com/css/jquery.fancybox.css" />
+	<link rel="stylesheet" th:href="'//img.onxiao.com'+${additionalCss}" th:unless="${#strings.isEmpty(additionalCss)}" />
+
+	<script src="//img.onxiao.com/js/libs/modernizr-2.6.2.min.js" ></script>
+	<script type="text/javascript">/*<![CDATA[*/
+	var $$ = {}, lastScripts = [], lazyJs = [];
+	(function(g,b,d,h){var c=b.head||b.getElementsByTagName("head"),D="readyState",E="onreadystatechange",F="DOMContentLoaded",G="addEventListener",H=setTimeout,
+	sg = function(hh,pt){if(pt>=hh.length)return;var pts = hh[pt];$$.dn=pts.length;for(var i=0; pts.length>i; i++){var df=pts[i];if(!df)return;if(Object.prototype.toString.call(df)=='[object Function]'){df(sg);if(0>=--$$.dn)sg(hh,++pt);}else{var a=b.createElement("script");a.onload=a[E]=function(){if((this[D]&&this[D]!=="complete"&&this[D]!=="loaded")||this.ee){return false;}this.onload=this[E]=null;this.ee=true;if(0>=--$$.dn)sg(hh,++pt);};a.src=df;try{c.insertBefore(a,c.firstChild);}catch(e){alert(e);}}}},
+	sgs = function (hh){sg(hh, 0);};H(function(){if("item"in c){if(!c[0]){H(arguments.callee,25);return}c=c[0]}sgs(h)},0);if(b[D]==null&&b[G]){b[D]="loading";b[G](F,d=function(){b.removeEventListener(F,d,false);b[D]="complete"},false)}})(this,document,null,
+	[['//img.onxiao.com/js/libs/jquery-1.10.2.min.js'],[function(sg){$.browser={
+			msie: /msie/.test(navigator.userAgent.toLowerCase()),
+			version: $('html.lt-ie7').length>1?6:($('html.lt-ie8').length>1?7:8)
+		};}],
+	 ['//img.onxiao.com/js/ssbusy-plugins.js', '//img.onxiao.com/js/blc-plugins.js','//img.onxiao.com/js/ssbusy.js?v=3.js','//img.onxiao.com/js/innerAddress.js?v=2.js','//img.onxiao.com/js/cartOperations.js?v=2.js','//img.onxiao.com/js/v2/ssbusy_v2.js','/js/BLC.js'],
+	 [function(sg){if($){$(document).ready(function(){
+			var invokeLast = function(){for(var i =0;i<lastScripts.length;i++)lastScripts[i]();};
+			if(lazyJs.length > 0) {
+				lazyJs[lazyJs.length] = [invokeLast];
+				sg(lazyJs, 0);
+			} else
+				invokeLast();
+		})}}]
+	]);
+	/*]]>*/
+	</script>
+</head>

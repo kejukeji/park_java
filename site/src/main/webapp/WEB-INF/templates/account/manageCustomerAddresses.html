@@ -1,0 +1,80 @@
+
+
+<div class="manage-account-form-wrapper">
+	<div class="manage-address-form">
+	    <span class="title">收获地址管理</span>
+	    <div th:if="${!#lists.isEmpty(customerAddresses)}" class="panel">
+	    	<div class="head grid-100 tablet-grid-100">已存收货地址</div>
+	    	<div class="content">
+	    		<div class="content-line grid-100 tablet-grid-100 grid-parent">
+	    			<div class="grid-15 tablet-grid-15" style="border-left:none;">收货人</div>
+	    			<div class="grid-45 tablet-grid-45">收货地址</div>
+	    			<div class="grid-20 tablet-grid-20">手机</div>
+	    			<div class="grid-20 tablet-grid-20">操作</div>
+	    		</div>
+	    		<div  th:each="customerAddress :${customerAddresses}" th:object="${customerAddress}" th:inline="text" class="content-line grid-100 tablet-grid-100 grid-parent">
+	    			<div class="grid-15 tablet-grid-15" style="border-left:none;">[[*{address.firstName}]]</div>
+	    			<div th:if="*{address.dormitory != null}" class="grid-45 tablet-grid-45">[[*{address.dormitory.areaAddress.region.regionName}]]&nbsp;&nbsp;&nbsp;[[*{address.dormitory.areaAddress.areaName}]]
+					&nbsp;&nbsp;&nbsp;[[*{address.dormitory.dormitoryName}]]&nbsp;&nbsp;&nbsp;[[*{address.roomNo}]]&nbsp;&nbsp;&nbsp;</div>
+	    			<div th:if="*{address.primaryPhone != null}" class="grid-20 tablet-grid-20">[[*{address.primaryPhone}]]</div>
+                    <div class="grid-20 tablet-grid-20"><a th:href="@{/account/addresses/} + *{id}" style="text-decoration:none;">修改（删除）</a></div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="panel">
+	    	<div class="head">新增收货地址</div>
+			  <blc:form class="manage-account" method="post" th:action="@{'/account/addresses/' + ${customerAddressForm.customerAddressId != null ? customerAddressForm.customerAddressId : ''}}" th:object="${customerAddressForm}">    
+                <div class="grid-100 tablet-grid-100">
+        			<div style="display:none">
+        				<select id="state" th:field="*{address.state}" size="1" style="width: 48px;">
+                        <option th:each="state : ${states}" th:value="${state.abbreviation}" th:text="${state.abbreviation}"></option>
+        				</select>
+        			</div>
+        			
+                    <input type="hidden" name="address.country" value="CN" />
+					<div class="infoline">
+                        <label for="address_name"><span class="label">地 址 名 字：</span></label>
+                        <input type="text" th:field="*{addressName}" class="inbox"  style="width:20%;" />
+        				<label>&nbsp;</label>
+                        <input type="checkbox" th:field="*{address.default}" class="field25" style="width:22px;" /> 默认
+                    </div>
+                    <div class="infoline">
+                        <label for="firstName"><span class="label">收件人姓名：</span></label> 
+        				<input id="firstName" type="text" class="inbox" th:field="*{myAddress.firstName}" placeholder="姓名" th:classappend="${#fields.hasErrors('myAddress.firstName')}? 'fieldError'" style="width:20%;" />&nbsp;&nbsp;*
+        				<span class="error" th:if="${#fields.hasErrors('myAddress.firstName')}" th:errors="*{myAddress.firstName}"></span> 
+                    </div>
+        			<div class="infoline">
+        				<label><span class="label">收件人地址：</span></label> 
+                        <span class="error"></span> 
+        				<select class="select_box" id="area_id" size="1" th:field="*{myAddress.addressLine2}" onchange="getDormitory();" style="width:25%; height:2.5em;">
+                            <option value="0">--</option>
+        					<option th:each="area : ${areas}" th:value="${area.areaId}" th:text="${area.areaName}"></option>
+                        </select>
+        				&nbsp;&nbsp;&nbsp;
+        				<!--这里最后要改掉，不适用addressLine3，自己在myaddress里面扩展字段-->
+        				<select class="select_box" id="dormitory_id" th:field="*{myAddress.addressLine3}" style="width:25%; height:2.5em;">
+                            <option value="">--</option>
+        				  <option th:each="dormitory : ${dormitorys}" th:value="${dormitory.dormitoryId}" th:text="${dormitory.dormitoryName}"></option>
+                        </select>
+        				&nbsp;&nbsp;&nbsp;
+        				<input type="text"  placeholder="宿舍号"  th:field="*{myAddress.roomNo}" class="inbox" th:classappend="${#fields.hasErrors('myAddress.roomNo')}? 'fieldError'" style="width:20%;"/>&nbsp;&nbsp;*
+        				<span class="error" th:if="${#fields.hasErrors('myAddress.roomNo')}" th:errors="*{myAddress.roomNo}"></span> 
+                    </div>
+        			<div class="infoline">
+        				<label for="phone"><span class="label">手 机 号 码：</span></label>
+        				<input type="tel" id="address.primaryPhone"  class="inbox" name="myAddress.primaryPhone"  th:value="*{myAddress.primaryPhone}" th:classappend="${#fields.hasErrors('myAddress.primaryPhone')}? 'fieldError'" style="width:20%;"/>&nbsp;&nbsp;*
+        				<span class="error" th:if="${#fields.hasErrors('myAddress.primaryPhone')}" th:errors="*{myAddress.primaryPhone}"></span> 
+                    </div>
+					<br />
+                </div>
+                <div>
+                    <input class="button" type="submit" th:value="*{customerAddressId != null ? '修改地址' : '添加新地址'}"  style="width:25%;margin-left:0em; margin-top:1em;border:0;border-radius:0.3em; margin-bottom:1em;" />
+                    <input th:if="*{customerAddressId}" type="submit"  class="button" name="removeAddress" value="删除地址" style="width:25%;margin-left:0em; margin-top:1em;border:0;border-radius:0.3em; margin-bottom:1em;" />
+                    <span class="error" th:if="${errorMessage}" th:text="${errorMessage}"></span>
+                </div>
+            </blc:form>
+	    </div>
+  	</div>
+ </div>
+	
+<p class="success" th:if="${successMessage}" th:text="${successMessage}"></p>

@@ -1,0 +1,11 @@
+<span th:with="cat=${cat.defaultParentCategory},chldCat=${cat}">
+ <span th:substituteby="'v2/catalog/partials/scrumbCat'+${(cat eq null or #strings.isEmpty(cat.url)?'Blank':'')}" />
+</span>
+<span class="hover-show" style="z-index:10">
+	<a th:if="${cat ne null}" th:text="${' > '+cat.name}" th:href="${cat.url}" />
+	<ul th:unless="${cat.childCategoryXrefs.empty}" class="hover-showed topright menu">
+		<li th:each="cx:${cat.childCategoryXrefs}" th:if="${chldCat eq null or chldCat.id ne cx.subCategory.id}" th:object="${cx.subCategory}">
+			<a th:text="*{name}" th:href="*{url}"></a>
+		</li>
+	</ul>
+</span>

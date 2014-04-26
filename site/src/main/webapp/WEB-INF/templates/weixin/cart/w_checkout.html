@@ -1,0 +1,136 @@
+<style >
+	.checkout-info{margin-top:20px;font-size:1em;color:block;}
+	.checkout-info label{font-weight: normal !important;}
+	.info{margin:5px 0;}
+	.inbox{height: 34px;padding: 6px 12px;font-size: 14px;line-height: 1.428571429;color: #555;vertical-align: middle;background-color: #fff;background-image: none;border: 1px solid #ccc;border-radius: 4px;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;}
+	.select-box{height:40px !important;}
+</style>
+<div class="container checkout-info">
+<blc:form th:object="${shippingInfoForm}" th:action="@{/weixin/checkout/singleship}" method="post" id="shipping_info" novalidate="novalidate" th:classappend="${validShipping} ? 'hide'">
+	<div class="row">
+		<!--后台的state里面必须要有数据，该数据没有用，但不能为空-->
+		<div style="display:none">
+			<select id="state" th:field="*{address.state}" size="1" style="width: 48px;">
+			<option th:each="state : ${states}" th:value="${state.abbreviation}" th:text="${state.abbreviation}"></option>
+			</select>
+		</div>
+		<input type="hidden" name="address.country" value="CN" />
+		<div class="info col-xs-12">
+			<label for="firstName" class="">姓名：</label> 
+			<input id="firstName" type="text" class="inbox"  th:field="*{myAddress.firstName}" placeholder="姓名" th:classappend="${#fields.hasErrors('myAddress.firstName')}? 'fieldError'" />&nbsp;&nbsp;*
+			<span class="error" th:if="${#fields.hasErrors('myAddress.firstName')}" th:errors="*{myAddress.firstName}"></span> 
+		</div>
+		<div class="info col-xs-12">
+			<label class="span-font">地址：</label> 
+			<select class="inbox select-box" id="area_id" th:field="*{myAddress.addressLine2}" size="1" onchange="getDormitory(); ">
+				<option th:if="${!#lists.isEmpty(areas)  &amp;&amp; #lists.size(areas)>1}" value="0">--</option>
+				<option th:each="area : ${areas}" th:value="${area.areaId}" th:text="${area.areaName}"></option>
+			</select>&nbsp;&nbsp;&nbsp;
+			<!-- 这里最后要改掉，不适用addressLine3，自己在myaddress里面扩展字段 -->
+			<span id="display-none" th:classappend="${!#lists.isEmpty(dormitorys) &amp;&amp; #lists.size(dormitorys)==1}? 'display-none'">
+				<select  class="inbox select-box" id="dormitory_id" th:field="*{myAddress.addressLine3}" th:classappend="${#fields.hasErrors('myAddress.roomNo')}? 'fieldError'">
+					<option th:if="${!#lists.isEmpty(dormitorys) &amp;&amp; #lists.size(dormitorys)>1}" value="">--</option>
+					<option th:each="dormitory : ${dormitorys}" th:value="${dormitory.dormitoryId}" th:text="${dormitory.dormitoryName}"></option>
+				</select>
+			</span><br />
+			
+		</div>
+		<div class="info col-xs-12"  style="margin-top:2px;">
+			<label>　　　</label> 
+			<span id="extend-width" th:classappend="${!#lists.isEmpty(dormitorys) &amp;&amp; #lists.size(dormitorys)==1}? 'extend-width'">
+				<input type="text"  placeholder="宿舍号/详细地址"  th:field="*{myAddress.roomNo}" class="inbox" th:classappend="${#fields.hasErrors('myAddress.roomNo')}? 'fieldError'" />&nbsp;&nbsp;*
+			</span>
+			<span class="error" th:if="${#fields.hasErrors('myAddress.roomNo')||#fields.hasErrors('myAddress.addressLine3')}" th:errors="*{myAddress.roomNo}"></span> 
+		</div>
+		<div class="info col-xs-12">
+			<label for="myAddress.primaryPhone" class="span-font">电话：</label>
+			<input type="text" maxlength="11" id="myAddress.primaryPhone"  class="inbox" name="myAddress.primaryPhone" th:value="*{myAddress.primaryPhone}" th:classappend="${#fields.hasErrors('myAddress.primaryPhone')}? 'fieldError'"/>&nbsp;&nbsp;*
+			<span th:if="${customer.region.id eq 2}">支持短号 </span>
+			<span class="error" th:if="${#fields.hasErrors('myAddress.primaryPhone')}" th:errors="*{myAddress.primaryPhone}"></span> 
+		</div>
+		<div class="info col-xs-12" th:unless="${#lists.isEmpty(cart.orderItems)}">
+			<div>
+				<label  class="span-font">合计：</label>
+				<span class="price" style="font-size:2em" th:unless="${cart.subTotal.zero}" blc:price="${cart.total}" ></span>
+				<input type="hidden" th:value="${cart.total}" id="order_total"/>
+			</div>
+		</div>
+		<div class="info col-xs-12" th:if="${cart.currency != null &amp;&amp; cart.currency.currencyCode == 'CNY'}">
+			<label class="span-font">支付：</label>
+
+			<span th:unless="${cart.multiFulfillmentLocations}" th:remove="tag">
+				<span th:if="${!customer.anonymous}">
+					<input type="radio" name="paymentMethod" value="0" id="paymentMethod_bp" />
+					<label for="paymentMethod_bp">
+						<span class="span-font line-box">余额支付
+						</span>
+					</label>
+				</span>
+			</span>
+			<span>
+				<input type="radio" name="cod" value="cod" id="paymentMethod_cod" checked="checked" />
+				<label for="paymentMethod_cod"><span class="span-font">货到付款<span class="price cod_pay"></span></span></label>
+			</span>
+			<span class="error" th:if="${#fields.hasErrors('address.addressLine3')}" th:errors="*{address.addressLine3}"></span>
+		</div>
+		<div class="info col-xs-12" th:unless="${cart.currency != null &amp;&amp; cart.currency.currencyCode == 'CNY'}">
+			<span th:if="${!customer.anonymous}">
+				<label class="span-font">支付：</label>
+				<input type="radio" name="address.addressLine3" value="integral_pay" id="paymentMethod_integrl" checked="checked" />
+				<label for="paymentMethod_integrl"><span class="span-font">仙丹支付</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="info info col-xs-12">
+			<label for="lastName"><span class="span-font">配送：</span></label>
+            <label for="send-now"><span class="span-font">筋斗云配送（即刻送达）</span></label>
+		</div>
+		<div class="info col-xs-12">
+			<label for="lastName"><span class="span-font">备注：</span></label> <span class="error" th:if="${#fields.hasErrors('myAddress.lastName')}" th:errors="*{myAddress.lastName}"></span> 
+			<textarea placeholder="请不要超过30个字......" class="inbox" style="width:60%; height:50%; resize: none;padding:10px 10px;" th:field="*{myAddress.lastName}" maxlength="30"  rows="1"  th:classappend="${#fields.hasErrors('myAddress.lastName')}? 'fieldError'">
+			</textarea>
+		</div>
+	</div>
+	<div>
+	   <input type="submit" class="check-button" value="提 交 订 单" />
+	</div>
+</blc:form>
+</div>
+<script th:inline="javascript">
+   /*<![CDATA[*/
+	lastScripts[lastScripts.length]=function(){
+		$('#shipping_info').validate({
+			rules: {
+				'myAddress.firstName': "required",
+				'myAddress.roomNo': "required",
+				'myAddress.addressLine3': "required",
+				'myAddress.primaryPhone': "required"
+			},
+			messages: {
+				'myAddress.firstName': "亲~，请输入你的名字" + "<br/>",
+				'myAddress.roomNo': "亲~，请输入你的地址" + "<br/>",
+				'myAddress.addressLine3': "",
+				'myAddress.primaryPhone': "亲~，请输入你的手机号码" + "<br/>",
+			},
+			errorPlacement: function(error, element) {
+				$(element).parent().append(error);
+			},
+			highlight: function(element, errorClass) {
+				$(element).addClass('fieldError');
+			},
+			unhighlight: function(element, errorClass) {
+				$(element).removeClass('fieldError');
+			},
+			errorElement: "span",
+			errorClass: "error"
+		});
+	};
+	/*]]>*/
+</script>
+
+<script type="text/javascript">
+	/*<![CDATA[*/
+	lastScripts[lastScripts.length]=function(){
+    	$('.nav-info a.nav-cart').addClass('active');
+	}
+	/*]]>*/
+</script>

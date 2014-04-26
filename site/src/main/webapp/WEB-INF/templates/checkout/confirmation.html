@@ -1,0 +1,68 @@
+<div class="round-product grid-parent tablet-grid-25 grid-25">
+	<div class="tablet-grid-95 grid-95 grid-parent bg">
+	<h2>购物积分</h2>
+	<div class="tablet-grid-100 grid-100" style="text-align:center" th:each="sku:${skus}" th:object="${sku.product}">
+		<div th:include="catalog/partials/productListItem" ></div>
+	</div>
+</div>
+</div>
+<div class="order_confirm">
+	<div class="main-nav-step">
+    	<div class="step-1">
+    		<div class="step-1-middle"><i class="step-i">1</i> 我的购物车</div>
+    		<div class="step-1-right"></div>
+    	</div>
+    	<div class="step-2">
+    		<div class="step-2-middle"><i class="step-i">2</i> 填写订单信息</div>
+    		<div class="step-2-right"></div>
+    	</div>
+    	<div class="step-3">
+    		<div class="step-3-middle"><i class="step-i">3</i> 成功提交订单</div>
+    		<div class="step-3-right"></div>
+    	</div>
+	</div>
+	<br/><br/>
+    <div class="order_title">
+        <div class="complite"><span class="order_warn font_family">感谢你，订单(<span th:text="${order.orderNumber}"/>)提交成功！</span></div>
+        <span class="order_warn_time font_family" style="padding-left: 70px;">商品将在<span text="${sendTime}">第一时间</span>为您送达，请保持电话畅通！</span>
+        
+	</div>
+	<br />
+    <div id="cart" style="padding-left: 70px;">
+            <table class="order_detial">
+                <tr><td><span class="font_family">订单编号：</span></td><td><strong class="price" style="font-size:1.2em" th:text="${order.orderNumber}"/></td></tr>
+        		<tr><td><span class="font_family">订单小计：</span></td><td  class="price" style="font-weight:bold;font-size:1.6em" blc:price="${order.subTotal}"></td></tr>
+				<tr><td><span class="font_family">运费金额：</span></td><td  class="price" style="font-weight:bold;font-size:1.6em" blc:price="${order.totalShipping}"></td></tr>
+                <tr th:each="paymentInfo : *{order.paymentInfos}" th:object="${paymentInfo}">
+                    <td><span class="font_family" th:text="*{type.friendlyType}+'：'"></span></td><td class="price" style="font-weight:bold;font-size:1.6em" blc:price="*{amount}"></td>
+				</tr>
+        		<tr th:object="${order.fulfillmentGroups[0]}" th:inline="text" th:unless="${#lists.size(order.fulfillmentGroups) > 1}">
+					<td><span class="font_family">收货信息：</span></td>
+					<td class="font_family" th:if="*{address.dormitory != null  &amp;&amp;  address.primaryPhone != null  &amp;&amp;address.dormitory.dormitoryId>0 }"> 
+					[[*{address.firstName}]]&nbsp;&nbsp;&nbsp;[[*{address.dormitory.areaAddress.region.regionName}]]&nbsp;&nbsp;&nbsp;[[*{address.dormitory.areaAddress.areaName}]]
+					&nbsp;&nbsp;&nbsp;[[*{address.dormitory.dormitoryName}]]&nbsp;&nbsp;&nbsp;[[*{address.roomNo}]]&nbsp;&nbsp;&nbsp;[[*{address.primaryPhone}]]
+					</td>
+					<td class="font_family" th:if="*{address.dormitory != null  &amp;&amp;  address.primaryPhone != null  &amp;&amp;address.dormitory.dormitoryId lt 0 }"> 
+					[[*{address.firstName}]]&nbsp;&nbsp;&nbsp;[[*{address.dormitory.areaAddress.region.regionName}]]&nbsp;&nbsp;&nbsp;[[*{address.roomNo}]]&nbsp;&nbsp;&nbsp;[[*{address.primaryPhone}]]
+					</td>
+				</tr>
+				<tr th:object="${order.fulfillmentGroups[0]}" th:inline="text" th:unless="${#lists.size(order.fulfillmentGroups) > 1}">
+					<td th:if="*{address.lastName!=''}"><span class="font_family">备　　注：</span></td>
+					<td th:if="*{address.lastName!=''}" class="font_family"> 
+					[[*{address.lastName}]]&nbsp;&nbsp;&nbsp;
+					</td>
+					
+				</tr>
+    		</table>	
+			<div class="continue-shop">
+			<a class="continue" th:href="@{/customer/orders}">查看订单</a>
+			<blc:content contentName="订单提交成功处公告" maxResults="4" contentItemVar="boardContent" />
+			<p th:if="${boardContent ne null}" th:utext="${boardContent[htmlContent]}" />
+			<ul th:object="${order.fulfillmentGroups[0]}" th:inline="text" th:unless="${#lists.size(order.fulfillmentGroups) > 1}">
+				<li><a th:href="@{/customer/orders}" onclick="return reviewTheProduct(this);" class="create-review">发表评价</a>
+				<p  th:text="*{address.firstName}"></p></li>
+			</ul>
+
+		</div>
+    </div>	
+</div>

@@ -1,0 +1,17 @@
+<section role="main">
+	<div class="row" id="box1">
+			<div class="twelve columns">
+				共有<span th:text="${#lists.size(totalSalesForm)}"></span>条记录
+                <table style="width: 100%;">
+                	<thead><th>日期</th><th>营业额</th><th>货到付款</th><th>支付宝付</th><th>余额付款</th></thead>
+                	<tr th:each="form:${totalSalesForm}" th:object="${form}">
+                        <td th:text="*{submitDate}"></td>
+                		<td th:text="*{total}"></td>
+                		<td th:text="*{codPay}"></td>
+                		<td th:text="*{aliPay}"></td>
+                		<td th:text="*{bpPay}"></td>
+                	</tr>
+                </table>
+			</div>
+		</div>
+</section>

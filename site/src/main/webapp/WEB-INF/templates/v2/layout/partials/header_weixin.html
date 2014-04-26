@@ -1,0 +1,40 @@
+<style>
+	body{padding-bottom:55px;}
+	.nav-info{text-align:center;font-size:1em;padding: 5px 0 0 0 !important;text-align: center;color:#333;background-color:#fff;border-top: 1px solid #ddd;height: 55px;}
+	.nav-info a{text-decoration: none;color:#888}
+	.nav-info a:hover{text-decoration: none;}
+	.nav-info a.active{color:#e65c5c}
+	.nav-icon{font-size:1.5em;}
+	.price{color:#FF3344;font-size:1.2em;}
+	.has-sale{text-decoration: line-through;color: #a2a2a2;font-size:0.9em !important;}
+</style>
+
+<header class="navbar-fixed-bottom" role="navigation">
+    <div class="row">
+        <div class="hidden"><a href="javascript:history.go(-1)"></a></div>
+        <div class="col-xs-3 nav-info">
+            <a class="nav-home" href="/weixin/home">
+				<span class="glyphicon glyphicon-home nav-icon"></span><br />
+				<span>首页 </span>
+			</a>
+        </div>
+        <div class="col-xs-3 nav-info"> 
+			<a class="nav-category" href="/weixin/category">
+                <span class="glyphicon glyphicon-th-large nav-icon"></span><br />
+                <span>分类</span>
+            </a>
+		</div>
+        <div class="col-xs-3 nav-info">
+			<a class="nav-cart" href="/weixin/cart">
+                <span class="glyphicon glyphicon-shopping-cart nav-icon"></span><br />
+                <span>购物车</span>
+            </a>
+        </div>
+        <div class="col-xs-3 nav-info">
+			<a  class="nav-userinfo" href="/weixin/userinfo">
+                <span class="glyphicon glyphicon-user nav-icon"></span><br />
+                <span>我的在校</span>
+            </a>
+        </div>
+    </div>
+</header>

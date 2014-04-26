@@ -1,0 +1,8 @@
+<span class="hover-show" style="z-index:10">
+	<a href="/">全部结果</a>
+	<ul th:unless="${cat.childCategoryXrefs.empty}" class="hover-showed topright menu">
+		<li th:each="cx:${cat.childCategoryXrefs}" th:if="${chldCat.id ne cx.subCategory.id}" th:object="${cx.subCategory}">
+			<a th:text="*{name}" th:href="*{url}"></a>
+		</li>
+	</ul>
+</span>

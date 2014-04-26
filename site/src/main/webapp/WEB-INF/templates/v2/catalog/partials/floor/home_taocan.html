@@ -1,0 +1,207 @@
+<style>
+	.taocan_hover{
+		position:relative;
+		overflow:hidden !important;
+	}
+	.taocan_add{
+		position:relative;
+		overflow:hidden !important;
+	}
+	.taocan_add .mask_layer{
+		background-color:#2e2e2e;
+		opacity:0.95;
+	}
+	.taocan_hover:hover{
+		box-shadow:5px 5px 0 #eaeaea;
+	}
+	.mask_layer{
+		position:absolute;
+		top:0;
+		left:0;
+		width:200px;
+		height:175px;
+		opacity:0.9;
+	}
+	.taocan_hover .text_layer{
+		position:absolute;
+		top:23px;
+		left:43px;
+		width:129px;
+		height:129px;
+		color:white;
+		font-size:4em;
+		z-index:1;
+		overflow:hidden;
+		padding:0;
+		letter-spacing: 16px;
+	}
+	.taocan_hover .text_detial{
+		cursor:pointer;
+		display:block;
+		position:absolute;
+		top:-200px;
+		width:200px;
+		height:175px;
+		color:white;
+		z-index:1;
+		overflow:hidden;
+		padding:0;
+		text-align:center;
+	}
+	.taocan_hover .detial_desc{
+		margin: 35px auto 0;
+        max-width: 150px;
+        overflow: hidden;
+        text-align: left;
+		line-height: 18px;
+	}
+	.taocan_hover .cool_line{
+		margin:0 15px;
+		left: 0;
+        position: absolute;
+        top: 142px;
+        width: 170px;
+	}
+	.taocan_hover .buy_info{
+		height: 20px;
+        left: 0;
+        line-height: 20px;
+        margin: 0 15px;
+        overflow: hidden;
+        position: absolute;
+        top: 150px;
+        width: 170px;
+	}
+	.taocan0 .mask_layer{
+		background-color:#d24444;
+	}
+	.taocan0 .cool_line{
+		border-top:1px solid #950300;
+		border-bottom:1px solid #ea5c59;
+	}
+	.taocan1 .mask_layer{
+		background-color:#cd5a15;
+	}
+	.taocan1 .cool_line{
+		border-top:1px solid #9a3a00;
+		border-bottom:1px solid #e67c3c;
+	}
+	.taocan2 .mask_layer{
+		background-color:#0060b1;
+	}
+	.taocan2 .cool_line{
+		border-top:1px solid #004680;
+		border-bottom:1px solid #458ecd;
+	}
+	.taocan3 .mask_layer{
+		background-color:#6fae4c;
+	}
+	.taocan3 .cool_line{
+		border-top:1px solid #377d10;
+		border-bottom:1px solid #7dc651;
+	}
+	.taocan4 .mask_layer{
+		background-color:#c53b72;
+	}
+	.taocan4 .cool_line{
+		border-top:1px solid #a53355;
+		border-bottom:1px solid #dc5a85;
+	}
+	.taocan5 .mask_layer{
+		background-color:#d24444;
+	}
+	.taocan5 .cool_line{
+		border-top:1px solid #950300;
+		border-bottom:1px solid #ea5c59;
+	}
+	.taocan6 .mask_layer{
+		background-color:#d24444;
+	}
+	.taocan6 .cool_line{
+		border-top:1px solid #950300;
+		border-bottom:1px solid #ea5c59;
+	}
+	.taocan_add .text_layer{
+		position:absolute;
+		top:0px;
+		left:0px;
+		width:200px;
+		height:175px;
+		color:white;
+		font-size:1em;
+		z-index:1;
+		overflow:hidden;
+		padding:0;
+		text-align:center;
+	}
+	.taocan_add .add_sign{
+		background: url(//img.onxiao.com/img/Sprites.png) -127px -921px no-repeat;
+		position:absolute;
+		left:79px;
+		top:65px;
+		width:42px;
+		height:42px;
+	}
+	.taocan_add .add_message{
+		position:absolute;
+		margin: 0 15px;
+        top: 140px;
+        width: 170px;
+	}
+	.taocan_hover .dabang{
+		background: url(//img.onxiao.com/img/Sprites.png) -205px -926px no-repeat;
+		position:absolute;
+		top:5px;
+		right:5px;
+		width:40px;
+		height:40px;
+		display:block;
+	}
+	
+</style>
+
+<div th:if="*{flrTab.subCategory.categoryMedia['alt1'] ne null  &amp;&amp; flrTab.subCategory.categoryMedia['alt1'].tags ne null}" class="bind_pic_first grid-20 tablet-grid-25 grid-parent first-margin-right">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt1'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt1].url}"/>
+	</a>
+</div>
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+<div>
+    <blc:related_products relatedProductsResultVar="floorProducts" type="'CROSS_SALE'" categoryId="*{flrTab.subCategory.id}" quantity="5" />
+    <div th:each="floorProducts,flloorStats:${floorProducts}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}">  
+    	<div th:if="*{media['alt6']}" class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent taocan_hover" th:classappend="${'taocan'+flloorStats.index}">
+    		<a th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+                <div class="mask_layer"></div>
+                <div class="text_layer" th:if="*{productAttributes['packagename']}" th:text="*{productAttributes['packagename'].value}"></div>
+    			<div class="text_detial">
+					<div class="dabang"></div>
+    				<div class="detial_desc"> 
+    					<span  th:if="*{productAttributes['packagedetial']}" th:utext="*{productAttributes['packagedetial'].value}"/>
+    				</div>
+    				<div class="cool_line"></div>
+    				<div class="buy_info">
+                        <span>原价:</span>
+        				<span th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" blc:price="*{retailPrice}"></span>
+        				<span th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" blc:price="*{defaultSku.retailPrice}"></span>
+        				<span>套餐价:</span>
+        				<span th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" blc:price="*{salePrice}"></span>
+        				<span th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" blc:price="*{defaultSku.salePrice}"></span>
+                    </div>
+    			</div>
+			</a>
+    	</div>
+    </div>
+    <div class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent taocan_add">
+		<img  src="//img.onxiao.com/img/v2/willadd.png"/>
+		<div class="mask_layer"></div>
+		<div class="text_layer">
+            <div class="add_sign"></div>
+			<div class="add_message">添加我的套餐，享受优惠</div>
+		</div>
+	</div>
+</div>

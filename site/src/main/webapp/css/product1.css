@@ -1,0 +1,170 @@
+#product_main_image {
+border: 1px solid #e8e8e8;
+overflow: hidden;
+}
+.prod_img {
+overflow: hidden;
+text-align: center;
+position: relative;
+}
+.prod_img > span  {
+display: block;
+width: 1000px;
+margin-left: calc(50% - 500px);
+}
+.prod_img img.orig {
+display: inline-block;
+}
+#product_thumbs {
+padding: 10px 0;
+margin: 10px 0 0;
+border-top: 1px solid #e8e8e8;
+}
+.p-detail h2 {
+margin: 0;
+color: #3d3d3d;
+}
+.p-detail h2 span{
+color: #f15151;
+}
+.product_main_info{
+padding-left: 22px;
+}
+.product_main_info table{
+padding: 0;
+margin-top: 13px;
+line-height: 2em;
+color: #7d7d7d;
+}
+.product_main_info table td:first-child + td{
+color: #b0b0b0;
+}
+#prodPrice label {
+background-color: #f15151;
+color: #fff;
+padding: 2px 6px;
+border-radius: 2px;
+}
+.prod-main-stats{
+border: 1px solid #e8e8e8;
+border-width: 1px 0;
+margin: 1em 0;
+}
+.prod-main-stats div{
+text-align: center;
+color: #7d7d7d;
+margin: 1.2em 0;
+border-left: 1px dashed #d2d2d2;
+}
+.prod-main-stats b{
+font-size: 1.5em;
+color: #f25a5a;
+}
+.prod-main-stats .sold{
+border-left: 0;
+}
+.prod-main-stats .sold b{
+color: #e39314;
+}
+.prod-main-stats .comments b{
+color: #41aae6;
+}
+.prod-main-stats .likes b{
+color: #ff0000;
+}
+.prod-main-stats .stars b{
+}
+.prod-main-stats .tops b{
+background: url(//img.onxiao.com/img/Sprites.png) -315px -153px no-repeat;
+display: inline-block;
+width: 15px;
+height: 21px;
+}
+.prod-main-qty {
+border-bottom: 1px solid #eee;
+padding-bottom: 1em;
+line-height: 29px;
+color: #7d7d7d;
+}
+.productActions{
+line-height: 60px;
+}
+.shop_btn {
+background: url(//img.onxiao.com/img/Sprites.png) 0 -674px;
+border: 0;
+height: 30px;
+color: #fff !important;
+width: 141px;
+display: inline-block;
+line-height: 30px;
+text-align: center;
+padding: 0;
+}
+.btn_buy:hover {
+background-position: 0 -704px;
+}
+.addToCart {
+background-position: 0 -734px;
+}
+.addToCart:hover {
+background-position: 0 -764px;
+}
+.spec{
+border: 1px solid #f1f1f1;
+padding: 2px 9px;
+cursor: pointer;
+line-height: 3em;
+overflow: hidden;
+margin-right: 1em;
+}
+.spec:active{
+border-color: #f56148;
+background-color: #f56047;
+color: #fff !important;
+}
+.specs .active{
+border-color: #f56148;
+color: #f56148;
+}
+#sidebar{
+border: 1px solid #f9f9f9;
+background-color: #f9f9f9;
+}
+#sidebar h2{
+margin-top: 0;
+height: 47px;
+font-weight: normal;
+font-size: 14px;
+line-height: .9em;
+padding-top: 10px;
+color: #fff;
+text-align: center;
+background: url(//img.onxiao.com/img/Sprites.png) 0 -1896px;
+}
+.related-product .border{
+margin-bottom: 1em;
+line-height: 2em;
+}
+.related-product img, #product_thumbs img{
+border: 1px solid #d0d0d0;
+width: 100%;
+}
+#slidingBlock .title{
+	width:100%;
+	border:1px solid #ccc;
+	height:3.4em;
+}
+#slidingBlock h2 {float:left;line-height:2.1em;text-align:center; width:120px;}
+#slidingBlock h2.second{
+	border-right:1px solid #CCC;
+	border-left:1px solid #ccc;
+}
+#slidingBlock h2.menuNo {margin-top:-1px;font-weight:normal;color:#333333;cursor:pointer;border-right:1px solid #CCC;background:#ccc;}
+#slidingBlock h2 span{
+	background:#FFF;
+	display:block;
+	margin-top:4px
+}
+#slidingBlock h2.menuOn {margin-top:-1px;font-weight:normal;color:#f60;cursor:pointer;background:#f60; background:#f60;border-right:1px solid #CCC;}
+
+#slidingBlock DIV.slidingList_none {display:none}

@@ -1,0 +1,24 @@
+
+<div class="integral-form">
+	<span class="title">账户仙丹</span>
+	<br/>
+	<br/>
+	<span class="label">仙丹余额</span>
+	<span class="label" th:text="*{customerIntegral}"></span><br/><br/>
+	<div class="panel">
+	    	<div class="content grid-parent">
+	    		<div class="head content-line grid-100 tablet-grid-100 grid-parent">
+	    			<div class="grid-25 tablet-grid-25" style="border-left:none;">明细编号</div>
+	    			<div class="grid-20 tablet-grid-20">积分变动</div>
+	    			<div class="grid-30 tablet-grid-30">变动时间</div>
+	    			<div class="grid-25 tablet-grid-25">备注</div>
+	    		</div>
+	    		<div th:each="integral:${integralHistoryList}" th:object="${integral}" class="content-line grid-100 tablet-grid-100 grid-parent" >
+	    			<div class="grid-25 tablet-grid-25" th:text="*{id}" style="border-left:none;"></div>
+	    			<div class="grid-20 tablet-grid-20" th:text="*{changeQuantity}"></div>
+	    			<div class="grid-30 tablet-grid-30" th:text="*{changeDate}"></div>
+	    			<div class="grid-25 tablet-grid-25" th:text="*{changeType}"></div>	
+	    		</div>	
+	    	</div>
+	</div>
+</div>

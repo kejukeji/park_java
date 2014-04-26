@@ -1,0 +1,71 @@
+<style>
+	.travel-floor{background-color:#f8f8f8;border:1px solid #f1f1f1;padding:4px 0 0 0;height:386px;}
+	.travel-floor nav {margin-top: 2em;}
+	.travel-floor nav .tab {display: block;text-align: center;line-height: 3em;color:#a8a8a8;font-size: 1.2em;}
+	.travel-floor nav .tab.active {color:#50B1E4;}
+	.travel-floor .tab-content {width:100%;height:100%;}
+	.travel_title{
+		margin-top:30px;
+	}
+	.travel_title .travel_name{
+		height:45px;
+		background: url(//img.onxiao.com/img/Sprites.png) -14px -627px;
+	}
+	@media screen and (min-width: 1025px) {
+	.travel-floor .flr-grid {overflow:hidden;margin-left:0.5%;margin-right:0.5%;}
+	}
+	.travel_more{
+		text-align:right;
+		margin-top:24px;
+	}
+	
+	.travel_more .desc_tab{
+		display:none;
+	}
+	.travel_more .desc_tab.active{
+		display:block;
+	}
+	.desc_tab p{
+		margin:0;
+		padding:0;
+	}
+	.travel_container{
+		overflow:hidden;
+		height:100%;
+		width:100%;
+	}
+	
+	.traveltabs{color:#50B1E4;} 
+	.traveltabs .tab-0 .tab-ico{background:url(//img.onxiao.com/img/Sprites.png) -497px -1173px  no-repeat;} 
+	.traveltabs .active.tab-0 .tab-ico {background-position:-497px -1252px;}
+	.traveltabs .tab-1 .tab-ico{background:url(//img.onxiao.com/img/Sprites.png) -497px -1213px  no-repeat;} 
+	.traveltabs .active.tab-1 .tab-ico {background-position:-497px -1292px;}
+</style>
+<div class="travel_title">
+    <div class="travel_name grid-15 tablet-grid-15 grid-parent"></div>
+	<div class="travel_more grid-85 tablet-grid-85">
+		<div class="title_absolute">
+    		<span th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}">
+                <span class="desc_tab" th:classappend="${tabStats.index==0?'tab'+tabStats.index+' active':'tab'+tabStats.index}">
+                <span  th:utext="*{longDescription}"/>
+    			</span>
+    		</span>
+		</div>
+	</div>
+</div>
+<div class="travel-floor grid-100 tablet-grid-100">
+	<nav class="grid-15 tablet-grid-15 traveltabs">
+		<a th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}"
+			th:attr="key='tab'+${tabStats.index}" th:class="${'tab tab-'+tabStats.index}" th:classappend="${tabStats.index==0?'active':''}">
+			<style th:text="${flrTab.subCategory.getCategoryAttributeByName('icon-class')}" />
+			<span class="tab-ico" th:text="*{name}" />
+		</a>
+	</nav>
+	<div class="flr-content tab-contents grid-85 tablet-grid-85 grid-parent">
+        <div class="travel_container">
+        	<div th:each="flrTab,tabStats:${floor.childCategoryXrefs}" class="clearfix tab-content" th:classappend="${tabStats.index eq 0 ? 'active tab' + tabStats.index:'tab' + tabStats.index}">
+        		<div th:substituteby="${#strings.isEmpty(flrTab.subCategory.displayTemplate)?'/v2/catalog/partials/floor/default_floor':flrTab.subCategory.displayTemplate}"></div>
+        	</div>
+		</div>
+	</div>
+</div>

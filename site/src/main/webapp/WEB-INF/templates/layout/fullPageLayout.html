@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<blc:head pageTitle="${templateName}" th:attr="head=(${session.uiv2 ne null and session.uiv2}?'v2/layout/partials/head':'')" />
+
+<body th:class="${session.uiv2 ne null and session.uiv2?'v2':''}">
+    <header th:substituteby="${session.uiv2 ne null and session.uiv2?'v2/layout/partials/header':'layout/partials/header'}" />
+    
+    <div id="fulllayout-content" class="grid-container" role="main">
+    
+        <!-- <nav th:substituteby="layout/partials/nav" /> -->
+        
+        <div th:substituteby="${templateName}" />
+            
+    </div>
+    
+    <footer th:substituteby="v2/layout/partials/footer" />
+<script type="text/javascript">
+	document.write(unescape("%3Cscript src='//hm.baidu.com/h.js%3Fc5950a1860bb774d0085d23cdb30a5aa' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

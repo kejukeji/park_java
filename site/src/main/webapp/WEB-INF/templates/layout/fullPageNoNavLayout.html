@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<blc:head pageTitle="TEMPLATE" th:attr="head=(${session.uiv2 ne null and session.uiv2}?'v2/layout/partials/head':'')" />
+
+<body>
+    <header th:substituteby="layout/partials/header" />
+    
+    <div id="content" class="width_setter group" role="main">
+    
+        <div th:substituteby="${templateName}" />
+            
+    </div>
+    
+    <footer th:substituteby="layout/partials/footer" />
+    	<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc5950a1860bb774d0085d23cdb30a5aa' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<div class="footer-container" style="position: relative;">
+   	<div class="footer-img-l" />
+	<div class="footer-img">
+		<span>&copy; 2013 Onxiao.com 版权所有 浙ICP备13037286号-2</span>
+		<img src="//img.onxiao.com/img/v2/footer1.png" />
+	</div>
+   	<div class="footer-img-r" />
+
+	<footer class="grid-container" style="border-top: 2px solid #eee;position: relative;">
+		<div class="grid-25 tablet-grid-25"><div class="footer-col footer-1 clearfix">
+			<div class="footer-title">
+				<div class="footer-ico"></div>
+				<h4>消费者保障</h4>
+				<p>消费者权益保障.优质售后服务</p>
+			</div>
+			<a href="/about/aftersales#tuihuo" class="active">退换货保障</a>
+			<a href="/about/aftersales#yinsi">隐私保护</a>
+			<a href="/about/aftersales#tousu">投诉建议</a>
+		</div></div>
+		<div class="grid-25 tablet-grid-25"><div class="footer-col footer-2 clearfix">
+			<div class="footer-title">
+				<div class="footer-ico"></div>
+				<h4>配送服务</h4>
+				<p>送到寝室,全程不越59分钟</p>
+			</div>
+			<a href="/about/range-time#rangeTime">配送范围</a>
+			<a href="/about/range-time#yunfei">运费说明 </a>
+			<a href="/about/range-time#rangeTime">配送时间</a>
+			<a href="/about/range-time#jindou" class="active">筋斗云配送 </a>
+		</div></div>
+		<div class="grid-25 tablet-grid-25"><div class="footer-col footer-3 clearfix">
+			<div class="footer-title">
+				<div class="footer-ico"></div>
+				<h4>支付方式</h4>
+				<p>熟悉的支付,更方便安全</p>
+			</div>
+			<a href="/about/payment-type#cod">货到付款 </a>
+			<a href="/about/payment-type#alipay" class="active">支付宝</a>
+			<a href="/about/payment-type#jifen">仙丹换购</a>
+			<a href="/about/payment-type#balance">充值卡余额支付 </a>
+		</div></div>
+		<div class="grid-25 tablet-grid-25"><div class="footer-col footer-4 clearfix">
+			<div class="footer-title">
+				<div class="footer-ico"></div>
+				<h4>关于在校</h4>
+				<p>来了解下我们吧,期待你的加入</p>
+			</div>
+			<a href="/about/aboutus#about">关于我们</a>
+			<a href="/about/aboutus#theme">西游主题</a>
+			<a href="/about/aboutus#zhaopin" class="active">招贤纳士</a>
+			<a href="/about/aboutus#hezuo">合作加盟</a>
+			<a href="/about/aboutus#xinshou">新手帮帮</a>
+			<a target="_blank" href="http://www.3dbizhi.com" style="color: #FF9534;">酷靓壁纸</a>
+		</div></div>
+	</footer>
+</div>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+	lastScripts[lastScripts.length] = function(){
+		$(window).scroll(function() {
+			if($(window).scrollTop() > 195) {
+				$('#right-float').fadeIn(100);
+			} else {
+				$('#right-float').fadeOut(100);
+			}
+		});
+		$('#nav-follow').hover(function(e){
+			var u = $('#nav2 ul');
+			var h = u.data('h');
+			u.animate({height:h||'100%'}, 200, null, function() {
+				h || u.data('h', u.height());
+				$('#nav2').next().addClass('nav-up');
+			});
+		},function(e){
+			$('#nav2 ul').animate({height:'0'}, 200);
+			$('#nav2').next().removeClass('nav-up');
+		});
+	}
+/*]]>*/
+</script>

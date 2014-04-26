@@ -1,0 +1,107 @@
+<style >
+	.regioncheck{
+		list-style:none;float:left;
+	}
+</style>
+<section role="main">
+	<div class="row">
+		<div class="twelve columns">
+			<div id="sectionKey" style="display: none;">Distribute</div>
+			<div class="listgrid-container">
+				<div class="tabs-container">
+					<dl class="tabs entity-form">
+						<dd class="active">
+							<a href="#tab1">产品销售</a>
+						</dd>
+						<dd class="">
+							<a href="#tab2">营业额统计</a>
+						</dd>
+						<dd class="">
+							<a href="#tab3">用户统计</a>
+						</dd>
+						<dd class="">
+							<a href="#tab4">当日订单</a>
+						</dd>
+					</dl>
+				</div>
+				<ul class="tabs-content">
+					<li class="tab1Tab active" style="display: block;">
+						<div class="listgrid-toolbar"></div> 
+						<blc:form
+							th:action="@{/statistics-productsales}" method="post">
+							<div id="productsales" class="listgrid-header-wrapper">
+								开始日期：日期格式2014-02-01<input type="date" name="startdate"/>
+								结束日期：<input type="date" name="enddate"/>
+							    <span class="listgrid-table-footer"><input type='submit' class="button" value='查询' />（默认查询当天）</span>
+							</div>
+						</blc:form>
+					</li>
+					<li class="tab2Tab" style="display: none;">
+						<div class="listgrid-toolbar"></div>
+						<blc:form
+							th:action="@{/statistics-totalsales}" method="post">
+							<div class="listgrid-header-wrapper">
+								开始日期：日期格式2014-02-01<input type="date" name="startdate"/>
+								结束日期：<input type="date" name="enddate"/>
+								<!--<ul class="regionul">
+									<li class="regioncheck" th:each="region:${regions}" th:object="${region}">
+										<input type="checkbox" name="regionIds" th:value="*{id}" th:title="*{regionName}" th:text="*{regionName}"/>
+                                    </li>
+								</ul>-->
+								选择校区（可多选）：<input type="checkbox"  th:each="region:${regions}" name="regionIds" th:value="${region.id}" th:text="${region.regionName}"/>
+							    <span class="listgrid-table-footer"><input type='submit' class="button" value='查询' />（默认查询当天）</span>
+							</div>
+						</blc:form>
+					</li>
+					<li class="tab3Tab" style="display: none;">
+						<div class="listgrid-toolbar"></div>
+						<blc:form
+							th:action="@{/statistics-adminuserinfo}" method="post">
+							<div class="listgrid-header-wrapper">
+								开始日期：日期格式2014-02-01<input type="date" name="startdate"/>
+								结束日期：<input type="date" name="enddate"/>
+								选择校区：<select name="regionId">
+            						<option th:each="region:${regions}" th:value="${region.id}" th:text="${region.regionName}" ></option>
+            					</select>
+							    <span class="listgrid-table-footer"><input type='submit' class="button" value='查询' />（默认查询当天）</span>
+							</div>
+						</blc:form>
+					</li>
+					<li class="tab4Tab" style="display: none;">
+						<div class="listgrid-toolbar"></div> 
+						<blc:form
+							th:action="@{/statistics-adminorderinfo}" method="post">
+							<div class="listgrid-header-wrapper">
+								开始日期：日期格式2014-02-01<input type="date" name="startdate"/>
+								结束日期：<input type="date" name="enddate"/>
+								选择校区：<select name="regionId">
+            						<option th:each="region:${regions}" th:value="${region.id}" th:text="${region.regionName}"></option>
+            					</select>
+							    <span class="listgrid-table-footer"><input type='submit' class="button" value='查询' />（默认查询当天）</span>
+							</div>
+						</blc:form>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</section>
+<script type="text/javascript" th:inline="text">
+/*<![CDATA[*/
+//$('.button').click(function(){
+//	$.ajax({
+//		type : "get",
+//		url : "[[@{/statistics-productsales}]]",
+//		dataType : "html"
+//	}).done(function(data) {
+//		$('#productsales').html(data);   
+//	});
+//	return false;
+//}); 
+/*]]>*/
+</script>
+<script type="text/javascript" th:inline="javascript">
+   /*<![CDATA[*/
+    /*]]>*/
+</script>

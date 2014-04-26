@@ -1,0 +1,250 @@
+
+<div>
+	<blc:form th:object="${shippingInfoForm}" th:action="@{/checkout/singleship}" method="post" id="shipping_info" novalidate="novalidate" th:classappend="${validShipping} ? 'hide'">
+		<input type="hidden" value="no"  name="forcedSubmit" class="forcedSubmit"/>
+		<div class="left_content">
+			<!--后台的state里面必须要有数据，该数据没有用，但不能为空-->
+		  	<div style="color:red;" th:if="${param.error}" th:text="${param.error[0]}" />
+		
+			<div style="display:none">
+				<select id="state" th:field="*{address.state}" size="1" style="width: 48px;">
+				<option th:each="state : ${states}" th:value="${state.abbreviation}" th:text="${state.abbreviation}"></option>
+				</select>
+			</div>
+			<input type="hidden" name="address.country" value="CN" />
+			<div class="info">
+				<label for="firstName" class="span-font">收货人姓名：</label> 
+				<input id="firstName" type="text" class="inbox" th:field="*{myAddress.firstName}" placeholder="姓名" th:classappend="${#fields.hasErrors('myAddress.firstName')}? 'fieldError'" />&nbsp;&nbsp;*
+				<span class="error" th:if="${#fields.hasErrors('myAddress.firstName')}" th:errors="*{myAddress.firstName}"></span> 
+			</div>
+			<div class="info">
+				<label class="span-font">收货人地址：</label> 
+				<select class="select_box" id="area_id" th:field="*{myAddress.addressLine2}" size="1" onchange="getDormitory(); ">
+					
+					<option th:if="${!#lists.isEmpty(areas)  &amp;&amp; #lists.size(areas)>1}" value="0">--</option>
+					<option th:each="area : ${areas}" th:value="${area.areaId}" th:text="${area.areaName}"></option>
+				</select>&nbsp;&nbsp;&nbsp;
+				<!-- 这里最后要改掉，不适用addressLine3，自己在myaddress里面扩展字段 -->
+				<span id="display-none" th:classappend="${!#lists.isEmpty(dormitorys) &amp;&amp; #lists.size(dormitorys)==1}? 'display-none'">
+					<select  class="select_box" id="dormitory_id" th:field="*{myAddress.addressLine3}" th:classappend="${#fields.hasErrors('myAddress.roomNo')}? 'fieldError'">
+						<option th:if="${!#lists.isEmpty(dormitorys) &amp;&amp; #lists.size(dormitorys)>1}" value="">--</option>
+						<option th:each="dormitory : ${dormitorys}" th:value="${dormitory.dormitoryId}" th:text="${dormitory.dormitoryName}"></option>
+					</select>
+					&nbsp;&nbsp;&nbsp;
+				</span>
+				<span id="extend-width" th:classappend="${!#lists.isEmpty(dormitorys) &amp;&amp; #lists.size(dormitorys)==1}? 'extend-width'">
+					<input type="text"  placeholder="宿舍号/详细地址"  th:field="*{myAddress.roomNo}" class="inbox" th:classappend="${#fields.hasErrors('myAddress.roomNo')}? 'fieldError'" />&nbsp;&nbsp;*
+				</span>
+				<span class="error" th:if="${#fields.hasErrors('myAddress.roomNo')||#fields.hasErrors('myAddress.addressLine3')}" th:errors="*{myAddress.roomNo}"></span> 
+			</div>
+			<div class="info">
+				<label for="myAddress.primaryPhone" class="span-font">手 机 号 码：</label>
+				<input type="number" maxlength="11" id="myAddress.primaryPhone"  class="inbox" name="myAddress.primaryPhone" th:value="*{myAddress.primaryPhone}" th:classappend="${#fields.hasErrors('myAddress.primaryPhone')}? 'fieldError'"/>&nbsp;&nbsp;*
+				<span th:if="${customer.region.id eq 2}">支持校园短号 </span>
+				<span class="error" th:if="${#fields.hasErrors('myAddress.primaryPhone')}" th:errors="*{myAddress.primaryPhone}"></span> 
+			</div>
+			<div class="info" th:unless="${#lists.isEmpty(cart.orderItems)}">
+				<div>
+					<label  class="span-font">合　　　计：</label>
+					<span class="price" style="font-size:2em" th:unless="${cart.subTotal.zero}" blc:price="${cart.total}" ></span>
+					<input type="hidden" th:value="${cart.total}" id="order_total"/>
+				</div>
+			</div>
+			<div th:if="${cart.currency != null &amp;&amp; cart.currency.currencyCode == 'CNY'}" class="info">
+				<label class="span-font">支 付 方 式：</label>
+
+				<span th:unless="${cart.multiFulfillmentLocations}" th:remove="tag">
+					<input type="radio" name="paymentMethod" value="0" id="paymentMethod_alipay"/>
+					<label for="paymentMethod_alipay"><span class="span-font line-box">支付宝支付</span></label>
+					<span class="space_box"> </span>
+					<span id="alipay_box">
+						<input type="text" name="alipay" th:value="${alipay}" class="inbox bp-box"/>&nbsp;&nbsp;
+					</span>
+					<span th:if="${!customer.anonymous}">
+						<input type="radio" name="paymentMethod" value="0" id="paymentMethod_bp" />
+						<label for="paymentMethod_bp">
+							<span class="span-font line-box">余额支付
+							</span>
+						</label>
+						<span id="bppay_box">
+							<input type="text" name="bp_pay" th:value="${balance_pay}" class="inbox bp-box"/>
+							<span class="price" th:inline="text">(可用：
+								<span>￥[[${customer.balance}]])</span>
+							</span>
+						</span>
+					</span>
+				</span>
+				<br />
+				<span>
+					<label class="span-font">　　　　　&nbsp;&nbsp;&nbsp;</label>
+					<input type="radio" name="cod" value="cod" id="paymentMethod_cod" checked="checked" />
+					<label for="paymentMethod_cod"><span class="span-font">货到付款<span class="price cod_pay"></span></span></label>
+				</span>
+				<span class="error" th:if="${#fields.hasErrors('address.addressLine3')}" th:errors="*{address.addressLine3}"></span>
+			</div>
+			<div th:unless="${cart.currency != null &amp;&amp; cart.currency.currencyCode == 'CNY'}" class="info">
+				<span th:if="${!customer.anonymous}">
+					<label class="span-font">支 付 方 式：</label>
+					<input type="radio" name="address.addressLine3" value="integral_pay" id="paymentMethod_integrl" checked="checked" />
+					<label for="paymentMethod_integrl"><span class="span-font">仙丹支付</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</span>
+			</div>
+			<div class="info">
+				<label for="lastName"><span class="span-font">送 货 时 间：</span></label>
+					<input type="radio" name="assign" id="assign" value="2"  onclick='$.dis(2)'/>
+					<label for="assign"><span class="span-font">指定时间，预订!</span></label>
+				<div style="padding-left:7.2em;margin-top: 8px;">
+					 <div id="allocate"  style="display:none;padding-left:2em">
+					<input type="radio" name="date" id="date-0" value="0"/><label for="date-0"><span class="span-font"> 今天</span></label>
+					&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+					<input type="radio" name="date" id="date-1" value="1"/><label for="date-1"><span class="span-font"> 明天</span></label>
+					&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+					<input type="radio" name="date" id="date-2" value="2"/><label for="date-2"><span class="span-font"> 后天</span></label>
+					&nbsp;&nbsp; &nbsp;&nbsp;
+					<select class="select_box" name="detaildate">
+						<option value="9">09:00-10:00</option>
+						<option value="10">10:00-11:00</option>
+						<option value="11">11:00--12:00</option>
+						<option value="12">12:00--13:00</option>
+						<option value="13">13:00--14:00</option>
+						<option value="14">14:00--15:00</option>
+						<option value="15">15:00--16:00</option>
+						<option value="16">16:00--17:00</option>
+						<option value="17">17:00--18:00</option>
+						<option value="18">18:00--19:00</option>
+						<option value="19">19:00--20:00</option>
+						<option value="20">20:00--21:00</option>
+						<option value="21">21:00--22:00</option>				
+					</select>
+				</div>
+				<input type="radio" name="assign" id="send-now" value="1" checked="true"  onclick="$.dis(1)"/>
+				<label for="send-now"><span class="span-font">筋斗云配送（即刻送达）<span class="delivery-hint" th:classappend="'reg-'+${customer.region eq null ? '' : customer.region.id}"><div th:substituteby="content/rangeTime"></div></span></span></label>
+				<span style="color:red" th:if="${isOutDeliveryDateRange}">当前不在送货时间</span>
+				<span th:unless="${isOutDeliveryDateRange}">当前可以送货</span>
+				</div>
+			</div>
+			<div class="info">
+				<label for="lastName"><span class="span-font">备　　　注：</span></label> <span class="error" th:if="${#fields.hasErrors('myAddress.lastName')}" th:errors="*{myAddress.lastName}"></span> 
+				<textarea placeholder="请不要超过30个字......" class="inbox" style="width:60%; height:50%; resize: none;padding:10px 10px;" th:field="*{myAddress.lastName}" maxlength="30"  rows="1"  th:classappend="${#fields.hasErrors('myAddress.lastName')}? 'fieldError'">
+				</textarea>
+			</div>
+		</div>
+		<div>
+		   <input type="submit" class="check-button" value="提 交 订 单" />
+		</div>
+	</blc:form>
+</div>
+<script th:inline="javascript">
+   /*<![CDATA[*/
+	lastScripts[lastScripts.length]=function(){
+		$('#shipping_info').validate({
+			rules: {
+				'myAddress.firstName': "required",
+				'myAddress.roomNo': "required",
+				'myAddress.addressLine3': "required",
+				'myAddress.primaryPhone': "required"
+			},
+			messages: {
+				'myAddress.firstName': "亲~，请输入你的名字" + "<br/>",
+				'myAddress.roomNo': "亲~，请输入你的地址" + "<br/>",
+				'myAddress.addressLine3': "",
+				'myAddress.primaryPhone': "亲~，请输入你的手机号码" + "<br/>",
+			},
+			errorPlacement: function(error, element) {
+				$(element).parent().append(error);
+			},
+			highlight: function(element, errorClass) {
+				$(element).addClass('fieldError');
+			},
+			unhighlight: function(element, errorClass) {
+				$(element).removeClass('fieldError');
+			},
+			errorElement: "span",
+			errorClass: "error"
+		});
+		
+		$.dis=function (temp){
+			if(temp=='1'){
+				document.getElementById("allocate").style.display = "none";
+			}else if(temp=='2'){
+			document.getElementById("allocate").style.display = "block";
+			}
+		}
+		
+		$("#paymentMethod_alipay").click(function(){
+			 if($("#paymentMethod_alipay").val()==0){  
+				$("#paymentMethod_alipay").attr("value","alipay_pay");
+				$("#paymentMethod_alipay").attr("checked","checked"); 
+				$(".space_box").attr("style","display:none");
+				$("#alipay_box").attr("style","display:inline-block");
+				$("#bppay_box").attr("style","display:none");
+				$("#paymentMethod_bp").val("0"); 
+				var cod =parseFloat(parseFloat($("#order_total").val())-parseFloat($("#alipay_box input").val())).toFixed(2);
+				if($.isNumeric(cod))
+					$(".cod_pay").html("(到付：￥"+cod+")");
+				else
+					$(".cod_pay").html("");
+	   		 } else {  
+				$(".space_box").attr("style","display:inline-block");
+				$("#alipay_box").attr("style","display:none");
+				$("#paymentMethod_alipay").removeAttr("checked");  
+				$("#paymentMethod_alipay").val("0");  
+				$(".cod_pay").html("");
+	   		 }  	
+		});
+		
+		$("#paymentMethod_bp").click(function(){
+			 if($("#paymentMethod_bp").val()==0){  
+				$("#paymentMethod_bp").attr("value","balance_pay");
+				$("#paymentMethod_bp").attr("checked","checked");  
+				$("#bppay_box").attr("style","display:inline-block");
+				$("#alipay_box").attr("style","display:none");
+				$(".space_box").attr("style","display:inline-block");
+				$("#paymentMethod_alipay").val("0");  
+				var cod =parseFloat(parseFloat($("#order_total").val())-parseFloat($("#bppay_box input").val())).toFixed(2);
+				if($.isNumeric(cod))
+					$(".cod_pay").html("(到付：￥"+cod+")");
+				else
+					$(".cod_pay").html("");
+	   		 } else {  
+				$("#bppay_box").attr("style","display:none");
+				$("#paymentMethod_bp").removeAttr("checked");  
+				$("#paymentMethod_bp").val("0");  
+				$(".cod_pay").html("");
+	   		 }  	
+		});
+		
+		$("#bppay_box input").change(function(){
+			if(!$.isNumeric($("#bppay_box input").val())){
+				$("#bppay_box input").val("");
+				return false;
+			}else{
+				var cod = parseFloat(parseFloat($("#order_total").val())-parseFloat($("#bppay_box input").val())).toFixed(2);
+				if(cod<0){
+						$("#bppay_box input").val($("#order_total").val());
+						$(".cod_pay").html("(到付：￥0.00)");
+					}
+				else{
+					$(".cod_pay").html("(到付：￥"+cod+")");
+				}
+			}
+		});
+		
+		$("#alipay_box input").change(function(){
+			if(!$.isNumeric($("#alipay_box input").val())){
+				$("#bppay_box input").val("");
+				$(".cod_pay").html("(到付：￥0.00)");
+				return false;
+			}else{
+				var cod = parseFloat(parseFloat($("#order_total").val())-parseFloat($("#alipay_box input").val())).toFixed(2);
+				if(cod<0){
+					$("#alipay_box input").val($("#order_total").val());
+					$(".cod_pay").html("(到付：￥0.00)");
+				}
+				else
+					$(".cod_pay").html("(到付：￥"+cod+")");
+			}
+		});
+	};
+	/*]]>*/
+</script>

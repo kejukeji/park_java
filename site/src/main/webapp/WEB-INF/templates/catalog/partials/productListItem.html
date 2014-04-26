@@ -1,0 +1,56 @@
+<style>
+.product{
+	font-size:1em;
+	border-bottom:dashed 1px #ccc;
+	
+} 
+.detail{
+ text-align:left;
+	white-space: nowrap;
+	 text-overflow: ellipsis;
+	 overflow:hidden;
+ }
+</style>
+<div class="history tablet-grid-100 grid-100 grid-parent">
+    <div class="product tablet-grid-100 grid-100 grid-parent" style="border-bottom:dashed 1px #ccc;margin-top:10px;"> 
+    	<div class="tablet-grid-30 grid-30 grid-parent">
+			<a herf="#"> 
+				<img th:if="*{media['primary']}" th:alt="*{name}" th:src="@{*{media['primary'].url} + '?thumbnail&amp;resize-width-amount=122&amp;resize-height-amount=122'}"  width="100%"/>
+			</a>
+		</div>
+        <div class="tablet-grid-70 grid-70 detail grid-parent" style="padding-left:10px;">
+        	<div class="p-name">
+				<a th:href="@{*{defaultSku.product.url}}" target="_blank">
+					<span th:text="*{name}"></span>
+					<br th:if="*{defaultSku.description}" />
+				</a>
+			</div>
+			<div style="float:left;">
+   		    <div class="font-color-orange"><strong>
+				<div class="price content"
+		th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+    			<span blc:price="*{defaultSku.salePrice}"
+        			th:if="*{defaultSku.onSale}"
+        			th:classappend="*{defaultSku.onSale}? 'sale'"></span> <span
+        			blc:price="*{defaultSku.retailPrice}"
+        			th:classappend="*{defaultSku.onSale}? 'has-sale' : 'sale'"></span>
+    				</div>
+			 </strong>
+			</div>
+       		<div class="p-saled">
+				<span class="sold-num">销量：<big th:text="*{totalSaled == 0?'-':totalSaled}"></big></span>
+			</div>
+			</div>
+			<div class="" >
+				<span href="#">
+					<blc:form method="GET" th:action="@{/cart/add-cou}">
+						<input type="hidden" name="quantity" value="1" />
+						<input type="hidden" name="skuId" id="skuId" th:value="*{defaultSku.id}" />
+						<!-- FIXME <input type="hidden" name="locationId" id="locationId" th:value="*{defaultSku1.id}" /> -->
+						<input type="submit" class="cart-png"  value=" " />
+					</blc:form>
+				</span>
+			</div>
+        </div>  
+    </div>
+</div>

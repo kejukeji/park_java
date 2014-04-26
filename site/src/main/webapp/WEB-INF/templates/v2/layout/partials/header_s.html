@@ -1,0 +1,22 @@
+<div th:substituteby="v2/layout/partials/header_bar" />
+
+<div id="header-middle" class="header-middle-s" style="margin-top: 10px;">
+  <div class="grid-container">
+  <div class="grid-25 tablet-grid-25 mobile-grid-25"><a href="/"><img src="//img.onxiao.com/img/onxiao-logo-s.png" alt="logo"/></a></div>
+  <div style="margin-top:20px;">
+  	<form style="position:relative;" action="/search" method="GET" class="grid-55 tablet-grid-55 mobile-grid-55 grid-parent">
+  		<div class="search-bar">
+  			<div class="search-bar-bg" ></div>
+			<input type="text" name="q" th:value="${originalQuery}" placeholder="火眼金睛，尽“搜”眼底" class="grid-80 tablet-grid-80 search-box" />
+  			<input type="submit" class="grid-20 tablet-grid-20 search-button" value="搜  索"/>
+		</div>
+  	</form>
+  	<div class="grid-15 tablet-grid-15 mobile-grid-15 grid-parent push-5 tablet-push-5 mobile-push-5">
+  		<a href="/cart" class="cart right">
+  			<span class="cart-bag">购物袋</span>
+  			<span id="cartItemCount" th:text="${ cart ne null and cart.itemCount>0?cart.itemCount:'+1'}">1</span>
+		</a>
+  	</div>
+  </div>
+  </div>
+</div>

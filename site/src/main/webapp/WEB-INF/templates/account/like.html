@@ -1,0 +1,48 @@
+
+<style>
+.test:hover{
+opacity: 0.5; 
+z-index:2;
+}
+</style>
+<div class="like">
+	<span class="my-like">我的喜欢</span>
+	<div>
+		<div class="grid-25 tablet-grid-25 product-data" th:each="Product: *{products}"
+			th:object="${Product}">
+
+			<div class="this-product">
+			<div th:if="${Product}" class="full-square">
+				<a href="#" th:data="*{id}" class="like_delete" onclick="return cancelLike(this)">
+					<span class="full-square-img">X</span>
+				</a>
+				<a th:href="@{*{url}}"> <img class="test" th:if="*{media['primary']}"
+					th:src="@{*{media['primary'].url} + '?thumbnail&amp;resize-width-amount=160&amp;resize-height-amount=160'}" width="100%"/>
+				</a> 
+			</div>
+            <div>
+				<span th:text="*{#strings.length(name) gt 12?#strings.substring(name,0, 12):name}" style="float: left; padding-top: 0.5em;width:1em" class="nowrap"></span>
+				<a th:href="@{*{url}}"><span style="float: right; padding-top: 0.5em;background-color: #fff;" class="price">
+					<span blc:price="*{defaultSku.onSale?defaultSku.salePrice:defaultSku.retailPrice}"
+						style="margin-right: 0;padding-left: .5em;" class="sale"></span>
+				</span>
+				</a>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function cancelLike(obj){
+	
+	var p = $(obj);
+	$.ajax({
+		type : "get",
+		url : "/customer/cancel-like",
+		data : {pid : p.attr("data")}
+	}).done(function(data) {
+		p.closest(".product-data").remove();
+	});
+	return false;	
+}
+</script>

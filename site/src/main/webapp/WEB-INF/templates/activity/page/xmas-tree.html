@@ -1,0 +1,205 @@
+<style>
+html,body{
+background-color: #000;
+overflow: hidden;
+}
+.bg1, .bg2, .bg3{
+position:absolute;
+width: 50%;
+left: 0;
+top: 0;
+}
+img.bg2{
+left:50%;
+}
+.bg3{
+position:fixed;
+width: 100%;
+height: 100%;
+background: url(//img.onxiao.com/img/activities/xmas/bg_Filling.png);
+}
+#tree0{
+margin: auto;
+position: relative;
+width: 30%;
+height: 100%;
+}
+#tree0 img{
+width:100%;
+position: absolute;
+left: 0;
+}
+#l0,#l1,#l2,#l3,#l4,#l5{
+top:-100px;
+}
+#p1,#p2,#p11{
+position: absolute;
+left: 0;
+top: 0;
+bottom: 0;
+right: 0;
+z-index: 0;
+}
+#p2{
+display: none;
+}
+#hill{
+position:absolute;
+width:100%;
+bottom: -250px;
+z-index:9;
+}
+.prods{
+position: absolute;
+left: 7%;
+top: 41%;
+right: 7%;
+bottom: 14%;
+}
+.prod{
+width:25%;float:left;
+}
+.prod11{
+margin:9px;
+background-color: #fff;
+position: relative;
+display: block;
+overflow: hidden;
+padding:2% 2% 0;
+}
+.prod11 img{
+width: 100%;
+}
+.prod11 .prod-info{
+position: absolute;
+left:2.5%;
+bottom: 4px;
+color: #fff;
+background-color: #a2361b;
+opacity:.8;
+padding: 4px 0 4px 2%;
+width:93.5%;
+}
+.x-max-gree-tree{
+	position: absolute;
+	right: -9.7%;
+    bottom: 6%;
+    width: 20%;
+}
+@font-face {
+	font-family: 'Quicksand';
+	src:url('/fonts/Quicksand-Regular.otf');
+	font-weight: normal;
+	font-style: normal;
+}
+.x-max-more{
+	position: absolute;
+	bottom: 147px;
+	right: -53%;
+	width:40%;
+}
+#p11 a.skip{
+position: absolute;
+bottom: 30px;
+right: 40px;
+color: #fff !important;
+}
+</style>
+<div id="p1">
+	<img class="bg1" src="//img.onxiao.com/img/activities/xmas/Bg_1.jpg"/>
+	<img class="bg2" src="//img.onxiao.com/img/activities/xmas/Bg_2.jpg"/>
+	<div class="bg3" />
+</div>
+<div id="p11">
+	<div id="tree0">
+		<img id="l0" src="//img.onxiao.com/img/activities/xmas/logo_0.png"/>
+		<img id="l1" src="//img.onxiao.com/img/activities/xmas/logo_1.png"/>
+		<img id="l2" src="//img.onxiao.com/img/activities/xmas/logo_2.png"/>
+		<img id="l3" src="//img.onxiao.com/img/activities/xmas/logo_3.png"/>
+		<img id="l4" src="//img.onxiao.com/img/activities/xmas/logo_4.png"/>
+		<img id="l5" src="//img.onxiao.com/img/activities/xmas/logo_5.png"/>
+		<img id="l6" src="//img.onxiao.com/img/activities/xmas/logo_6.png"/>
+	</div>
+	<a class="skip" onclick="$('#p1').fadeOut(300);$$.p2();">跳过动画</a>
+</div>
+<div id="p2">
+	<img class="bg3" style="z-index: -2;" src="//img.onxiao.com/img/activities/xmas/bg-p2.jpg"/>
+	<img id="hill" src="//img.onxiao.com/img/activities/xmas/hill.png"/>
+	<img id="deer" style="position:absolute;top:50%;left:30%;width:30%;display:none;" src="//img.onxiao.com/img/activities/xmas/deer.png"/>
+	<div id="bd" style="position:absolute;bottom:-891px;width:65%;">
+		<img id="board" style="width:100%;" src="//img.onxiao.com/img/activities/xmas/board.png"/>
+		<blc:related_products relatedProductsResultVar="xmasProds" type="'UP_SALE'" categoryId="651" quantity="8" /><!-- 651 -->
+		<div class="prods">
+			<div th:each="prod:${xmasProds}" class="prod" th:object="${prod.relatedProduct}"
+			 th:if="${prod.relatedProduct.media['alt8'] ne null}">
+    			<a class="prod11" target="_blank" th:href="*{url}">
+    				<img th:src="*{media['alt8'].url}" />
+    				<div class="prod-info">
+    					<!--<span class="nowrap" style="width:6em;display:inline-block;" th:text="${prod.relatedProduct.name.length() gt 4} ? ${#strings.substring(prod.relatedProduct.name, 0, 4)}+'..':${prod.relatedProduct.name}">
+    					</span>
+    					<span class="right" style="background-color: #a2361b;padding-right:7px;font-family: 'Quicksand';" blc:price="*{defaultSku.salePrice eq null?defaultSku.retailPrice:defaultSku.salePrice}"></span>
+						-->
+                        <table width="100%">
+                            <tr>
+								<td style="overflow:hidden;"><span class="nowrap" style="width:6em;display:inline-block;" th:text="${prod.relatedProduct.name}"/></td>
+								<td><span class="right" style="background-color: #a2361b;padding-right:7px;font-family: 'Quicksand';" blc:price="*{defaultSku.salePrice eq null?defaultSku.retailPrice:defaultSku.salePrice}"></span></td>
+							</tr>
+						</table>
+					</div>
+    			</a>
+			</div>
+		</div>
+		<img class="x-max-gree-tree" src="//img.onxiao.com/img/activities/xmas/tree.png"/>
+		<a href="/fenlei/shengdanhuodongshangpin" target="_blank"><img class="x-max-more" src="//img.onxiao.com/img/activities/xmas/more.png"/></a>
+	</div>
+	<img id="moon" style="z-index: -1;position:absolute;top:-321px;left:75%;width:20%;" src="//img.onxiao.com/img/activities/xmas/moon.png"/>
+	<img id="box" style="position:absolute;bottom: 100%;left:3%;width:8%;z-index:10 !important;" src="//img.onxiao.com/img/activities/xmas/box.png"/>
+</div>
+<script>
+lazyJs[lazyJs.length]=['//img.onxiao.com/js/libs/snowfall.min.jquery.js'];
+lastScripts[lastScripts.length] = function(){
+	var top = $(window).height()-120;
+	$('#l6').css('top',top+'px');
+	// show page2
+	var p2ed=false;
+	$$.p2=function(){
+		if(p2ed)return;
+		p2ed=true;
+		$('#p2').fadeIn({duration:500,complete:function(){
+			$('#hill').animate({bottom:0},{duration:200});
+			$('#bd').animate({bottom:30},{duration:200,queue:false});
+			$('#moon').animate({top:30},{duration:200,queue:false,complete:function(){
+				$('#deer').show().animate({top:117,left:'69%'},{duration:400,queue:false});
+				$('#box').animate({bottom:40},{duration:400,queue:false,easing:'easeOutBounce'});
+			}});
+		}});
+	}
+	// fall logos
+	var falled={};
+	var fallNext=function(id,top){
+		if(p2ed)return;
+		falled[id+'']=true;
+		var l=$('#l'+(id--));
+		l.animate({top:top-l.height()},{duration : 300,easing : 'easeOutBounce', progress:function(a,p,remainingMs){
+			if(remainingMs>150||falled[id+''])return;
+			if(id>=0)fallNext(id,top-l.height());
+			else{//delay 3s, next page
+				setTimeout(function(){
+					setTimeout(function(){$('#tree0').fadeOut(500,function(){
+						setTimeout($$.p2,5000);
+					});},1500);
+					$('#p1').fadeOut(1000);
+				},3000);
+			}
+		}});
+	}
+	fallNext(5,top);
+	$(document).snowfall({shadow : true, round : false,  minSize: 1, maxSize:3,flakeCount : 150});
+	/**$('.prod11').hover(function(){
+		$('.prod-info').animate({bottom:0},300);
+	},function(){
+		$('.prod-info').animate({bottom:'-2em'},300);
+	}); **/
+	$('.prod').hover(function(){$(this).find('a.prod11').css({'box-shadow':'5px 5px 0 #710C0C'})},function(){$(this).find('a.prod11').css({'box-shadow':'none'})});
+}
+</script>

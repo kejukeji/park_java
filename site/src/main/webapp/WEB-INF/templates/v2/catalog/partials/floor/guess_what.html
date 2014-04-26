@@ -1,0 +1,90 @@
+<style>
+	.floor {background-color:#f8f8f8;border:1px solid #f1f1f1;padding:4px 0 0 0;height:403px;}
+	.floor nav {margin-top: 2em;}
+	.floor nav .tab {display: block;text-align: center;line-height: 3em;color:#a8a8a8;font-size: 1.2em;}
+	.floor nav .tab .tab-ico {display: inline-block;width: 40px; height: 30px;vertical-align: middle;padding-left: 0;}
+	.floor nav .tab.active {color:#35c535;}
+	.floor .tab-content {width:100%;height:100%;}
+	.brief-entry-block a {margin: .65em 0;color: inherit;display: block;}
+	.flr-content {background-color:#fff;padding:10px;box-shadow: -2px 0 2px 0px #ccc;height:100%;; overflow:hidden;}
+	.flr-grid-b {height:100%;position: relative;overflow:hidden;}
+	.flr-grid-b div {position: absolute;overflow: hidden;}
+	.flr-grid-b div a {color: #fff;padding: 0.3em 1em;font-size: 1.2em;display: inline-block;}
+	.flr-grid-b div s {float:right;	display: inline-block;width: 20px;height:10px;background: url(//img.onxiao.com/img/Sprites.png) -271px -107px;margin-top: .8em;}
+	.flr-grid-b .alt1-title {bottom: 114px;background-color: rgb(146,12,3);background-color: rgba(146,12,3,.7);}
+	.flr-grid-b .alt1-alt {bottom: 78px;background-color: rgb(0, 108, 176);background-color: rgba(0, 108, 176, .7);}
+	.flr-grid-b .alt1-tags {bottom: 42px;background-color: rgb(164,66,6);background-color: rgba(164,66,6,.7);}
+	.brief-entry-block {top: 0;bottom: 0;right: 0;left: 0;position: absolute;overflow: hidden;border:1px solid #fff;}
+	.brief-entry-block .content{padding: 1.4em 3.5em;}
+	.brief-entry-block .right-slide {position: absolute;top: 0;bottom: 0;left: 100%;background-color: #fff;padding: 1em 2em 0 0;}
+	.brief-entry-block .right-slide img.abs {position: absolute;left: -50%;}
+	.brief-entry-block .title {font-size: 1.5em;}
+	.brief-entry-block .right-slide .content {text-align: right;padding: 1em 0;}
+	.flr-grid {overflow:hidden;}
+</style>
+<h3 th:text="${floor.name}"></h3>
+<div class="floor grid-100 tablet-grid-100">
+	<nav class="grid-15 tablet-grid-15 tabs">
+		<a th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}"
+			th:attr="key='tab'+${tabStats.index}" th:class="*{'tab tab-'+id}" th:classappend="${tabStats.index==0?'active':''}">
+			<style th:text="${flrTab.subCategory.getCategoryAttributeByName('icon-class')}" />
+			<span class="tab-ico"></span><span th:text="*{name}" />
+		</a>
+	</nav>
+	<div class="flr-content tab-contents grid-85 tablet-grid-85 grid-parent">
+	 <div th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}" class="clearfix tab-content" th:classappend="${tabStats.index eq 0 ? 'active tab' + tabStats.index:'tab' + tabStats.index}">
+		<div class="flr-grid-b grid-20 tablet-grid-25 grid-parent first-margin-right" th:if="*{categoryMedia['alt1'] ne null}" th:style="'background:url('+*{categoryMedia['alt1'].url}+') right center no-repeat;'">
+			<div class="alt1-title" th:if="*{categoryMedia['alt1'].title ne null}" th:utext="*{categoryMedia['alt1'].title}"></div>
+			<div class="alt1-alt" th:if="*{categoryMedia['alt1'].altText ne null}" th:utext="*{categoryMedia['alt1'].altText}"></div>
+			<div class="alt1-tags" th:if="*{categoryMedia['alt1'].tags ne null}" th:utext="*{categoryMedia['alt1'].tags}"></div>
+		</div>
+		<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right" th:if="*{categoryMedia['alt2'] ne null}" th:style="'background:url('+*{categoryMedia['alt2'].url}+') right center no-repeat;'"></div>
+		<div th:each="gridCat,gridStats:*{childCategoryXrefs}" th:if="${gridStats.index lt 6}" th:remove="tag">
+		 <div class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent" style="position:relative;">
+			<blc:related_products relatedProductsResultVar="gridProds" type="'CROSS_SALE'" categoryId="${gridCat.subCategory.id}" quantity="7" />
+			<div class="brief-entry-block" th:with="gProds=${gridProds}">
+				<div class="content">
+					<a class="title" th:text="${gridCat.subCategory.name}" th:if="${gridCat.subCategory.url ne null}" th:href="${gridCat.subCategory.url}"></a>
+					<a class="title" th:text="${gridCat.subCategory.name}"  th:if="${gridCat.subCategory.url eq null}"></a>
+					<div th:each="gridRow,rowStats:${gProds}" th:if="${rowStats.index lt 3}" th:remove="tag">
+						<a class="nowrap" th:text="${#strings.isEmpty(gridRow.promotionMessage)?gridRow.relatedProduct.name:gridRow.promotionMessage}" th:if="${gridRow.relatedProduct.url ne null}" th:href="${gridRow.relatedProduct.url}"
+							th:with="marked=${gridRow.relatedProduct.productAttributes['marked']}"
+							th:style="${marked ne null?marked.value:''}" />
+						<a class="nowrap" th:text="${#strings.isEmpty(gridRow.promotionMessage)?gridRow.relatedProduct.name:gridRow.promotionMessage}" th:if="${gridRow.relatedProduct.url eq null}"
+							th:with="marked=${gridRow.relatedProduct.productAttributes['marked']}"
+							th:style="${marked ne null?marked.value:''}" />
+					</div>
+				</div>
+				<div th:if="${gridCat.subCategory.categoryMedia['primary'] ne null}" class="right-slide grid-100 tablet-grid-100 grid-parent">
+					<div class="left" style="position:relative;">
+						<img class="abs" th:alt="${gridCat.subCategory.categoryMedia['primary'].altText}" th:src="${gridCat.subCategory.categoryMedia['primary'].url}" />
+						<img style="opacity:0;" th:alt="${gridCat.subCategory.categoryMedia['primary'].altText}" th:src="${gridCat.subCategory.categoryMedia['primary'].url}" />
+					</div>
+					<div class="right content" style="position: absolute;right: 10px;width: 67%;overflow: hidden;">
+					<div th:each="gridRow,rowStats:${gProds}" th:if="${rowStats.index ge 3}" th:remove="tag">
+						<a class="nowrap" th:classappend="${rowStats.index eq 3 ? 'title':''}" th:text="${#strings.isEmpty(gridRow.promotionMessage)?gridRow.relatedProduct.name:gridRow.promotionMessage}" th:if="${gridRow.relatedProduct.url ne null}" th:href="${gridRow.relatedProduct.url}" />
+						<a class="nowrap" th:classappend="${rowStats.index eq 3 ? 'title':''}" th:text="${#strings.isEmpty(gridRow.promotionMessage)?gridRow.relatedProduct.name:gridRow.promotionMessage}" th:if="${gridRow.relatedProduct.url eq null}"/>
+					</div>
+					</div>
+				</div>
+			</div>
+		 </div>
+		</div>
+	 </div>
+	</div>
+</div>
+<script>
+	lastScripts[lastScripts.length] = function() {
+		$('.right-slide').hover(function(){
+			var self=$(this).stop().animate({'left':0}, 200,function(){self.parent().css('border-color','#fb8383');});
+		}, function() {
+			var self=$(this).stop().animate({left:'100%'}, 200,function(){self.parent().css('border-color','#fff');});
+		});
+		var wid = parseInt($('.alt1-title').hover(function() {
+			var self =$(this);
+			self.stop().animate({width:wid+20},10,'swing',function(){self.append('<s/>')}).animate({width:'100%'},260);
+		},function() {
+			$(this).stop().animate({width:wid},260).children('s').remove();
+		}).css('width'));
+	}
+</script>

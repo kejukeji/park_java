@@ -1,0 +1,38 @@
+<header>
+    <div id="header_content_fixed">
+        <div id="header_content_checkout">
+
+            <div id="checkout_info">
+
+                <table class="checkout_info_left" id="checkout_total_table" cellspacing="10">
+                    <tr>
+                        <th>小计</th>
+                        <th>促销</th>
+                        <th>税费</th>
+                        <th>运费</th>
+                    </tr>
+                    <tr>
+                        <td blc:price="${cart.subTotal}"></td>
+                        <td class="discount" th:if="${cart.orderAdjustmentsValue.zero}">---</td>
+                        <td class="discount" th:unless="*{cart.orderAdjustmentsValue.zero}" blc:price="${cart.orderAdjustmentsValue}"></td>
+                        <td blc:price="${cart.totalTax}"></td>
+                        <td blc:price="${cart.totalShipping}"></td>
+                    </tr>
+                </table>
+
+                <div class="checkout_info_left">
+
+                </div>
+
+                <div class="checkout_info_right">
+                    <h3>当前小计</h3>
+                    <div id="checkout_total" blc:price="${cart.total}"></div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="logo"><h1><a th:href="@{/}">沙僧很忙</a></h1></div>
+        </div>
+    </div>
+</header>

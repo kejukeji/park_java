@@ -1,0 +1,40 @@
+<section role="main">
+	<blc:form th:action="@{/order-distributed-do}" method="post">
+		<div class="row" id="box1">
+			<div class="twelve columns" th:each="form:${forms}" th:object="${form}">
+				<span>--------------------</span><br/>
+				<span><input type="hidden" name="order_id" th:value="*{orderId}" /></span>
+				<span>订单号码:</span><br/><span th:text="*{orderNumber}"></span><br /><br/>
+				<span>送货地址:</span><span th:text="*{myAddress}"></span><br /> <br/>
+				<span>提交时间:</span><span th:text="*{submitDate}"></span><br /> <br/>
+				<span>支付方式:</span><span th:text="#{'payment.'+*{payType}}"></span><br /><br/>
+				<span>联系电话：</span><span th:text="*{phone}"></span><br /><br/>
+				<span>商品明细:</span><br /> <br/>
+				<span>
+					<span>商品名称</span>#<span>规格</span>#<span>单价</span>*<span>数量</span>
+				</span><br/>
+				<span th:each="item:${form.items}" th:object="${item}">
+					<span th:text="*{name}"></span>#
+					<span th:text="*{sku.name}"></span>#
+					<span th:text="*{salePrice}"></span>*
+					<span th:text="*{quantity}"></span>
+					<br/><br/>
+				</span>
+                <span>小计:</span><span th:text="*{subTotal}"></span>
+                <span>优惠:</span><span th:text="*{itemAdjustmentsValue}"></span><br/><br/>
+				<span>商品总价:</span><span th:text="*{total}"></span><br /><br/>
+			</div>
+		</div>
+		<input type="button" value="打印" onclick="printme();" />
+		<input type="submit" value="确定配货" />
+	</blc:form>
+</section>
+<script>
+	function printme(){
+		var obj1 = document.getElementById('box1').innerHTML;
+		var obj2 =document.body.innerHTML
+		document.body.innerHTML=obj1
+		window.print();
+		document.body.innerHTML=obj2
+	}
+</script>

@@ -1,0 +1,583 @@
+<style>
+@font-face {
+	font-family: 'bebas';
+	src:url('/fonts/BEBAS___.TTF');
+	font-weight: normal;
+	font-style: normal;
+}
+.christmas_card{
+	background-color:#b9112e;
+	position:relative;
+	height:440px;
+}
+.xmas-topsnow{
+	width:100%;position: absolute;top: 0; left:0;
+}
+.christmas_logo{
+	position:absolute;
+	top:45px;
+	right: 990px;
+}
+.rules_other{
+	margin-top:125px;
+	padding: 0 15px;
+}
+.snow_left{
+	height:78px;
+	width:480px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -36px -130px no-repeat;
+}
+.activity_rules{
+	border:1px dotted #f39800;
+	padding-left:20px;
+	color:white;
+	font-size:1.2em;
+}
+.christmas_card .gift{
+	display:inline-block;
+	width:20px;
+	height:30px;
+}
+.christmas_card .info{
+	display:inline-block;
+	height: 22px;
+    line-height: 30px;
+    margin-right: 4px;
+    vertical-align: bottom;
+}
+.gift_div{
+	margin-top:10px;
+	height:30px;
+	line-height:30px;
+}
+.gift_add{
+	margin-top:5px;
+	height:30px;
+	line-height:30px;
+}
+.gift_add .jia{
+	display:inline-block;
+    height: 39px;
+    line-height: 30px;
+    margin-left: -2px;
+    margin-right: -2px;
+    vertical-align: bottom;
+}
+.activity_rules .socks{
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -42px -229px no-repeat;
+	margin-left:0px;
+}
+.activity_rules .bell{
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -123px -233px no-repeat;
+}
+.activity_rules .bigbell{
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)  -208px -231px  no-repeat;
+}
+.activity_rules .bounl{
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -290px -229px no-repeat;
+}
+.sign_card{
+	margin-top:114px;
+}
+.sign_card_log{
+	height:82px;
+	width:290px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -36px -276px no-repeat;
+}
+.date_card{
+	font-family: 'bebas';
+	color:white;
+	width:290px;
+	font-size:1.2em;
+	position:relative;
+	margin-top:-10px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -9px -505px no-repeat;
+}
+.date_card table{
+	text-align:center;
+}
+.date_card table tr{
+	height:36px;
+}
+.date_card table tr td{
+	padding:0;
+	width:41.4px;
+}
+.date_card table thead tr{
+	height:30px;
+}
+.will_open{
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -30px -420px no-repeat;
+}
+.date_card .socks{
+	width:41px;
+	height:30px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -30px -229px no-repeat;
+}
+.date_card .bell{
+	width:41px;
+	height:24px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -113px -237px no-repeat;
+}
+.date_card .bigbell{
+	width:41px;
+	height:24px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -196px -237px no-repeat;
+}
+.date_card .bounl{
+	width:41px;
+	height:24px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -279px -234px no-repeat;
+}
+.socks_hover,.bell_hover,.bigbell_hover,.bounl_hover{
+	display:none;
+	width:108px;
+	height:104px;
+	color:white;
+	padding-top:13px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -79px -380px no-repeat;
+}
+.big_socks{
+	display:inline-block;
+	width:27px;
+	height:35px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)  -51px -721px no-repeat;
+}
+.big_bell{
+	display:inline-block;
+	width:27px;
+	height:35px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)  -132px -726px no-repeat;
+}
+.big_bigbell{
+	display:inline-block;
+	width:30px;
+	height:35px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)  -209px -724px no-repeat;
+}
+.big_bounl{
+	display:inline-block;
+	width:27px;
+	height:35px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)  -291px -722px no-repeat;
+}
+.cms_number{
+	font-size:2em;
+}
+.cms_other{
+	font-family: "Microsoft YaHei";
+}
+.sign_notice{
+	padding-left:110px;
+	display:inline-block;
+	height: 196px;
+	line-height:196px;
+	overflow:hidden;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)   -36px -810px no-repeat;
+}
+.gift_notice{
+	padding-left:110px;
+	padding-top:47px;
+	display:inline-block;
+	height: 149px;
+	overflow:hidden;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)   -36px -810px no-repeat;
+}
+.gift_info{
+	font-size:1.5em;
+	margin-left:28px;
+}
+.left_lead{
+	display:inline-block;
+	width:26px;
+	height:23px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)   -71px -1006px no-repeat;
+}
+.right_leader{
+	display:inline-block;
+	width:20px;
+	height:23px;
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png)   -97px -1006px no-repeat;
+}
+.notice_word{
+	font-size:2em;
+}
+.signed{
+	background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -31px -92px no-repeat;
+}
+.cart_id,.password{
+	font-family: 'bebas';
+	vertical-align:bottom;
+}
+.recharge{
+	margin-top:10px;
+	margin-left:28px;
+}
+.chargeNow,.send_other{
+	border:1px dotted #f39800;
+	padding: 0 5px 3px;
+}
+.chargeNow{
+cursor:pointer;
+}
+.share_qcozoe,.share_weibo,.share_renren{
+	color:#f39800;
+}
+</style>
+<style th:inline="text">
+	[[${signed}]]{
+		background: url(//img.onxiao.com/img/activities/Christmas_Sprites.png) -31px -90px no-repeat;
+	}
+	[[${today}]]{
+		cursor:pointer;
+	}
+	[[${socksCss}]]
+	[[${bellCss}]]
+	[[${bigbellCss}]]
+	[[${bounlCss}]]
+</style>
+<div class="christmas_card">
+	<div class="grid-container" style="position: relative;">
+		<img src="//img.onxiao.com/img/activities/top_snow.png" alt="xmas left nav" class="xmas-topsnow" />
+		<map name="leftnavmap">
+			<area href="/fenlei/jinkou" shape="rect" coords="70,160,203,211">精选</area>
+			<area href="/fenlei/laopodaren" shape="rect" coords="81,240,196,273">在校特供</area>
+			<area href="/fenlei/baicaowei" shape="rect" coords="81,309,193,350">水果</area>
+			<area href="/product/anjiachunniunai250ml" shape="rect" coords="70,372,203,419">安佳</area>
+		</map>
+		<div class="grid-20 hide-on-tablet hide-on-mobile">
+			<img src="//img.onxiao.com/img/activities/left_nav.png" style="width:120%;" usemap="#leftnavmap" alt="xmas left nav" />
+		</div>
+		<div class="grid-45 rules_other tablet-grid-60">
+			<img src="//img.onxiao.com/img/activities/xmas-title.png" style="width:100%;" />
+			<div class="activity_rules">
+				<div class="gift_div">
+					<span class="gift socks"></span><span class="info">×5=1元</span>
+					<span class="gift bell"></span><span class="info" >×5=2元</span>
+					<span class="gift bigbell"></span><span class="info" >×5=3元</span>
+					<span class="gift bounl"></span><span class="info" >×5=4元</span>
+				</div>
+				<div class="gift_add">
+					<span class="gift socks"></span>
+					<div class="jia">+</div >
+					<span class="gift bell"></span>
+					<div class="jia">+</div>
+					<span class="gift bigbell"></span>
+					<div class="jia">+</div>
+					<span class="gift bounl"></span>
+					<div class="jia">=10元</div>
+				</div>
+				<div><p >累计打卡获得相应现金-每累计5次签到就会得到不同数额的奖励。</p>
+					<p >累计打卡天数越多，得到的奖励就越多。</p>
+					<p >卡券12.30号过期，充入账号，终身使用。</p>
+				</div>
+			</div>
+		</div>
+		<div class="grid-35 sign_card tablet-grid-40">
+			<div class="sign_card_log"></div>
+			<div class="date_card">
+				<table width="100%">
+					<td>SUN</td><td>MON</td><td>TUE</td><td>WED</td><td>tdU</td><td>FRI</td><td>SAT</td>
+					<tr >
+						<td class="d_1">1</td>
+						<td class="d_2">2</td>
+						<td class="d_3">3</td>
+						<td class="d_4">4</td>
+						<td class="d_5 will_open">5</td>
+						<td class="d_6 will_open">6</td>
+						<td class="d_7 will_open">7</td>
+					</tr>
+					<tr >
+						<td class="d_8 will_open">8</td>
+						<td class="d_9 will_open">9</td>
+						<td class="d_10 will_open">10</td>
+						<td class="d_11 will_open">11</td>
+						<td class="d_12 will_open">12</td>
+						<td class="d_13 will_open">13</td>
+						<td class="d_14 will_open">14</td>
+					</tr>
+					<tr >
+						<td class="d_15 will_open">15</td>
+						<td class="d_16 will_open">16</td>
+						<td class="d_17 will_open">17</td>
+						<td class="d_18 will_open">18</td>
+						<td class="d_19 will_open">19</td>
+						<td class="d_20 will_open">20</td>
+						<td class="d_21 will_open">21</td>
+					</tr>
+					<tr >
+						<td class="d_22 will_open">22</td>
+						<td class="d_23 will_open">23</td>
+						<td class="d_24 will_open">24</td>
+						<td class="d_225 will_open">25</td>
+						<td class="d_226 will_open">26</td>
+						<td class="d_227 will_open">27</td>
+						<td class="d_228 will_open">28</td>
+					</tr>
+					<tr >
+						<td class="d_229 will_open">29</td>
+						<td class="d_320 will_open">30</td>
+						<td class="d_321 will_open">31</td>
+						<td class="d_322">&nbsp;</td>
+						<td class="d_323">&nbsp;</td>
+						<td class="d_324">&nbsp;</td>
+						<td class="d_325">&nbsp;</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+	(function(){
+		var a = new Date().getDate();
+		var today = [[${today}]];
+    	var socks = [[${socks}]];
+    	var bell = [[${bell}]];
+    	var bigbell = [[${bigbell}]];
+    	var bounl = [[${bounl}]];
+    	var socks_String = '<div class="socks"></div><div class="socks_hover"><span class="big_socks"></span><span>×</span><span class="cms_number">&nbsp;&nbsp;5</span><div class="cms_other">累计签到5天</div><div class="cms_other">1元抵用券</div></div>';
+    	var bell_String = '<div class="bell"></div><div class="bell_hover"><span class="big_bell"></span><span>×</span><span class="cms_number">&nbsp;&nbsp;5</span><div class="cms_other">累计签到10天</div><div class="cms_other">2元抵用券</div></div>';
+    	var big_bellString = '<div class="bigbell"></div><div class="bigbell_hover"><span class="big_bigbell"></span><span>×</span><span class="cms_number">&nbsp;&nbsp;5</span><div class="cms_other">累计签到15天</div><div class="cms_other">3元抵用券</div></div>';
+    	var bounl_string = '<div class="bounl"></div><div class="bounl_hover"><span class="big_bounl"></span><span>×</span><span class="cms_number">&nbsp;&nbsp;5</span><div class="cms_other">累计签到20天</div><div class="cms_other">4元抵用券</div></div>';
+    	$('.'+socks).html(socks_String);
+    	$('.'+bell).html(bell_String);
+    	$('.'+bigbell).html(big_bellString);
+    	$('.'+bounl).html(bounl_string);
+		
+		$('.'+socks).hover(function(){
+			var hoverday = socks.substr(2,2);
+			if(hoverday==a){
+				return;
+			}
+			$('.'+socks+' .socks').css({'visibility': 'hidden'});
+			$('.d_'+(parseInt(hoverday)-7)).css({'visibility': 'hidden'});
+			$('.d_'+(parseInt(hoverday)+7)).css({'visibility': 'hidden'});
+			if(parseInt(hoverday)==15||parseInt(hoverday)==22){
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'hidden'});
+			}else if(parseInt(hoverday)==14||parseInt(hoverday)==21){
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'hidden'});
+			}else{
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'hidden'});
+			}
+		},function(){
+			var hoverday = socks.substr(2,2);
+			if(hoverday==a){
+				return;
+			}
+			$('.'+socks+' .socks').css({'visibility': 'visible'});
+			$('.d_'+(parseInt(hoverday)-7)).css({'visibility': 'visible'});
+			$('.d_'+(parseInt(hoverday)+7)).css({'visibility': 'visible'});
+			if(parseInt(hoverday)==15||parseInt(hoverday)==22){
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'visible'});
+			}else if(parseInt(hoverday)==14||parseInt(hoverday)==21){
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'visible'});
+			}else{
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'visible'});
+			}
+		});
+		$('.'+bell).hover(function(){
+			var hoverday = bell.substr(2,2);
+			if(hoverday==a){
+				return;
+			}
+			$('.'+bell+' .bell').css({'visibility': 'hidden'});
+			$('.d_'+(parseInt(hoverday)-7)).css({'visibility': 'hidden'});
+			$('.d_'+(parseInt(hoverday)+7)).css({'visibility': 'hidden'});
+			if(parseInt(hoverday)==15||parseInt(hoverday)==22){
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'hidden'});
+			}else if(parseInt(hoverday)==14||parseInt(hoverday)==21){
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'hidden'});
+			}else{
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'hidden'});
+			}
+		},function(){
+			var hoverday = bell.substr(2,2);
+			if(hoverday==a){
+				return;
+			}
+			$('.'+bell+' .bell').css({'visibility': 'visible'});
+			$('.d_'+(parseInt(hoverday)-7)).css({'visibility': 'visible'});
+			$('.d_'+(parseInt(hoverday)+7)).css({'visibility': 'visible'});
+			if(parseInt(hoverday)==15||parseInt(hoverday)==22){
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'visible'});
+			}else if(parseInt(hoverday)==14||parseInt(hoverday)==21){
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'visible'});
+			}else{
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'visible'});
+			}
+		});
+		$('.'+bigbell).hover(function(){
+			var hoverday = bigbell.substr(2,2);
+			if(hoverday==a){
+				return;
+			}
+			$('.'+bigbell+' .bigbell').css({'visibility': 'hidden'});
+			$('.d_'+(parseInt(hoverday)-7)).css({'visibility': 'hidden'});
+			$('.d_'+(parseInt(hoverday)+7)).css({'visibility': 'hidden'});
+			if(parseInt(hoverday)==15||parseInt(hoverday)==22){
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'hidden'});
+			}else if(parseInt(hoverday)==14||parseInt(hoverday)==21){
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'hidden'});
+			}else{
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'hidden'});
+			}
+		},function(){
+			var hoverday = bigbell.substr(2,2);
+			if(hoverday==a){
+				return;
+			}
+			$('.'+bigbell+' .bigbell').css({'visibility': 'visible'});
+			$('.d_'+(parseInt(hoverday)-7)).css({'visibility': 'visible'});
+			$('.d_'+(parseInt(hoverday)+7)).css({'visibility': 'visible'});
+			if(parseInt(hoverday)==15||parseInt(hoverday)==22){
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'visible'});
+			}else if(parseInt(hoverday)==14||parseInt(hoverday)==21){
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'visible'});
+			}else{
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'visible'});
+			}
+		});
+		$('.'+bounl).hover(function(){
+			var hoverday = bounl.substr(2,2);
+			if(hoverday==a){
+				return;
+			}
+			$('.'+bounl+' .bounl').css({'visibility': 'hidden'});
+			$('.d_'+(parseInt(hoverday)-7)).css({'visibility': 'hidden'});
+			$('.d_'+(parseInt(hoverday)+7)).css({'visibility': 'hidden'});
+			if(parseInt(hoverday)==15||parseInt(hoverday)==22){
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'hidden'});
+			}else if(parseInt(hoverday)==14||parseInt(hoverday)==21){
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'hidden'});
+			}else{
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'hidden'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'hidden'});
+			}
+		},function(){
+			var hoverday = bounl.substr(2,2);
+			if(hoverday==a){
+				return;
+			}
+			$('.'+bounl+' .bounl').css({'visibility': 'visible'});
+			$('.d_'+(parseInt(hoverday)-7)).css({'visibility': 'visible'});
+			$('.d_'+(parseInt(hoverday)+7)).css({'visibility': 'visible'});
+			if(parseInt(hoverday)==15||parseInt(hoverday)==22){
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'visible'});
+			}else if(parseInt(hoverday)==14||parseInt(hoverday)==21){
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'visible'});
+			}else{
+				$('.d_'+(parseInt(hoverday)+8)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)+1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-1)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-6)).css({'visibility': 'visible'});
+				$('.d_'+(parseInt(hoverday)-8)).css({'visibility': 'visible'});
+			}
+		});
+		$(today).click(function(){
+			$.ajax({
+        		type : "get",
+        		url : "/activity/christmassign/signsubmit",
+        		data : {
+        			signDate : new Date().getDate()
+        		},
+        		dataType : "html"
+        	}).done(
+    			function(data) {
+					var addString = '<div class="santa_claus sign_notice"><span class="left_lead"></span><span class="notice_word">';
+					var giftString = '<div class="santa_claus gift_notice"><span class="left_lead"></span><span class="notice_word">恭喜你获得一张充值券！</span><span class="right_leader"></span><div class="gift_info"><span>券号：<span  class="cart_id">';
+					if(data){
+						data = eval('('+data+')');
+    					if(data.loginNotice){
+    						addString = addString+data.loginNotice;
+    					}else if(data.rechargeableCard){
+							giftString = giftString+data.rechargeableCard.card_id+'</span>&nbsp;密码：<span class="password">'+data.rechargeableCard.card_password;
+							giftString = giftString+'</span></span></div><div class="recharge"><span class="chargeNow" onclick="christmasRecharge()">直接充值</span></div></div>';
+							$('.activity_rules').html(giftString);
+							$(today).addClass('signed');
+							return;
+						}else if(data.signdOk){
+    						addString = addString+data.signdOk;
+							$(today).addClass('signed');
+    					}else if(data.signdArready){
+    						addString = addString+data.signdArready;
+							$(today).addClass('signed');
+    					}else if(data.signdError){
+    						addString = addString+data.signdError;
+    					}else{
+    						addString = addString+'出问题了？不开心。';
+    					}
+					}
+					addString = addString+'</span><span class="right_leader"></span></div>';
+					$('.activity_rules').html(addString);
+    			});
+		});
+	})();
+</script>

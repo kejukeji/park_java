@@ -1,0 +1,707 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<blc:head pageTitle="双11狂欢嘉年华" head="v2/layout/partials/head" additionalCss="/css/d11.css?v=9.css" />
+
+<body th:with="now=${#dates.createNow()}" th:class="${'d-'+#dates.day(now)}">
+<div style="bg1"></div>
+<div id="page1">
+	<img class="d11-logo" src="//img.onxiao.com/img/activities/d11-logo.png" />
+	<img class="d11-date" src="//img.onxiao.com/img/activities/d11-date.png" />
+	<img class="d11-txt" src="//img.onxiao.com/img/activities/d11-txt.png" />
+	<a class="d11-ad">
+		<img src="//img.onxiao.com/img/activities/d11_hover.png" id="shine" />
+		<img src="//img.onxiao.com/img/activities/d11-go.png" />
+	</a>
+</div>
+<div id="page2">
+	<div id="days"><div class="day-center">
+		<div id="day9">
+			<div class="day"></div>
+			<div class="day-bd"></div>
+		</div>
+		<div id="day10">
+			<div class="day"></div>
+			<div class="day-bd"></div>
+		</div>
+		<div id="day11">
+			<div class="day"></div>
+			<div class="day-bd"></div>
+		</div>
+	</div></div>
+	<div id="hr"></div>	
+
+	<div id="main">
+		<div class="jia jia-l"></div>
+		<div class="jia jia-r"></div>
+		<div class="ruler"></div>
+		<div class="d11-flag" style="top: 50px;">双11特卖抢购，先到先得！</div>
+		<div style="position: absolute; top: 130px; left: 219px; color: #fff; background: url(//img.onxiao.com/img/activities/d11-gg.png) 0 0 no-repeat; height: 39px; line-height: 39px; width: 674px; text-align: center;">
+			<marquee scrollamount="4">限购1单：维护世界和平，每时段每人限购1单。嫌少？拉上小伙伴一起抢吧！ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;狂欢双11疯狂到爆，由于同学们“过于”热情，订单源源不断，筋斗云配送可能有所延迟，请大家谅解！！！！！</marquee>
+		</div>
+		<div class="qg-block blc-day9">
+			<div id="d91" class="qg-section clearfix">
+				<div class="dtime"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/ganguo">
+				</a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109783')}">抢购价 ￥3.3</a>
+					<a class="dprod-desc" target="_blank" href="/product/anjiachunniunai250ml">
+						<span class="left">安佳纯牛奶250ml</span>
+						<span class="right">原￥6 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12160')}">抢购价 ￥18</a>
+					<a class="dprod-desc" target="_blank" href="/product/changsongguanzhuangkoudaibingniunaikouwei200g">
+						<span class="left">罐装口袋饼(牛奶口味)</span>
+						<span class="right">原￥22 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12152')}">抢购价 ￥1.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/aodunjingdiantaishinaicha18g">
+						<span class="left">澳顿经典台式奶茶18</span>
+						<span class="right">原￥2 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12147')}">抢购价 ￥0.7</a>
+					<a class="dprod-desc" target="_blank" href="/product/DOMOOduomouchangtiaoyumibangqiaokeli15g">
+						<span class="left">DM长条玉米棒（巧克力）15g</span>
+						<span class="right">原￥1.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109768')}">抢购价 ￥2.8</a>
+					<a class="dprod-desc" target="_blank" href="/product/shilijia">
+						<span class="left">士力架巧克力-51g</span>
+						<span class="right">原￥3.8 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12014')}">抢购价 ￥2</a>
+					<a class="dprod-desc" target="_blank" href="/product/qiaqiaxiangguazibaizhuruwei110g">
+						<span class="left">洽洽瓜子百煮110g</span>
+						<span class="right">原￥3.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/ganguo"></a>
+			</div>
+
+			<div id="d92" class="qg-section clearfix">
+				<div class="dtime dtime2"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/xiafan">
+				</a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-10027')}">抢购价 ￥2.7</a>
+					<a class="dprod-desc" target="_blank" href="/product/letianmangguozhiyinliao180ml">
+						<span class="left">乐天芒果汁饮料180</span>
+						<span class="right">原￥3.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='')}">抢购价 ￥1.2</a>
+					<a class="dprod-desc" target="_blank" href="/product/baicaoweimanyuemeisu300g">
+						<span class="left">百草味蔓越莓酥15</span>
+						<span class="right">原￥1.7 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109832')}">抢购价 ￥1.3</a>
+					<a class="dprod-desc" target="_blank" href="/duduzhuzhengzongjingjiangroufutianxiangwei">
+						<span class="left">LP靖江肉脯甜香味20</span>
+						<span class="right">原￥2 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109780')}">抢购价 ￥1.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/MMniunaiqiaokelidou-100g">
+						<span class="left">mm牛奶巧克力豆40g</span>
+						<span class="right">原￥3.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12150')}">抢购价 ￥15</a>
+					<a class="dprod-desc" target="_blank" href="/product/ningmengweijiayuntang200g">
+						<span class="left">柠檬味嘉云糖</span>
+						<span class="right">原￥21.8 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12140')}">抢购价 ￥4.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/gudipaijianjiaosu72g">
+						<span class="left">香辣味尖角酥</span>
+						<span class="right">原￥6 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/xiafan"></a>
+			</div>
+
+			<div id="d93" class="qg-section clearfix">
+				<div class="dtime dtime3"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/yinliao">
+				</a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12110')}">抢购价 ￥1.3</a>
+					<a class="dprod-desc" target="_blank" href="/product/defumokatairenwei">
+						<span class="left">德芙摩卡泰仁味14g</span>
+						<span class="right">原￥2 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12162')}">抢购价 ￥2</a>
+					<a class="dprod-desc" target="_blank" href="/product/xiaozinvzhilianbaiqiaokelixingrenjuanxinsu16g">
+						<span class="left">白巧克力杏仁卷心酥</span>
+						<span class="right">原￥3.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-1365')}">抢购价 ￥0.3</a>
+					<a class="dprod-desc" target="_blank" href="/product/tipoyuenanmianbaogan10g">
+						<span class="left">Tipo越南面包干10g</span>
+						<span class="right">原￥0.6 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12139')}">抢购价 ￥4.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/shikongmaoyerouchengzhiyinliaoertongyinliao">
+						<span class="left">时空猫椰肉橙汁</span>
+						<span class="right">原￥7 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109777')}">抢购价 ￥3.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/aiyihuapingguojiaxinmianhuatang90g">
+						<span class="left">草莓夹心棉花糖90g</span>
+						<span class="right">原￥5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109783')}">抢购价 ￥3.3</a>
+					<a class="dprod-desc" target="_blank" href="/product/anjiachunniunai250ml">
+						<span class="left">安佳纯牛奶250ml</span>
+						<span class="right">原￥6 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/yinliao"></a>
+			</div>
+		</div>
+
+
+		<div class="qg-block blc-day10">
+			<div id="d101" class="qg-section clearfix">
+				<div class="dtime"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/laopodaren"></a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='653')}">抢购价 ￥5.4</a>
+					<a class="dprod-desc" target="_blank" href="/product/anjiachunniunai250ml">
+						<span class="left">2包安佳牛奶250ml</span>
+						<span class="right">原￥11.4 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='652')}">抢购价 ￥3</a>
+					<a class="dprod-desc" target="_blank" href="/product/qiaqiaxiangguazibaizhuruwei110g">
+						<span class="left">2包洽洽瓜子110g</span>
+						<span class="right">原￥7 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='657')}">抢购价 ￥7</a>
+					<a class="dprod-desc" target="_blank" href="/product/jimualaboweisurongkafeigutiyinliao">
+						<span class="left">5包咖啡吉尔伯特阿拉伯</span>
+						<span class="right">原￥10 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='654')}">抢购价 ￥3.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/DOMOOduomouchangtiaoyumibangqiaokeli15g">
+						<span class="left">5根DM长条玉米棒15g（巧克力）</span>
+						<span class="right">原￥7.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='656')}">抢购价 ￥4</a>
+					<a class="dprod-desc" target="_blank" href="/product/caihongtangyuanwei45gdaizhuang">
+						<span class="left">2包彩虹糖45克袋装</span>
+						<span class="right">原￥6 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='655')}">抢购价 ￥2.6</a>
+					<a class="dprod-desc" target="_blank" href="/product/baicaoweifashikaofutiaoniunaiwei236g">
+						<span class="left">2条百草味烤麸条15</span>
+						<span class="right">原￥3.6 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/laopodaren"></a>
+			</div>
+
+			<div id="d102" class="qg-section clearfix">
+				<div class="dtime dtime2"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/xiuxian">
+				</a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109780')}">抢购价 ￥1.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/MMniunaiqiaokelidou-100g">
+						<span class="left">mm牛奶巧克力豆40g</span>
+						<span class="right">原￥3.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-1113')}">抢购价 ￥1</a>
+					<a class="dprod-desc" target="_blank" href="/product/01.007.0120">
+						<span class="left">有友泡椒凤爪80g</span>
+						<span class="right">原￥4.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='662')}">抢购价 ￥5</a>
+					<a class="dprod-desc" target="_blank" href="/product/jiuzhihuamei65g">
+						<span class="left">4包九制话梅65g</span>
+						<span class="right">原￥14 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12159')}">抢购价 ￥10</a>
+					<a class="dprod-desc" target="_blank" href="/product/changsongguanzhuangkoudaibingqisikouwei200g">
+						<span class="left">罐装口袋饼起司200</span>
+						<span class="right">原￥22 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12150')}">抢购价 ￥10</a>
+					<a class="dprod-desc" target="_blank" href="/product/ningmengweijiayuntang200g">
+						<span class="left">柠檬味嘉云糖</span>
+						<span class="right">原￥21.8 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='661')}">抢购价 ￥5</a>
+					<a class="dprod-desc" target="_blank" href="/product/gudipaijianjiaosu72g">
+						<span class="left">2包香辣尖角酥</span>
+						<span class="right">原￥12 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/xiuxian"></a>
+			</div>
+
+			<div id="d103" class="qg-section clearfix">
+				<div class="dtime dtime3"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/jinkou">
+				</a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='653')}">抢购价 ￥5.4</a>
+					<a class="dprod-desc" target="_blank" href="/product/anjiachunniunai250ml">
+						<span class="left">2包安佳牛奶250ml</span>
+						<span class="right">原￥11.4 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109775')}">抢购价 ￥9</a>
+					<a class="dprod-desc" target="_blank" href="/product/yidazizuncaobenwutangkouxiangtang40lipingzhuang56g">
+						<span class="left">益达草本瓶装56g</span>
+						<span class="right">原￥11.2 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='668')}">抢购价 ￥6.4</a>
+					<a class="dprod-desc" target="_blank" href="/product/jiabaowuhuaguo65g">
+						<span class="left">4包佳宝无花果65g</span>
+						<span class="right">原￥12.8 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12146')}">抢购价 ￥8</a>
+					<a class="dprod-desc" target="_blank" href="/product/bailangnikeaixiaogutou100g">
+						<span class="left">白浪妮可爱小骨头</span>
+						<span class="right">原￥12.7 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='666')}">抢购价 ￥6.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/defumokatairenwei">
+						<span class="left">5包德芙摩卡泰仁味14g</span>
+						<span class="right">原￥10 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='667')}">抢购价 ￥6.6</a>
+					<a class="dprod-desc" target="_blank" href="/product/aiyihuapingguojiaxinmianhuatang90g">
+						<span class="left">2包草莓夹心棉花糖90g</span>
+						<span class="right">原￥10 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/jinkou"></a>
+			</div>
+		</div>
+
+
+		<div class="qg-block blc-day11">
+			<div id="d111" class="qg-section clearfix">
+				<div class="dtime"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/jueweiyabo" th:if="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -1}"></a>
+				<a class="dprod-b" target="_blank" href="/fenlei/xiafan" th:unless="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -1}"></a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='653')}">抢购价 ￥2</a>
+					<a class="dprod-desc" target="_blank" href="/product/anjiachunniunai250ml">
+						<span class="left">2包安佳牛奶250ml</span>
+						<span class="right">原￥11.4 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='652')}">抢购价 ￥3</a>
+					<a class="dprod-desc" target="_blank" href="/product/qiaqiaxiangguazibaizhuruwei110g">
+						<span class="left">2包洽洽瓜子110g</span>
+						<span class="right">原￥7 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='654')}">抢购价 ￥3.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/DOMOOduomouchangtiaoyumibangqiaokeli15g">
+						<span class="left">5根DM长条玉米棒15g（巧克力）</span>
+						<span class="right">原￥7.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='658')}">抢购价 ￥10</a>
+					<a class="dprod-desc" target="_blank" href="/product/beisinasuishenbaojirouweibinggan100g">
+						<span class="left">5包鸡肉味饼干随身包100g</span>
+						<span class="right">原￥17.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='659')}">抢购价 ￥2</a>
+					<a class="dprod-desc" target="_blank" href="/product/01.008.0154">
+						<span class="left">10包咪咪虾条15g</span>
+						<span class="right">原￥5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='660')}">抢购价 ￥3</a>
+					<a class="dprod-desc" target="_blank" href="/product/jiabaoyangmei45g">
+						<span class="left">3包佳宝杨梅45g</span>
+						<span class="right">原￥9.6 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/jueweiyabo" th:if="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -1}"></a>
+				<a class="dprod-more" target="_blank" href="/fenlei/xiafan" th:unless="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -1}"></a>
+				<div id="dtime-cnt" class="dtime-down">剩余时间：<br /><strong id="dtime-down"></strong></div>
+			</div>
+
+			<div id="d112" class="qg-section clearfix">
+				<div class="dtime dtime2"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/xiuxian"></a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109780')}">抢购价 ￥1.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/MMniunaiqiaokelidou-100g">
+						<span class="left">mm牛奶巧克力豆40g</span>
+						<span class="right">原￥3.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='665')}">抢购价 ￥6</a>
+					<a class="dprod-desc" target="_blank" href="/product/xingqiubei120g">
+						<span class="left">3包星球杯8粒装</span>
+						<span class="right">原￥15 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='663')}">抢购价 ￥5</a>
+					<a class="dprod-desc" target="_blank" href="/product/bailangnikaohaitai">
+						<span class="left">5包烤海苔(不分口味)</span>
+						<span class="right">原￥11 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='664')}">抢购价 ￥5</a>
+					<a class="dprod-desc" target="_blank" href="/product/shuirongC100ningmeng445ml">
+						<span class="left">2瓶水溶C100(不分口味)</span>
+						<span class="right">原￥9 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12150')}">抢购价 ￥10</a>
+					<a class="dprod-desc" target="_blank" href="/product/ningmengweijiayuntang200g">
+						<span class="left">柠檬味嘉云糖</span>
+						<span class="right">原￥21.8 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='661')}">抢购价 ￥5</a>
+					<a class="dprod-desc" target="_blank" href="/product/gudipaijianjiaosu72g">
+						<span class="left">2包香辣尖角酥</span>
+						<span class="right">原￥12 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/xiuxian"></a>
+			</div>
+
+			<div id="d113" class="qg-section clearfix">
+				<div class="dtime dtime3"></div>
+				<a class="dprod-b" target="_blank" href="/fenlei/sushi">
+				</a>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='701')}">抢购价 ￥0.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/01.008.0154">
+						<span class="left">5包咪咪虾条15g</span>
+						<span class="right">原￥2.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-12111')}">抢购价 ￥1.1</a>
+					<a class="dprod-desc" target="_blank" href="/product/defusihuaniunaiwei">
+						<span class="left">德芙丝滑牛奶味14g</span>
+						<span class="right">原￥2 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='702')}">抢购价 ￥4</a>
+					<a class="dprod-desc" target="_blank" href="/product/xiaozinvzhilianbaiqiaokelixingrenjuanxinsu16g">
+						<span class="left">2包小资女之恋16g</span>
+						<span class="right">原￥7 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='703')}">抢购价 ￥2.8</a>
+					<a class="dprod-desc" target="_blank" href="/product/aodunjingdiangangshinaicha18g">
+						<span class="left">2包澳顿经典奶茶</span>
+						<span class="right">原￥4 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod" th:if="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -1}">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-1091')}">抢购价 ￥2.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/01.008.0142">
+						<span class="left">上好佳鲜虾片40g</span>
+						<span class="right">原￥3.3 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod" th:unless="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -1}">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-109862')}">抢购价 ￥2.5</a>
+					<a class="dprod-desc" target="_blank" href="/product/shanghaojiatianyuanshupianfanqie60g">
+						<span class="left">上好佳田园薯片50g</span>
+						<span class="right">原￥3.5 &nbsp;详情</span>
+					</a>
+				</div>
+				<div class="dprod">
+					<div class="dprod-cover"></div>
+					<a class="dprod-btn" th:href="@{/activity/d11/qianggou/checkout(product_id='-1263')}">抢购价 ￥2.8</a>
+					<a class="dprod-desc" target="_blank" href="/product/tongyilaotansuancainiuroumian120g">
+						<span class="left">统一老坛牛肉面</span>
+						<span class="right">原￥3.7 &nbsp;详情</span>
+					</a>
+				</div>
+				<a class="dprod-more" target="_blank" href="/fenlei/sushi"></a>
+			</div>
+		</div>
+
+		<div class="foot">
+			<div class="ft-fold1">
+				<div class="fd-bd foldl"></div>
+				<div class="fd-bd foldr"></div>
+				<ol>
+					<li>每天11：11、15：11、19:11准时开抢，每个时间段6种惊爆低价产品，数量有限，抢完为止． </li>
+					<li>每人每件限购1个，超出将按原价销售，（技巧：可拍下多个商品，再提交）</li>
+					<li>多种组合套餐价格优惠，一定有你要的款~ </li>
+					<li>活动期间购物满送，订单满整额即有精美礼品</li>
+					<li>人人、微博、微信转发即送现金券</li>
+				</ol>
+			</div>
+			<div class="ft-fold2">
+				<div class="fd-bd foldl2"></div>
+				<div class="fd-bd foldr2"></div>
+				<div class="d11-flag">宅男宅女的爱情</div>
+				<div style="text-align: center;"><img style="margin-top: 98px;" alt="光棍节4格漫画" src="//img.onxiao.com/img/activities/d11-ctn.jpg" /></div>
+			</div>
+			<div class="ft-fold1">
+				<div class="fd-bd foldl"></div>
+				<div class="fd-bd foldr"></div>
+				<div class="ft-copy">Copyright ©2013 - 2014 ONXIAO.COM. All Rights Reserved.</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
+var curSec, dtimeDon = document.getElementById('dtime-down'),timestamp= [[${now.getTime() - 1000}]],
+periods=[[1383966671000, 1383981071000],[1383981071000,1383995471000],[1383995471000, 1384009871000],
+		[1384053071000, 1384067471000], [1384067471000,1384081871000],[1384081871000, 1384096271000],
+		[1384139471000, 1384153871000], [1384153871000, 1384168271000],[1384168271000, 1384182671000]];
+$$.getCurSec = function(now) {
+	var ii = -1, nextStart = -1;
+	for(var i = 0; i < periods.length; i++) {
+		if(nextStart < 0 && now < periods[i][0]) {
+			nextStart = periods[i][0];
+			break;
+		}
+		if(now>=periods[i][0] && now <periods[i][1]) {
+			ii = i;
+		}
+	}
+	var ret = {nextStart: nextStart};
+	if(ii >= 0) {
+		var d=Math.floor(ii / 3) + 9, s = (ii % 3) + 1;
+		// test var d=9, s = 2; ii = 0;
+		ret.id = 'd'+d+s;
+	}
+	return ret;
+};
+$$.switchSec = function(secId) {
+	var sec = document.getElementById(secId);
+	var block = sec.parentNode;
+	if(block.firstChild)
+		block.insertBefore(sec, block.firstChild);
+	else
+		block.appendChild(sec);
+	sec.appendChild(dtimeDon.parentNode);
+	if(window.$) {
+		var secs = $('.qg-section');
+		secs.children('.dprod').trigger('mouseout');
+		secs.removeClass('dnow');
+		$(sec).addClass('dnow').find('.dprod-cover').css({opacity:0});
+		return true;
+	}
+	return false;
+};
+$$.interval = function(){
+	timestamp+=1000;
+	var cs = $$.getCurSec(timestamp);
+	if(cs.nextStart > 0) {
+		var tleft = Math.round((cs.nextStart - timestamp) /1000);
+		dtimeDon.innerHTML = Math.floor(tleft/3600) + ':' + (Math.floor(tleft / 60) % 60) + ':' + (tleft % 60);
+	}
+
+	if(cs.id && curSec != cs.id) {
+		if($$.switchSec(cs.id))
+			curSec = cs.id;
+	}
+};
+setInterval($$.interval, 1000);
+lastScripts[lastScripts.length]=function() {
+	$$.interval();
+	$('.day').click(function(){
+		$('.day').parent().removeClass('d-on');
+		$('.qg-block').hide();
+		$('.blc-'+($(this).parent().addClass('d-on').attr('id'))).show();
+	});
+	$('.d11-logo').animate({right: '50%'}, { duration: 300, queue: false });
+	$('.d11-date').animate({top: 150}, { duration: 300, queue: false });
+	$('.d11-txt').animate({left: '50%'}, { duration: 300, queue: false });
+	$('.d11-ad').animate({top: 380}, { duration: 300, queue: false })
+		.hover(function(){$('#shine').animate({left: '300px'},500);},function(){$('#shine').css({left: '-600px'});})
+		.click(function(){
+			$('#page2').show();
+			$('body').animate({'background-position-y': '-270px'}, { duration: 700, queue: false });
+			$('.d11-logo').animate({top: -20}, { duration: 700, queue: false });
+			$('.d11-date').animate({top: 5}, { duration: 700, queue: false });
+			$('.d11-txt').animate({top: 15}, { duration: 700, queue: false });
+			$('.d11-ad').fadeOut({ duration: 700, queue: false });
+			$('#page2').animate({top: 170}, { duration: 700, queue: false, complete: function(){$('body').css({overflow:'inherit'});}});
+		});
+	$('.dprod').hover(function(){
+			var self = $(this);
+			if(self.parent('.dnow').length > 0) {
+				var soldOut = self.hasClass('sold-out');
+				self.children('.dprod-desc').animate({bottom:0},{ duration: 100, queue: false });
+				self.children('.dprod-cover').animate({opacity: soldOut?.8:1},{ duration: 100, queue: false });
+				self.children('.dprod-btn').animate({top:7},{ duration: 100, queue: false });
+			}
+		},
+		function(){
+			var self = $(this);
+			if(self.parent('.dnow').length > 0) {
+				var soldOut = self.hasClass('sold-out');
+				self.children('.dprod-desc').animate({bottom:-28},{ duration: 100, queue: false });
+				self.children('.dprod-cover').animate({opacity:soldOut?.8:0},{ duration: 100, queue: false, complete:function(){
+					if(self.parent('.dnow').length == 0)self.children('.dprod-cover').css({opacity:.8});
+				}});
+				self.children('.dprod-btn').animate({top:-136},{ duration: 100, queue: false });
+			}
+	});
+	
+	$(".dprod-btn").click(function(){
+		var that = $(this);
+		if(that.parent().hasClass("sold-out")){
+			return false;
+		}
+		 $.ajax({url:that.attr('href'),
+                type: "GET"
+            }).done(function(data){
+				if(data){
+					if(data.errorTime){
+						alert(data.errorTime);
+					}else if(data.errorInventory || data.errorInventoryUn){
+						that.parent(".dprod").addClass("sold-out");
+						that.html('');
+					}else if(data.redirect){
+						window.location="/checkout/checkout-step-2";
+					}else{
+						alert("哎呀，人太多了，你被挤下去了。");
+					}
+				}
+            });
+		return false;
+	});
+};
+document.write(unescape("%3Cscript src='//hm.baidu.com/h.js%3Fc5950a1860bb774d0085d23cdb30a5aa' type='text/javascript'%3E%3C/script%3E"));
+/*]]>*/
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<div class="m-header clearfix"><img th:if="*{categoryMedia['alt6'] ne null}" th:src="*{categoryMedia['alt6'].url}" th:alt="*{name}" /></div>
+<blc:related_products relatedProductsResultVar="menuProds" type="'CROSS_SALE'" categoryId="*{id}" />
+<div th:class="'m-main cols-'+${cols}"
+	 th:with="mProds=${menuProds},cols=*{(getCategoryAttributeByName('nav-menu-cols') eq null)?2:T(java.lang.Integer).parseInt(getCategoryAttributeByName('nav-menu-cols').value)},size=*{childCategoryXrefs.size()},fpSize=${menuProds.size()+0d}">
+	<div th:with="rows=${T(java.lang.Math).ceil((fpSize+size)/cols)}" th:remove="tag">
+		<div class="m-col" th:each="ii,stats: ${#numbers.sequence(0, size+fpSize, rows)}">
+			<div th:class="'mcol col'+${stats.count}">
+				<div th:each="jj: ${#numbers.sequence(ii,ii+rows)}" th:if="${jj lt (ii+rows)}">
+				 <div th:with="subCat=${category.childCategoryXrefs.get(jj).subCategory}" th:if="${jj lt size}" th:remove="tag">
+				  <div th:if="${subCat.categoryMedia['alt6'] eq null}" th:remove="tag">
+					<a th:text="${subCat.name}" th:if="${#strings.isEmpty(subCat.url)}" class="sub-title"></a>
+					<a th:text="${subCat.name}" th:unless="${#strings.isEmpty(subCat.url)}" class="sub-title" th:href="${subCat.url}"></a>
+					<div class="subsub clearfix">
+						<a th:each="catItmRef:${subCat.childCategoryXrefs}" th:if="${#strings.isEmpty(catItmRef.subCategory.url)}" th:text="${catItmRef.subCategory.name}" />
+						<a th:each="catItmRef:${subCat.childCategoryXrefs}" th:unless="${#strings.isEmpty(catItmRef.subCategory.url)}"
+							th:href="${catItmRef.subCategory.url}" th:text="${catItmRef.subCategory.name}"
+							th:with="marked=${catItmRef.subCategory.getCategoryAttributeByName('marked')}"
+							th:style="${marked ne null?marked.value:''}" />
+					</div>
+				  </div>
+				  <div th:if="${subCat.categoryMedia['alt6'] ne null}">
+					<img th:if="${#strings.isEmpty(subCat.url)}" th:alt="${subCat.name}" th:src="${subCat.categoryMedia['alt6'].url}"/>
+					<a th:title="${subCat.name}" th:unless="${#strings.isEmpty(subCat.url)}" th:href="${subCat.url}">
+						<img th:alt="${subCat.name}" th:src="${subCat.categoryMedia['alt6'].url}"/>
+					</a>
+				  </div>
+				 </div>
+				 <div th:if="${jj ge size and (jj-size) lt fpSize}" th:with="fProd=${mProds.get(jj-size)}">
+					<a th:title="${#strings.isEmpty(fProd.promotionMessage)?fProd.relatedProduct.name:fProd.promotionMessage}" th:href="${fProd.relatedProduct.url}">
+						<span th:if="${fProd.relatedProduct.media['alt7'] eq null}" th:text="${fProd.relatedProduct.name}" th:remove="tag"/>
+						<img th:unless="${fProd.relatedProduct.media['alt7'] eq null}" th:alt="${fProd.relatedProduct.name}" th:src="${fProd.relatedProduct.media['alt7'].url}"/>
+					</a>
+				 </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

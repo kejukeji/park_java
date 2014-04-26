@@ -1,0 +1,120 @@
+
+update blc_sku set name='银鹭牛奶花生蛋白饮品370g' where sku_id=-1264;
+update blc_sku set name='统一老坛酸菜牛肉面（桶）120g' where sku_id=-1263;
+update blc_sku set name='百事可乐600ml' where sku_id=-1262;
+update blc_sku set name='娃哈哈营养快线（菠萝味）500g' where sku_id=-1261;
+update blc_sku set name='娃哈哈营养快线（原味）500g' where sku_id=-1260;
+update blc_sku set name='椰树椰汁245ml' where sku_id=-1259;
+update blc_sku set name='农夫山泉矿泉水380ml' where sku_id=-1258;
+update blc_sku set name='银鹭桂圆八宝粥360g' where sku_id=-1257;
+update blc_sku set name='娃哈哈AD钙奶饮料220g' where sku_id=-1256;
+update blc_sku set name='李子园甜牛奶450ml' where sku_id=-1255;
+update blc_sku set name='银鹭绿豆汤370g' where sku_id=-1254;
+update blc_sku set name='娃哈哈营养快线（椰子味）500g' where sku_id=-1253;
+update blc_sku set name='农夫山泉矿泉水550ml' where sku_id=-1252;
+update blc_sku set name='可口可乐（听）330ml' where sku_id=-1251;
+update blc_sku set name='娃哈哈纯净水596ml' where sku_id=-1250;
+update blc_sku set name='尖叫运动型饮料（纤维）550ml' where sku_id=-1249;
+update blc_sku set name='娃哈哈桂圆莲子八宝粥360g' where sku_id=-1248;
+update blc_sku set name='袋装统一100卤肉面112g' where sku_id=-1247;
+update blc_sku set name='袋装统一100老坛酸菜牛肉面112g' where sku_id=-1246;
+update blc_sku set name='统一小浣熊干脆面（奥尔良烤翅味）46g' where sku_id=-1245;
+update blc_sku set name='统一小浣熊干脆面（烤肉味）46g' where sku_id=-1244;
+update blc_sku set name='统一小浣熊干脆面（意大利红烩味）46g' where sku_id=-1243;
+update blc_sku set name='统一小当家干脆面（香葱味）26g' where sku_id=-1242;
+update blc_sku set name='统一小当家干脆面（红烧牛肉味）26g' where sku_id=-1241;
+update blc_sku set name='统一小当家干脆面（蜜汁猪排味）26g' where sku_id=-1240;
+update blc_sku set name='统一小当家干脆面（五香牛肉味）26g' where sku_id=-1239;
+update blc_sku set name='洽洽香瓜子（自然生香）60g' where sku_id=-1238;
+update blc_sku set name='洽洽香瓜子（奶香味）110g' where sku_id=-1237;
+update blc_sku set name='口水娃兰花豆（酱汁牛肉味）30g' where sku_id=-1236;
+update blc_sku set name='口水娃兰花豆（烤肉味）30g' where sku_id=-1235;
+update blc_sku set name='口水娃兰花豆（香辣味）30g' where sku_id=-1234;
+update blc_sku set name='口水娃兰花豆（五香味）30g' where sku_id=-1233;
+
+
+
+
+
+
+
+
+
+update blc_media set title='银鹭牛奶花生蛋白饮品370g' where media_id in (-1264,-3264,-2264);
+update blc_media set title='统一老坛酸菜牛肉面（桶）120g' where media_id in (-1263,-3263,-2263);
+update blc_media set title='百事可乐600ml' where media_id in (-1262,-3262,-2262);
+update blc_media set title='娃哈哈营养快线（菠萝味）500g' where media_id in (-1261,-3261,-2261);
+update blc_media set title='娃哈哈营养快线（原味）500g' where media_id in (-1260,-3260,-2260);
+update blc_media set title='椰树椰汁245ml' where media_id in (-1259,-3259,-2259);
+update blc_media set title='农夫山泉矿泉水380ml' where media_id in (-1258,-3258,-2258);
+update blc_media set title='银鹭桂圆八宝粥360g' where media_id in (-1257,-3257,-2257);
+update blc_media set title='娃哈哈AD钙奶饮料220g' where media_id in (-1256,-3256,-2256);
+update blc_media set title='李子园甜牛奶450ml' where media_id in (-1255,-3255,-2255);
+update blc_media set title='银鹭绿豆汤370g' where media_id in (-1254,-3254,-2254);
+update blc_media set title='娃哈哈营养快线（椰子味）500g' where media_id in (-1253,-3253,-2253);
+update blc_media set title='农夫山泉矿泉水550ml' where media_id in (-1252,-3252,-2252);
+update blc_media set title='可口可乐（听）330ml' where media_id in (-1251,-3251,-2251);
+update blc_media set title='娃哈哈纯净水596ml' where media_id in (-1250,-3250,-2250);
+update blc_media set title='尖叫运动型饮料（纤维）550ml' where media_id in (-1249,-3249,-2249);
+update blc_media set title='娃哈哈桂圆莲子八宝粥360g' where media_id in (-1248,-3248,-2248);
+update blc_media set title='袋装统一100卤肉面112g' where media_id in (-1247,-3247,-2247);
+update blc_media set title='袋装统一100老坛酸菜牛肉面112g' where media_id in (-1246,-3246,-2246);
+update blc_media set title='统一小浣熊干脆面（奥尔良烤翅味）46g' where media_id in (-1245,-3245,-2245);
+update blc_media set title='统一小浣熊干脆面（烤肉味）46g' where media_id in (-1244,-3244,-2244);
+update blc_media set title='统一小浣熊干脆面（意大利红烩味）46g' where media_id in (-1243,-3243,-2243);
+update blc_media set title='统一小当家干脆面（香葱味）26g' where media_id in (-1242,-3242,-2242);
+update blc_media set title='统一小当家干脆面（红烧牛肉味）26g' where media_id in (-1241,-3241,-2241);
+update blc_media set title='统一小当家干脆面（蜜汁猪排味）26g' where media_id in (-1240,-3240,-2240);
+update blc_media set title='统一小当家干脆面（五香牛肉味）26g' where media_id in (-1239,-3239,-2239);
+update blc_media set title='洽洽香瓜子（自然生香）60g' where media_id in (-1238,-3238,-2238);
+update blc_media set title='洽洽香瓜子（奶香味）110g' where media_id in (-1237,-3237,-2237);
+update blc_media set title='口水娃兰花豆（酱汁牛肉味）30g' where media_id in (-1236,-3236,-2236);
+update blc_media set title='口水娃兰花豆（烤肉味）30g' where media_id in (-1235,-3235,-2235);
+update blc_media set title='口水娃兰花豆（香辣味）30g' where media_id in (-1234,-3234,-2234);
+update blc_media set title='口水娃兰花豆（五香味）30g' where media_id in (-1233,-3233,-2233);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+update BLC_STATIC_ASSET set NAME='银鹭牛奶花生蛋白饮品370g' where STATIC_ASSET_ID in (-1264,-3264,-2264);
+update BLC_STATIC_ASSET set NAME='统一老坛酸菜牛肉面（桶）120g' where STATIC_ASSET_ID in (-1263,-3263,-2263);
+update BLC_STATIC_ASSET set NAME='百事可乐600ml' where STATIC_ASSET_ID in (-1262,-3262,-2262);
+update BLC_STATIC_ASSET set NAME='娃哈哈营养快线（菠萝味）500g' where STATIC_ASSET_ID in (-1261,-3261,-2261);
+update BLC_STATIC_ASSET set NAME='娃哈哈营养快线（原味）500g' where STATIC_ASSET_ID in (-1260,-3260,-2260);
+update BLC_STATIC_ASSET set NAME='椰树椰汁245ml' where STATIC_ASSET_ID in (-1259,-3259,-2259);
+update BLC_STATIC_ASSET set NAME='农夫山泉矿泉水380ml' where STATIC_ASSET_ID in (-1258,-3258,-2258);
+update BLC_STATIC_ASSET set NAME='银鹭桂圆八宝粥360g' where STATIC_ASSET_ID in (-1257,-3257,-2257);
+update BLC_STATIC_ASSET set NAME='娃哈哈AD钙奶饮料220g' where STATIC_ASSET_ID in (-1256,-3256,-2256);
+update BLC_STATIC_ASSET set NAME='李子园甜牛奶450ml' where STATIC_ASSET_ID in (-1255,-3255,-2255);
+update BLC_STATIC_ASSET set NAME='银鹭绿豆汤370g' where STATIC_ASSET_ID in (-1254,-3254,-2254);
+update BLC_STATIC_ASSET set NAME='娃哈哈营养快线（椰子味）500g' where STATIC_ASSET_ID in (-1253,-3253,-2253);
+update BLC_STATIC_ASSET set NAME='农夫山泉矿泉水550ml' where STATIC_ASSET_ID in (-1252,-3252,-2252);
+update BLC_STATIC_ASSET set NAME='可口可乐（听）330ml' where STATIC_ASSET_ID in (-1251,-3251,-2251);
+update BLC_STATIC_ASSET set NAME='娃哈哈纯净水596ml' where STATIC_ASSET_ID in (-1250,-3250,-2250);
+update BLC_STATIC_ASSET set NAME='尖叫运动型饮料（纤维）550ml' where STATIC_ASSET_ID in (-1249,-3249,-2249);
+update BLC_STATIC_ASSET set NAME='娃哈哈桂圆莲子八宝粥360g' where STATIC_ASSET_ID in (-1248,-3248,-2248);
+update BLC_STATIC_ASSET set NAME='袋装统一100卤肉面112g' where STATIC_ASSET_ID in (-1247,-3247,-2247);
+update BLC_STATIC_ASSET set NAME='袋装统一100老坛酸菜牛肉面112g' where STATIC_ASSET_ID in (-1246,-3246,-2246);
+update BLC_STATIC_ASSET set NAME='统一小浣熊干脆面（奥尔良烤翅味）46g' where STATIC_ASSET_ID in (-1245,-3245,-2245);
+update BLC_STATIC_ASSET set NAME='统一小浣熊干脆面（烤肉味）46g' where STATIC_ASSET_ID in (-1244,-3244,-2244);
+update BLC_STATIC_ASSET set NAME='统一小浣熊干脆面（意大利红烩味）46g' where STATIC_ASSET_ID in (-1243,-3243,-2243);
+update BLC_STATIC_ASSET set NAME='统一小当家干脆面（香葱味）26g' where STATIC_ASSET_ID in (-1242,-3242,-2242);
+update BLC_STATIC_ASSET set NAME='统一小当家干脆面（红烧牛肉味）26g' where STATIC_ASSET_ID in (-1241,-3241,-2241);
+update BLC_STATIC_ASSET set NAME='统一小当家干脆面（蜜汁猪排味）26g' where STATIC_ASSET_ID in (-1240,-3240,-2240);
+update BLC_STATIC_ASSET set NAME='统一小当家干脆面（五香牛肉味）26g' where STATIC_ASSET_ID in (-1239,-3239,-2239);
+update BLC_STATIC_ASSET set NAME='洽洽香瓜子（自然生香）60g' where STATIC_ASSET_ID in (-1238,-3238,-2238);
+update BLC_STATIC_ASSET set NAME='洽洽香瓜子（奶香味）110g' where STATIC_ASSET_ID in (-1237,-3237,-2237);
+update BLC_STATIC_ASSET set NAME='口水娃兰花豆（酱汁牛肉味）30g' where STATIC_ASSET_ID in (-1236,-3236,-2236);
+update BLC_STATIC_ASSET set NAME='口水娃兰花豆（烤肉味）30g' where STATIC_ASSET_ID in (-1235,-3235,-2235);
+update BLC_STATIC_ASSET set NAME='口水娃兰花豆（香辣味）30g' where STATIC_ASSET_ID in (-1234,-3234,-2234);
+update BLC_STATIC_ASSET set NAME='口水娃兰花豆（五香味）30g' where STATIC_ASSET_ID in (-1233,-3233,-2233);

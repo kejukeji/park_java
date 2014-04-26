@@ -1,0 +1,97 @@
+<li th:each="product : ${products}" th:object="${product}"
+	th:classappend="${ajax}?'wf animate':'wf'">
+	<div class="wf-item">
+
+		<!-- <div th:if="*{featuredProduct}" class="new_badge"></div> -->
+		<blc:form method="GET" th:action="@{/cart/add}">
+			<div class="image" th:title="*{name}">
+				<a th:href="@{*{url}}" target="_blank"> 
+					<div class="full-square">
+						<div class="show-back-image clearfix">
+							<ul>
+								<span th:data="*{id}" style="cursor: pointer"
+									onclick="return tagLike(this);">
+									<div class="like-png"><div th:id="*{id}" class="floatMsg"
+											style="right: 9px;"></div></div>
+								</span>
+							</ul>
+						</div>
+						<div class="border clearfix">
+							<img th:if="*{media['primary']}" th:alt="*{name}"
+								th:src="@{*{media['primary'].url} + '?thumbnail&amp;resize-width-amount=227&amp;resize-height-amount=227'}" />
+						</div>
+					</div>
+				</a>
+				<div class="price content"
+					th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+					<span blc:price="*{salePrice}" th:if="*{onSale}"
+						th:classappend="*{defaultSku.onSale}? 'sale'"></span> <span
+						blc:price="*{retailPrice}" th:classappend="*{onSale}? 'has-sale'"></span>
+				</div>
+				<div class="price content"
+					th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+					<span blc:price="*{defaultSku.salePrice}"
+						th:if="*{defaultSku.onSale}"
+						th:classappend="*{defaultSku.onSale}? 'sale'"></span> <span
+						blc:price="*{defaultSku.retailPrice}"
+						th:classappend="*{defaultSku.onSale}? 'has-sale' : 'sale'"></span>
+					<span class="sold-num">销量：<big
+						th:text="*{totalSaled == 0?'-':totalSaled}"></big></span>
+				</div>
+			</div>
+
+			<div class="content">
+				<div class="title" th:text="*{name}" style="line-height: 2.5em;"></div>
+				<p th:if="*{description ne null}" th:text="*{description}"></p>
+			</div>
+
+			<div th:class="*{'productActions productActions' + id}">
+				<div class="add_to_cart">
+					<div th:unless="*{#lists.isEmpty(skus)}" style="margin: 1em;">
+						<span th:attr="sid=*{defaultSku.id}" class="sku active"
+							onclick="skuSelect(this, '.sku');"> <span th:text="*{defaultSku.name}" /> <ins
+								style="display: none"
+								blc:price="*{defaultSku.onSale?defaultSku.salePrice:defaultSku.retailPrice}" />
+						</span> 
+						<span th:unless="*{#lists.isEmpty(skus)}" th:each="sku : *{skus}"
+							th:object="${sku}" th:attr="sid=*{id}" class="sku"
+							onclick="skuSelect(this, '.sku');"> <span
+							th:text="*{name}" class="nowrap">2盒</span> <ins
+								style="display: none"
+								blc:price="*{onSale?salePrice:retailPrice}" />
+						</span>
+					</div>
+					<input type="hidden" name="quantity" value="1" /> <input
+						type="hidden" name="skuId" id="skuId" th:value="*{defaultSku.id}" />
+					<div class="addToCart">加入购物车
+						<div class="floatMsg" style="right: 0px;">+1</div>
+					</div>
+				</div>
+			</div>
+		</blc:form>
+
+		<blc:ratings itemId="${product.id}" />
+		<!-- TODO batch read -->
+		<div th:if="${ratingSummary}" th:object="${ratingSummary}"
+			class="productReviews">
+				<div class="content review-item"
+					th:each="review, iterStat : *{reviews}" th:object="${review}"
+					th:if="${iterStat.count} lt 4" th:title="*{customer.firstName}">
+					<span class="reviewer-info" style="overflow: hidden;">
+						<span class="tiny avatar" th:if="*{customer.avatarUrl==null}"
+							style="background-image:url('/img/Onxiao_userimg.png')" />
+						<span class="tiny avatar" th:unless="*{customer.avatarUrl==null}"
+							th:style="'background-image:url('+*{customer.avatarUrl}+')'" />
+					</span>
+					<q th:text="*{reviewText}">Review Text</q>
+				</div>
+		</div>
+
+	</div>
+</li>
+<script th:if="${bonusOfferCode}" th:inline="javascript">
+	if(window.$) {
+		showBonus([[${bonusOfferCode.offerCode}]], [[${bonusOfferCode.offer.marketingMessage}]], [[${customer.anonymous}]]);
+	} else
+		lastScripts[lastScripts.length] = function(){showBonus([[${bonusOfferCode.offerCode}]], [[${bonusOfferCode.offer.marketingMessage}]], [[${customer.anonymous}]]);};
+</script>

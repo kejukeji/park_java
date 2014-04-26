@@ -1,0 +1,53 @@
+<style>
+	.meizhuang-floor{background-color:#f8f8f8;border:1px solid #f1f1f1;padding:4px 0 0 0;height:386px;}
+	.meizhuang-floor nav {margin-top: 2em;}
+	.meizhuang-floor nav .tab {display: block;text-align: center;line-height: 3em;color:#a8a8a8;font-size: 1.2em;}
+	.meizhuang-floor nav .tab.active {color:#DA73D1;}
+	.meizhuang-floor .tab-content {width:100%;height:100%;}
+	.meizhuang_title{
+		margin-top:30px;
+	}
+	.meizhuang_title .meizhuang_name{
+		height:45px;
+		background: url(//img.onxiao.com/img/Sprites.png) -211px -411px;
+	}
+	@media screen and (min-width: 1025px) {
+	.meizhuang-floor .flr-grid {overflow:hidden;border:1px solid #f1f1f1;}
+	}
+	.meizhuangtabs .tab-0 {color:#35c535;} 
+	.meizhuangtabs .tab-0 .tab-ico{background:url(//img.onxiao.com/img/Sprites.png) -494px -1375px  no-repeat;} 
+	.meizhuangtabs .active.tab-0 .tab-ico {background-position:-494px -1473px;}
+	.meizhuangtabs .tab-1 .tab-ico{background:url(//img.onxiao.com/img/Sprites.png) -494px -1415px  no-repeat;} 
+	.meizhuangtabs .active.tab-1 .tab-ico {background-position:-494px -1513px;}
+	.meizhuangtabs .tab-2 .tab-ico{background:url(//img.onxiao.com/img/Sprites.png) -494px -1553px  no-repeat;} 
+	.meizhuangtabs .active.tab-2 .tab-ico {background-position:-494px -1588px;color:#779C2E;}
+	
+</style>
+<div class="meizhuang_title">
+    <div class="meizhuang_name grid-15 tablet-grid-15 grid-parent"></div>
+	<div class="meizhuang_more grid-85 tablet-grid-85">
+		<div class="title_absolute">
+    		<span th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}">
+                <span class="desc_tab" th:classappend="${tabStats.index==0?'tab'+tabStats.index+' active':'tab'+tabStats.index}">
+                <span  th:utext="*{longDescription}"/>
+    			</span>
+    		</span>
+		</div>
+	</div>
+</div>
+<div class="meizhuang-floor grid-100 tablet-grid-100">
+	<nav class="grid-15 tablet-grid-15 meizhuangtabs">
+		<a th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}"
+			th:attr="key='tab'+${tabStats.index}" th:class="${'tab tab-'+tabStats.index}" th:classappend="${tabStats.index==0?'active':''}">
+			<style th:text="${flrTab.subCategory.getCategoryAttributeByName('icon-class')}" />
+			<span class="tab-ico" th:text="*{name}" />
+		</a>
+	</nav>
+	<div class="flr-content tab-contents grid-85 tablet-grid-85 grid-parent">
+		<div class="meizhuang_container">
+        	<div th:each="flrTab,tabStats:${floor.childCategoryXrefs}" class="clearfix tab-content" th:classappend="${tabStats.index eq 0 ? 'active tab' + tabStats.index:'tab' + tabStats.index}">
+        		<div th:substituteby="${#strings.isEmpty(flrTab.subCategory.displayTemplate)?'/v2/catalog/partials/floor/default_floor':flrTab.subCategory.displayTemplate}"></div>
+        	</div>
+		</div>
+	</div>
+</div>

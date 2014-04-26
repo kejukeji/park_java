@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+
+	<named-query name="BC_READ_INVENTORY_FOR_QUANTITY">
+		<query>
+			SELECT inventory FROM org.broadleafcommerce.inventory.domain.Inventory inventory
+			WHERE inventory.quantityAvailable  &lt; :quantity and inventory.fulfillmentLocation.id =:fulfillmentLocationId
+		</query>
+	</named-query>
+	<named-query name="BC_READ_SKU_INVENTORY_FOR_QUANTITY_AVAILABLE">
+		<query>
+			SELECT count(*) from  org.broadleafcommerce.inventory.domain.FulfillmentLocation  fulfillmentLocation
+			where fulfillmentLocation.id not in (select inventory.fulfillmentLocation.id from org.broadleafcommerce.inventory.domain.Inventory inventory   WHERE inventory.sku.id = :skuId AND inventory.quantityAvailable  &gt; :quantity)
+		</query>
+	</named-query>
+	<named-query name="BC_READ_SKU_INVENTORY_FOR_LOCATION">
+		<query>
+			SELECT inventory FROM org.broadleafcommerce.inventory.domain.Inventory inventory
+			WHERE inventory.sku.id = :skuId AND inventory.fulfillmentLocation.id = :fulfillmentLocationId
+		</query>
+	</named-query>
+	<named-query name="BC_READ_SKU_INVENTORY_FOR_DEFAULT_LOCATION">
+		<query>
+			SELECT inventory FROM org.broadleafcommerce.inventory.domain.Inventory inventory
+			WHERE inventory.fulfillmentLocation.shippingLocation = true AND inventory.fulfillmentLocation.defaultLocation = true AND inventory.sku.id = :skuId
+		</query>
+	</named-query>
+
+	<named-query name="BC_READ_INVENTORY_FOR_FULFILLMENT_LOCATION">
+		<query>
+			SELECT inventory
+			FROM org.broadleafcommerce.inventory.domain.Inventory inventory
+			WHERE inventory.fulfillmentLocation.id = :fulfillmentLocationId order by inventory.quantityAvailable asc
+		</query>
+	</named-query>
+
+	<named-query name="BC_READ_INVENTORIES_FOR_PRODUCT">
+		<query>
+			SELECT i
+			FROM org.broadleafcommerce.inventory.domain.Inventory i
+			WHERE i.fulfillmentLocation in (:locations) and
+			 (i.sku.product=:product OR i.sku.defaultProduct=:product)
+		</query>
+	</named-query>
+
+	<named-query name="BC_READ_INVENTORIES_FOR_PRODUCTS">
+		<query>
+			SELECT i
+			FROM org.broadleafcommerce.inventory.domain.Inventory i
+			WHERE i.fulfillmentLocation in (:locations) and
+			 (i.sku.product in (:products) OR i.sku.defaultProduct in(:products))
+		</query>
+	</named-query>
+
+	<named-query name="BC_READ_INVENTORIES_FOR_SKU">
+		<query>
+			SELECT inventory
+			FROM org.broadleafcommerce.inventory.domain.Inventory inventory
+			WHERE inventory.sku.id = :skuId order by inventory.quantityAvailable asc
+		</query>
+	</named-query>
+
+	<named-query name="SSB_READ_INVS_BY_PRICE_CURRENCY">
+		<query>
+			SELECT i
+			FROM org.broadleafcommerce.inventory.domain.Inventory i
+			WHERE ((TRUNCATE((i.sku.retailPrice + :price), 0) = (i.sku.retailPrice + :price) and i.sku.salePrice is NULL) 
+					or TRUNCATE((i.sku.salePrice + :price), 0) = (i.sku.salePrice + :price))
+				and i.sku.currency=:currency and i.fulfillmentLocation in (:locations)
+			order by  i.sku.retailPrice
+		</query>
+	</named-query>
+
+	<named-query name="BC_READ_SKUS_NOT_AT_FULFILLMENT_LOCATION">
+		<query>
+			SELECT sku
+			FROM org.broadleafcommerce.core.catalog.domain.Sku sku
+			WHERE sku.id NOT IN
+				(
+					SELECT inventory.sku.id
+					FROM org.broadleafcommerce.inventory.domain.Inventory inventory
+					WHERE inventory.fulfillmentLocation.id = :fulfillmentLocationId
+				)
+		</query>
+	</named-query>
+
+	<named-query name="BC_COUNT_PRODUCT_IN_INVENTORY_FOR_LOC">
+		<query>
+			select count(i) FROM org.broadleafcommerce.inventory.domain.Inventory i
+			WHERE i.fulfillmentLocation = :location and
+			 (i.sku.product=:product OR i.sku.defaultProduct=:product)
+		</query>
+	</named-query>
+
+	<named-query name="BC_LIST_PRODUCT_SKUS_FOR_LOC">
+		<query>
+			select i.sku FROM org.broadleafcommerce.inventory.domain.Inventory i
+			WHERE i.fulfillmentLocation = :location and
+			 (i.sku.product=:product OR i.sku.defaultProduct=:product)
+		</query>
+	</named-query>
+
+	<named-query name="BC_FILTER_PRODUCTS_FOR_LOC">
+		<query>
+			select distinct i.sku.defaultProduct FROM org.broadleafcommerce.inventory.domain.Inventory i
+			WHERE i.fulfillmentLocation in (:locations) and i.sku.defaultProduct in (:products)
+		</query>
+	</named-query>
+	<named-query name="BC_COUNT_SKU_FOR_LOCATION">
+		<query>
+			SELECT count(inventory) FROM org.broadleafcommerce.inventory.domain.Inventory inventory
+			WHERE inventory.sku.id = :skuId AND inventory.fulfillmentLocation.id = :fulfillmentLocationId
+		</query>
+	</named-query>
+	<named-query name="BC_FILTER_SKUS_FOR_LOC">
+		<query>
+			select distinct i.sku FROM org.broadleafcommerce.inventory.domain.Inventory i
+			WHERE i.fulfillmentLocation = :location and i.sku in (:skus)
+		</query>
+	</named-query>
+</entity-mappings>

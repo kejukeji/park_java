@@ -1,0 +1,134 @@
+<style>
+.marketing-main .grid-container{max-width:940px;}
+.marketing-main .marketing-top{position:relative;background: url(//img.onxiao.com/img/activities/Game_introduce.png) center no-repeat; width:100%;height:450px;z-index:1;overflow:hidden;}
+.marketing-main .marketing-nav{position:absolute;width:1000px;height:60px;line-height:60px;margin:0 auto;bottom:44px;}
+.marketing-main .marketing-content{background-color:#dd900a;display:none;}
+.marketing-main .marketing-title{text-align:center;margin-bottom:40px;padding-top: 40px;}
+.marketing-main .marketing-sub-title{font-size:3em;color:white;display:inline-block;margin-left:35px;margin-right:35px;}
+.marketing-main .marketing-sub-title-en{font-size:2em;color:white;}
+.marketing-main .marketing-line{width:125px;height:20px;background:url(//img.onxiao.com/img/Sprites.png) -240px -2070px no-repeat;display:inline-block;}
+.marketing-main .marketing-introduce{font-size:2em;color:#9b6200;line-height:1.875em;margin-top:30px;margin-bottom:30px;}
+.marketing-main .marketing-nav li{float:left;margin-left:70px;color:#9d6400;font-size:2em;}
+.marketing-main .marketing-copy{font-size:2em;color:white;}
+.marketing-main .marketing-copy tr{line-height:1.875em;}
+.marketing-main .marketing-footer{text-align:center;background-color:#dd900a;padding-bottom:50px;}
+.marketing-main .award-cup{margin-bottom:10px;}
+.marketing-main .maketing-team{height:180px;overflow:hidden;margin-top:20px;border:10px solid white;position:relative;text-align:center;}
+.marketing-main .marketing-msk{position:absolute;top:0;left:0;width:100%;height:100%;background-color:#dd900a;opacity:0.5;display:none;}
+.marketing-main .team-name{position:absolute;color:white;font-size:1em;bottom:25px;left:0;max-height:1em;width:100%;display:none;}
+.marketing-main .maketing-team:hover .marketing-msk{display:block;}
+.marketing-main .maketing-team:hover .team-name{display:block;}
+@media screen and (min-width: 1367px){
+	.marketing-main .marketing-nav{left:30%;}
+}
+@media screen and (min-width: 1025px) and (max-width: 1366px){
+	.marketing-main .marketing-nav{left:22%;}
+}
+@media screen and (max-width: 1024px){
+	.marketing-main .marketing-nav{left:12%;}
+}
+.marketing-main .marketing-top li a{color:#a87a3a;}
+.marketing-main .marketing-top li a:hover{color:#a87a3a;}
+.marketing-main .introducetitle-main{display:block;}
+</style>
+<div class="marketing-main">
+	<div class="marketing-top">
+        <ul class="marketing-nav grid-container">
+			<li><a class="introducetitle">比赛介绍</a></li><li><a class="musttitle">比赛须知</a></li><li><a class="competitiontitle">实战营销</a></li><li><a class="gifttitle">比赛奖励</a></li>
+		</ul>
+	</div>
+	<div class="marketing-content introducetitle-main">
+        <div class="grid-container">
+    		<div class="marketing-title">
+    			<div class="marketing-line"></div>
+    			<div class="marketing-sub-title">比赛介绍</div>
+    			<div class="marketing-line"></div>
+				<div class="marketing-sub-title-en">Game Introduce</div>
+    		</div>
+            <div class="marketing-introduce">
+    			近年来，市场竞争依旧越来越激烈，企业的规模也随着发展在不断扩大，营销在企业战略中也发挥着越来越重要的作用。与此同时，企业的营销模式、营销组织形式和管理方式也在随之同步演进。大多数的企业都需要一个具有扎实营销理论，能为企业制定合适的营销战略的高素质人才。然而，在现今的教育体制下，学校的教育跟实践出现脱节问题，造成大学生普遍缺乏实践经验和工作经验，无法将学到的营销知识运用到实际生活中。很多学生都表现出了对提高自我实践能力的热情，想用自己的行动证明自己的能力。社会也是越来越注重实战经验和绩效考核。所以努力完成学业，刚刚走出大学校门步入社会的有志青年们将面临着“毕业即失业”的严峻社会压力，在这一刻，我们鼓励有志向的青年从力所能及的事情做起，坚持梦想，脚踏实地，稳扎稳打，用自己的智慧和汗水浇灌我们的花期，创造出一片属于我们自己的天地。
+    		</div>
+		</div>
+	</div>
+	<div class="marketing-content musttitle-main">
+        <div class="grid-container">
+    		<div class="marketing-title">
+    			<div class="marketing-line"></div>
+    			<div class="marketing-sub-title">比赛须知</div>
+    			<div class="marketing-line"></div>
+				<div class="marketing-sub-title-en">Game Must</div>
+    		</div>
+            <div class="marketing-introduce">
+				<img src="//img.onxiao.com/img/activities/Game_Must.png"/>
+    		</div>
+		</div>
+	</div>
+	<div class="marketing-content competitiontitle-main">
+        <div class="grid-container">
+    		<div class="marketing-title">
+    			<div class="marketing-line"></div>
+    			<div class="marketing-sub-title">入围团队</div>
+    			<div class="marketing-line"></div>
+				<div class="marketing-sub-title-en">Finalist Team</div>
+    		</div>
+            <div class="marketing-introduce">
+				<ul class="grid-parent clearfix">
+            	   	<li class="grid-33 tablet-grid-33"
+            	   		 th:each="category: ${category.childCategoryXrefs}" th:object="${category}">
+        				<div class="maketing-team">
+        					<a th:if="*{subCategory.url ne null}" th:href="*{subCategory.url}" target="_blank">
+        						<img th:if="*{subCategory.categoryMedia['alt6']}" th:alt="*{subCategory.name}" th:src="@{*{subCategory.categoryMedia['alt6'].url} + '?browse&amp;resize-width-amount=263&amp;resize-height-amount=175'}"  width="100%"/>
+    							<div class="marketing-msk">
+    							</div>
+    							<div class="team-name" ><span th:text="*{subCategory.name}"/></div>
+							</a>
+        				</div>
+            	   	</li>
+            	</ul>
+    		</div>
+		</div>
+	</div>
+	<div class="marketing-content gifttitle-main">
+        <div class="grid-container">
+    		<div class="marketing-title">
+                <div class="award-cup"><img src="//img.onxiao.com/img/activities/award_cup.png"/></div>
+    			<div class="marketing-line"></div>
+    			<div class="marketing-sub-title">比赛奖励</div>
+    			<div class="marketing-line"></div>
+				<div class="marketing-sub-title-en">Competition Awards</div>
+    		</div>
+            <div class="marketing-introduce">
+               <img style="margin-top:20px;margin-bottom:100px;" src="//img.onxiao.com/img/activities/Competition_Awards.png"/>
+    		</div>
+		</div>
+	</div>
+	
+	<div class="marketing-footer">
+		<div class="marketing-title">
+			<div class="marketing-line"></div>
+			<div class="marketing-sub-title">主办/承办单位</div>
+			<div class="marketing-line"></div>
+		</div>
+		<table class="marketing-copy grid-container">
+            <tr><td>浙江理工大学社团联合会</td></tr>
+    		<tr><td>浙江理工大学市场营销协会</td></tr>
+    		<tr><td>杭州电子科技大学市场营销协会</td></tr>
+    		<tr><td>ONXIAO.COM在校网</td></tr>
+		</table>
+	</div>
+</div>
+<script type="text/javascript">
+	/*<![CDATA[*/
+	lastScripts[lastScripts.length]=function(){
+	$(".marketing-nav li a").click(function() {
+		$(".marketing-nav li a").removeClass("active");
+		var tabContentClass = $(this).attr("class") + "-main";
+		$(".marketing-content").attr("style", "display:none;");
+		$("." + tabContentClass).attr("style", "display:block;");
+		$(this).addClass("active");
+		return false;
+	});
+	}
+	/*]]>*/
+</script>
+

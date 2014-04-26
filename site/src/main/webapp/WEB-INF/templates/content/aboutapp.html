@@ -1,0 +1,63 @@
+<style>
+	.android-show-box{
+		float:left;
+	}
+	.andriod-title{
+		font-size:1.5em;
+		margin-bottom:30px;
+		display:block;
+	}
+	.pnumber{
+	float:left;
+	}
+	a.download{
+		background:#ff6600;
+		color:#fff;
+		width:150px;
+		height:30px;
+		display:block;
+		text-align:center;
+		word-spacing:2em;
+		margin-top:30px;
+		margin-bottom:50px;
+		line-height:30px;
+		font-size:14px;
+	}
+	input[type="text"].pnumber{
+		width:300px;
+		height:30px;
+	}
+	input[type="submit"].app_download{
+		height:35px;
+		background:#f60;
+		border:0px;
+		width:100px;
+		margin-top:20px;
+		float:left;
+		color:#fff;
+	}
+	.response{
+		float:left;
+		color:red;
+		margin-top:30px;
+		margin-left:10px;
+	}
+</style>
+<div class="grid-60 tablet-grid-60 push-15 tablet-push-15">
+    <div class="android-show-box" style="width:45%; border-right:1px dashed #ccc;margin-right:30px;height:350px;">
+            <span class="andriod-title">直接下载</span>	
+            <a class="download" th:href="@{/dl/onxiao.apk}">下载到电脑</a>
+            <span class="andriod-title">发送短信</span>
+            <blc:form th:action="@{/d/app}" method="post">
+                <input type="text" class="pnumber" name="pnumber"  placeholder="输入手机号，免费发送下载地址" />	
+                <input type="submit" value="发送" class="app_download"/>
+                <div class="response"></div>
+            </blc:form>
+    </div>
+	<div class="android-show-box" style="width:30%" >
+		<span class="andriod-title">手机扫描下载</span>
+		<div>
+		<img alt="app下载二维码" src="/img/erwei.png"/>
+	</div>
+	</div>
+</div>

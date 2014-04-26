@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
+	<named-query name="READ_CARBARN_BY_CARBARN_NAME">
+		<query>
+        	FROM com.ssbusy.core.carbarn.domain.Carbarn cb where cb.name like :carbarnName
+       </query>
+	</named-query>
+	<named-query name="READ_CARBARN_BY_CARBARN_ADDRESS">
+		<query>
+        	FROM com.ssbusy.core.carbarn.domain.Carbarn cb where cb.address like :carbarnAddress
+       </query>
+	</named-query>
+	<named-query name="READ_CARBARN_BY_LATITUDE_AND_LONGITUDE">
+		<query>
+        	FROM com.ssbusy.core.carbarn.domain.Carbarn cb where cb.id in(select ce.carbarn.id from com.ssbusy.core.carbarn.domain.CarEntrance ce where (ce.latitude between :beginLatitude and :endLatitude) and (ce.longitude between :beginLongitude and :endLongitude))
+       </query>
+	</named-query>
+</entity-mappings>

@@ -1,0 +1,142 @@
+<style >
+	#rslides1_s0,#rslides1_s1,#rslides1_s2{width:100%;}
+</style>
+<div class="group_container clearfix">
+	<div class="cat-scrumb grid-100 tablet-grid-100 mobile-grid-100">
+		<span class="left scrumb" th:with="cat=${category}" th:if="${category ne null}">
+			<span th:substituteby="v2/catalog/partials/scrumbCat" />
+		</span>
+		<span class="left scrumb" th:if="${param.q ne null}">
+			<a href="/">全部结果</a> > <span th:text="${param.q[0]}"></span>
+		</span>
+	</div>
+	<div class="group_title_pic">
+		<div class="left_fly"></div>
+		<div class="pic_tuangou"><img src="//img.onxiao.com/img/v2/tuangoutitle.png"/></div>
+		<div class="right_fly"></div>
+	</div>
+	<div class="group_feature rslidesdiv">
+		<blc:related_products relatedProductsResultVar="group_fea_product" type="'FEATURED'" categoryId="${category.id}" quantity="3" />
+		<div class="rslides">
+			<div th:each="floorProducts,floorStats:${group_fea_product}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}">
+				<div class="grid-55 feature_pic_0">
+					<a th:href="*{defaultSku.product.url}" target="_blank">
+						<img th:if="*{media['primary']}" th:alt="*{name}" th:src="@{*{media['primary'].url}}" width="100%"/>
+                    </a>
+				</div>
+				<div class="grid-45 feature_detial_0">
+					<div class="last_notice">
+						<div class="grid-5 l_notice"></div>
+						<div class="grid-85 l_detial">
+							<span class="l_text">距离团购结束：</span><span th:class="${'last_time last_time'+floorStats.index}"></span><span th:class="${'last_time_'+floorStats.index}" th:text="*{defaultSku.activeEndDate}" style="display:none;"></span>
+						</div>
+					</div>
+					<div class="tuan_name">
+						<span th:class="${'tuan_name'+floorStats.index}" th:if="*{productAttributes['tuan_name']}" th:utext="*{productAttributes['tuan_name'].value}"></span>
+						<span th:class="${'tuan_name'+floorStats.index}" th:unless="*{productAttributes['tuan_name']}" th:utext="*{name}"></span>
+					</div>
+					<div class="tuan_description">
+						<span th:if="*{productAttributes['tuan_description']}" th:utext="*{productAttributes['tuan_description'].value}"></span>
+						<span th:unless="*{productAttributes['tuan_description']}" th:utext="*{description}"></span>
+					</div>
+					<div class="price_page">
+						<!--<span class="price_sig">￥</span>
+						<span class="tuan_price" th:if="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(retailPrice)),0,'POINT')}"></span>
+						<span class="tuan_price" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}" th:text="*{#numbers.formatInteger(T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(defaultSku.retailPrice)),0,'POINT')}"></span>
+						!-->
+						<div class="tuan_all_price">
+							<span class="tuan_price" blc:price="*{defaultSku.salePrice}" th:if="*{defaultSku.onSale}"
+								th:classappend="*{defaultSku.onSale}? 'sale'"></span>
+							<span class="tuan_price" blc:price="*{defaultSku.retailPrice}"
+				  				th:classappend="*{defaultSku.onSale}?'has-sale':'sale'"></span>
+						</div>
+						<a th:href="*{defaultSku.product.url}" target="_blank"><div th:if="*{defaultSku.activeEndDate > #dates.createNow()}" class="seedetial"></div>
+						</a>
+						<div th:if="*{defaultSku.activeEndDate &lt; #dates.createNow()}" class="seedetial soledover"></div>
+					</div>
+					<!--<div class="statictis">
+						<span>已经被抢：<font th:text="*{totalSaled == 0?'-':totalSaled+'件'}"></font></span><br />
+						<span>剩余数量：<span></span>份</span>
+					</div>-->
+				</div>
+			</div>
+		</div>
+		<!--<ul class="rslides_tabs rslides1_tabs grid-100 tuan_tag">
+			<li th:each="floorProducts,floorStats:${group_fea_product}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}" th:class="${'active tuan_tag_all rslides1_s'+(floorStats.index+1)+' tuan_tag'+floorStats.index}" >
+				<a href="#" th:class="${'rslides1_s'+(floorStats.index+1)}" ><span th:if="*{productAttributes['tuan_name']}" th:utext="*{productAttributes['tuan_name'].value}"></span></a>
+			</li>
+		</ul>-->
+	</div>
+	<div class="grid-100 grid-parent flower_brig"></div>
+</div>
+<div class="grid-85 grid-parent list_group_cross">
+	<!--<blc:related_products relatedProductsResultVar="group_cross_product" type="'CROSS_SALE'" categoryId="10550" quantity="9" />-->
+	<ul id="products" class="grid-parent clearfix">
+	   	<li class="grid-33 tablet-grid-33" th:unless="${#lists.isEmpty(products)}"
+	   		 th:each="product,stats: ${products}" th:object="${product}" th:style="${'z-index:'+(products.size()-stats.index)}">
+	   		<div class="product-item">
+				<div class="product-item0">
+					<a th:href="*{defaultSku.product.url}" target="_blank" class="prod-img">
+						<img th:if="*{media['primary']}" th:alt="*{name}" th:src="@{*{media['primary'].url} + '?browse&amp;resize-width-amount=263&amp;resize-height-amount=175'}"  width="100%"/>
+					</a>
+					<div class="tuan_item_name" th:text="*{name}"></div>
+					<a th:href="*{defaultSku.product.url}" class="tuan_item_description" target="_blank">
+						<span class="" th:if="*{description ne null}" th:text="*{description}"></span>
+					</a>
+					<div class="price content" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+						<span blc:price="*{defaultSku.salePrice}" th:if="*{defaultSku.onSale}"
+							th:classappend="*{defaultSku.onSale}? 'sale'"></span>
+						<span blc:price="*{defaultSku.retailPrice}"
+				  				th:classappend="*{defaultSku.onSale}?'has-sale':'sale'"></span>
+						<a th:href="*{defaultSku.product.url}" target="_blank"><div class="seedetial"></div></a>
+					</div>
+				</div>
+				<div class="prod-more clearfix" th:with="rating=${ratingSums eq null?null:ratingSums[#strings.toString(product.id)]}">
+					<span class="prod-sold grid-33 tablet-grid-33 mobile-grid-33">销量：<font th:text="*{totalSaled == 0?'-':totalSaled+'件'}"></font></span>
+					<span class="prod-ps grid-33 tablet-grid-33 mobile-grid-33">评论：<font th:text="${rating eq null?'-':rating.numberOfReviews+'条'}"></font></span>
+					<span class="prod-star grid-33 tablet-grid-33 mobile-grid-33">星级：<font th:text="${rating eq null?'-':#numbers.formatDecimal(rating.averageRating,1,1)}"></font></span>
+				</div>
+			</div>
+	   	</li>
+	</ul>
+</div>
+<div class="grid-15 tuan_ads grid-parent">
+	
+
+</div>
+<div class="pager" th:unless="${#lists.isEmpty(products)}" th:with="start=${result.page-2 gt 1?result.page-2:1},end=${result.page+3 gt result.totalPages?result.totalPages:result.page+3}">
+	<a blc:paginationpagelink="${result.page-1}" th:if="${result.page gt 1}" class="near-page">上一页</a>
+	<a blc:paginationpagelink="${1}" th:if="${start gt 2}">1</a>
+	<span th:if="${start gt 1}">...</span>
+	<a th:each="num: ${#numbers.sequence(start, end)}" blc:paginationpagelink="${num}" th:text="${num}" th:class="${result.page == num}? 'active'"></a>
+	<span th:if="${end lt result.totalPages}">...</span>
+	<a blc:paginationpagelink="${result.page+1}" th:if="${result.page lt result.totalPages}" class="near-page">下一页</a>
+</div>
+<script >
+/*<![CDATA[*/
+lastScripts[lastScripts.length]=function(){
+	$('.rslides').responsiveSlides({
+		 prevText: '<span class="tuan_pre"></span>', nextText: '<span class="tuan_next"></span>',pager: true,
+		random: false, pause:true, nav: true
+	});
+	$(page());
+	function page(){
+		$('.rslides_tabs').addClass('grid-100').addClass('tuan_tag');
+		$('.rslides_tabs li.rslides1_s1').addClass('tuan_tag_all').addClass('tuan_tag0');
+		$('.rslides_tabs li.rslides1_s2').addClass('tuan_tag_all').addClass('tuan_tag1');
+		$('.rslides_tabs li.rslides1_s3').addClass('tuan_tag_all').addClass('tuan_tag2');
+		$('.rslides_tabs a.rslides1_s1').text($('.tuan_name .tuan_name0').text());
+		$('.rslides_tabs a.rslides1_s2').text($('.tuan_name .tuan_name1').text());
+		$('.rslides_tabs a.rslides1_s3').text($('.tuan_name .tuan_name2').text());
+	}
+	$('a.rslides1_s1').hover(function(){$('a.rslides1_s1').trigger("click");},function(){});
+	$('a.rslides1_s2').hover(function(){$('a.rslides1_s2').trigger("click");},function(){});
+	$('a.rslides1_s3').hover(function(){$('a.rslides1_s3').trigger("click");},function(){});
+	$(".last_time0").countdown($('.last_time_0').text());
+	$(".last_time1").countdown($('.last_time_1').text());
+	$(".last_time2").countdown($('.last_time_2').text());
+}
+/*]]>*/
+</script>
+	
+

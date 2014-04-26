@@ -1,0 +1,43 @@
+<div class="history tablet-grid-100 grid-100 grid-parent">
+	<div class="product tablet-grid-100 grid-100 grid-parent" style="border-bottom:dashed 1px #ccc;margin-top:10px;"> 
+		<div class="tablet-grid-30 grid-30 grid-parent">
+			<a herf="#"> 
+				<img th:if="*{sku.product.media['primary']}" th:alt="*{sku.product.name}" th:src="@{*{sku.product.media['primary'].url} + '?thumbnail&amp;resize-width-amount=122&amp;resize-height-amount=122'}"  width="100%"/>
+			</a>
+		</div>
+		<div class="tablet-grid-70 grid-70 detail grid-parent" style="padding-left:10px;">
+			<div class="p-name">
+				<a th:href="@{*{sku.product.url}}" target="_blank">
+					<span th:text="*{sku.product.name}"></span>
+					<br th:if="*{sku.description}" />
+				</a>
+			</div>
+			<div style="float:left;">
+			<div class="font-color-orange"><strong>
+				<div class="price content"
+		th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+				<span blc:price="*{sku.salePrice}"
+					th:if="*{sku.onSale}"
+					th:classappend="*{sku.onSale}? 'sale'"></span> <span
+					blc:price="*{sku.retailPrice}"
+					th:classappend="*{sku.onSale}? 'has-sale' : 'sale'"></span>
+					</div>
+			 </strong>
+			</div>
+			<div class="p-saled">
+				<span class="sold-num">销量：<big th:text="*{sku.product.totalSaled == 0?'-':sku.product.totalSaled}"></big></span>
+			</div>
+			</div>
+			<div class="" >
+				<span href="#">
+					<blc:form method="GET" th:action="@{/cart/add-cou}">
+						<input type="hidden" name="quantity" value="1" />
+						<input type="hidden" name="skuId" id="skuId" th:value="*{sku.id}" />
+						<input type="hidden" name="locationId" id="locationId" th:value="*{fulfillmentLocation.id}" />
+						<input type="submit" class="cart-png"  value=" " />
+					</blc:form>
+				</span>
+			</div>
+		</div>  
+	</div>
+</div>

@@ -1,0 +1,311 @@
+.register_box{
+	text-align:center;
+}
+
+.register-container img{
+	width:100%;
+}
+.register-line{
+	float:left;
+	border-left:1px solid #e3e3e3;
+	height:410px;
+	display:inline-block;
+	width:1px;
+}
+.register-form{
+	margin-top:60px;
+	text-align:left;
+	position:relative;
+	width:510px;
+}
+.login-href{
+	text-align:bottom;
+	float:right;
+	display:inline-block;
+	position:absolute;
+	right:3px;
+	top:15px;
+}
+.title-line{
+	height:5px;
+}
+.login-div .title-line{
+	background: url(//img.onxiao.com/img/Sprites.png)  -16px -9px;
+}
+.tang-div .title-line{
+	background: url(//img.onxiao.com/img/Sprites.png)  -16px -24px;
+}
+.sun-div .title-line{
+	background: url(//img.onxiao.com/img/Sprites.png)  -16px -39px;
+}
+.zhu-div .title-line{
+	background: url(//img.onxiao.com/img/Sprites.png)  -16px -54px;
+}
+.sha-div .title-line{
+	background: url(//img.onxiao.com/img/Sprites.png)  -16px -69px;
+}
+.zixia-div .title-line{
+	background: url(//img.onxiao.com/img/Sprites.png)  -16px -84px;
+}
+ .title{
+	margin-left:25px;
+}
+.login-div .title{
+	color:#e96e6e;
+}
+.tang-div .title{
+	color:#bc6566;
+}
+.sun-div .title{
+	color:#b49b82;
+}
+.zhu-div .title{
+	color:#e67f42;
+}
+.sha-div .title{
+	color:#59b567;
+}
+.zixia-div .title{
+	color:#b87aae;
+}
+.register-text{
+	font-size:2em;
+}
+.register-en{
+	font-size:1.2em;
+}
+.register-table{
+	margin-top:30px;
+	margin-left:25px;
+	font-family: "Microsoft YaHei";
+}
+.register-info{
+	font-size:1.3em;
+}
+.register-table table tr{
+	height:55px;
+}
+.inbox-v2{
+	height:40px;
+	line-height:40px;
+   	border-radius: 3px;
+   	color: gray;
+   	border: 1px solid #ccc;
+   	padding: 0 1em;
+}
+.register-button{
+	 border-radius: 5px;
+	 font-size: 3em;
+        font-weight: bold;
+        height: 2.55em;
+        width: 5.55em;
+	 font-family: "Microsoft YaHei";
+	 font-weight: bold;
+	 color:white;
+	 border:none;
+}
+.tang_pic,.sun_pic,.zhu_pic,.sha_pic,.zixia_pic{
+	display:none;
+}
+.left_error_pic{
+	background:url(//img.onxiao.com/img/reg-error.png) right center no-repeat;
+	display: none;
+	line-height: 380px;
+	height: 340px;
+	text-align: center;
+	padding-left: 180px;
+	color: #fff;
+}
+.login-div .left_error_pic{
+	background:url(//img.onxiao.com/img/login-error.png) right center no-repeat;
+}
+.login-div .register-button{
+	 background-color:#e96e6e;
+	 border-bottom:5px solid #d36464;
+}
+.tang-div .register-button{
+	 background-color:#bc6566;
+	 border-bottom:5px solid #9f5758;
+}
+.sun-div .register-button{
+	 background-color:#b49b82;
+	 border-bottom:5px solid #9f8770;
+}
+.zhu-div .register-button{
+	 background-color:#e67f42;
+	 border-bottom:5px solid #cc7947;
+}
+.sha-div .register-button{
+	 background-color:#59b567;
+	 border-bottom:5px solid #4d9658;
+}
+.zixia-div .register-button{
+	 background-color:#b87aae;
+	 border-bottom:5px solid #9a6191;
+}
+.login-div .register-button:hover{
+	background-color:#d36363;
+	border-bottom:5px solid #b75555;
+}
+
+.tang-div .register-button:hover{
+	background-color:#a85b5c;
+	border-bottom:5px solid #924c4d;
+}
+.sun-div .register-button:hover{
+	background-color:#9d8771;
+	border-bottom:5px solid #8b7865;
+}
+.zhu-div .register-button:hover{
+	background-color:#e4722e;
+	border-bottom:5px solid #b26e46;
+}
+.sha-div .register-button:hover{
+	background-color:#37a047;
+	border-bottom:5px solid #398645;
+}
+.zixia-div .register-button:hover{
+	background-color:#a4679a;
+	border-bottom:5px solid #8a5681;
+}
+.register-protocol{
+	padding-left:10px;
+	font-size:1em;
+	cursor:pointer;
+}
+.register-pro span{
+	color:red;
+	font-size:12px;
+}
+.checkout-protocol{
+	display:inline-block;
+	height:17px;
+	width:21px;
+	content:"";
+}
+.tang-div .checkout-protocol{
+	background: url(//img.onxiao.com/img/Sprites.png) -15px -104px;
+}
+.sun-div .checkout-protocol{
+	background: url(//img.onxiao.com/img/Sprites.png) -47px -104px;
+}
+.zhu-div .checkout-protocol{
+	background: url(//img.onxiao.com/img/Sprites.png) -75px -104px;
+}
+.sha-div .checkout-protocol{
+	background: url(//img.onxiao.com/img/Sprites.png) -103px -104px;
+}
+.zixia-div .checkout-protocol{
+	background: url(//img.onxiao.com/img/Sprites.png) -131px -104px;
+}
+
+.tang-div .checkedprotocol{
+	background:url(//img.onxiao.com/img/Sprites.png) -15px -128px;
+}
+.sun-div .checkedprotocol{
+	background:url(//img.onxiao.com/img/Sprites.png) -47px -128px;
+}
+.zhu-div .checkedprotocol{
+	background:url(//img.onxiao.com/img/Sprites.png) -75px -128px;
+}
+.sha-div .checkedprotocol{
+	background:url(//img.onxiao.com/img/Sprites.png) -103px -128px;
+}
+.zixia-div .checkedprotocol{
+	background:url(//img.onxiao.com/img/Sprites.png) -131px -128px;
+}
+
+.switch-style{
+	margin-top:20px;
+	background: url(//img.onxiao.com/img/Sprites.png) -19px -225px ;
+	height:41px;
+	width:100%;
+	line-height:41px;
+}
+.switch-style .title{
+	display:inline-block;
+	font-family: "Microsoft YaHei";
+}
+.login-div .switch-style .title{
+	color:#e96e6e;
+}
+.tang-div .switch-style .title{
+	color:#bc6566;
+}
+.sun-div .switch-style .title{
+	color:#b49b82;
+}
+.zhu-div .switch-style .title{
+	color:#e67f42;
+}
+.sha-div .switch-style .title{
+	color:#59b567;
+}
+.zixia-div .switch-style .title{
+	color:#b87aae;
+}
+.switch-style span.zh{
+	font-size:1.1em;
+}
+.switch-style span.en{
+	font-size:0.9em;
+}
+.switch-style .title div{
+	display:inline-block;
+	margin-top:5px;
+	margin-bottom:5px;
+	width:28px;
+	height:30px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+.tang{
+	background: url(//img.onxiao.com/img/Sprites.png) -14px -157px  ;
+}
+.sun{
+	background: url(//img.onxiao.com/img/Sprites.png) -43px -157px  ;
+}
+.zhu{
+	background: url(//img.onxiao.com/img/Sprites.png) -71px -157px ;
+}
+.sha{
+	background: url(//img.onxiao.com/img/Sprites.png) -99px -157px ;
+}
+.zixia{
+	background: url(//img.onxiao.com/img/Sprites.png) -127px -157px ;
+}
+
+.tang:hover,.tang.activity{
+	background: url(//img.onxiao.com/img/Sprites.png) -14px -187px  ;
+}
+.sun:hover,.sun.activity{
+	background: url(//img.onxiao.com/img/Sprites.png) -43px -187px  ;
+}
+.zhu:hover,.zhu.activity{
+	background: url(//img.onxiao.com/img/Sprites.png) -71px -187px ;
+}
+.sha:hover,.sha.activity{
+	background: url(//img.onxiao.com/img/Sprites.png) -99px -187px ;
+}
+.zixia:hover,.zixia.activity{
+	background: url(//img.onxiao.com/img/Sprites.png) -127px -187px ;
+}
+.qq_v2,.weibo_v2,.renren_v2{
+    border: 0 none;
+    display: inline-block;
+    float: left;
+    height: 35px;
+    width: 35px;
+}
+.qq_v2{
+	width:28px !important;
+	background: url(//img.onxiao.com/img/Sprites.png) -15px -363px ;
+}
+.weibo_v2{
+	width：45px;
+	background: url(//img.onxiao.com/img/Sprites.png) -97px -363px ;
+}
+.renren_v2{
+	width: 45px;
+	background: url(//img.onxiao.com/img/Sprites.png) -47px -363px ;
+}

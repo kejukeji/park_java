@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>		 <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<blc:head pageTitle="在校网" additionalCss="/css/home.css?v=9.css"/>
+<body>
+	<!--[if lt IE 7]>
+	  <p class="chromeframe">你用的浏览器<strong>过时了</strong>，赶快更新吧。请 <a href="http://browsehappy.com/">升级您的浏览器</a> 或者 <a href="http://www.google.com/chromeframe/?redirect=true">使用谷歌浏览器</a>来提高你的浏览体验。</p>
+	<![endif]-->
+	<header th:substituteby="layout/partials/header" />
+	<div th:if="${bonusOfferCode}" th:remove="tag">
+		<header th:substituteby="catalog/partials/bonusOfferCode" />
+		<script th:inline="javascript">
+			lastScripts[lastScripts.length] = function(){showBonus([[${bonusOfferCode.offerCode}]], [[${bonusOfferCode.offer.marketingMessage}]], [[${customer.anonymous}]]);};
+		</script>
+	</div>
+
+	<div class="main-container">
+<!-- <div th:if="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -1}" style="text-align: center; font-size: 3em; line-height: 2em; color: #ff6e17;">
+  <span scrollamount="10">由于双十一伙伴们太给力，货源不足，今天稍作休整，明天（11-14）继续为伙伴们服务。</span>
+</div> -->
+<!-- 
+<div th:if="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -2}" style="text-align: center; font-size: 3em; line-height: 2em; color: #ff6e17;">
+-->
+<div th:if="${customer.region ne null and customer.region.fulfillmentLocations[0].id eq -2}" style="text-align: center;font-size: 3em; line-height: 2em; color: #ff6e17;">
+    
+    	<span scrollamount="10">亲们，双11过后还单身么？下订单满15元卡贴妹妹求带走，满30元充值券姐姐求抱走！赶紧行动吧~~~hoho</span>
+  
+</div>
+		<div class="banner clearfix grid-container">
+			<ul>
+				<li><a class="hot-items active" href="#">热门零食</a></li>
+				<li><a class="brand-nav" href="#">品牌浏览</a></li>
+				<li><a class="floor-entry" href="#">通往灵山</a></li>
+				<li><a class="pictorial" href="#">吃货画报</a></li>
+				<li><a class="shares" href="#">我爱分享</a></li>
+			</ul>
+			
+			<div class="mainmenu hot-items-main clearfix">
+				<blc:categories resultVar="navCategories" parentCategory="Hot-sale" />
+				<article th:each="category : ${navCategories}" th:object="${category}" class="grid-container grid-100 tablet-grid-100 hot-div grid-parent">
+				   <table style="width:100%;height:100%;text-align:center">
+						<tr>
+							<td class="hot-bg">
+								<div id="page-left" class="hot-more clearfix">
+									<span class="hot-middle clearfix">&lt;&lt;</span>
+								</div>
+							</td>
+							<input type="hidden" id="fea-cat-id" th:value="*{id}"/>
+							<td style="width:90%;height:100%">
+								<div class="hot-center">
+									<div id="page-data" th:with="catId=*{id}" th:include="catalog/partials/hotProductItem"/>
+								</div>
+							</td>
+							<td class="hot-bg">
+								<div id="page-right" class="hot-more clearfix"><span class="hot-middle clearfix">>></span></div>
+							</td>
+						</tr>
+				   </table>
+				</article>
+			</div>
+			<div class="brand-nav-main clearfix "
+				style="display: none">
+				<div class="title grid-25 tablet-grid-25">
+					<span>推荐品牌</span>
+					<span>猜你喜欢</span>
+				</div>
+				
+				<div class="content grid-70 tablet-grid-70 grid-parent">
+					<div><blc:content contentType="首页品牌" maxResults="8" />
+						 <div class="grid-25 tablet-grid-25 grid-parent brand-item" th:each="contentItem: ${contentList}" th:if="${contentItem[imageUrl] ne null}">
+							<a th:if="${contentItem['targetUrl'] ne null}" th:href="@{${contentItem['targetUrl']}}">
+	   							<img th:src="@{${contentItem['imageUrl']}}"/>
+	   						</a>
+							<img th:if="${contentItem['targetUrl'] eq null &amp;&amp; contentItem['imageUrl'] ne null}" th:src="@{${contentItem['imageUrl']}}"/>
+						 </div>
+					</div>
+				</div>
+			</div>
+			<blc:categories resultVar="navCategories" parentCategory="Floor" />
+			<div class="floor-entry-main clearfix" style="display: none">
+				<div th:each="category,stats : ${navCategories}" th:object="${category}" class="grid-33 tablet-grid-33">
+					<a th:if="*{url}" th:href="@{*{url}}">
+					<div class="window">
+						<span class="title"><i class="floor-i" th:text="${stats.index}+1">1</i><i class="floor-i"><big class="floor-f">F</big></i> <span th:text="*{name}"></span></span>
+						<span class="description" th:if="${category.longDescription}" th:utext="${#strings.replace(#strings.replace(#strings.replace(category.longDescription,'&lt;p&gt;',''),'&lt;/p&gt;',''),'&lt;br /&gt;','')}"></span>
+					</div>
+					</a>
+				</div>
+			</div>
+			<div class="pictorial-main clearfix"
+				style="display: none">
+				<div class ="mainmenu grid-25 tablet-grid-25 pictorial-main-book">
+					<img src="img/ssb_huabao.gif"/>
+				</div>
+				<div class ="mainmenu grid-70 tablet-grid-70 pictorial-main-content">
+					<span class="head">亲，还没订阅吃货画报吧？<br/><br/></span>
+					<span class="word">吃货画报，是在校网为吃货们打造的推荐画报，
+						里面整合了各种吃货关于吃的理想， 还有我们推荐的好吃喝哦，赶快来订阅吧。<br/> 如果还没有
+						<span class="important">现在赶快加入</span>
+						提交第一笔订单，我们会免费发送第一期的画报到你的邮箱哦，还有小编送出的试吃零食哦。
+					</span><br/><br/>
+					<div>
+						<input type="text" class="input" />
+						<div class="button">GO</div>
+					</div>
+				</div>
+			</div>
+			<div class="shares-main clearfix" style="display: none;">
+				<a id="tx-weibo" ><div class="share-menu grid-25 shares-main-tx clearfix"></div></a>
+				<a id="qq"><div  class="share-menu grid-25 shares-main-qz clearfix"></div></a>
+				<a id="sina"><div class="share-menu grid-25 shares-main-xinlang clearfix"></div></a>
+				<a id="renren"> <div class="share-menu grid-25 shares-main-renren clearfix"></div></a>
+			</div>
+		</div>
+		
+		<!-- <div class="grid-container">
+			<div class="ongoing">
+				<span>吃货风向标：</span>
+				<ul>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div> -->
+		<div class="main grid-container">
+			<div class="all-floor clearfix" >
+				<article th:each="category,stats : ${navCategories}" th:object="${category}" th:id="'article-'+${stats.index}">
+					<header class="clearfix floor-line nowrap">
+						<h1 class="floor-head">
+						<div class="right-triangle"></div>
+						<div class="top-triangle"></div>
+						<div th:class="'floor-'+${stats.index}%5+'-right'"></div>
+						<div th:class="'floor-'+${stats.index}%5+'-top'"></div>
+						<div th:class="'floor-'+${stats.index}%5+'-middle'"><i class="floor-i" th:text="${stats.index}+1">1</i><i class="floor-i"><big class="floor-f">F</big></i> <span th:text="*{name}"></span></div>
+						</h1>
+						<div class="floor-category"><span class="long-desc" th:if="${category.longDescription}" th:utext="${#strings.replace(#strings.replace(#strings.replace(category.longDescription,'&lt;p&gt;',''),'&lt;/p&gt;',''),'&lt;br /&gt;','')}"></span><a th:if="*{url}" th:href="@{*{url}}">显示更多</a></div>
+					</header>
+					<input type="hidden" class="category-Id" th:value="${category.id}"/>
+					<blc:related_products relatedProductsResultVar="floorProducts" type="'CROSS_SALE'" categoryId="*{id}" quantity="4" />
+					<section th:with="type='CROSS_SALE',floorProducts=${floorProducts}" th:id="${type}+'-'+${stats.index}" class="clearfix array-show" th:unless="${#lists.isEmpty(floorProducts)}">  
+						<div class="tink-forward-first">
+							<a th:id="'a-forward-'+${stats.index}" class="forward"></a>
+						</div>
+						<input type="hidden" class="page" value="0"/>
+						<input type="hidden" class="innercategory" th:value="${type}"/>
+						<div class="product-data">
+							<div th:include="catalog/partials/floorProductListItem" />
+						</div>
+						<div class="tink-back">
+							<a th:id="'a-back-'+${stats.index}" class="back"></a>
+						</div>
+					</section>
+					<blc:related_products relatedProductsResultVar="floorProducts" type="'UP_SALE'" categoryId="*{id}" quantity="4" />
+					<section th:with="type='UP_SALE',floorProducts=${floorProducts}" th:id="${type}+'-'+${stats.index}" class="clearfix array-show" th:unless="${#lists.isEmpty(floorProducts)}">  
+						<div class="tink-forward-first">
+							<a th:id="'a-forward-'+${stats.index}" class="forward"></a>
+						</div>
+						<input type="hidden" class="page" value="0"/>
+						<input type="hidden" class="innercategory" th:value="${type}"/>
+						<div class="product-data">
+							<div th:include="catalog/partials/floorProductListItem" />
+						</div>
+						<div class="tink-back">
+							<a th:id="'a-back-'+${stats.index}" class="back"></a>
+						</div>
+					</section>
+					<blc:related_products relatedProductsResultVar="floorProducts" categoryId="*{id}" quantity="4" />
+					<section th:with="type='FEATURED',floorProducts=${floorProducts}" th:id="${type}+'-'+${stats.index}" class="clearfix array-show" th:unless="${#lists.isEmpty(floorProducts)}">  
+						<div class="tink-forward-first">
+							<a th:id="'a-forward-'+${stats.index}" class="forward"></a>
+						</div>
+						<input type="hidden" class="page" value="0"/>
+						<input type="hidden" class="innercategory" th:value="${type}"/>
+						<div class="product-data">
+							<div th:include="catalog/partials/floorProductListItem" />
+						</div>
+						<div class="tink-back">
+							<a th:id="'a-back-'+${stats.index}" class="back"></a>
+						</div>
+					</section>
+				</article>
+			</div>
+		 	<blc:categories resultVar="navCategories" parentCategory="Integer" />
+		 	<blc:related_products relatedProductsResultVar="scoreProducts"
+		 		categoryId="${navCategories.get(0).id}" quantity="4" />
+			<article class="non-signined" th:unless="${#lists.isEmpty(scoreProducts)}">
+				<div class="folded fold-left"></div><div class="folded fold-right"></div>
+				<header class="clearfix nowrap">
+					<div th:if="${customer.anonymous}" class="plz-signin left clearfix grid-20 tablet-grid-20">
+						<h1>咦？</h1>
+						<span>还没注册在校网吗？赶快加入我们吧，下面的试吃零食免费等你来领取哦~</span>
+					</div>
+					<div th:unless="${customer.anonymous}" class="plz-signin left clearfix grid-20 tablet-grid-20">
+						<h1>哈！</h1>
+						<span>快来赚取仙丹，免费兑换这么多试吃零食吧，先到先得哦～</span>
+					</div>
+
+					<div th:if="${customer.anonymous}" class="plz-signin right" style="background-color: #ff6e17;">
+						<a class="button account signon" th:href="@{/login}">登录</a><a class="button account signin" th:href="@{/register}">注册</a>
+						<a class="vertical-fade">&nbsp;</a>
+						<blc:form th:action="@{/signin/qq}" method="POST" class="oauth"><input class="oauth oauth_qq" type="submit" value="" /></blc:form>
+						<blc:form th:action="@{/signin/weibo}" method="POST" class="oauth"><input class="oauth oauth_wb" type="submit" value="" /></blc:form>
+						<blc:form th:action="@{/signin/renren}" method="POST" class="oauth"><input class="oauth oauth_rr" type="submit" value="" /></blc:form>
+					</div>
+					<div th:unless="${customer.anonymous}" class="right plz-signin" style="background-color: #ff6e17;">
+						<a th:href="${navCategories.get(0).url}" style="color: #fff;font-size: large;">更多仙丹换购 >></a></div>
+				</header>				<section id="csp-score" class="clearfix array-show">  					<div class="product-data" th:with="scoreProducts=${scoreProducts}">						<div th:include="catalog/partials/floorProductListItem1" />					</div>				</section>			</article>
+		</div>
+	</div>
+	<footer th:substituteby="layout/partials/footer" />
+	<script th:src="@{/js/libs/jquery.nivo.slider.pack.js}"></script>
+	<script>
+		$.browser={
+			msie: /msie/.test(navigator.userAgent.toLowerCase()),
+			version: $('html.lt-ie7').length>1?6:($('html.lt-ie8').length>1?7:8)
+		}
+	</script>
+	<script src="/js/blc-plugins.js"></script>
+	<script src="/js/ssbusy-plugins.js?v=2.js"></script>
+	<script type="text/javascript">
+	/*<![CDATA[*/
+		$(document).ready(function() {
+			$('<a href="javascript:vswtch(true);" style="text-decoration: none;top: 9px; right: 6px; position: absolute; background-color: #ff6e17; padding: 5px; color: #fff;">切换至新版</a>').prependTo('body');
+			$('<a id="xmas_banner" style="z-index: 2;position:relative;display:block;width:100%;height:50px; background:url(//img.onxiao.com/img/activities/xmas_banner.jpg) center 0 no-repeat;background-color: #b9112e;"/>').prependTo('body');
+			var bw=($('body').width() - $('.grid-container').width())/2 -40;
+			$('#xmas_banner').append('<div style="position:absolute;left:'+bw+'px;top:50px;height: 1px;"><div id="xmas-pull" style="display:none;"><div id="xmas-puller" style="position:absolute;top:0;width:1px;height:90px;background-color:#e3e3e3;"><div id="xmas-puller" style="background:url(//img.onxiao.com/img/activities/Christmas_Sprites.png) 0 0 no-repeat;width:30px;height:38px;position:absolute;bottom:-38px;left: -14px;" /></div></div></div></div>');
+			var rotation = 8; 
+			function pendulumswing() {
+				$('#xmas-pull').animate({rotate: rotation},1000, "jswing", function(){
+					rotation *= -1;
+					pendulumswing();
+				});
+			}
+			(function () {
+				$('#xmas-pull').animate({rotate: rotation}, 0, function () {
+					$('#xmas-pull').css("display", "block");
+					rotation *= -1;
+					pendulumswing();					
+				});
+			})();
+			$('#xmas_banner').mouseup(function(){pulled = true;});
+			var pulled = false;
+			$('#xmas-pull').mousedown(function(){
+				pulled = true;
+				$(this).stop();
+				$('#xmas-puller').css({height:120});
+			});
+			$(document).click(function(){
+				var v=$('#xmas-main');
+				if(parseInt(v.css('height'))==0)return;
+				v.stop().animate({height:0},500,'easeInQuart',function(){$('#vswtch').show();$('#xmas_banner').show();});}).mouseup(function(){
+					if(!pulled){return;}
+					pulled=false;
+					$('#xmas-puller').css({height:90});
+					pendulumswing();
+					xmasgo();
+				});
+			var xmasgo = function() {
+				var xmas = $('#xmas-main');
+				function xmasdown(xmas){
+					$('#vswtch').hide();
+					$('#xmas_banner').hide();
+					xmas.stop().animate({height:420},500,'easeOutBounce');
+				}
+				if(xmas.length == 0) {
+					$.ajax({url:'/activity/christmassign',type:'get',cache:'false'}).done(function(d){xmasdown($('<div id="xmas-main" style="overflow:hidden;height:0;">'+d+'</div>').prependTo('body').click(function(e){e.stopPropagation();}))});
+				} else xmasdown(xmas);
+			};
+
+			$('#slider').nivoSlider({
+				effect : 'random', // Specify sets like: 'fold,fade,sliceDown'
+				slices : 15, // For slice animations
+				boxCols : 8, // For box animations
+				boxRows : 4, // For box animations
+				animSpeed : 500, // Slide transition speed
+				pauseTime : 5000, // How long each slide will show
+				startSlide : 0, // Set starting Slide (0 index)
+				directionNav : true, // Next and Prev navigation
+				controlNav : true, // 1,2,3... navigation
+				controlNavThumbs : false, // Use thumbnails for Control Nav
+				pauseOnHover : true, // Stop animation while hovering
+				manualAdvance : false, // Force manual transitions
+				prevText : '', // Prev directionNav text
+				nextText : '', // Next directionNav text
+				randomStart : true, // Start on a random slide
+				beforeChange : function() {
+				}, // Triggers before a slide transition
+				afterChange : function() {
+				}, // Triggers after a slide transition
+				slideshowEnd : function() {
+				}, // Triggers after all slides have been shown
+				lastSlide : function() {
+				}, // Triggers when last slide is shown
+				afterLoad : function() {
+				} // Triggers when slider has loaded
+			});
+		});
+	$(".banner li a").click(function() {
+		$(".banner li a").removeClass("active");
+		var tabContentClass = $(this).attr("class") + "-main";
+		$(".banner div").attr("style", "display:none;");
+		$("." + tabContentClass).attr("style", "display:block;");
+		$("." + tabContentClass+" div").attr("style", "display:block;");
+		$(this).addClass("active");
+		return false;
+	});
+		$(".array-show .tink-back a").click(function(){
+			var linkId= $(this).attr("id");
+			var articleId = "#" + linkId.replace("a-back","article");
+			var parent = "#"+$(this).parent().parent().attr("id");
+			var page = parseInt($(articleId+" "+parent+" .page").val());
+			var categoryId = $(articleId+" .category-Id").val();
+			var innerCategory = $(articleId+" "+parent+" .innercategory").val();
+			$.ajax({
+				type : "get",
+				url : "/catalog/products/page-back",
+				data : {
+					start : (page+1)*4,
+					"category-id":categoryId,
+					"inner-category":innerCategory
+				},
+				dataType : "html"
+				}).done(function(data){
+				if(data.length>0){
+					var pagenow = parseInt($(articleId+" "+parent+" .page").val())+1;
+					$(articleId+" "+parent+" .page").val(pagenow);
+					$(articleId+" "+parent+" .product-data").html(data);
+					$(articleId+" "+parent+" .tink-forward-first").addClass("tink-forward");
+				}
+				});
+		});
+		$(".array-show .tink-forward-first a").click(function(){
+			var linkId= $(this).attr("id");
+			var articleId = "#" + linkId.replace("a-forward","article");
+			var parent = "#"+$(this).parent().parent().attr("id");
+			var page = parseInt($(articleId+" "+parent+" .page").val());
+			var categoryId = $(articleId+" .category-Id").val();
+			var innerCategory = $(articleId+" "+parent+" .innercategory").val();
+			$.ajax({
+				type : "get",
+				url : "/catalog/products/page-forward",
+				data : {
+					start : (page-1)*4,
+					"category-id":categoryId,
+					"inner-category":innerCategory
+				},
+				dataType : "html"
+				}).done(function(data){
+				if(data.length>0){
+					var pagenow = parseInt($(articleId+" "+parent+" .page").val())-1;
+					if(parseInt($(articleId+" "+parent+" .page").val()) == 1){
+					$(articleId+" "+parent+" .tink-forward-first").removeClass("tink-forward");
+						pagenow = 0;
+					}
+					$(articleId+" "+parent+" .page").val(pagenow);
+					$(articleId+" "+parent+" .product-data").html(data);
+				}
+				});
+		});
+		$("#page-left").click(function(){
+			var categoryId=$("#fea-cat-id").val();
+			var pageNow = $("#page-data").data("page");
+			if(!pageNow)pageNow = 0;
+			$.ajax({type : "get",
+			url:"/catalog/hot/page-left",
+			data:{start: (pageNow-1)*10,
+			"category-id":categoryId},
+			dataTyle:"html"
+			}).done(function(data){
+				if(data.length>0){
+					if(--pageNow < 0){
+						pageNow = 0;
+					}
+   					$("#page-data").data("page",pageNow);
+					$("#page-data").html(data);
+				}
+			});
+			return false;
+		});
+		$("#page-right").click(function(){
+			var categoryId=$("#fea-cat-id").val();
+			var pageNow = $("#page-data").data("page");
+			if(!pageNow)pageNow = 0;
+			$.ajax({type : "get",
+			url:"/catalog/hot/page-right",
+			data:{start: (pageNow+1)*10,
+			"category-id":categoryId
+			},
+			dataTyle:"html"
+			}).done(function(data){
+				if(data.length>0){
+					$("#page-data").data("page",pageNow+1);
+					$("#page-data").html(data);
+				}
+			});
+			return false;
+		});
+		$('.nav1 a').click(function() {
+			var sid = $(this).attr('sid');
+			if(sid) {
+				$('.nivo-control[rel="'+sid+'"]').trigger('click');
+			}
+		});
+   $("#tx-weibo").click(function sina()
+	{
+	var _appkey ='100515120';
+	var _t1=encodeURI("前几天终于看了传说中的舌尖上的中国，感觉当个吃货也蛮不错的。吃好了才能心情好么，这让我又想起了--");
+	var _site = encodeURI;  
+  
+	 var _t = encodeURI(document.title); 
+   	var _url = encodeURI(window.location); 
+	var _u ='http://v.t.qq.com/share/share.php?title='+_t1+_t+'&url='+_url+'&appkey='+_appkey+'&site='+_site; 
+	window.open( _u,'转播到腾讯微博', 'width=700, height=580, top=180, left=320, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' ); 
+	});
+	$("#qq").click(function qq() {
+	 var _t1=encodeURIComponent("前几天终于看了传说中的舌尖上的中国，感觉当个吃货也蛮不错的。吃好了才能心情好么，这让我又想起了--");
+   	var _url = encodeURIComponent(window.location); 
+	var _u ='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+_url+'&title='+_t1;
+	window.open( _u,'转播到QQ空间', 'width=700, height=580, top=180, left=320, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' ); 
+	});
+	$("#sina").click(function sina(){
+	   	var _url = encodeURI(window.location); 
+		var _t1=encodeURI("前几天终于看了传说中的舌尖上的中国，感觉当个吃货也蛮不错的。吃好了才能心情好么，这让我又想起了--");
+	
+		var appkey="1500853607";
+		var _u='http://v.t.sina.com.cn/share/share.php?appkey='+appkey+'&title='+_t1+_url;
+		window.open( _u,'转播到新浪微博', 'width=700, height=580, top=180, left=320, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' ); 
+	}
+	);
+	$("#renren").click(function renren(){
+		var _t1=encodeURI("前几天终于看了传说中的舌尖上的中国，感觉当个吃货也蛮不错的。吃好了才能心情好么，这让我又想起了--");
+		
+	
+		var _url = encodeURI(window.location); 
+		var _u='http://share.renren.com/share/buttonshare.do?link='+_url+'&title='+_t1;
+		window.open( _u,'转播到人人', 'width=700, height=580, top=180, left=320, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' ); 
+	})
+	/*]]>*/
+	</script>
+	<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc5950a1860bb774d0085d23cdb30a5aa' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

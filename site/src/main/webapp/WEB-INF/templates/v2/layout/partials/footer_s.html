@@ -1,0 +1,56 @@
+<div class="footer-s-container" style="position: relative;">
+    <footer class="grid-container" style="border-top: 2px solid #eee;position: relative; border-bottom: 2px solid #eee;position: relative;">
+    	<div class="grid-25 tablet-grid-25"><div class="footer-col footer-1 clearfix">
+    		<a href="/about/aftersales" class="active">退货保障</a>
+    		<a href="/about/aftersales">隐私保护</a>
+    		<a href="/about/aftersales">投诉建议</a>
+    	</div></div>
+    	<div class="grid-25 tablet-grid-25"><div class="footer-col footer-2 clearfix">
+    		<a href="/about/range-time#rangeTime">配送范围</a>
+    		<a href="/about/range-time#yunfei">运费说明 </a>
+    		<a href="/about/range-time#rangeTime">配送时间</a>
+    		<a href="/about/range-time#jindou" class="active">筋斗云配送 </a>
+    	</div></div>
+    	<div class="grid-25 tablet-grid-25"><div class="footer-col footer-3 clearfix">
+    		<a href="/about/payment-type#cod">货到付款 </a>
+    		<a href="/about/payment-type#alipay" class="active">支付宝</a>
+    		<a href="/about/payment-type#jifen">仙丹换购</a>
+    		<a href="/about/payment-type#balance">充值卡余额支付 </a>
+    	</div></div>
+    	<div class="grid-25 tablet-grid-25"><div class="footer-s-col footer-col footer-4 clearfix">
+    		<a href="/about/aboutus#about">关于我们</a>
+    		<a href="/about/aboutus#theme">西游主题</a>
+    		<a href="/about/aboutus#zhaopin" class="active">招贤纳士</a>
+    		<a href="/about/aboutus#hezuo">合作加盟</a>
+    		<a href="/about/aboutus#xinshou">新手帮帮</a>
+    	</div></div>
+    </footer>
+        <div class="footer-s-copyright grid-container">
+    	<span>&copy; 2013 Onxiao.com 版权所有 浙ICP备13037286号-2</span>
+    </div>
+</div>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+	lastScripts[lastScripts.length] = function(){
+		$(window).scroll(function() {
+			if($(window).scrollTop() > 195) {
+				$('#right-float').fadeIn(100);
+			} else {
+				$('#right-float').fadeOut(100);
+			}
+		});
+		$('#nav-follow').hover(function(e){
+			var u = $('#nav2 ul');
+			var h = u.data('h');
+			u.animate({height:h||'100%'}, 200, null, function() {
+				h || u.data('h', u.height());
+				$('#nav2').next().addClass('nav-up');
+			});
+		},function(e){
+			$('#nav2 ul').animate({height:'0'}, 200);
+			$('#nav2').next().removeClass('nav-up');
+		});
+	}
+/*]]>*/
+</script>

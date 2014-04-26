@@ -1,0 +1,24 @@
+
+<div class="integral-form">
+	<span class="title">账户交易</span>
+	<br/>
+	<br/>
+	<span class="label">账户余额:</span>
+	<span class="label" th:text="'￥'+*{balance}" style="width:20em;"></span><br/><br/>
+	<div class="panel">
+	    	<div class="content grid-parent">
+	    		<div class="head content-line grid-100 tablet-grid-100 grid-parent">
+	    			<div class="grid-30 tablet-grid-30" style="border-left:0px">交易金额</div>
+	    			<div class="grid-40 tablet-grid-40">交易时间</div>
+	    			<div class="grid-30 tablet-grid-30">备注</div>
+	    		</div>
+	    		<div th:each="transactionDetail:${transactionDetails}" th:object="${transactionDetail}" class="content-line grid-100 tablet-grid-100 grid-parent">
+	    			<div class="grid-30 tablet-grid-30" th:text="*{transaction_amount}"></div>
+	    			<div class="grid-40 tablet-grid-40" th:text="*{transaction_time}"></div>
+	    			<div class="grid-30 tablet-grid-30" th:text="*{transaction_type.friendlyType}"></div>
+	    				
+	    		</div>
+	    		
+	    	</div>
+	</div>
+</div>

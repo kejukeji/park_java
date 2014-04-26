@@ -1,0 +1,76 @@
+<section role="main">
+	<div class="row" id="box1">
+		<div class="twelve columns">
+			<div class="seven columns">
+				<form action="" method="GET" class="custom-entity-search">
+				    <div class="row">
+					<div class="six columns">
+					    <input type="search" placeholder="OrderNumber" style="height: 28px; width: 100%"/>
+					</div>
+					<div class="four columns">
+					    <a class="button small dark radius" href="#">
+							<i class="icon-search"></i>&nbsp;搜索
+					    </a>
+					</div>
+					<div class="two columns">&nbsp;</div>
+				    </div>
+				</form>
+			</div>
+		</div>
+		<div class="twelve columns">
+			<div class="listgrid-container">
+				<blc:form th:action="@{/order-complete-do}" method="post">
+					<div class="listgrid-header-wrapper">
+						<table
+							class="list-grid-table responsive twelve table-hover table-hover"
+							data-path="/order"
+							data-listgridtype="main" id="listGrid-main-header"
+							style="width: 100%;">
+							<thead>
+								<tr>
+									<th scope="col" style="width: 20px;"><input
+										type="checkbox" onclick="tabTabCheckClick(this)" /></th>
+									<th scope="col" style="width: 130px;">订单号</th>
+									<th scope="col" style="width: 70px;">订单状态</th>
+									<th scope="col" style="width: 70px;">订单金额</th>
+									<th scope="col" style="width: 100px;">提交日期</th>
+									<th scope="col" style="width: 100px;">修改订单</th>
+								</tr>
+							</thead>
+						</table>
+						<table
+							class="list-grid-table responsive twelve table-hover table-hover"
+							data-currenturl="https://localhost:8444/order" data-path="/order"
+							data-listgridtype="main" id="listGrid-main-header"
+							style="width: 100%;">
+							<thead>
+								<tr th:each="order:${deliveryOrders}" th:object="${order}">
+									<th scope="col" style="width: 20px;"><input
+										type="checkbox" name="order_id" th:value="*{id}" /></th>
+									<th scope="col" style="width: 130px;" >
+									<a th:href="@{*{'/order-detail/'+id}}" target="_blank" th:text="*{orderNumber}"></a></th>
+									<th scope="col" style="width: 70px;"
+										th:text="#{'orderStatus.'+*{status.friendlyType}}"></th>
+									<th scope="col" style="width: 70px;" th:text="*{total}"></th>
+									<th scope="col" style="width: 100px;" th:text="*{submitDate}"></th>
+                                    <th scope="col" style="width: 100px;"><a th:href="@{/order-process/update(id=*{id})}">修改订单</a></th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<span class="listgrid-table-footer"><input type='submit' class="button"
+						value='完成订单' /></span>
+				</blc:form>
+			</div>
+		</div>
+	</div>
+</section>
+<script>
+	var tabTabCheckClick = function(e){
+	  try {
+		$("thead tr input").prop("checked",$(e).is(':checked'));
+	  } catch(err) {
+		  log.console(err);
+	  }
+	}
+</script>

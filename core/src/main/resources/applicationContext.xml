@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+        
+        <!-- Shared properties between admin and site go here -->
+        <context:component-scan base-package="com.ssbusy"><!-- FIXME -->
+        </context:component-scan>
+        <context:component-scan base-package="com.ssbusy.core" />
+		
+	<bean id="blCustomerDao" class="com.ssbusy.core.account.dao.MyCustomerDaoImpl"></bean>
+	<bean id="blCustomerService" class="com.ssbusy.core.account.service.MyCustomerServiceImpl"></bean>
+	<bean id="blAddressDao" class="com.ssbusy.core.address.dao.MyAddressDaoImpl"></bean>
+	<bean id="blAddressService" class="com.ssbusy.core.address.service.MyAddressServiceImp"></bean>
+	<bean id="blProductDao" class="com.ssbusy.core.product.dao.MyProductDaoImpl"></bean>
+	<bean id="ssbMyProductService" class="com.ssbusy.core.product.myservice.MyProductServiceImpl"></bean>
+	<bean id="blCustomerFieldService" class="com.ssbusy.admin.web.rulebuilder.service.CustomerFieldServiceImpl"></bean>
+		
+    <!-- update add blCodPaymentInfoFactory bean  -->
+    <bean id="blCodPaymentInfoFactory" class="com.ssbusy.payment.service.type.CodPaymentInfoFactoryImpl"> </bean>
+    <bean id="blSecurePaymentInfoService" class="com.ssbusy.payment.service.type.MySecurepaymentinfoServiceImpl"></bean> 
+    <bean id="blSecurePaymentInfoDao" class="com.ssbusy.checkout.dao.MySecurePaymentInfoDaoImpl"></bean>
+    <bean id="blBpPaymentInfoFactory" class="com.ssbusy.payment.service.type.BpPaymentInfoFactoryImpl"></bean>
+    
+    <bean id="blGiftService" class="com.ssbusy.core.gift.service.GiftServiceImpl"></bean>
+    <bean id="blOfferService" class="com.ssbusy.core.offer.service.MyOfferServiceImpl"></bean>
+    
+    <!-- add cod module -->
+    <bean id="sscodModule" class="com.ssbusy.module.CodPaymentModule"></bean>
+    <bean id="sscodervice" class="org.broadleafcommerce.core.payment.service.PaymentServiceImpl">
+     	<property name="paymentModule" ref="sscodModule"/>
+    </bean>
+    <bean p:order="1000" id="blCodActivity" class="org.broadleafcommerce.core.payment.service.workflow.PaymentActivity">
+        <property name="paymentService" ref="sscodervice"/>
+        <property name="userName" value="web"/>
+    </bean>
+    
+    <!-- add blcBp module -->
+    <bean id="ssbpModule" class="com.ssbusy.module.BpPaymentModule"></bean>
+    <bean id="ssbpservice" class="org.broadleafcommerce.core.payment.service.PaymentServiceImpl">
+     	<property name="paymentModule" ref="ssbpModule"/>
+    </bean>
+    <bean p:order="2000" id="blBpActivity" class="org.broadleafcommerce.core.payment.service.workflow.PaymentActivity">
+        <property name="paymentService" ref="ssbpservice"/>
+        <property name="userName" value="web"/>
+    </bean>
+     
+    <!-- add integrl module -->
+    <bean id="ssinModule" class="com.ssbusy.module.IntegrlPaymentModule"></bean>
+    <bean id="ssinservice" class="org.broadleafcommerce.core.payment.service.PaymentServiceImpl">
+      	<property name="paymentModule" ref="ssinModule"></property>
+    </bean>
+    <bean p:order="3000" id="blInActivity" class="org.broadleafcommerce.core.payment.service.workflow.PaymentActivity">
+        <property name="paymentService" ref="ssinservice"/>
+        <property name="userName" value="web"/>
+    </bean>
+     
+    <!-- add alipay module -->
+    <bean id="ssAlipayModule" class="com.ssbusy.module.AlipayPaymentModule"></bean>
+    <bean id="ssAlipayService" class="org.broadleafcommerce.core.payment.service.PaymentServiceImpl">
+      	<property name="paymentModule" ref="ssAlipayModule"></property>
+    </bean>
+    <bean p:order="4000" id="AlipayActivity" class="org.broadleafcommerce.core.payment.service.workflow.PaymentActivity">
+        <property name="paymentService" ref="ssAlipayService"/>
+        <property name="userName" value="web"/>
+    </bean>
+     
+    <bean id="blAuthorizeAndDebitWorkflow" class="org.broadleafcommerce.core.workflow.SequenceProcessor">
+       	<property name="activities">
+            <list> 
+                <ref bean="blCodActivity" />
+                <ref bean="blBpActivity"/>
+                <ref bean="blInActivity"/>
+                <ref bean="AlipayActivity"/>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="ssbDefaultFulfillmentOption" factory-bean="blFulfillmentOptionService"
+		factory-method="readFulfillmentOptionById" scope="singleton">
+		<constructor-arg value="-1" />
+	</bean>
+
+    <bean id="blFixedPriceFulfillmentPricingProvider"
+            class="org.broadleafcommerce.core.pricing.service.fulfillment.provider.FixedPriceFulfillmentPricingProviderEx" />
+    <bean id="blRatingService"
+            class="org.broadleafcommerce.core.rating.service.RatingServiceImplEx" />
+
+    <bean id="blOfferCodeDao"
+            class="com.ssbusy.core.offer.dao.MyOfferCodeDaoImpl" />
+        
+    <bean id="messageSource" class="org.broadleafcommerce.common.util.BroadleafMergeResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:/messages/coreMessages</value>
+            </list>
+        </property>
+    </bean>
+    <bean p:order="5000" id="blCompleteOrderActivity" class="org.broadleafcommerce.core.checkout.service.workflow.MyCompleteOrderActivity" />
+
+	<bean class="org.broadleafcommerce.core.search.domain.FieldEntity">
+		<constructor-arg index="0" value="SKU"></constructor-arg>
+		<constructor-arg index="1" value="sku"></constructor-arg>
+	</bean>
+	<bean id="blOrderItemService" class="org.broadleafcommerce.core.order.service.OrderItemServiceImplEx" />
+	<bean p:order="2000" id="blAddOrderItemActivity" class="org.broadleafcommerce.core.order.service.workflow.add.AddOrderItemActivityEx" />
+</beans>

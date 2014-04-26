@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+             
+    <persistence-unit name="blPU" transaction-type="RESOURCE_LOCAL">
+    	<non-jta-data-source>jdbc/web</non-jta-data-source>
+     	<mapping-file>config/ssbusy/jpa/domain/RechargeableCard.orm.xml</mapping-file>
+      	<mapping-file>config/ssbusy/jpa/domain/MyCustomer.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/MySku.orm.xml</mapping-file>
+     	<mapping-file>config/ssbusy/jpa/domain/Like.orm.xml</mapping-file>
+      	<mapping-file>config/ssbusy/jpa/domain/Region.orm.xml</mapping-file>
+      	<mapping-file>config/ssbusy/jpa/domain/Dormitory.orm.xml</mapping-file>
+      	<mapping-file>config/ssbusy/jpa/domain/AreaAddress.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/Message.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/Order.orm.xml</mapping-file>
+ 		<mapping-file>config/ssbusy/jpa/domain/Inventory.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/FulfillmentLocation.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/MyProduct.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/TransactionDetails.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/MyOffer.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/Statistics.orm.xml</mapping-file>
+        <mapping-file>config/ssbusy/jpa/domain/Carbarn.orm.xml</mapping-file>
+        <class>com.ssbusy.core.rechargeablecard.domain.TransactionDetailsImpl</class>  
+      	<class>com.ssbusy.core.rechargeablecard.domain.RechargeableCardImpl</class>  
+     	<class>com.ssbusy.core.like.domain.CustomerLikeImpl</class>
+     	<class>com.ssbusy.core.domain.MyAddressImpl</class>
+     	<class>com.ssbusy.core.region.domain.RegionImpl</class>
+     	<class>com.ssbusy.core.account.domain.MyCustomerImpl</class>
+     	<class>com.ssbusy.payment.service.type.CodPaymentInfoImpl</class>
+     	<class>com.ssbusy.core.integral.domain.IntegralImpl</class>
+     	<class>com.ssbusy.core.domain.AreaAddressImpl</class>
+     	<class>com.ssbusy.core.domain.DormitoryImpl</class>
+        <class>com.ssbusy.core.message.domain.MessageImpl</class>
+        <class>com.ssbusy.core.myorder.domain.MyOrderImpl</class>
+        <class>org.broadleafcommerce.core.order.domain.OrderImpl</class>
+       	<class>org.broadleafcommerce.inventory.domain.InventoryImpl</class>
+        <class>org.broadleafcommerce.inventory.domain.FulfillmentLocationImpl</class>
+        <class>com.ssbusy.core.product.domain.MyProductImpl</class>
+        <class>org.broadleafcommerce.core.offer.domain.MyOrderAdjustmentImpl</class>
+        <class>org.broadleafcommerce.core.offer.domain.MyOfferImpl</class>
+        <class>com.ssbusy.core.offer.domain.MyOfferCodeImpl</class>
+
+        <class>org.broadleafcommerce.core.catalog.domain.MyFeaturedProductImpl</class>
+        <class>org.broadleafcommerce.core.catalog.domain.MyCrossSaleProductImpl</class>
+        <class>org.broadleafcommerce.core.catalog.domain.MyUpSaleProductImpl</class>
+        <class>com.ssbusy.core.vote.domin.VoteImpl</class>
+        <class>com.ssbusy.core.christmas.domain.ChristmasCardImpl</class>
+        <class>com.ssbusy.core.invoicing.domain.InvoicingImpl</class>
+        <class>org.broadleafcommerce.core.order.domain.MyDiscreteOrderItemImpl</class>
+        <class>com.ssbusy.core.carbarn.domain.CarbarnImpl</class>
+        <class> com.ssbusy.core.carbarn.domain.CarEntranceImpl</class>
+      <exclude-unlisted-classes/>
+
+    </persistence-unit>
+    
+    <persistence-unit name="blSecurePU" transaction-type="RESOURCE_LOCAL">
+        <non-jta-data-source>jdbc/webSecure</non-jta-data-source>
+        <exclude-unlisted-classes/>
+    </persistence-unit>
+
+    <persistence-unit name="blCMSStorage" transaction-type="RESOURCE_LOCAL">
+        <non-jta-data-source>jdbc/cmsStorage</non-jta-data-source>
+        <exclude-unlisted-classes/>
+    </persistence-unit>
+
+
+</persistence>

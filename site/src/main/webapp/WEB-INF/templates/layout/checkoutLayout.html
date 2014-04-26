@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<blc:head pageTitle="Checkout - 在校网" th:attr="head=(${session.uiv2 ne null and session.uiv2}?'v2/layout/partials/head':'')" />
+
+<body>
+    <header th:substituteby="layout/partials/headerCheckout" />
+    
+    <div id="checkout_content" class="width_setter group" role="main">
+    
+        <div th:substituteby="${templateName}" />
+    
+    </div>
+
+	<footer th:substituteby="${session.uiv2 ne null and session.uiv2?'v2/layout/partials/footer' : 'layout/partials/footer'}" />
+    <script type="text/javascript" th:inline="text">
+        /*<![CDATA[*/
+		[[${session.uiv2 ne null and session.uiv2?'lastScripts[lastScripts.length] = function()':''}]]
+		{
+        $().ready(function() {
+            $('#paymentOptions dd').css({display:"none"});
+            $('#paymentMethod_cc').click();
+			
+            $('#shipping_info').validate({
+                rules: {
+                    'address.firstName': "required",
+                    'address.addressLine1': "required",
+                    'address.city': "required",
+                    'address.state': "required",
+                    'address.emailAddress' : "required",
+					'address.addressLine2': "required",
+					 'address.postalCode' : "required"
+                },
+                messages: {
+                    'address.firstName': "请输入你的名字" + "<br/>",
+                    'address.addressLine1': "请输入你的校区" + "<br/>",
+                    'address.city': "请输入你的寝室号" + "<br/>",
+                    'address.state': "请输入你的宿舍楼号" + "<br/>",
+                    'address.emailAddress' : "请输入你的邮箱" + "<br/>",
+					 'address.postalCode' : "请输入你的电话" + "<br/>",
+					 'address.addressLine2' : "请输入你的生活区" + "<br/>"
+                },
+                errorPlacement: function(error, element) {
+                    $(element).parent().append(error);
+                },
+                highlight: function(element, errorClass) {
+                    $(element).addClass('fieldError');
+                },
+                unhighlight: function(element, errorClass) {
+                    $(element).removeClass('fieldError');
+                },
+                errorElement: "div",
+                errorClass: "error"
+            });
+
+        });
+		}
+        /*]]>*/
+    </script>
+	<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc5950a1860bb774d0085d23cdb30a5aa' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

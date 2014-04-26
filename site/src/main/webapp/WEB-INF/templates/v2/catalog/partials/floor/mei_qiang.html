@@ -1,0 +1,21 @@
+<style>
+	@media screen and (min-width: 1025px){
+	.flr-grid-two-margin{
+		margin-right:1.5%;
+		margin-bottom:0.5%;
+	}
+	}
+</style>
+        
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+<div th:each="gridCat,gridStats:*{flrTab.subCategory.childCategoryXrefs}" th:if="${gridStats.index lt 4}" th:remove="tag">
+	<div th:if="${gridCat.subCategory.url ne null}" class="grid-40 tablet-grid-50 grid-parent height-helf height-helf-special" th:classappend="${gridStats.index==0 || gridStats.index==2?'margin-left-hidd flr-grid-two-margin':''}">
+    	<a th:if="${gridCat.subCategory.url ne null}" th:href="${gridCat.subCategory.url}">
+    		<img class="hidden_layer" th:if="${gridCat.subCategory.categoryMedia['alt6']}" th:src="@{${gridCat.subCategory.categoryMedia['alt6'].url}}"/>
+		</a>
+	</div>
+</div>

@@ -1,0 +1,83 @@
+<style>
+#review{
+-moz-border-radius:20px;-webkit-border-radius:20px;border-radius:20px;
+border:5px solid #F1F1F1;
+margin:0;
+padding:0;
+margin-top:10px;
+}
+#pingfen{
+height:28px;
+line-height:28px;
+margin-bottom:10px;
+margin-left:7px;
+}	
+#pingfen span{
+float:left;
+margin-bottom:10px;
+}	
+#pingfen li{ 
+width:27px;
+float:left;
+height:28px; 
+cursor:pointer;
+background:url(/img/star.gif) no-repeat 0 0; 
+list-style:none;
+}
+.review-text{
+width:100%;
+clear:both;
+margin-left:7px;
+margin-bottom:20px;
+}
+.review-submit{
+margin-left:7px;
+margin-bottom:20px;
+}
+</style>
+<div id="review">
+    <blc:form action="#" th:object="${reviewForm}"  th:action="@{'/reviews/product/' + *{product.id}}" method="post">
+        <div id="pingfen">
+        	<span>评分：</span> 
+			<ul>
+            	<li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="review-text">
+            <span>评论：</span>
+            <span class="error" th:if="${#fields.hasErrors('reviewText')}" th:errors="*{reviewText}"></span>
+            <textarea type="text" th:field="*{reviewText}" class="field100" th:classappend="${#fields.hasErrors('reviewText')}? 'fieldError'" rows="8"  style="width:500px;"></textarea>
+			<input type="hidden" id="rating" name="rating" value="5"/>
+		</div>
+        <div class="review-submit">
+            <input type="submit" class="inbox review_button" style="width:80px;background-color:#f1f1f1;" value="添加评论"  />
+        </div>
+    </blc:form>
+</div>
+<script th:inline="javascript">
+   /*<![CDATA[*/
+	var oPf=$('#pingfen');
+	var aLi=$('#pingfen li');
+	var i=0;
+	for(i=0;i<aLi.length;i++){
+		aLi[i].index=i;
+		aLi[i].onmouseover=function(){
+			for(i=0;i<aLi.length;i++){
+				$("#rating").val(this.index+1);
+				if(i<=this.index)
+				{
+					aLi[i].style.background="url(/img/star.gif) no-repeat 0 -29px";
+				}
+				else
+				{
+					aLi[i].style.background="url(/img/star.gif) no-repeat 0 0";
+				}
+			}
+		};
+	}
+ /*]]>*/
+</script>

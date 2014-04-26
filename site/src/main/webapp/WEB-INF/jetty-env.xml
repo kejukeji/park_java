@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<!-- THIS IS FOR RUNNING IN local OR development MODE ONLY! IT WILL AUTOMATICALLY BE USED IN A 
+JETTY ENVIRONMENT. YOU SHOULD SET UP JNDI ACCORDING TO YOUR SERVER'S DOCUMENTATION AND USE THAT. 
+IT IS NOT RECOMMENDED TO USE JETTY IN A PRODUCTION ENVIRONMENT.
+-->
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+    <!-- Add an EnvEntry only valid for this webapp -->
+    <New id="appName" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+        <Arg>appName</Arg>
+        <Arg type="java.lang.String">ssbusy-site</Arg>
+        <Arg type="boolean">true</Arg>
+    </New>
+   <New id="webDS" class="org.eclipse.jetty.plus.jndi.Resource">
+    <Arg>jdbc/web</Arg>
+      <Arg>
+		<New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<Set name="driverClass">com.mysql.jdbc.Driver</Set>
+			<Set name="jdbcUrl"><![CDATA[jdbc:mysql://localhost:3306/parking?autoReconnect=true]]></Set>
+			<Set name="user">root</Set>
+			<Set name="password">root</Set>
+			<Set name="minPoolSize">1</Set>
+			<Set name="maxPoolSize">1</Set>
+			<Set name="numHelperThreads">1</Set>
+			<Set name="preferredTestQuery">SELECT 1</Set>
+		</New>
+      </Arg>
+   </New>
+   <New id="webSecureDS" class="org.eclipse.jetty.plus.jndi.Resource">
+       <Arg>jdbc/secure</Arg>
+       <Arg>
+		<New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<Set name="driverClass">com.mysql.jdbc.Driver</Set>
+			<Set name="jdbcUrl"><![CDATA[jdbc:mysql://localhost:3306/parking?autoReconnect=true]]></Set>
+			<Set name="user">root</Set>
+			<Set name="password">root</Set>
+			<Set name="minPoolSize">1</Set>
+			<Set name="maxPoolSize">1</Set>
+			<Set name="numHelperThreads">1</Set>
+			<Set name="preferredTestQuery">SELECT 1</Set>
+		</New>
+    </Arg>
+   </New>
+
+   <New id="webStorageDS" class="org.eclipse.jetty.plus.jndi.Resource">
+       <Arg>jdbc/storage</Arg>
+       <Arg>
+		<New class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<Set name="driverClass">com.mysql.jdbc.Driver</Set>
+			<Set name="jdbcUrl"><![CDATA[jdbc:mysql://localhost:3306/parking?autoReconnect=true]]></Set>
+			<Set name="user">root</Set>
+			<Set name="password">root</Set>
+			<Set name="minPoolSize">1</Set>
+			<Set name="maxPoolSize">1</Set>
+			<Set name="numHelperThreads">1</Set>
+			<Set name="preferredTestQuery">SELECT 1</Set>
+		</New>
+    </Arg>
+   </New>
+</Configure>

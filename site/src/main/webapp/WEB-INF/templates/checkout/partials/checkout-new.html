@@ -1,0 +1,148 @@
+<div class="step-1-cart grid-75 tablet-grid-75">
+	<div class="main-nav-step">
+		<div class="step-1">
+			<div class="step-1-middle"><i class="step-i">1</i> 我的购物车</div>
+			<div class="step-1-right"></div>
+		</div>
+		<div class="step-2">
+			<div class="step-2-middle"><i class="step-i">2</i> 填写订单信息</div>
+			<div class="step-2-right"></div>
+		</div><!-- end step-2 -->
+		
+		<div class="step-3">
+			<div class="step-3-middle"><i class="step-i">3</i> 成功提交订单</div>
+			<div class="step-3-right"></div>
+		</div><!-- end step-3 -->
+	</div><!-- end main-nav-step -->
+	<div th:if="${#lists.isEmpty(cart.orderItems)}" class="checkout_warning">
+		<br/>
+		<br/>
+		<br/>
+		<h2 th:text="#{cart.empty}">你的购物车为空。</h2>
+	</div><!-- end checkout_warning -->
+	<div th:unless="${#lists.isEmpty(cart.orderItems)}" class="cart_summary">
+		<div style="color:red;" th:if="${param.error}" th:text="${param.error[0]}" />
+<!-- <div th:if="${customer.region ne null and customer.region.fulfillmentLocation.id eq -1}" style="text-align: center; font-size: 2em; line-height: 2em; color: #ff6e17;">
+  <span>【折扣躲猫猫】即日起，每天都会有数款特价折扣产品散落在页面中，产品名称之前有（促销）即是特价产品啦，小伙伴们快去抓猫猫罗~</span>
+</div>
+<div th:if="${customer.region ne null and customer.region.fulfillmentLocation.id eq -2}" style="text-align: center; font-size: 2em; line-height: 2em; color: #ff6e17;">
+  <span>狂欢双11疯狂到爆，由于同学们“过于”热情，订单源不断，筋斗云配送可能有所延迟，请大家谅解。</span>
+</div> -->
+		<div class="cart-inner">
+			<div class="cart-thead clearfix">
+				<div class="column t-goods grid-35 tablet-grid-35">商品</div>
+				<div class="column t-promotion grid-10 tablet-grid-10">送仙丹</div>
+				<div class="column t-price grid-10 tablet-grid-10">在校价</div>
+				<div class="column t-quantity grid-15 tablet-grid-15">数量</div>
+				<div class="column t-subtotal grid-10 tablet-grid-10">优惠</div>
+				<div class="column t-subtotal grid-10 tablet-grid-10">小计</div>
+				<div class="column t-action grid-10 tablet-grid-10">操作</div>
+			</div><!-- end cart-thead -->
+			<div class="cart-tbody" id="product-list">
+				  <div class="item_form clearfix" th:each="item : ${cart.orderItems}" th:object="${item}" th:id="${'productRow' + item.id}">
+					<div class="cell p-goods grid-25 tablet-grid-25">
+						<div class="p-img">
+							<a th:if="*{sku.product.url}" th:href="@{*{sku.product.url}}" target="_blank">
+							<img th:if="*{sku.product.media['primary']}" th:src="@{*{sku.product.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{name}" />
+							</a>
+						</div>	
+						<div class="p-name">
+							<a th:href="@{*{sku.product.url}}" target="_blank">
+								<span th:text="*{name}"></span><br th:if="*{sku.description}" />
+								<span th:if="*{sku.description}" th:text="*{sku.description}"></span>
+							</a>
+							<br/>
+							 <blc:product_option_display orderItem="${item}" >
+								<ul th:unless="${#lists.isEmpty(productOptionDisplayValues)}" class="productOptions">
+									<li th:each="entry: ${productOptionDisplayValues}">
+									  <span  th:text="${entry.key} + ': ' + ${entry.value}"></span>
+									</li>
+								</ul>
+							</blc:product_option_display>
+							<ul th:if="${item instanceof T(org.broadleafcommerce.core.order.domain.BundleOrderItem)}">
+								<li th:each="doi : *{discreteOrderItems}" th:text="${doi.quantity + ' x ' + doi.name}" />
+							</ul>
+						</div>	
+					</div>
+					<div class="cell long-desc grid-10 tablet-grid-10" th:text="*{sku.description}">
+					 
+					</div>
+
+					<div class="cell p-promotion grid-10 tablet-grid-10" th:text="*{sku.product.jifen gt 0 ?'☯'+sku.product.jifen:'-'}"></div>
+					<div class="cell p-price grid-10 tablet-grid-10"><span class="price" blc:price="*{getPriceBeforeAdjustments(true)}"></span></div>
+					<div class="cell grid-15 tablet-grid-15">
+					<form method="get" th:action="@{/cart/updateQuantity}">
+						<input type="hidden" name="productId" th:value="*{sku.product.id}" />
+						<input type="hidden" name="orderItemId" th:value="*{id}" />
+						<input type="hidden" name="redirect" value="redirect:/checkout" />
+						<a class="icon_btn" onclick="minus(this)">-</a>
+						<input type="number" class="itemQuantity" name="quantity" onchange="$(this).closest('form').submit();" th:value="*{quantity}" maxlength="2" autocomplete="off"/>
+						<a class="icon_btn" onclick="plus(this)">+</a>
+					</form>
+					</div>
+					<div class="cell grid-10 tablet-grid-10" style="color:rgb(0, 148, 0);" th:text="*{'-' + (totalAdjustmentValue.zero?'':totalAdjustmentValue.amount)}">
+					</div>
+					<div class="cell price grid-10 tablet-grid-10" blc:price="*{totalPrice}">
+					</div>
+					<div class="cell p-remove grid-10 tablet-grid-10">
+						<a th:href="@{/cart/remove(orderItemId=*{id}, productId=*{sku.product.id})}">删除商品</a>
+					</div>
+				</div>
+			</div>
+		</div><!-- end cart-inner -->
+		<div class="total-summery">
+			<div th:if="${cart.currency != null &amp;&amp; cart.currency.currencyCode == 'CNY'}" class="promotion-info">
+				<blc:form id="cart_promo" method="POST" th:action="@{/cart/promo}">
+					<div class="promo-input">
+						<div class="combobox">
+							<select class="inbox" onchange="document.getElementById('promoCode').value=this.value;">
+								<option value="">--</option>
+								<option th:each="offercode : ${offercodes}" th:value="${offercode.offerCode}" th:text="${offercode.offer.marketingMessage}"></option>
+							</select>
+							<input class="inbox" name="promoCode" id="promoCode" type="text" placeholder="优惠券编码 / 没有优惠券"/>
+						</div>
+						<input type="submit" class="promotion" value="使用" /><span style="color:red;padding-left:10px;" th:if="${param.error_pro}" th:text="${param.error_pro[0]}" />
+					</div>
+					<br /><br />
+					<div th:each="promo : ${cart.addedOfferCodes}" th:object="${promo}" th:remove="tag">
+						<div class="promo price" style="display:inline">
+							<span th:text="*{offerCode}" th:remove="tag" />:
+							<!--共优惠<span class="price" blc:price="${promo.offer.value}" th:remove="tag" /> -->
+							<span th:text="${promo.offer.marketingMessage}" th:remove="tag" />
+						</div>
+					</div>
+					<div id="cart_promo_error" style="display: none;"></div>
+				</blc:form>
+			</div>
+			<div class="total-info">
+				<label>合　计:</label>
+				<span class="total-price" th:unless="${cart.subTotal.zero}" blc:price="${cart.total}" ></span>
+			</div>
+			<div class="ful-option">
+				(满8元免费送，不足8元加收0.5元运费(新开张，免运费))
+			</div>
+		</div><!-- end total_summary -->
+		 
+	 </div><!-- end cart_summary -->
+	 <a class="check_button" th:href="@{/checkout/checkout-step-2}">去 结 算</a> 
+	<a class="continue-shop" th:href="@{/}">&lt;&lt; 继 续 购 物</a>
+</div><!-- end step-1-cart -->
+
+<div class="round-product grid-parent grid-25 tablet-grid-25">
+	<div class="grid-95 tablet-grid-95 grid-parent bg">
+	<h2>优惠进行时</h2>
+		<div class="grid-100 tablet-grid-100 grid-parent" th:inline="text"  th:each="offer:${offers}" th:object="${offer}" th:if="${customer.region ne null}">
+			<hr/><h3><span style="font-size:1.14em;">[[*{name}]]</span></h3>
+			<div th:if="*{description!=null}">[[*{description}]]</div>
+		</div>
+		<div class="grid-100 tablet-grid-100 grid-parent">
+		</div>
+	</div>
+	
+	<div class="grid-95 tablet-grid-95 grid-parent bg">
+	<h2>凑个整数</h2>
+		<div class="grid-100 tablet-grid-100" style="text-align:center" th:each="sku:${skus}" th:object="${sku.product}">
+			<div th:include="catalog/partials/productListItem" ></div>
+		</div>
+	</div>
+</div>

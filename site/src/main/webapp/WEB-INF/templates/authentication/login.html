@@ -1,0 +1,93 @@
+<style >
+	body{
+		background-color:#f9f9f9;
+	}
+</style>
+<link rel="stylesheet" href="//img.onxiao.com/css/ssbusy_main_v2.css?v=9.css" />
+<div class="register-container main login-div">
+	<div class="grid-50 tablet-grid-50 left_pic">
+		<img src="//img.onxiao.com/img/v2/Zi_.png"/>
+	</div>
+	<div class="grid-50 tablet-grid-50 left_error_pic" />
+	<div class="register-line grid-5 tablet-grid-5 grid-parent">
+	</div>
+	<div class="grid-45 tablet-grid-45 grid-parent">
+		<div class="register-form">
+			<div class="title"><span class="register-text">登录&nbsp;</span><span class="register-en">Login</span><span class="login-href signin"><a class="signin" onclick="return $.registerfromLogin();" href="/register">我要注册</a></span></div>
+			<div class="title-line">
+				&nbsp;
+			</div>
+			<div class="register-table">
+				<blc:form id="loginForm" th:action="@{/login_post.htm}" method="post">
+				<table>
+					<tr>
+						<td class="register-info"><label for="u"><span>账号：</span></label></td>
+						<td class="register-info"><input type="email" id="u" autofocus="autofocus" placeholder="Email帐号" tabindex="1" name="u" class="inbox-v2"/></td>
+						<td rowspan="2" style="padding-left:12px;">
+							<input type="submit" value="走起" class="register-button" tabindex="3" />
+						</td>
+					</tr>
+					<tr>
+						<td class="register-info"><label for="p"><span>密码：</span> </label></td>
+						<td class="register-info"><input type="password" id="p" name="p" tabindex="2" maxlength="15" class="inbox-v2" /></td>
+						<td >
+						</td>
+					</tr>
+				</table>
+			</blc:form>
+			</div>
+			<div class="switch-style">
+				<div class="title"><span class="zh">第三方登录&nbsp;</span><span class="en">3rd LOGIN</span>
+					<div style="width:28px;"><blc:form th:action="@{/signin/qq}" method="POST" class="oauth"><input type="submit"  class="qq_v2" value=" " /></blc:form>&nbsp;</div>
+					<div style="width:45px;"><blc:form th:action="@{/signin/renren}" method="POST" class="oauth"><input type="submit" class="renren_v2" value=" "/></blc:form>&nbsp;</div> 
+					<div style="width:36px;"><blc:form th:action="@{/signin/weibo}" method="POST" class="oauth"><input type="submit" class="weibo_v2" value=" "/></blc:form>&nbsp;</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$.registerfromLogin=function(){
+			$.ajax({
+				type : "get",
+				url : "/register",
+				dataType : "html"
+			}).done(function(data) {
+					var logBox=$('div.login_box');
+					var regBox=$('div.register_box').html(data);
+					var windowwidth = $(window).width()+100;
+					var widthbox = $(window).width()-149;
+					var marginleft = (windowwidth-17 - $('.login_box').width()-100)/2;
+					regBox.css({position:'absolute',left:2400,top:'0px',width:widthbox+"px",'margin-left':marginleft}).show();
+					logBox.css({position:'absolute',border:'100%'});
+					$('.sha_pic').css({display:'block'});
+					$('.register-container').css({'margin-top':($(window).height()-457)/2+10});
+					logBox.animate({left:0},{duration : 700,easing : 'easeOutBack', queue:false});
+					regBox.animate({left:widthbox},{duration : 700,easing : 'easeOutBack', queue:false});
+			});
+			return false;
+		}; 
+		$('#loginForm').submit(function(){
+			if(!$('#u').val()){
+				$('#u').focus();
+				$$.showErrorMessage('emailAddress.required');
+				return false;
+			}
+			if(!$('#p').val()){
+				$('#p').focus();
+				$$.showErrorMessage('password.required');
+				return false;
+			}
+			var self = $(this);
+			BLC.ajax({url: '/app/login_post',
+				type:'get',
+				data:self.serialize()},function(data){
+					if(data.error){
+						$$.showErrorMessage(data.error);
+						return;
+					}
+					window.location.reload();
+			});
+			return false;
+		});
+	</script>
+</div>

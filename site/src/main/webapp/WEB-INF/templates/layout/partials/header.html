@@ -1,0 +1,114 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+lastScripts={};
+/*]]>*/
+</script>
+<div id="page-follow">
+	<div class="user-info nowrap grid-container">
+		<div class="h-nav-block">&nbsp;</div>
+		<div class="grid-10 tablet-grid-10">
+			<b id="curr-region" th:text="${customer.region eq null ? '' : customer.region.regionName}" />
+			<a class="sel-region" th:href="@{/region}">[切换校区]</a>
+			<a class="icon-android" th:href="@{/d/app}">
+			<span>手机版</span></a>
+			
+			
+		</div>
+		<div class="right nowrap">
+			<span id="search">
+			<blc:form th:action="@{/search}" method="GET">
+				<input type="search" class="search" name="q" th:value="${originalQuery}" placeholder="火眼金睛，尽“搜”眼底" />
+			</blc:form>
+			</span>
+			<span th:if="${customer.anonymous}" class="account hover-show underline nowrap">
+				<a class="signon" th:href="@{/login}"> <span
+					th:text="#{home.login}">登录</span>
+				</a><a class="signin" th:href="@{/register}"> <span
+					th:text="#{home.register}">注册</span>
+				</a>
+				  <div class="hover-showed bottom-left menu">
+					<blc:form th:action="@{/signin/qq}" method="POST" class="oauth"><input class="oauth oauth_qq" type="submit" value="QQ帐号" /></blc:form>
+					<blc:form th:action="@{/signin/weibo}" method="POST" class="oauth"><input class="oauth oauth_wb" type="submit" value="微博帐号" /></blc:form>
+					<blc:form th:action="@{/signin/renren}" method="POST" class="oauth"><input class="oauth oauth_rr" type="submit" value="人人帐号" /></blc:form>
+				</div>
+			</span>
+			<span th:unless="${customer.anonymous}" th:remove="tag">
+				<span><span th:text="#{home.welcome}">欢迎回来</span>, <a
+					class="my-account" th:href="@{/account}"
+					th:text="${customer.firstName ne null and customer.firstName.length() gt 10} ? ${#strings.substring(customer.firstName, 0, 10)}+'..':${customer.firstName}"></a></span><a
+					th:href="@{/logout}"> <span th:text="#{home.logout}">退出</span>
+				</a>
+			</span>
+			<span class="underline"><a th:href="@{/customer/like/show}">我的喜欢</a></span>
+			<span class="underline"><a th:href="@{/cart}" class="cart">购物车<span th:if="${cart!=null}"><sup id="cartItemCount" th:text="${cart.itemCount>0?cart.itemCount:'+1'}">+1</sup></span></a></span>
+		</div>
+	</div>
+</div>
+<div class="grid-container">
+	<h1 class="h-logo">
+		<a href="http://www.onxiao.com"><img src="/img/onxiao-logo.png" alt="在校生活" /></a>
+		<div id="nav-follow">
+		<nav id="nav2" class="nav2">
+			<blc:categories resultVar="navCategories" parentCategory="Primary Nav" />
+			<a href="http://www.onxiao.com">www.OnXiao.com</a>
+			<!-- TODO -->
+			<ul><li th:each="category : ${navCategories}"
+     	     th:if="${(customer.region ne null and (customer.region.fulfillmentLocations[0].id eq -1 and category.id ne 201 or customer.region.fulfillmentLocations[0].id eq -2 and category.id ne 102 and category.id ne 1507)) and category.active and category.categoryMedia['primary'] != null and !#strings.isEmpty(category.categoryMedia['primary'].url)}">
+      		   <a th:href="@{${category.url}}" class="nowrap">
+      		   	<img th:src="@{${category.categoryMedia['primary'].url} + '?thumbnail&amp;resize-width-amount=50&amp;resize-height-amount=50'}" />
+      		   	<span th:text="${category.name}"></span>
+     	       </a>
+    	    </li></ul>
+		</nav>
+   	    <div class="bottom-arrow"></div>
+		</div>
+	</h1>
+</div>
+<div class="header-container clearfix">
+	<header class="grid-container clearfix">
+		<div class="clearfix">
+			<div class="h-nav-block">&nbsp;</div>
+			<nav class="nav1 grid-60 tablet-grid-60 grid-parent">
+				<ul>
+					<li class="grid-20 tablet-grid-20 active"><a th:href="@{/}">首页</a></li>
+					<li class="grid-20 tablet-grid-20"><a sid="0">八戒是吃货</a></li>
+					<li class="grid-20 tablet-grid-20"><a sid="2" title="敬请期待">紫霞月光盒</a></li>
+					<li class="grid-20 tablet-grid-20"><a sid="1" title="敬请期待">师父开讲坛</a></li>
+					<li class="grid-20 tablet-grid-20"><a sid="3" title="敬请期待">沙僧比较忙</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div class="user-info-fix"> </div>
+	<div class="nav-fix"> </div>
+	<div th:if="${!(customer.region eq null) and customer.region.id==2}" class="social-share clearfix">
+		<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1327643878&amp;site=qq&amp;menu=yes"><img border="0" src="/img/callcenter_girls_blonde.png" alt="在校网客服QQ" title="在校网客服QQ" width="100%"/></a>
+		<a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=127de3f872cea3016d85898e6d1ad93ae617ebab353e64d018fc9f9eafbacc90"><img border="0" src="/img/group.png" alt="在校网用户QQ群" title="在校网用户QQ群" width="100%" /></a>
+	</div>
+	<div th:if="${!(customer.region eq null) and customer.region.id!=2}" class="social-share clearfix">
+		<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2961715148&amp;site=qq&amp;menu=yes"><img border="0" src="/img/callcenter_girls_blonde.png" alt="在校网客服QQ" title="在校网客服QQ" width="100%"/></a>
+		<a target="_blank" href="http://wp.qq.com/wpa/qunwpa?idkey=c69d08bc6c501e94480ff5c72253c5d1ab23b978d1e65c847b50a47f8f7a0cff"><img border="0" src="/img/group.png" alt="在校网用户QQ群" title="在校网用户QQ群" width="100%"/></a>
+	</div>
+	<div id="right-float" class="float-right clearfix">
+		<div class="up" id="back-to-top">
+			<div class="font-hint">回到顶部</div>
+			<div class="short-line"></div>
+		</div>
+		<div class="renren">
+			<a href="http://page.renren.com/601805898" target="_blank" style="text-decoration:none;color:white"><div class="font-hint">人人主页</div></a>
+			<div class="short-line"></div>
+		</div>
+		<!-- <div class="tecent">
+			<a href="http://2806866104.qzone.qq.com" target="_blank" style="text-decoration:none;color:white"><div class="font-hint">QQ空间</div></a>
+			<div class="short-line"></div>
+		</div> -->
+		<div class="sina">
+			<a href="http://weibo.com/onxiao" target="_blank" style="text-decoration:none;color:white"><div class="font-hint">新浪微博</div></a>
+		</div>
+		<div class="weixin">
+			<div class="font-hint">扫二维码</div>
+			<div class="qrcode_for_wexin">
+			<a></a><p>快来关注在校微信吧！</p></div>
+		</div>
+	</div>
+</div>

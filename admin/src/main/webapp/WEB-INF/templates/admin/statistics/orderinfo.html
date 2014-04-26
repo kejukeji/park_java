@@ -1,0 +1,19 @@
+<section role="main">
+	<div class="row" id="box1">
+			<div class="twelve columns">
+				共有<span th:text="${#lists.size(orderForm)}"></span>条记录
+                <table style="width: 100%;">
+                	<thead><th>订单号</th><th>用户ID</th><th>用户名</th><th>金额</th><th>详情</th></thead>
+                	<tr th:each="form:${orderForm}" th:object="${form}">
+                        <td th:text="*{orderNumber}"></td>
+						<td th:text="*{cid}"></td>
+                		<td th:text="*{username}"></td>
+                		<td th:text="*{total}"></td>
+                        <td><div th:each="orderitem:*{orderItems}" th:object="${orderitem}">
+								<span th:text="*{salePrice}"></span> # <span th:text="*{quantity}"></span>	*	<span th:text="*{name}"/>		
+						</div></td>
+                	</tr>
+                </table>
+			</div>
+		</div>
+</section>

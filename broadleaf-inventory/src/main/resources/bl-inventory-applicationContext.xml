@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <context:component-scan base-package="org.broadleafcommerce.inventory" />
+    
+    <bean class="org.broadleafcommerce.common.logging.ModuleLifecycleLoggingBean">
+        <property name="moduleName" value="broadleaf-inventory"/>
+        <property name="lifeCycleEvent" value="LOADING"/>
+    </bean>
+
+	<bean id="org.broadleafcommerce.openadmin.server.service.persistence.validation.IntegerRangeValidator" class="org.broadleafcommerce.openadmin.server.service.persistence.validation.IntegerRangeValidator"></bean>
+    
+        
+    <bean id="messageSource" class="org.broadleafcommerce.common.util.BroadleafMergeResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:/messages/InventoryMessages</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- admin-specific -->
+    <bean id="blCustomPersistenceHandlers" class="org.springframework.beans.factory.config.ListFactoryBean" scope="prototype">
+        <property name="sourceList">
+            <list>
+                <bean class="org.broadleafcommerce.inventory.admin.server.service.handler.InventoryCustomPersistenceHandler"/>
+                <!-- <bean class="org.broadleafcommerce.inventory.admin.server.service.handler.InventorySkuCustomPersistenceHandler"/> -->
+                <bean class="org.broadleafcommerce.inventory.admin.server.service.handler.FulfillmentLocationCustomPersistenceHandler"/>
+            	<bean class="org.broadleafcommerce.inventory.admin.server.service.handler.InvoicingCustomPersistenceHandler"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="blAdminInventoryPersister" class="org.broadleafcommerce.inventory.admin.server.service.handler.AdminInventoryPersister" />
+    
+    <!-- Workflows for site -->
+
+    <bean p:order="1500" id="blCheckAvailabilityActivity" class="org.broadleafcommerce.inventory.service.workflow.CheckAvailabilityActivity"/>
+
+    <bean id="blAddItemWorkflow" class="org.broadleafcommerce.core.workflow.SequenceProcessor">
+        <property name="activities">
+            <list>
+            	<ref bean="blCheckAvailabilityActivity" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="blUpdateItemWorkflow" class="org.broadleafcommerce.core.workflow.SequenceProcessor">
+        <property name="activities">
+            <list>
+            	<ref bean="blCheckAvailabilityActivity" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="blCheckoutWorkflow" class="org.broadleafcommerce.core.workflow.SequenceProcessor">
+        <property name="processContextFactory">
+            <bean class="org.broadleafcommerce.core.checkout.service.workflow.CheckoutProcessContextFactory"/>
+        </property>
+        <property name="activities">
+            <list>
+                <bean p:order="1500" class="org.broadleafcommerce.inventory.service.workflow.DecrementInventoryActivity">
+                    <property name="rollbackHandler">
+                        <bean class="org.broadleafcommerce.inventory.service.workflow.InventoryRollbackHandler"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+        <property name="defaultErrorHandler" ref="blInventoryCompensatingCheckoutErrorHandler"/>
+    </bean>
+</beans>

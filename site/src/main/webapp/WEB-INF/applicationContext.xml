@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+    
+    <bean id="blConfiguration" class="org.broadleafcommerce.common.config.RuntimeEnvironmentPropertiesConfigurer" />
+    
+    <!-- Scan Broadleaf defined web utility classes -->
+    <!--  context:component-scan base-package="org.broadleafcommerce.cms.web"/ -->
+    <context:component-scan base-package="org.broadleafcommerce.common.web"/>
+    <context:component-scan base-package="org.broadleafcommerce.core.web"/> 
+    <context:component-scan base-package="org.broadleafcommerce.profile.web"/>
+
+    <bean id="blMergedDataSources" class="org.springframework.beans.factory.config.MapFactoryBean">
+        <property name="sourceMap">
+            <map>
+                <entry key="jdbc/web" value-ref="webDS"/>
+                <entry key="jdbc/webSecure" value-ref="webSecureDS"/>
+                <entry key="jdbc/cmsStorage" value-ref="webStorageDS"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="blMergedPersistenceXmlLocations" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list>
+                <value>classpath*:/META-INF/persistence.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Set up Broadleaf messaging -->
+    <bean id="messageSource" class="org.broadleafcommerce.common.util.BroadleafMergeResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:messages</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Set up custom entity overrides. These are defined in core/src/main/resources -->
+    <bean id="blMergedEntityContexts" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list>
+                <value>classpath:applicationContext-entity.xml</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Delete this bean to enable caching - leaving it on for development is recommended -->
+    <!-- as it will allow changes made in the admin or directly on the database to be reflected -->
+    <!-- immediately. However, caching is obviously beneficial in production. -->
+    <bean id="blMergedCacheConfigLocations" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list>
+                <value>classpath:bl-override-ehcache.xml</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Delete this section to disable the embedded solr search service. Although this will result in a smaller -->
+    <!-- application footprint, it will default the search service to use the database implementation, which  -->
+    <!-- is slower and less full-featured. Broadleaf suggests maintaining this solr implementation in the vast -->
+    <!-- majority of cases. Note that you may also pass in a bean reference to a SolrServer if you would prefer -->
+    <!-- to use a standalone solr server. (The default constructor will create an embedded one at solrHome) -->
+    <bean id="solrEmbedded" class="java.lang.String">
+        <constructor-arg value="${solr.url}"/>
+    </bean>
+    <bean id="blSearchService" class="org.broadleafcommerce.core.search.service.solr.SolrSearchServiceImpl">
+        <constructor-arg name="solrServer" ref="${solr.source}" />
+    </bean> 
+    <bean id="rebuildIndexJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="blSearchService" />
+        <property name="targetMethod" value="rebuildIndex" />
+    </bean> 
+    <bean id="rebuildIndexTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+        <property name="jobDetail" ref="rebuildIndexJobDetail" />
+        <property name="startDelay" value="${solr.index.start.delay}" />
+        <property name="repeatInterval" value="${solr.index.repeat.interval}" />
+    </bean>
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="rebuildIndexTrigger" />
+            </list>
+        </property>
+    </bean>
+  
+    <!--  Broaldeaf Commerce comes with an Image Server that allows you to manipulate images.   For example, the 
+          demo includes a high resolution image for each product that is reduced in size for browsing operations -->
+    <bean id="blStaticMapNamedOperationComponent" class="org.broadleafcommerce.cms.file.service.operation.StaticMapNamedOperationComponent">
+        <property name="namedOperations">
+            <map>
+                <entry key="browse">
+                    <map>
+                        <entry key="resize-width-amount" value="400"/>
+                        <entry key="resize-height-amount" value="400"/>
+                        <entry key="resize-high-quality" value="false"/>
+                        <entry key="resize-maintain-aspect-ratio" value="true"/>
+                        <entry key="resize-reduce-only" value="true"/>
+                    </map>
+                </entry> 
+                <entry key="thumbnail">
+                    <map>
+                        <entry key="resize-width-amount" value="60"/>
+                        <entry key="resize-height-amount" value="60"/>
+                        <entry key="resize-high-quality" value="false"/>
+                        <entry key="resize-maintain-aspect-ratio" value="true"/>
+                        <entry key="resize-reduce-only" value="true"/>
+                    </map>
+                </entry>  
+            </map>
+        </property>
+    </bean>
+
+    <!-- This is an example of a custom dialect definition that uses a custom processor -->
+    <!-- The second bean registers the dialct to the blWebTemplateEngine -->
+    <!-- Note that the same thing could be done for the blEmailTemplateEngine -->
+    <!-- 
+    <bean id="myDialect" class="com.ssbusy.common.web.dialect.MyDialect">
+        <property name="processors">
+          <set>
+            <bean class="com.ssbusy.common.web.processor.MyProcessor" />
+          </set>
+        </property>     
+    </bean> 
+    <bean id="blWebTemplateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+        <property name="dialects">
+            <set>
+                <ref bean="myDialect" />
+            </set>
+        </property>
+    </bean> 
+    -->
+    
+    <!-- The following two beans are defined like this in Broadleaf Commerce. However, -->
+    <!-- you may want to override the bean definitions by uncommenting these two beans -->
+    <!-- to control whether or not templates are cacheable. This will generally be desireable -->
+    <!-- in production environments, but likely not in development environments. -->
+    <!-- 
+    <bean id="blWebTemplateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="${cache.page.templates}"/>
+        <property name="cacheTTLMs" value="${cache.page.templates.ttl}" />
+        <property name="characterEncoding" value="UTF-8" />
+    </bean> 
+    <bean id="blEmailTemplateResolver" class="org.thymeleaf.templateresolver.ClassLoaderTemplateResolver">
+        <property name="prefix" value="emailTemplates/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="${cache.page.templates}"/>
+        <property name="cacheTTLMs" value="${cache.page.templates.ttl}" />
+        <property name="characterEncoding" value="UTF-8" />
+    </bean>
+    -->
+
+
+	<bean class="com.intera.util.web.servlet.filter.JsonpCallbackFilter" id="jsonpCallbackFilter" />
+    <bean p:order="2000" id="blPaymentServiceActivity" class="com.ssbusy.payment.MyPaymentServiceActivity"/>
+    <bean id="blPriceTextDisplayProcessor" class="org.broadleafcommerce.core.web.processor.PriceTextDisplayProcessorEx"></bean>
+	<bean id="blRelatedProductsService" class="org.broadleafcommerce.core.catalog.service.RelatedProductsServiceImplEx"></bean>
+	<bean id="blRelatedProductProcessor" class="org.broadleafcommerce.core.web.processor.RelatedProductProcessorEx"></bean>
+	<bean id="blHeadProcessor" class="org.broadleafcommerce.core.web.processor.HeadProcessorEx"></bean>
+	<bean id="blCategoriesProcessor" class="com.ssbusy.site.process.MyCategoriesProcessor"></bean>
+
+</beans>

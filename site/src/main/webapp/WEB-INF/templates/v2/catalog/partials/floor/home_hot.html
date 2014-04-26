@@ -1,0 +1,35 @@
+<div th:if="*{flrTab.subCategory.categoryMedia['alt1'] ne null  &amp;&amp; flrTab.subCategory.categoryMedia['alt1'].tags ne null}" class="bind_pic_first grid-20 tablet-grid-25 clear_padding clear_left_padding clear_right_padding first-margin-right">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt1'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt1].url}"/>
+	</a>
+</div>
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile  clear_padding right" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+<div th:each="gridCat,gridStats:*{flrTab.subCategory.childCategoryXrefs}" th:if="${gridStats.index lt 3}" th:remove="tag">
+	<div th:if="${gridCat.subCategory.url ne null}" class="flr-grid height-helf grid-20 tablet-grid-25  clear_padding hover_layer">
+    	<a th:if="${gridCat.subCategory.url ne null}" th:href="${gridCat.subCategory.url}">
+    		<img class="hidden_layer" th:if="${gridCat.subCategory.categoryMedia['alt6']}" th:src="@{${gridCat.subCategory.categoryMedia['alt6'].url}}"/>
+    		<div class="hover_visible">
+    			<img class="border_readious" th:if="${gridCat.subCategory.categoryMedia['alt6']}" th:src="@{${gridCat.subCategory.categoryMedia['alt6'].url}}" width="88px" height="88px"/>
+    			<br /><span th:text="${gridCat.subCategory.name}"></span>
+    		</div>
+		</a>
+	</div>
+</div>
+<div>
+	<blc:related_products relatedProductsResultVar="floorProducts" type="'CROSS_SALE'" categoryId="*{flrTab.subCategory.id}" quantity="3" />
+    <div th:each="floorProducts:${floorProducts}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}">  
+    	<div th:if="*{media['alt6']}" class="flr-grid height-helf grid-20 tablet-grid-25  clear_padding hover_layer">
+    		<a th:href="@{*{url}}">
+				<img class="hidden_layer" th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+        		<div class="hover_visible">
+        			<img class="border_readious" th:if="*{media['alt6']}" th:src="@{*{media['alt6'].url}}" width="88px" height="88px"/>
+        			<br /><span th:text="*{name}"></span>
+        		</div>
+			</a>
+    	</div>
+    </div>
+</div>

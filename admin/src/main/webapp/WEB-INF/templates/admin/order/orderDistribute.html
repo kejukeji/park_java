@@ -1,0 +1,257 @@
+<style>
+#notification_bar,#order_notification_bar {
+	width: 100%;
+	height: 30px;
+	background-color: #3e0000;
+	margin-bottom: 5px;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	font: 16px/40px 'Open Sans', Helvetica, sans-serif;
+	font-weight: 600;
+	display: none;
+	position: fixed;
+	z-index: 999;
+	line-height: 24px;
+	border-bottom: 3px solid #E40037;
+	height: auto;
+}
+#notification_bar{
+bottom:0;
+}
+.table-warn{
+ margin:auto;
+ align:center;
+}
+</style>
+<div id="order_notification_bar"></div>
+<section role="main">
+	<audio id="media" src="aa.mp3"></audio>
+	<div class="row">
+		<div class="seven columns">
+			<form action="" method="GET" class="custom-entity-search">
+				<div class="row">
+					<div class="six columns">
+						<input type="search" placeholder="OrderNumber"
+							style="height: 28px; width: 100%" />
+					</div>
+					<div class="four columns">
+						<a class="button small dark radius" href="#"> <i
+							class="icon-search"></i>&nbsp;搜索
+						</a>
+					</div>
+					<div class="two columns">&nbsp;</div>
+				</div>
+			</form>
+		</div>
+		<div class="twelve columns">
+			<div id="sectionKey" style="display: none;">Distribute</div>
+			<div class="listgrid-container">
+				<div class="tabs-container">
+					<dl class="tabs entity-form">
+						<dd class="active">
+							<a href="#tab1">已提交订单</a>
+						</dd>
+						<dd class="">
+							<a href="#tab2">正在配货订单</a>
+						</dd>
+						<dd class="">
+							<a href="#tab3">已配货订单</a>
+						</dd>
+					</dl>
+				</div>
+				<ul class="tabs-content">
+					<li class="tab1Tab active" style="display: block;">
+						<div class="listgrid-toolbar"></div> <blc:form
+							th:action="@{/order-distributing-detail}" method="post">
+							<div class="listgrid-header-wrapper">
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 100% 100%;">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" onclick="tabTabCheckClick(this)" /></th>
+											<th scope="col" style="width: 130px;">订单号</th>
+											<th scope="col" style="width: 70px;">订单状态</th>
+											<th scope="col" style="width: 70px;">订单金额</th>
+											<th scope="col" style="width: 100px;">配送时间</th>
+											<th scope="col" style="width: 100px;">提交日期</th>
+										</tr>
+									</thead>
+								</table>
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 100%;">
+									<thead>
+										<tr th:each="order:${submittedOrders}" th:object="${order}">
+											<th scope="col" style="width: 20px;"><input
+												class="checkbox count" type="checkbox" name="order_id"
+												th:value="*{id}" /></th>
+											<th scope="col" style="width: 130px;"><a
+												th:href="@{*{'/order-detail/'+id}}" target="_blank"
+												th:text="*{orderNumber}"></a></th>
+											<th scope="col" style="width: 70px;"
+												th:text="#{'orderStatus.'+*{status.friendlyType}}"></th>
+											<th scope="col" style="width: 70px;" th:text="*{total}"></th>
+											<th scope="col" style="width: 100px;"
+												th:text="*{delieverDete}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{submitDate}"></th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<span class="listgrid-table-footer"><input type='submit'
+								class="button" value='去配货' /></span>
+						</blc:form>
+
+					</li>
+					<li class="tab2Tab" style="display: none;">
+						<div class="listgrid-toolbar"></div> <blc:form
+							th:action="@{/order-distributed-do}" method="post">
+							<div class="listgrid-header-wrapper">
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" onclick="tabTabCheckClick(this)" /></th>
+											<th scope="col" style="width: 130px;">订单号</th>
+											<th scope="col" style="width: 70px;">订单状态</th>
+											<th scope="col" style="width: 70px;">订单金额</th>
+											<th scope="col" style="width: 100px;">提交日期</th>
+										</tr>
+									</thead>
+								</table>
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr th:each="order:${distributingOrders}" th:object="${order}">
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" name="order_id" th:value="*{id}" /></th>
+											<th scope="col" style="width: 130px;"><a
+												th:href="@{*{'/order-detail/'+id}}" target="_blank"
+												th:text="*{orderNumber}"></a></th>
+											<th scope="col" style="width: 70px;"
+												th:text="#{'orderStatus.'+*{status.friendlyType}}"></th>
+											<th scope="col" style="width: 70px;" th:text="*{total}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{submitDate}"></th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<span class="listgrid-table-footer"><input type='submit'
+								class="button" value='完成配货' /></span>
+						</blc:form>
+					</li>
+					<li class="tab3Tab" style="display: none;">
+						<div class="listgrid-toolbar"></div> <blc:form
+							th:action="@{/order-process/order-complete}" method="post">
+							<div class="listgrid-header-wrapper">
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-currenturl="https://localhost:8444/order"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" onclick="tabTabCheckClick(this)" /></th>
+											<th scope="col" style="width: 130px;">订单号</th>
+											<th scope="col" style="width: 70px;">订单状态</th>
+											<th scope="col" style="width: 70px;">订单金额</th>
+											<th scope="col" style="width: 100px;">提交日期</th>
+										</tr>
+									</thead>
+								</table>
+								<table
+									class="list-grid-table responsive twelve table-hover table-hover"
+									data-currenturl="https://localhost:8444/order"
+									data-path="/order" data-listgridtype="main"
+									id="listGrid-main-header" style="width: 595.19999998100791px;">
+									<thead>
+										<tr th:each="order:${distributedOrders}" th:object="${order}">
+											<th scope="col" style="width: 20px;"><input
+												type="checkbox" name="order_id" th:value="*{id}" /></th>
+											<th scope="col" style="width: 130px;"><a
+												th:href="@{*{'/order-detail/'+id}}" target="_blank"
+												th:text="*{orderNumber}"></a></th>
+											<th scope="col" style="width: 70px;"
+												th:text="#{'orderStatus.'+*{status.friendlyType}}"></th>
+											<th scope="col" style="width: 70px;" th:text="*{total}"></th>
+											<th scope="col" style="width: 100px;" th:text="*{submitDate}"></th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<span class="listgrid-table-footer"></span>
+						</blc:form>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</section>
+<div id="notification_bar"></div>
+<script>
+	var tabTabCheckClick = function(e) {
+		try {
+			$("thead tr input").prop("checked", $(e).is(':checked'));
+		} catch (err) {
+			log.console(err);
+		}
+
+	}
+</script>
+<script type="text/javascript" th:inline="text">
+/*<![CDATA[*/
+self.setInterval(warn, 2000);
+function warn() {
+	var lastTime = new Date();
+	var ms = lastTime.getTime();
+	$.ajax({
+		type : "get",
+		url : '[[@{/order-warn}]]',
+		data : {
+			lastTime : ms - 2000
+		},
+		dataType : "html"
+	}).done(function(data) {
+		if (data> 0) {
+			document.getElementById("media").play();
+			showNotification("有" + data + "张新订单",2000,"#order_notification_bar");
+			var list = document.getElementsByClassName("count");
+		/* 	var i=0;
+			for(i=0;i<list.length;i++)
+			{
+				if(list[i].value==data[data.length-1])
+					break;
+			}
+			if(i>=list.length){
+				location.reload();
+			} */
+			if(list.length!=data)
+				 location.reload();
+    		}
+		 
+	});
+}
+/*]]>*/
+</script>
+<script type="text/javascript" th:inline="javascript">
+   /*<![CDATA[*/
+function showNotification(notification, delay,id) {
+        if (!delay) {
+            delay = '3500';
+        }
+        $(id).html(notification).slideToggle('slow').delay(delay).slideToggle('slow');
+}
+    /*]]>*/
+</script>

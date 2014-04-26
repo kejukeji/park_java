@@ -1,0 +1,20 @@
+<div class="manage-account-form-wrapper">   
+    <p class="success" th:if="${successMessage}" th:text="${successMessage}"></p>
+    <h2>Óà¶î¸¶¿î</h2>
+    
+    <blc:form class="manage-account" action="#" th:action="@{/checkout/balancepay}" th:object="${changePasswordForm}" method="POST" style="width: 400px;">
+        <span th:text="*{balance}"></span>
+        <div class="form100">
+            <label for="Password">Password:</label>
+            <span class="error" th:if="${#fields.hasErrors('currentPassword')}" th:errors="*{currentPassword}"></span>
+            <input type="password" name="Password" id="Password" class="field50"/>
+        </div>
+        
+        <div class="form100">
+            <label for="newPasswordConfirm">Confirm New Password:</label>
+            <span class="error" th:if="${#fields.hasErrors('newPasswordConfirm')}" th:errors="*{newPasswordConfirm}"></span>
+            <input type="password" name="newPasswordConfirm" id="newPasswordConfirm" th:field="*{newPasswordConfirm}" class="field50" th:classappend="${#fields.hasErrors('newPasswordConfirm')}? 'fieldError'"/>
+        </div>
+        <input type="submit" class="medium red" value="Submit" />
+    </blc:form>
+</div>

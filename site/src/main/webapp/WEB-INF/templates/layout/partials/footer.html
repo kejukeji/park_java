@@ -1,0 +1,85 @@
+<div class="footer-container">
+    <footer class="grid-container">
+    	<div class="grid-20 tablet-grid-20"><div class="footer-item help"></div>
+    	<dl>
+    		<dt>购物指南</dt>
+    		<hr class="faded" />
+    		<dd><a th:href="@{/about/aboutus}" target="_blank">新手指南</a></dd>
+    		<!--<dd><a href="#" target="_blank">积分规则</a></dd>-->
+    	</dl>
+    	</div><div class="grid-20 tablet-grid-20"><div class="footer-item fulfillment"></div>
+    	<dl>
+    		<dt>配送方式</dt>
+    		<hr class="faded" />
+    		<dd><a th:href="@{/about/range-time}" target="_blank">筋斗云配送</a></dd>
+    		<dd><a th:href="@{/about/range-time}" target="_blank">配送时间(范围)</a></dd>
+    	</dl>
+    	</div><div class="grid-20 tablet-grid-20"><div class="footer-item billing"></div>
+    	<dl>
+    		<dt>支付方式</dt>
+    		<hr class="faded" />
+    		<dd><a th:href="@{/about/payment-type}" target="_blank">货到付款</a></dd>
+    		<dd><a th:href="@{/about/payment-type}" target="_blank">充值卡余额支付</a></dd>
+            <dd><a th:href="@{/about/payment-type}" target="_blank" class="open_notice">支付宝支付<br /></a></dd>
+    		<dd><a th:href="@{/about/payment-type}" target="_blank" class="open_notice">仙丹换购<br /></a></dd>
+    	</dl>
+    	</div><div class="grid-20 tablet-grid-20"><div class="footer-item services"></div>
+    	<dl>
+    		<dt>售后服务</dt>
+    		<hr class="faded" />
+    		<dd><a th:href="@{/about/aftersales}" target="_blank">退换货保障</a></dd>
+    		<dd><a th:href="@{/about/aftersales}" target="_blank">隐私保护</a></dd>
+    		<dd><a th:href="@{/about/aftersales}" target="_blank">投诉建议</a></dd>
+    	</dl>
+    	</div><div class="grid-20 tablet-grid-20"><div class="footer-item about"></div>
+    	<dl>
+    		<dt>关于我们</dt>
+    		<hr class="faded" />
+    		<dd><a th:href="@{/about/aboutus}" target="_blank">关于在校网</a></dd>
+    		<dd><a href="#" target="_blank">加入我们</a></dd>
+    		<dd><a href="#" target="_blank">合作加盟</a></dd>
+    		<!-- <dd><a href="http://page.renren.com/601805898" target="_blank">人人主页</a></dd>
+    		<dd><a href="http://weibo.com/onxiao" target="_blank">新浪微博</a></dd>
+    		<dd><a href="http://2806866104.qzone.qq.com" target="_blank">QQ空间</a></dd> -->
+    	</dl>
+    	</div>
+    </footer>
+    <p class="copy">Copyright &copy;2013-2014 OnXiao.com, All Rights Reserved 浙ICP备13037286号-2</p>
+</div>
+
+<blc:bundle name="ssbusy9.js" mapping-prefix="/js/"
+            files="libs/jquery-1.10.1.min.js,
+            BLC.js,
+            libs/jquery.fancybox.pack.js,
+			jquery.validate.js,
+            innerAddress.js,
+	   		ssbusy.js" />
+
+<script type="text/javascript">
+/*<![CDATA[*/
+	$(window).scroll(function(){
+		if($(window).scrollTop() > 95) {
+			$('#nav-follow').addClass('following');
+			$('#page-follow').addClass('following');
+		} else {
+			$('#page-follow').removeClass('following');
+			$('#nav-follow').removeClass('following');
+		}
+	});
+	$('#nav-follow').hover(function(e){
+		var u = $('#nav2 ul');
+		var h = u.data('h');
+		u.animate({height:h||'100%'}, 200, null, function() {
+			h || u.data('h', u.height());
+			$('#nav2').next().addClass('nav-up');
+		});
+	},function(e){
+		$('#nav2 ul').animate({height:'0'}, 200);
+		$('#nav2').next().removeClass('nav-up');
+	});
+
+	if(lastScripts)
+	 for(var f in lastScripts)
+		(lastScripts[f])();
+/*]]>*/
+</script>

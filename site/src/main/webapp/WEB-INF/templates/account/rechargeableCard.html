@@ -1,0 +1,25 @@
+
+<div class="integral-form">
+	<span class="title">账户余额</span>
+	<br/>
+	<br/>
+	<span class="label">账户余额:</span>
+	<span class="label" th:text="'￥'+*{balance}" style="width:20em;"></span><br/><br/>
+	<div class="panel">
+	    	<div class="content grid-parent">
+	    		<div class="head content-line grid-100 tablet-grid-100 grid-parent">
+	    			<div class="grid-25 tablet-grid-25" style="border-left:0px">充值卡号</div>
+	    			<div class="grid-20 tablet-grid-20">密码</div>
+	    			<div class="grid-25 tablet-grid-25">金额</div>
+	    			<div class="grid-30 tablet-grid-30">充值时间</div>
+	    		</div>
+	    		<div th:each="card:${cards}" th:object="${card}" class="content-line grid-100 tablet-grid-100 grid-parent">
+	    			<div class="grid-25 tablet-grid-25" th:text="*{card_id}"></div>
+	    			<div class="grid-20 tablet-grid-20" th:text="*{card_password}"></div>
+	    			<div class="grid-25 tablet-grid-25" th:text="*{card_value}"></div>
+	    			<div class="grid-30 tablet-grid-30" th:text="*{recharge_time}"></div>	
+	    		</div>
+	    		
+	    	</div>
+	</div>
+</div>

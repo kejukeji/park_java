@@ -1,0 +1,117 @@
+<style>
+	.xianlu .trave_reclayer{
+		position:relative;
+	}
+	.xianlu .travel_msk{
+		width:620px;
+		height:100%;
+		position:absolute;
+		background-color:#393939;
+		opacity:0;
+		left:0;
+		top:0;
+	}
+	.xianlu .text_title,.xianlu .sub_title,.xianlu .travel_rec{
+		position:asolute;
+		right:700px;
+		top:130px;
+		font-size:4em;
+		color:white;
+		white-space: nowrap;
+	}
+	.xianlu .sub_title{
+		top:186px;
+		font-size: 1.15em;
+		font-family: "Microsoft YaHei";
+	}
+	.xianlu .travel_rec{
+		font-size: 1.15em;
+		font-family: "Microsoft YaHei";
+		top:214px;
+	}
+	.xianlu .travel_msk1{
+		background-color:#7f0b01;
+		opacity:0;
+	}
+	.xianlu .travel_msk2{
+		background-color:#305900;
+		opacity:0;
+	}
+	.xianlu .bg_text2{
+		width:111px;
+		height:111px;
+		position:absolute;
+		top:-120px;
+		left:45px;
+		background: url(//img.onxiao.com/img/Sprites.png) -110px -1189px no-repeat;
+	}
+	.xianlu .bg_text1{
+		width:120px;
+		height:111px;
+		position:absolute;
+		left:40px;
+		top:-120px;
+		background: url(//img.onxiao.com/img/Sprites.png) -243px -1190px no-repeat;
+	}
+	.xianlu .sub_title1{
+		position:absolute;
+		color:white;
+		bottom:-20px;
+		text-align:center;
+		width:100%;
+	}
+	.xianlu .tag-name{
+		background-color:#3a3a3a;
+		color:white;
+		padding-left:5px;
+		padding-right:5px;
+		padding-top:-2px;
+		margin-left:5px;
+		border-radius:3px;
+	}
+	.xianlu div.travel_rec a{
+		padding:0;
+		font-size:1em;
+	}
+</style>
+        
+<div class="grid-15 flr-grid-s hide-on-tablet hide-on-mobile grid-parent right" th:if="*{flrTab.subCategory.categoryMedia['alt2'] ne null}">
+	<a th:href="*{flrTab.subCategory.categoryMedia['alt2'].tags}">
+		<img th:src="*{flrTab.subCategory.categoryMedia[alt2].url}"/>
+	</a>
+</div>
+<div class="xianlu">
+	<blc:related_products relatedProductsResultVar="floorProducts" type="'CROSS_SALE'" categoryId="*{flrTab.subCategory.id}" quantity="3" />
+	<div th:each="floorProducts,floorStats:${floorProducts}" th:object="${floorProducts.relatedProduct}" th:unless="${#lists.isEmpty(floorProducts)}">  
+		<div th:if="${floorStats.index==0}" class="grid-60 flr-grid-b tablet-grid-75 grid-parent flr-grid-three first-margin-right trave_reclayer">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+                <div class="travel_msk"></div>
+                <div class="text_title" th:if="*{productAttributes['name']}" th:utext="*{productAttributes['name'].value}" />
+                <div class="sub_title" th:if="*{productAttributes['subname']}" th:utext="*{productAttributes['subname'].value}"></div>
+                <div class="travel_rec">
+                    <span style="background-color:#2a607c;padding-left:10px;padding-right:10px;margin-right:5px;border-radius:3px;">旅游推荐</span><span th:if="*{productAttributes['tag']}" th:utext="*{productAttributes['tag'].value}"></span>
+				</div>
+			</a>
+    	</div>
+		<div th:if="${floorStats.index==1}" class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent trave_reclayer">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+				<div class="travel_msk travel_msk1"></div>
+                <div class="bg_text1"></div>
+                <div class="sub_title1" th:if="*{productAttributes['subname']}" th:utext="*{productAttributes['subname'].value}"></div>
+			</a>
+    	</div>
+		<div th:if="${floorStats.index==2}" class="flr-grid height-helf grid-20 tablet-grid-25 grid-parent trave_reclayer">
+    		<a th:if="*{media['alt6']}" th:href="@{*{url}}">
+				<img th:if="*{media['alt6']}" th:alt="*{name}" th:src="@{*{media['alt6'].url}}"/>
+				<div class="travel_msk travel_msk2"></div>
+                <div class="bg_text2"></div>
+                <div class="sub_title1">
+					<span th:if="*{productAttributes['subname']}" th:utext="*{productAttributes['subname'].value}">
+					</span>
+				</div>
+			</a>
+    	</div>
+    </div>
+</div>

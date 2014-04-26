@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<blc:head pageTitle="${'吃货雷达 ' + param.q + ' - 在校网'}" th:attr="head=(${session.uiv2 ne null and session.uiv2}?'v2/layout/partials/head':'')" additionalCss="/css/waterfall.css?v=9.css" />
+
+<body th:class="${session.uiv2 ne null and session.uiv2?'v2':''}">
+    <header th:substituteby="${session.uiv2 ne null and session.uiv2?'v2/layout/partials/header':'layout/partials/header'}" />
+
+    <div id="content" class="grid-container width_setter group" role="main">
+        <section class="grid-25 tablet-grid-25">
+            <header style="margin:2em 0;"><span th:text="#{search.filterSearch}">Filter your search</span></header>
+            <div id="options">
+                <div th:substituteby="catalog/partials/facetFilter" />
+                <section th:unless="${#lists.isEmpty(products)}">
+                    <header><span th:text="#{search.featuredProducts}">Featured Products</span></header>
+                    <div id="options">
+                        <div class="section">
+                             <blc:related_products productsResultVar="rProducts" productId="${products[0].id}" quantity="3" />     
+                             <ul id="featured_products" class="group">
+                                <li th:each="product : ${rProducts}" th:object="${product}" th:include="catalog/partials/productListItem" class="product_container"></li>
+                             </ul>
+                        </div>                                  
+                    </div>
+                </section>  
+                
+            </div>
+        </section>
+        <section class="grid-75 tablet-grid-75">
+            <header>
+                <h1 th:inline="text">
+                    <span>吃货雷达： [[${originalQuery}]]</span>
+                </h1>
+            </header>
+            <ul id="products" class="wf-grid effect-6">
+            	<style>.wf-grid li.wf {width: 33.3%;}</style>
+            	<li th:if="${#lists.isEmpty(products)}">没找到哎，再试试吧～</li>
+            	<li th:unless="${#lists.isEmpty(products)}" th:substituteby="catalog/partials/productWaterfallItem"></li>
+            </ul>
+        </section>
+    </div>
+
+	<footer th:substituteby="${session.uiv2 ne null and session.uiv2?'v2/layout/partials/footer' : 'layout/partials/footer'}" />
+	<blc:bundle th:unless="${session.uiv2 ne null and session.uiv2}" name="category1.js" mapping-prefix="/js/"
+            files="libs/masonry.pkgd.min.js,
+            libs/imagesloaded.pkgd.min.js,
+            libs/classie.js,
+            libs/AnimOnScroll.js,
+            heatClinic.js" />
+	<script th:inline="text">
+	// <![CDATA[
+		if(window.lazyJs) {
+			lazyJs[lazyJs.length] = ['/js/libs/masonry.pkgd.min.js',
+				'/js/libs/imagesloaded.pkgd.min.js' ,'/js/libs/classie.js', '/js/libs/AnimOnScroll.js', '/js/heatClinic.js'];
+		}
+		[[${session.uiv2 ne null and session.uiv2?'lastScripts[lastScripts.length] = function()':''}]]
+		{
+		function animOnScroll() {
+			new AnimOnScroll( document.getElementById( 'products' ), {
+				itemSelector: 'li.wf',
+				minDuration : 0.4,
+				maxDuration : 0.7,
+				viewportFactor : 0.2
+			} );
+		};
+		animOnScroll();
+
+		/// scroll to bottom trigger ajax data fetch
+		var curPage = 1;
+		$(window).scroll(function () {
+			var self = $(this);
+		    if(!self.data('scroll-fetching')) {
+		        if (self.height() + self.scrollTop() >= $(document).height() - 300) {
+		            self.data('scroll-fetching', true);
+		            var url = window.location.href; // TODO use specific url, for perf?
+		            var idx = url.indexOf('?');
+		            if(0 > idx)
+		            	url += '?page=' + (++curPage);
+		            else {
+		            	url = url.substr(0, idx+1) + 'page=' + (++curPage) + '&' + url.substr(idx+1);
+		            }
+		            $.ajax({ url: url,
+		                type: "get",
+		                cache: false,
+		                success: function(html){
+		                	if(html.length == 0)
+		                		return;
+		                	$('ul#products').append(html);
+		                	animOnScroll();
+				            self.data('scroll-fetching', false);
+		                }
+		            });
+		        }
+		    }
+		});
+		}
+	// ]]>
+	</script>
+</body>
+</html>

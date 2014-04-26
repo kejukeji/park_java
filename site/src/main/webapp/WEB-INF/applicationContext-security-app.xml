@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sec="http://www.springframework.org/schema/security" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+	<!-- Add this file to the patchConfigLocation contextParam in the web.xml 
+		file to activate RESTful web services. Also, ensure that the RESTApiServlet 
+		and servlet mapping are uncommented and/or configured in web.xml. -->
+	<bean id="loginUrlAuthEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="useForward" value="true"></property>
+		<property name="loginFormUrl" value="/app/login"></property>
+	</bean>
+	<bean id="simpleFailureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<property name="useForward" value="true"></property>
+		<property name="defaultFailureUrl" value="/app/login?error=1"></property>
+	</bean>
+	<bean id="simpleSuccessHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+		<property name="alwaysUseDefaultTargetUrl" value="true"></property>
+		<property name="defaultTargetUrl" value="/app/logined"></property>
+		<property name="redirectStrategy">
+			<bean class="org.springframework.security.web.ForwardRedirectStrategy"></bean>
+		</property>
+	</bean>
+	
+	<!-- Set up Spring security for the RESTful API -->
+	<sec:http pattern="/app/**" auto-config="false"
+		authentication-manager-ref="blAuthenticationManager" entry-point-ref="loginUrlAuthEntryPoint" access-denied-page="/app/login">
+		<sec:session-management
+			session-fixation-protection="none" />
+		<sec:remember-me key="myAppKey" services-ref="blcRememberMeService"></sec:remember-me>
+		<sec:intercept-url pattern="/app/account/**" access="ROLE_USER" />
+
+		<!-- Define the login form along with the success and failure handlers -->
+		<sec:form-login login-page="/app/login"
+			default-target-url="/app/logined" authentication-failure-handler-ref="simpleFailureHandler"
+			authentication-success-handler-ref="simpleSuccessHandler"
+			authentication-failure-url="/app/login?error=1" login-processing-url="/app/login_post"
+			username-parameter="u" password-parameter="p"
+			always-use-default-target="true" />
+
+		<!-- Provide the logout handler -->
+		<sec:logout delete-cookies="ActiveID" invalidate-session="true"
+			logout-url="/logout" />
+
+		<!-- Specify our custom filters -->
+		<sec:custom-filter ref="blPreSecurityFilterChain"
+			before="CHANNEL_FILTER" />
+		<sec:custom-filter ref="blCsrfFilter" before="FORM_LOGIN_FILTER" />
+		<sec:custom-filter ref="blCustomerStateFilter"
+			after="REMEMBER_ME_FILTER" />
+		<sec:custom-filter ref="blSessionFixationProtectionFilter"
+			before="SESSION_MANAGEMENT_FILTER" />
+		<sec:custom-filter ref="blPostSecurityFilterChain"
+			after="SWITCH_USER_FILTER" />
+	</sec:http>
+
+	<bean id="hackAuthFilterPostOnly" class="com.ssbusy.controller.app.util.HackAuthFilterPostOnly">
+		<constructor-arg index="0" value="/app/login_post"></constructor-arg>
+	</bean>
+</beans>

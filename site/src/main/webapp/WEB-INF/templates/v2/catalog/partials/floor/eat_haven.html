@@ -1,0 +1,106 @@
+<style>
+	.haven-floor{background-color:#f8f8f8;border:1px solid #f1f1f1;padding:4px 0 0 0;height:386px;}
+	.haven-floor nav {margin-top: 2em;}
+	.haven-floor nav .tab {display: block;text-align: center;line-height: 3em;color:#a8a8a8;font-size: 1.2em;}
+	.haven-floor nav .tab.active {color:#DF7332;}
+	.haven-floor .tab-content {width:100%;height:100%;}
+	.haven_title{
+		margin-top:30px;
+	}
+	.haven_title .have_name{
+		height:45px;
+		background: url(//img.onxiao.com/img/Sprites.png) -14px -485px;
+	}
+	.haven-floor .flr-content{
+		padding-bottom:0;
+	}
+	
+	@media screen and (min-width: 1025px) {
+	.haven-floor .flr-grid {overflow:hidden;margin-left:0.5%;margin-right:0.5%;}
+	}
+	.hover_layer{
+		position:relative;
+	}
+	.border-shadow{
+		border:1px solid #f15151;
+		box-shadow:5px 5px 0 #eaeaea;
+	}
+	.hover_visible{
+		position:absolute;
+		background:white;
+		height:100%;
+		width:100%;
+		text-align:center;
+		cursor:pointer;
+		top:-200px;
+	}
+	.hover_layer .hover_visible .border_readious{
+		margin-top:28px;
+		margin-bottom:10px;
+		border-radius: 45px;
+	}
+	.haven_more{
+		text-align:right;
+		margin-top:24px;
+	}
+	
+	.haven_more .desc_tab{
+		display:none;
+	}
+	.haven_more .desc_tab.active{
+		display:block;
+	}
+	.desc_tab p{
+		margin:0;
+		padding:0;
+	}
+	.haven-floor .haven_container{
+		overflow:hidden;
+		width:100%;
+		height:100%;
+	}
+	.title_absolute{
+		position:relative;
+		overflow:hidden;
+		width:100%;
+		height:20px;
+	}
+	.tab-ico{
+		padding-left:40px;
+		display:inline-block;
+	}
+	.haven_tabs .tab-0 .tab-ico{background:url(//img.onxiao.com/img/Sprites.png) -106px -1038px  no-repeat;} 
+	.haven_tabs .active.tab-0 .tab-ico {background-position:-274px -1038px;}
+	.haven_tabs .tab-1 .tab-ico{background:url(//img.onxiao.com/img/Sprites.png) -106px -1083px  no-repeat;} 
+	.haven_tabs .active.tab-1 .tab-ico {background-position:-274px -1083px;}
+	.haven_tabs .tab-2 .tab-ico{background:url(//img.onxiao.com/img/Sprites.png) -106px -1127px  no-repeat;} 
+	.haven_tabs .active.tab-2 .tab-ico {background-position:-274px -1127px;}
+</style>
+<div class="haven_title">
+    <div class="have_name grid-20 tablet-grid-20 grid-parent"></div>
+	<div class="haven_more grid-80 tablet-grid-80">
+		<div class="title_absolute">
+    		<span th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}">
+                <span class="desc_tab" th:classappend="${tabStats.index==0?'tab'+tabStats.index+' active':'tab'+tabStats.index}">
+                <span  th:utext="*{longDescription}"/>
+    			</span>
+    		</span>
+		</div>
+	</div>
+</div>
+<div class="haven-floor grid-100 tablet-grid-100">
+	<nav class="grid-15 tablet-grid-15 haven_tabs">
+		<a th:each="flrTab,tabStats:${floor.childCategoryXrefs}" th:object="${flrTab.subCategory}"
+			th:attr="key='tab'+${tabStats.index}" th:class="${'tab tab-'+tabStats.index}" th:classappend="${tabStats.index==0?'active':''}">
+			<style th:text="${flrTab.subCategory.getCategoryAttributeByName('icon-class')}" />
+			<span class="tab-ico" th:text="*{name}" />
+		</a>
+	</nav>
+	<div class="flr-content tab-contents grid-85 tablet-grid-85 grid-parent">
+		<div class="haven_container">
+        	 <div th:each="flrTab,tabStats:${floor.childCategoryXrefs}" class="clearfix tab-content" th:classappend="${tabStats.index eq 0 ? 'active tab' + tabStats.index:'tab' + tabStats.index}">
+        		<div th:substituteby="${#strings.isEmpty(flrTab.subCategory.displayTemplate)?'/v2/catalog/partials/floor/default_floor':flrTab.subCategory.displayTemplate}"></div>
+        	 </div>
+		</div>
+	</div>
+</div>

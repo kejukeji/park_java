@@ -1,0 +1,49 @@
+<div class="order-details-container" th:object="${order}">
+<div class="cart-inner">
+	<div class="cart-thead clearfix">
+        <div class="column t-goods grid-45">商品</div>
+        <div class="column t-promotion grid-10">送仙丹</div>
+        <div class="column t-price grid-10">在校价</div>
+        <div class="column t-quantity grid-15">数量</div>
+		<div class="column t-subtotal grid-10">优惠</div>
+		<div class="column t-subtotal grid-10">小计</div>
+	</div><!-- end cart-thead -->
+	<div class="cart-tbody" id="product-list">
+		  <div class="item_form clearfix" th:each="item : ${order.orderItems}" th:object="${item}" th:id="${'productRow' + item.id}">
+            <div class="cell p-goods grid-45">
+                <div class="p-img">
+					<a th:if="*{sku.product.url}" th:href="@{*{sku.product.url}}" target="_blank">
+					<img th:if="*{sku.product.media['primary']}" th:src="@{*{sku.product.media['primary'].url} + '?thumbnail'}" width="60" th:alt="*{name}" />
+					</a>
+				</div>    
+                <div class="p-name">
+					<a th:href="@{*{sku.product.url}}" target="_blank">
+						<span th:text="*{name}"></span><br th:if="*{sku.description}" />
+						<span th:if="*{sku.description}" th:text="*{sku.description}"></span>
+					</a>
+                    <br/>
+                     <blc:product_option_display orderItem="${item}" >
+                        <ul th:unless="${#lists.isEmpty(productOptionDisplayValues)}" class="productOptions">
+                            <li th:each="entry: ${productOptionDisplayValues}">
+                              <span  th:text="${entry.key} + ': ' + ${entry.value}"></span>
+                            </li>
+                        </ul>
+                    </blc:product_option_display>
+                    <ul th:if="${item instanceof T(org.broadleafcommerce.core.order.domain.BundleOrderItem)}">
+                        <li th:each="doi : *{discreteOrderItems}" th:text="${doi.quantity + ' x ' + doi.name}" />
+                    </ul>
+				</div>    
+            </div>
+            <div class="cell p-promotion grid-10">-</div>
+            <div class="cell p-price grid-10"><span class="price" blc:price="*{getPriceBeforeAdjustments(true)}"></span></div>
+            <div class="cell grid-15">
+                <span th:text="*{quantity}"/>
+            </div>
+			<div class="cell grid-10" style="color:rgb(0, 148, 0);" th:text="*{'-' + (totalAdjustmentValue.zero?'':totalAdjustmentValue.amount)}">
+            </div>
+			<div class="cell price grid-10" blc:price="*{totalPrice}">
+            </div>   
+        </div>
+    </div>
+</div><!-- end cart-inner -->
+</div>

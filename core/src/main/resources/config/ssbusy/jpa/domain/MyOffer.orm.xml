@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd" version="2.0">
+	<named-query name="FIND_UNOWNED_OFFER_CODE">
+		<query>
+        	from com.ssbusy.core.offer.domain.MyOfferCode c where c.id&gt;0 and
+        	c.offer.id=:offerId and c.ownerCustomerId is null and c.userCustomerId is null
+       </query>
+	</named-query>
+
+	<named-query name="UPDATE_OWN_OFFER_CODE">
+		<query>
+			update com.ssbusy.core.offer.domain.MyOfferCode c set c.ownerCustomerId=:ownerCustomerId, c.ownDate=now()
+			where c.id=:id and c.ownerCustomerId is null and c.userCustomerId is null
+		</query>
+	</named-query>
+
+	<named-query name="UPDATE_OFFER_CODE_OWNNER_CUSTOMER">
+		<query>
+			update com.ssbusy.core.offer.domain.MyOfferCode c set c.ownerCustomerId=:ownerCustomerId
+			where c.id=:id
+		</query>
+	</named-query>
+
+	<named-query name="LIST_OFFER_CODE_BY_OWNER">
+		<query><![CDATA[
+			from com.ssbusy.core.offer.domain.MyOfferCode c
+			 where c.ownerCustomerId=:ownerCustomerId
+			  and (c.offerCodeEndDate is null or c.offerCodeEndDate >= now())
+			  and (c.maxUses is null or c.maxUses <= 0 or c.maxUses > c.uses)
+		]]></query>
+	</named-query>
+	<named-query name="COUNT_OFFER_CODE_BY_OWNER">
+		<query><![CDATA[
+			select count(c) from com.ssbusy.core.offer.domain.MyOfferCode c
+			 where c.ownerCustomerId=:ownerCustomerId
+			  and (c.offerCodeEndDate is null or c.offerCodeEndDate >= now())
+			  and (c.maxUses is null or c.maxUses <= 0 or c.maxUses > c.uses)
+		]]></query>
+	</named-query>
+
+	<named-query name="CHANGE_OFFER_CODE_USAGE">
+		<query>
+			update com.ssbusy.core.offer.domain.MyOfferCode c
+			set c.uses=c.uses+:val
+			where c.id=:id
+		</query>
+	</named-query>
+</entity-mappings>

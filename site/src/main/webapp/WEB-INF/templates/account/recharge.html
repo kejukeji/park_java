@@ -1,0 +1,18 @@
+
+<div class="manage-account-form-wrapper change-password-form">   
+    <span class="title">账户充值</span>
+    <span class="success" th:if="${rechargeMessage}" th:text="${rechargeMessage}"></span>
+    <blc:form class="manage-account" name="form1" action="#" th:action="@{/account/rechargeSubmit}" th:object="${rechargeForm}" method="POST" >
+        <div class="passwordLine">
+            <span class="label">卡号 ：</span>
+            <input type="text" class="inbox" name="card_id"  th:field="*{card_id}" th:classappend="${#fields.hasErrors('card_id')}? 'fieldError'"  />
+            <span th:if="${#fields.hasErrors('card_id')}" th:errors="*{card_id}"></span>
+        </div>
+        <div class="passwordLine">
+            <span class="label">密码 :</span>
+            <input type="password" class="inbox" name="card_password"  th:field="*{card_password}" th:classappend="${#fields.hasErrors('card_password')}? 'fieldError'" />
+            <span th:if="${#fields.hasErrors('card_password')}" th:errors="*{card_password}"></span>
+        </div>
+        <div class="button submit" onclick="form1.submit();">充值</div><div class="button reset" onclick="form1.reset();">重置</div>
+    </blc:form>
+</div>

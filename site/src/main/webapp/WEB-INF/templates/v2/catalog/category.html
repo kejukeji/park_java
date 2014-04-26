@@ -1,0 +1,29 @@
+<div id="content" class="grid-container category-list" role="main">
+	<div class="cat-scrumb grid-100 tablet-grid-100 mobile-grid-100">
+		<span class="left scrumb" th:with="cat=${category}" th:if="${category ne null}">
+			<span th:substituteby="v2/catalog/partials/scrumbCat" />
+		</span>
+		<span class="left scrumb" th:if="${param.q ne null}">
+			<a href="/">全部结果</a> > <span th:text="${param.q[0]}"></span>
+		</span>
+		<span class="right" th:inline="text">共 [[${result.totalResults}]] 条</span>
+	</div>
+	<section id="options">
+		<div th:substituteby="v2/catalog/partials/facetFilter" />
+	</section>
+	<ul id="products" class="grid-parent clearfix">
+	   	<li th:if="${#lists.isEmpty(products)}">没找到哎，再试试吧～</li>
+	   	<li class="grid-25 tablet-grid-25 mobile-grid-50" th:unless="${#lists.isEmpty(products)}"
+	   		 th:each="product,stats: ${products}" th:object="${product}" th:style="${'z-index:'+(products.size()-stats.index)}">
+	   		<div th:substituteby="v2/catalog/partials/productListItem" th:remove="tag" />
+	   	</li>
+	</ul>
+<div class="pager" th:unless="${#lists.isEmpty(products)}" th:with="start=${result.page-2 gt 1?result.page-2:1},end=${result.page+3 gt result.totalPages?result.totalPages:result.page+3}">
+	<a blc:paginationpagelink="${result.page-1}" th:if="${result.page gt 1}" class="near-page">上一页</a>
+	<a blc:paginationpagelink="${1}" th:if="${start gt 2}">1</a>
+	<span th:if="${start gt 1}">...</span>
+	<a th:each="num: ${#numbers.sequence(start, end)}" blc:paginationpagelink="${num}" th:text="${num}" th:class="${result.page == num}? 'active'"></a>
+	<span th:if="${end lt result.totalPages}">...</span>
+	<a blc:paginationpagelink="${result.page+1}" th:if="${result.page lt result.totalPages}" class="near-page">下一页</a>
+</div>
+</div>

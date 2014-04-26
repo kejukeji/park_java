@@ -1,0 +1,17 @@
+<section role="main">
+	<div class="row" id="box1">
+			<div class="twelve columns">
+				共有<span th:text="${#lists.size(userForm)}"></span>条记录
+                <table style="width: 100%;">
+                	<thead><th>用户ID</th><th>用户名</th><th>购买次数</th><th>购买总额</th><th>积分总额</th></thead>
+                	<tr th:each="form:${userForm}" th:object="${form}">
+						<td th:text="*{id}"></td>
+                        <td th:text="*{firstname}"></td>
+                		<td th:text="*{buyCount}"></td>
+                		<td th:text="*{totalBuy}"></td>
+                		<td th:text="*{totalIntegral}"></td>
+                	</tr>
+                </table>
+			</div>
+		</div>
+</section>

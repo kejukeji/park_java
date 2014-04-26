@@ -1,0 +1,56 @@
+<h1 style="float:left;width:100%;">我的购物车</h1>
+
+<div class="cart_modal" style="margin: 6px 0px;min-width: 600px;">
+	<p class="error" th:if="${param.errorMessage}"
+		th:text="${param.errorMessage[0]}"></p>
+	<p class="error" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+	<div th:if="${cart.orderItems !=null &amp;&amp; #lists.size(cart.orderItems) gt 0}">
+		<div class="orderitem nowrap" th:classappend="${#lists.size(cart.orderItems)==1?'grid-100 tablet-grid-100':'grid-50 tablet-grid-50'}"
+		 th:each="item : ${cart.orderItems}" th:object="${item}" th:id="${'productRow' + item.id}">
+			<a th:href="@{*{sku.product.url}}"><img th:if="*{sku.product.media['primary']}" class="item" width="60"
+				th:src="@{*{sku.product.media['primary'].url} + '?thumbnail'}"
+				th:alt="*{name}" /></a>
+			<div class="item grid-75 tablet-grid-75">
+				<a th:href="@{*{sku.product.url}}"
+					th:if="*{(#strings.length(name))} le 20" class="fonts"
+					th:text="*{name}"></a> <a th:href="@{*{sku.product.url}}"
+					class="fonts" th:if="*{(#strings.length(name))} gt 20"
+					th:text="*{#strings.substring(name, 0, 20)}"></a> <span
+					align="center">
+					<form method="get" th:action="@{/cart/updateQuantity}">
+						<input type="hidden" name="productId" th:value="*{sku.product.id}" />
+						<input type="hidden" name="orderItemId" th:value="*{id}" />
+						<span class="price" align="center"
+							blc:price="*{getPriceBeforeAdjustments(true)}" ></span>X
+				 	    <a class="icon_btn" onclick="minus(this)">-</a><input type="number" name="quantity" class="updateQuantity"
+							th:value="*{quantity}" maxlength="3" autocomplete="off" /><a class="icon_btn" onclick="plus(this)">+</a>
+						<br/>
+						<div class="totalprice"><span>小计：</span><span blc:price="*{totalPrice}"></span></div>
+						<a style="text-decoration: none;" class="fonts remove_from_cart"
+							th:href="@{/cart/remove(orderItemId=*{id}, productId=*{sku.product.id})}">删除</a>
+						<br />
+						<!--  <input type="submit" class="updateQuantity"
+						th:value="#{cart.update}" />-->
+					</form>
+				</span>
+			</div>
+		</div>
+		<div class="grid-100 tablet-grid-100 grid-parent" style="line-height:48px;padding-top: 10px;">
+			<div class="grid-20 tablet-grid-20">共有<span
+					th:text="${#lists.size(cart.orderItems)}"></span>种商品</div>
+			<div class="grid-20 tablet-grid-20"><span id="subtotal" th:unless="${cart.subTotal.zero}"
+					blc:price="${cart.subTotal.subtract(cart.orderAdjustmentsValue)}"></span></div>
+			<div class="grid-30 tablet-grid-30"><span class="fonts">满<font style="color: #cc0000;font-weight: bold;">15元</font>免运费哦(新开张<b style="color:red;">全免</b>)</span></div>
+			<div class="grid-30 tablet-grid-30"><a th:href="@{/checkout}" target="_top" class="big-button nowrap"><span>去结账</span></a></div>
+		</div>
+	</div>
+	<div style="padding: 2em; font-size: 1.5em;text-align: center;line-height: 2em;"
+		th:unless="${cart.orderItems !=null &amp;&amp; #lists.size(cart.orderItems) gt 0}">
+		<span style="color: #F60;">亲，您的购物车还是空的哦！</span>
+		<div>
+			<a th:href="@{/}" target="_top" style="color:#222">&laquo; <span
+				th:text="#{cart.continueShopping}">继续购物</span></a>
+		</div>
+	</div>
+	<div id="blc-extra-data" class="hidden" th:utext="${blcextradata}" th:if="${!#strings.isEmpty(blcextradata)}"></div>
+</div>

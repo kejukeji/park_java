@@ -1,0 +1,43 @@
+<div class="product-item">
+	<div class="product-item0">
+		<a th:href="*{defaultSku.product.url}" target="_blank" class="prod-img">
+			<img th:if="*{media['primary']}" th:alt="*{name}" th:src="@{*{media['primary'].url} + '?browse&amp;resize-width-amount=263&amp;resize-height-amount=175'}"  width="100%"/>
+		</a>
+		<div class="price content" th:unless="${#object instanceof T(org.broadleafcommerce.core.catalog.domain.ProductBundle)}">
+			<span blc:price="*{defaultSku.salePrice}" th:if="*{defaultSku.onSale}"
+				th:classappend="*{defaultSku.onSale}? 'sale'"></span>
+			<span blc:price="*{defaultSku.retailPrice}"
+					th:classappend="*{defaultSku.onSale}?'has-sale':'sale'"></span>
+			<span style="float:right;color: #7D7D7D;" th:unless="${inventories eq null or inventories.empty or inventories.get(product) eq null}" th:text="'库存: ' + ${inventories.get(product)[0].quantityAvailable}"></span>
+		</div>
+		<a th:href="*{defaultSku.product.url}" class="prod-name" target="_blank">
+			<span th:text="*{name}"></span>
+			<span th:if="*{description ne null}" th:text="*{description}"></span>
+		</a>
+		<div class="prod-bar clearfix">
+			<form method="GET" action="/cart/add">
+				<!-- TODO 目前只取了第一个inv -->
+				<input type="hidden" name="skuId" id="skuId" th:value="${(inventories eq null or inventories.empty or inventories.get(product) eq null)?product.defaultSku.id:inventories.get(product)[0].sku.id}" />
+				<input type="hidden" name="locationId" id="locationId" th:unless="${inventories eq null or inventories.empty or inventories.get(product) eq null}" th:value="${inventories.get(product)[0].fulfillmentLocation.id}" />
+				<table><tr>
+				<td><span class="prod-qty">
+					<input type="number" name="quantity" value="1" class="itemQuantity" />
+					<a class="icon_btn qty-plus" title="加1个" onclick="plus(this)"></a>
+					<a class="icon_btn qty-minus disabled" title="减1个" onclick="minus(this)"></a>
+				</span></td>
+				<td><div class="addToCart btn-cart">加入购物车
+					<div class="floatMsg" style="right: 0px;">+1</div>
+				</div></td>
+				<td><a class="prod-like prod-btn" onclick="return tagLike(this);" title="喜欢" th:attr="data=*{id}"><div/></a></td>
+				<td class="hide-on-tablet"><a class="prod-stats prod-btn" title="榜单"></a></td>
+				<td><a class="prod-pack prod-btn" title="套餐"></a></td>
+				</tr></table>
+			</form>
+		</div>
+	</div>
+	<div class="prod-more clearfix" th:with="rating=${ratingSums eq null?null:ratingSums[#strings.toString(product.id)]}">
+		<span class="prod-sold grid-33 tablet-grid-33 mobile-grid-33">销量：<font th:text="*{totalSaled == 0?'-':totalSaled+'件'}"></font></span>
+		<span class="prod-ps grid-33 tablet-grid-33 mobile-grid-33">评论：<font th:text="${rating eq null?'-':rating.numberOfReviews+'条'}"></font></span>
+		<span class="prod-star grid-33 tablet-grid-33 mobile-grid-33">星级：<font th:text="${rating eq null?'-':#numbers.formatDecimal(rating.averageRating,1,1)}"></font></span>
+	</div>
+</div>

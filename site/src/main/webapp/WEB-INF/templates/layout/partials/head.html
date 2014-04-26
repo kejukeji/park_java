@@ -1,0 +1,17 @@
+ <head>
+        <meta charset="utf-8"/>
+        <title th:text="${pageTitle}"></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="description" content="在校网，在校生活，从此开始" />
+		<meta name="author" content="乐校网络" />
+        <meta name="viewport" content="width=device-width"/>
+        <!--[if (gt IE 8) | (IEMobile)]><!-->
+			<blc:bundle name="gr.css" mapping-prefix="/css/" files="grid-responsive.css" />
+		<!--<![endif]-->
+		<!--[if (lt IE 9) & (!IEMobile)]>
+			<link rel="stylesheet" href="/css/grid-ie.css" />
+		<![endif]-->
+		<blc:bundle name="stylea.css" mapping-prefix="/css/" files="normalize.min.css,nivo-slider.css,jquery.fancybox.css,ssbusy_main.css,checkout.css,icomoon.css" />
+		<link rel="stylesheet" th:href="${additionalCss}" th:unless="${#strings.isEmpty(additionalCss)}" />
+		<script th:src="@{/js/libs/modernizr-2.6.2.min.js}"></script> <!-- TODO customize -->
+</head>

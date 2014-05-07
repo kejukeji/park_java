@@ -14,7 +14,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.broadleafcommerce.common.presentation.AdminPresentation;
 import org.broadleafcommerce.common.presentation.AdminPresentationClass;
@@ -73,10 +72,10 @@ public class CarbarnImpl implements Carbarn {
 
 	@Column(name = "CARBARN_TOTAL", nullable = false)
 	@AdminPresentation(friendlyName = "车位总数", order = 2000, group = "车库", groupOrder = 2000, prominent = true, gridOrder = 5)
-	private Double carbarnTotal;
+	private Integer carbarnTotal;
 
-	@Transient
-	private Double carbarnLast = 0d;
+	@Column(name = "CARBARN_LAST", nullable = false)
+	private Integer carbarnLast = 0;
 
 	public Long getId() {
 		return id;
@@ -126,20 +125,22 @@ public class CarbarnImpl implements Carbarn {
 		this.cartEntrances = cartEntrances;
 	}
 
-	public Double getCarbarnTotal() {
+	public Integer getCarbarnTotal() {
 		return carbarnTotal;
 	}
 
-	public void setCarbarnTotal(Double carbarnTotal) {
+	public void setCarbarnTotal(Integer carbarnTotal) {
 		this.carbarnTotal = carbarnTotal;
 	}
 
-	public Double getCarbarnLast() {
+	public Integer getCarbarnLast() {
 		return carbarnLast;
 	}
 
-	public void setCarbarnLast(Double carbarnLast) {
+	public void setCarbarnLast(Integer carbarnLast) {
 		this.carbarnLast = carbarnLast;
 	}
+
+	
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssbusy.core.carbarn.dao.CarbarnDao;
 import com.ssbusy.core.carbarn.domain.Carbarn;
@@ -100,6 +101,25 @@ public class CarbarnServiceImpl implements CarbarnService {
 		s = s * EARTH_RADIUS;
 		s = Math.round(s * 10000) / 10000;
 		return s;
+	}
+
+	@Override
+	public Carbarn readCarbarnById(Long id) {
+		if(id ==null){
+			return null;
+		}else{
+			return carbarnDao.readCarbarnById(id);
+		}
+	}
+
+	@Override
+	@Transactional("blTransactionManager")
+	public Carbarn updateCarbarn(Carbarn carbarn) {
+		if(carbarn==null){
+			return null;
+		}else{
+			return carbarnDao.updateCarbarn(carbarn);
+		}
 	}
 
 }

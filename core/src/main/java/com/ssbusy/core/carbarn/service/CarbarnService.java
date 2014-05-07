@@ -30,4 +30,17 @@ public interface CarbarnService {
 	public List<Carbarn> readCarbarnByLatitudeAndLongitude(Double latitude,
 			Double longitude,String sortBy);
 
+	/**
+	 * 
+	 * @param id
+	 * @return id为空则返回null，找不到也返回null；
+	 */
+	public Carbarn readCarbarnById(Long id);
+	
+	/**
+	 * 
+	 * @param carbarn
+	 * @return 根据id
+	 */
+	public Carbarn updateCarbarn(Carbarn carbarn);
 }

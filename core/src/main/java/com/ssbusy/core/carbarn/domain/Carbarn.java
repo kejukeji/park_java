@@ -32,11 +32,12 @@ public interface Carbarn extends Serializable {
 
 	public void setCartEntrances(List<CarEntrance> cartEntrances);
 
-	public Double getCarbarnTotal();
+	public Integer getCarbarnTotal();
 
-	public void setCarbarnTotal(Double carbarnTotal);
+	public void setCarbarnTotal(Integer carbarnTotal);
 
-	public Double getCarbarnLast();
+	public Integer getCarbarnLast();
 
-	public void setCarbarnLast(Double carbarnLast);
+	public void setCarbarnLast(Integer carbarnLast);
+	
 }

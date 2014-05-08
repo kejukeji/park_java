@@ -1,7 +1,6 @@
 package com.ssbusy.controller.weixin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.ssbusy.weixin.config.WeixinConfig;
-import com.ssbusy.weixin.service.WeixinService;
 
 /**
  * 
@@ -32,12 +28,12 @@ public class WeixinController {
 			@RequestParam(value = "nonce", required = false) String nonce,
 			@RequestParam(value = "echostr", required = false) String echostr,
 			Model model) throws IOException {
-		PrintWriter out = response.getWriter();
+		/*PrintWriter out = response.getWriter();
 		if (WeixinConfig.checkSignature(signature, timestamp, nonce)) {
 			out.print(echostr);
 		}
 		out.close();
-		out = null;
+		out = null;*/
 	}
 
 	@RequestMapping(value = "/weixin/service")
@@ -45,10 +41,10 @@ public class WeixinController {
 			HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		String respMessage = WeixinService.processRequest(request);
+		/*String respMessage = WeixinService.processRequest(request);
 		PrintWriter out = response.getWriter();
 		out.print(respMessage);
-		out.close();
+		out.close();*/
 	}
 
 	@RequestMapping(value = "/weixin/home")

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssbusy.core.carbarn.dao.CarbarnDao;
 import com.ssbusy.core.carbarn.domain.Carbarn;
@@ -20,23 +21,32 @@ import com.ssbusy.core.carbarn.domain.Carbarn;
 public class CarbarnServiceImpl implements CarbarnService {
 
 	private static final double EARTH_RADIUS = 6378.137;
+	private static final String SORT_BY_PRICE="price";
 
 	@Resource(name = "carbarnDao")
 	protected CarbarnDao carbarnDao;
 
 	@Override
 	public List<Carbarn> readCarbarnByCarbarnName(String carbarnName) {
-		return carbarnDao.readCarbarnByCarbarnName(carbarnName);
+		if ("".equals(carbarnName)) {
+			return null;
+		} else {
+			return carbarnDao.readCarbarnByCarbarnName(carbarnName);
+		}
 	}
 
 	@Override
 	public List<Carbarn> readCarbarnByCarbarnAddress(String carbarnAddress) {
-		return carbarnDao.readCarbarnByCarbarnAddress(carbarnAddress);
+		if ("".equals(carbarnAddress)) {
+			return null;
+		} else {
+			return carbarnDao.readCarbarnByCarbarnAddress(carbarnAddress);
+		}
 	}
 
 	@Override
 	public List<Carbarn> readCarbarnByLatitudeAndLongitude(
-			final Double latitude, final Double longitude) {
+			final Double latitude, final Double longitude,String sortBy) {
 		// TODO 这里设置经纬度的范围。
 		Double radius = 0.01666667d;
 		if (latitude == null || longitude == null) {
@@ -44,31 +54,34 @@ public class CarbarnServiceImpl implements CarbarnService {
 		}
 		List<Carbarn> carbarns = carbarnDao.readCarbarnByLatitudeAndLongitude(
 				latitude, latitude + radius, longitude, longitude + radius);
-		Collections.sort(carbarns, new Comparator<Carbarn>() {
-			@Override
-			public int compare(Carbarn carbarn1, Carbarn carbarn2) {
-				if (carbarn1.getCartEntrances().isEmpty()
-						|| carbarn2.getCartEntrances().isEmpty()) {
-					return 0;
+		if(SORT_BY_PRICE.equals(sortBy)){
+			Collections.sort(carbarns, new Comparator<Carbarn>() {
+				@Override
+				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
+					return carbarn1.getPrice().compareTo(carbarn2.getPrice());
 				}
-				System.out.println(carbarn1.getAddress()+getDistance(latitude, longitude, carbarn1
-						.getCartEntrances().get(0).getLatitude(), carbarn1
-						.getCartEntrances().get(0).getLongitude()));
-				System.out.println(carbarn2.getAddress()+getDistance(latitude, longitude, carbarn2
-						.getCartEntrances().get(0).getLatitude(), carbarn2
-						.getCartEntrances().get(0).getLongitude()));
-				if (getDistance(latitude, longitude, carbarn1
-						.getCartEntrances().get(0).getLatitude(), carbarn1
-						.getCartEntrances().get(0).getLongitude()) > getDistance(
-						latitude, longitude, carbarn2.getCartEntrances().get(0)
-								.getLatitude(), carbarn2.getCartEntrances()
-								.get(0).getLongitude())) {
-					return 1;
-				} else {
-					return -1;
+			});
+		}else{
+			Collections.sort(carbarns, new Comparator<Carbarn>() {
+				@Override
+				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
+					if (carbarn1.getCartEntrances().isEmpty()
+							|| carbarn2.getCartEntrances().isEmpty()) {
+						return 0;
+					}
+					if (getDistance(latitude, longitude, carbarn1
+							.getCartEntrances().get(0).getLatitude(), carbarn1
+							.getCartEntrances().get(0).getLongitude()) > getDistance(
+							latitude, longitude, carbarn2.getCartEntrances().get(0)
+									.getLatitude(), carbarn2.getCartEntrances()
+									.get(0).getLongitude())) {
+						return 1;
+					} else {
+						return -1;
+					}
 				}
-			}
-		});
+			});
+		}
 		return carbarns;
 	}
 
@@ -88,6 +101,25 @@ public class CarbarnServiceImpl implements CarbarnService {
 		s = s * EARTH_RADIUS;
 		s = Math.round(s * 10000) / 10000;
 		return s;
+	}
+
+	@Override
+	public Carbarn readCarbarnById(Long id) {
+		if(id ==null){
+			return null;
+		}else{
+			return carbarnDao.readCarbarnById(id);
+		}
+	}
+
+	@Override
+	@Transactional("blTransactionManager")
+	public Carbarn updateCarbarn(Carbarn carbarn) {
+		if(carbarn==null){
+			return null;
+		}else{
+			return carbarnDao.updateCarbarn(carbarn);
+		}
 	}
 
 }

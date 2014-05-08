@@ -116,7 +116,7 @@
         <property name="alwaysUseDefaultTargetUrl" value="false" />
     </bean>
     
-	<bean id="blCustomerStateFilter" p:regionView="/region" p:regionViewApp="/app/region"
-	 class="org.broadleafcommerce.profile.web.core.security.CustomerStateFilterEx" />
+	<!--  <bean id="blCustomerStateFilter" p:regionView="/region" p:regionViewApp="/app/region"
+	 class="org.broadleafcommerce.profile.web.core.security.CustomerStateFilterEx" />-->
 	<bean id="blCustomerStateRequestProcessor" class="org.broadleafcommerce.profile.web.core.security.CustomerStateRequestProcessorEx" />
 </beans>

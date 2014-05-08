@@ -11,6 +11,7 @@ import org.broadleafcommerce.common.persistence.EntityConfiguration;
 import org.springframework.stereotype.Repository;
 
 import com.ssbusy.core.carbarn.domain.Carbarn;
+import com.ssbusy.core.carbarn.domain.CarbarnImpl;
 
 /**
  * 
@@ -54,6 +55,18 @@ public class CarbarnDaoImpl implements CarbarnDao {
 		query.setParameter("endLongitude", endLongitude);
 		return query.getResultList();
 	}
+
+	@Override
+	public Carbarn readCarbarnById(Long id) {
+		return em.find(CarbarnImpl.class, id);
+	}
+
+	@Override
+	public Carbarn updateCarbarn(Carbarn carbarn) {
+		Carbarn resCarbarn = em.merge(carbarn);
+		return resCarbarn;
+	}
+	
 
 
 }

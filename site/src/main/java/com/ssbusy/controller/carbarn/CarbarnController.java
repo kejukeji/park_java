@@ -8,18 +8,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssbusy.carbarn.form.CarbarnForm;
 import com.ssbusy.core.carbarn.domain.Carbarn;
 import com.ssbusy.core.carbarn.service.CarbarnService;
 
@@ -39,7 +37,6 @@ public class CarbarnController {
 	protected String tableId = "60709";
 	protected String localUrl = "http://api.map.baidu.com/geosearch/v3/local";
 	protected String nearby = "http://api.map.baidu.com/geosearch/v3/nearby";
-	private static final Log LOG = LogFactory.getLog(CarbarnController.class);
 	@RequestMapping(value = "/carbarn/carbarn-name", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public String readCarbarnsByCarbarnName(
@@ -52,13 +49,20 @@ public class CarbarnController {
 				.readCarbarnByCarbarnName(carbarnName);
 		List<Carbarn> returnCarbarns = null;
 		returnCarbarns = showPage(pageShow, carbarns);
+		CarbarnForm carbarnForm = null;
+		if(returnCarbarns.isEmpty()||returnCarbarns==null){
+			carbarnForm = new CarbarnForm(400, "没有对应的数据", returnCarbarns);
+		}else{
+			carbarnForm = new CarbarnForm(0, "调用接口成功", returnCarbarns);
+		}
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setExcludes(new String[] { "carbarn" });
-		JSONArray jsonArray = JSONArray.fromObject(returnCarbarns, jsonConfig);
+		//JSONArray jsonArray = JSONArray.fromObject(carbarnForm, jsonConfig);
 		/*Map<String, Object> pageCount = new HashMap<String, Object>();
 		pageCount.put("pageCount", getPageCount(carbarns.size()));
 		jsonArray.add(pageCount);*/
-		return jsonArray.toString();
+		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
+		return jsonObject.toString();
 	}
 
 	private List<Carbarn> showPage(Integer pageShow, List<Carbarn> carbarns) {
@@ -91,15 +95,21 @@ public class CarbarnController {
 				.readCarbarnByCarbarnAddress(carbarnAddress);
 		List<Carbarn> returnCarbarns = null;
 		returnCarbarns = showPage(pageShow, carbarns);
+		CarbarnForm carbarnForm = null;
+		if(returnCarbarns.isEmpty()||returnCarbarns==null){
+			carbarnForm = new CarbarnForm(400, "没有对应的数据", returnCarbarns);
+		}else{
+			carbarnForm = new CarbarnForm(0, "调用接口成功", returnCarbarns);
+		}
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setExcludes(new String[] { "carbarn" });
-		JSONArray jsonArray = JSONArray.fromObject(returnCarbarns, jsonConfig);
+		//JSONArray jsonArray = JSONArray.fromObject(carbarnForm, jsonConfig);
 		/*Map<String, Object> pageCount = new HashMap<String, Object>();
 		pageCount.put("pageCount", getPageCount(carbarns.size()));
 		jsonArray.add(pageCount);*/
-		LOG.error("Carbarn-address in");
-		LOG.error(jsonArray.toString());
-		return jsonArray.toString();
+		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
+		return jsonObject.toString();
+
 	}
 
 	@RequestMapping(value = "/carbarn/latitude-longitude", produces = { "application/json;charset=UTF-8" })
@@ -116,13 +126,20 @@ public class CarbarnController {
 				.readCarbarnByLatitudeAndLongitude(latitude, longitude,sortBy);
 		List<Carbarn> returnCarbarns = null;
 		returnCarbarns = showPage(pageShow, carbarns);
+		CarbarnForm carbarnForm = null;
+		if(returnCarbarns.isEmpty()||returnCarbarns==null){
+			carbarnForm = new CarbarnForm(400, "没有对应的数据", returnCarbarns);
+		}else{
+			carbarnForm = new CarbarnForm(0, "调用接口成功", returnCarbarns);
+		}
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setExcludes(new String[] { "carbarn" });
-		JSONArray jsonArray = JSONArray.fromObject(returnCarbarns, jsonConfig);
+		//JSONArray jsonArray = JSONArray.fromObject(carbarnForm, jsonConfig);
 		/*Map<String, Object> pageCount = new HashMap<String, Object>();
 		pageCount.put("pageCount", getPageCount(carbarns.size()));
 		jsonArray.add(pageCount);*/
-		return jsonArray.toString();
+		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
+		return jsonObject.toString();
 	}
 
 	@RequestMapping(value = "/carbarn/update", produces = { "application/json;charset=UTF-8" })//,method = RequestMethod.POST

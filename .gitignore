@@ -6,6 +6,7 @@ core/*
 admin/*
 broadleaf-inventory/*
 ecommerce-website.iml
+admin/src/main/webapp/WEB-INF/jetty-env.xml
 site/src/main/webapp/WEB-INF/jetty-env.xml
 *.class
 

@@ -6,6 +6,7 @@ core/*
 admin/*
 broadleaf-inventory/*
 ecommerce-website.iml
+site/src/main/webapp/WEB-INF/jetty-env.xml
 *.class
 
 # Mobile Tools for Java (J2ME)

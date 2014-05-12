@@ -13,6 +13,7 @@ import net.sf.json.JsonConfig;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -176,6 +177,30 @@ public class CarbarnController {
 	}
 	protected int getPageCount(int size) {
 		return (size / (pageSize + 1)) + 1;
+	}
+	
+	// jin todo 根据id返回车库信息
+	@RequestMapping(value = "/carbarn/get/{id}", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String getCarbranById(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model,
+			@PathVariable("id") Long id){
+		Carbarn carbran = carbarnService.readCarbarnById(id);
+		Map<String,Object> returnMap = new HashMap<String, Object>(2);
+		if (carbran == null){
+			returnMap.put("status", 400);
+			returnMap.put("message", "没有相对应的数据");
+		}else{
+			returnMap.put("status", 0);
+			returnMap.put("message", "请求成功");
+			returnMap.put("data", carbran);
+		}
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[] { "carbarn" });
+		JSONObject jsonObject = JSONObject.fromObject(returnMap, jsonConfig);
+		return jsonObject.toString();
 	}
 	/*
 	 * @RequestMapping("/carbarn/search/nearbyby") public String

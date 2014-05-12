@@ -1,4 +1,11 @@
 .idea/*
+lib/*
+site/*
+core/*
+.settings/*
+admin/*
+broadleaf-inventory/*
+ecommerce-website.iml
 *.class
 
 # Mobile Tools for Java (J2ME)

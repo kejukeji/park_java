@@ -48,7 +48,7 @@ public class CarbarnServiceImpl implements CarbarnService {
 	public List<Carbarn> readCarbarnByLatitudeAndLongitude(
 			final Double latitude, final Double longitude,String sortBy) {
 		// TODO 这里设置经纬度的范围。
-		Double radius = 0.01666667d;
+		Double radius = 0.01666667d*2;
 		if (latitude == null || longitude == null) {
 			return Collections.emptyList();
 		}

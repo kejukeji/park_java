@@ -213,4 +213,19 @@ public class CarbarnController {
 		JSONObject jsonObject = JSONObject.fromObject(returnMap, jsonConfig);
 		return jsonObject.toString();
 	}
+	
+	
+	@RequestMapping(value = "/carbarn/notice-customer", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String readCarbarnByIdAndLatitude(
+			@RequestParam("latitude") Double latitude,
+			@RequestParam("longitude") Double longitude,
+			@RequestParam(value = "id") Long id) {
+		Map<String,Object> returnMap = carbarnService.readCarbarnByIdAndLatitude(latitude, longitude, id);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[] { "carbarn" });
+		JSONObject jsonObject = JSONObject.fromObject(returnMap, jsonConfig);
+		return jsonObject.toString();
+	}
+	
 }

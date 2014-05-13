@@ -2,7 +2,10 @@ package com.ssbusy.core.carbarn.service;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -88,6 +91,43 @@ public class CarbarnServiceImpl implements CarbarnService {
 		}
 		return carbarns;
 	}
+	@Override
+	public Map<String, Object> readCarbarnByIdAndLatitude(Double latitude,
+			Double longitude, Long id) {
+		Map<String,Object> returnMap = new HashMap<String, Object>(3);
+		Carbarn carbarn = carbarnDao.readCarbarnById(id);
+		if(latitude ==null||longitude==null||carbarn==null){
+			return Collections.emptyMap();
+		}
+		for(CarEntrance carEntrance:carbarn.getCartEntrances() ){
+			carEntrance.setDistance(getDistance(latitude, longitude, carEntrance.getLatitude(), carEntrance.getLongitude()));
+		}
+		Comparator<CarEntrance> carEntranceCompare = new Comparator<CarEntrance>(){
+			@Override
+			public int compare(CarEntrance o1, CarEntrance o2) {
+				return Double.compare(o1.getDistance(), o2.getDistance());
+			}
+		};
+		Collections.sort(carbarn.getCartEntrances(),carEntranceCompare );
+		returnMap.put("data", carbarn);
+		Double distance = carbarn.getCartEntrances().get(0).getDistance();
+		Integer carbarnLast = carbarn.getCarbarnLast();
+		long nextDate = new Date().getTime();
+		if(distance>20000){
+			nextDate = nextDate +5*60*1000;
+		}else if(distance >10000){
+			nextDate = nextDate +3*60*1000;
+		}else if(distance>5000){
+			nextDate = nextDate +3*60*1000;
+		}else{
+			nextDate = nextDate +1*60*1000;
+		}
+		if(carbarnLast<10){
+			nextDate = nextDate +1*60*1000;
+		}
+		returnMap.put("nextTime", nextDate);
+		return returnMap;
+	}
 
 	private static double rad(double d) {
 		return d * Math.PI / 180.0;
@@ -125,5 +165,7 @@ public class CarbarnServiceImpl implements CarbarnService {
 			return carbarnDao.updateCarbarn(carbarn);
 		}
 	}
+
+	
 
 }

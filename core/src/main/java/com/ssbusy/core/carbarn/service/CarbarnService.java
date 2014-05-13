@@ -1,6 +1,7 @@
 package com.ssbusy.core.carbarn.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ssbusy.core.carbarn.domain.Carbarn;
 
@@ -43,4 +44,13 @@ public interface CarbarnService {
 	 * @return 根据id
 	 */
 	public Carbarn updateCarbarn(Carbarn carbarn);
+	
+	/**
+	 * 
+	 * @param latitude
+	 * @param longitude
+	 * @param id
+	 * @return 
+	 */
+	public Map<String,Object> readCarbarnByIdAndLatitude(Double latitude,Double longitude,Long id);
 }

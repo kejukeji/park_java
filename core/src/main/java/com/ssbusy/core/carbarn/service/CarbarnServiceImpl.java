@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssbusy.core.carbarn.dao.CarbarnDao;
+import com.ssbusy.core.carbarn.domain.CarEntrance;
 import com.ssbusy.core.carbarn.domain.Carbarn;
 
 /**
@@ -25,7 +26,7 @@ public class CarbarnServiceImpl implements CarbarnService {
 
 	@Resource(name = "carbarnDao")
 	protected CarbarnDao carbarnDao;
-
+	
 	@Override
 	public List<Carbarn> readCarbarnByCarbarnName(String carbarnName) {
 		if ("".equals(carbarnName)) {
@@ -46,14 +47,17 @@ public class CarbarnServiceImpl implements CarbarnService {
 
 	@Override
 	public List<Carbarn> readCarbarnByLatitudeAndLongitude(
-			final Double latitude, final Double longitude,String sortBy) {
-		// TODO 这里设置经纬度的范围。
-		Double radius = 0.01666667d*2;
+			final Double latitude, final Double longitude,String sortBy,Double radius) {
 		if (latitude == null || longitude == null) {
 			return Collections.emptyList();
 		}
 		List<Carbarn> carbarns = carbarnDao.readCarbarnByLatitudeAndLongitude(
 				latitude, latitude + radius, longitude, longitude + radius);
+		for(Carbarn carbarn:carbarns){
+			for(CarEntrance carEntrance:carbarn.getCartEntrances() ){
+				carEntrance.setDistance(getDistance(latitude, longitude, carEntrance.getLatitude(), carEntrance.getLongitude()));
+			}
+		}
 		if(SORT_BY_PRICE.equals(sortBy)){
 			Collections.sort(carbarns, new Comparator<Carbarn>() {
 				@Override
@@ -65,20 +69,20 @@ public class CarbarnServiceImpl implements CarbarnService {
 			Collections.sort(carbarns, new Comparator<Carbarn>() {
 				@Override
 				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
+					
+					Comparator<CarEntrance> carEntranceCompare = new Comparator<CarEntrance>(){
+						@Override
+						public int compare(CarEntrance o1, CarEntrance o2) {
+							return Double.compare(o1.getDistance(), o2.getDistance());
+						}
+					};
+					Collections.sort(carbarn1.getCartEntrances(),carEntranceCompare );
+					Collections.sort(carbarn2.getCartEntrances(),carEntranceCompare );
 					if (carbarn1.getCartEntrances().isEmpty()
 							|| carbarn2.getCartEntrances().isEmpty()) {
 						return 0;
 					}
-					if (getDistance(latitude, longitude, carbarn1
-							.getCartEntrances().get(0).getLatitude(), carbarn1
-							.getCartEntrances().get(0).getLongitude()) > getDistance(
-							latitude, longitude, carbarn2.getCartEntrances().get(0)
-									.getLatitude(), carbarn2.getCartEntrances()
-									.get(0).getLongitude())) {
-						return 1;
-					} else {
-						return -1;
-					}
+					return Double.compare(carbarn1.getCartEntrances().get(0).getDistance(), carbarn2.getCartEntrances().get(0).getDistance());
 				}
 			});
 		}
@@ -99,7 +103,7 @@ public class CarbarnServiceImpl implements CarbarnService {
 				+ Math.cos(radLat1) * Math.cos(radLat2)
 				* Math.pow(Math.sin(b / 2), 2)));
 		s = s * EARTH_RADIUS;
-		s = Math.round(s * 10000) / 10000;
+		s = Math.round(s * 10000) / 10;
 		return s;
 	}
 

@@ -28,7 +28,7 @@ public interface CarbarnService {
 	 * @return 根据经纬度 返回附近的车库信息;如果经纬度为null则返回null，如果对应的车库中没有入口信息，则返回null
 	 */
 	public List<Carbarn> readCarbarnByLatitudeAndLongitude(Double latitude,
-			Double longitude,String sortBy);
+			Double longitude,String sortBy,Double radius);
 
 	/**
 	 * 

@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,14 +31,14 @@ import com.ssbusy.core.carbarn.service.CarbarnService;
 @Controller
 public class CarbarnController {
 
-	private int pageSize = 10;
-
+	@Value("${carbarnSize}")
+	private int pageSize;
 	@Resource(name = "carbarnService")
 	protected CarbarnService carbarnService;
-	protected String ak = "F86bd27c9f27ad2db50f6802ef6809d1";
-	protected String tableId = "60709";
-	protected String localUrl = "http://api.map.baidu.com/geosearch/v3/local";
-	protected String nearby = "http://api.map.baidu.com/geosearch/v3/nearby";
+	
+	@Value("${radius}")
+	protected Double radius;
+
 	@RequestMapping(value = "/carbarn/carbarn-name", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public String readCarbarnsByCarbarnName(
@@ -57,10 +59,6 @@ public class CarbarnController {
 		}
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setExcludes(new String[] { "carbarn" });
-		//JSONArray jsonArray = JSONArray.fromObject(carbarnForm, jsonConfig);
-		/*Map<String, Object> pageCount = new HashMap<String, Object>();
-		pageCount.put("pageCount", getPageCount(carbarns.size()));
-		jsonArray.add(pageCount);*/
 		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
 		return jsonObject.toString();
 	}
@@ -103,10 +101,6 @@ public class CarbarnController {
 		}
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setExcludes(new String[] { "carbarn" });
-		//JSONArray jsonArray = JSONArray.fromObject(carbarnForm, jsonConfig);
-		/*Map<String, Object> pageCount = new HashMap<String, Object>();
-		pageCount.put("pageCount", getPageCount(carbarns.size()));
-		jsonArray.add(pageCount);*/
 		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
 		return jsonObject.toString();
 
@@ -114,7 +108,7 @@ public class CarbarnController {
 
 	@RequestMapping(value = "/carbarn/latitude-longitude", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public String readCarbarnsByLatitudeAndLongitude(
+	public String readCarbarnsByLatitudeAndLongitudeTest(
 			HttpServletRequest request,
 			HttpServletResponse response,
 			Model model,
@@ -123,7 +117,7 @@ public class CarbarnController {
 			@RequestParam(value = "page_show", required = false) Integer pageShow,
 			@RequestParam(value = "sortBy", required = false) String sortBy) {
 		List<Carbarn> carbarns = carbarnService
-				.readCarbarnByLatitudeAndLongitude(latitude, longitude,sortBy);
+				.readCarbarnByLatitudeAndLongitude(latitude, longitude,sortBy,radius);
 		List<Carbarn> returnCarbarns = null;
 		returnCarbarns = showPage(pageShow, carbarns);
 		CarbarnForm carbarnForm = null;
@@ -134,22 +128,55 @@ public class CarbarnController {
 		}
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setExcludes(new String[] { "carbarn" });
-		//JSONArray jsonArray = JSONArray.fromObject(carbarnForm, jsonConfig);
-		/*Map<String, Object> pageCount = new HashMap<String, Object>();
-		pageCount.put("pageCount", getPageCount(carbarns.size()));
-		jsonArray.add(pageCount);*/
+		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
+		return jsonObject.toString();
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @param latitude 纬度
+	 * @param longitude 经度
+	 * @param pageShow
+	 * @param sortBy
+	 * @return
+	 */
+	@RequestMapping(value = "/carbarn/latitude-longitude/{latitude}/{longitude}", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public String readCarbarnsByLatitudeAndLongitude(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model,
+			@PathVariable("latitude") Double latitude,
+			@PathVariable("longitude") Double longitude,
+			@RequestParam(value = "page_show", required = false) Integer pageShow,
+			@RequestParam(value = "sortBy", required = false) String sortBy) {
+		List<Carbarn> carbarns = carbarnService
+				.readCarbarnByLatitudeAndLongitude(latitude, longitude,sortBy,radius);
+		List<Carbarn> returnCarbarns = null;
+		returnCarbarns = showPage(pageShow, carbarns);
+		CarbarnForm carbarnForm = null;
+		if(returnCarbarns.isEmpty()||returnCarbarns==null){
+			carbarnForm = new CarbarnForm(400, "没有对应的数据", returnCarbarns);
+		}else{
+			carbarnForm = new CarbarnForm(0, "调用接口成功", returnCarbarns);
+		}
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[] { "carbarn" });
 		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
 		return jsonObject.toString();
 	}
 
-	@RequestMapping(value = "/carbarn/update", produces = { "application/json;charset=UTF-8" })//,method = RequestMethod.POST
+	@RequestMapping(value = "/carbarn/update/{id}/{quantity}", produces = { "application/json;charset=UTF-8" })//,method = RequestMethod.POST
 	@ResponseBody
 	public String updateCarbarnById(
 			HttpServletRequest request,
 			HttpServletResponse response,
 			Model model,
-			@RequestParam("id") Long id,
-			@RequestParam("quantity") Integer quantity) {
+			@PathVariable("id") Long id,
+			@PathVariable("quantity") Integer quantity) {
 		Carbarn carbarn = carbarnService.readCarbarnById(id);
 		Map<String,Object> returnMap = new HashMap<String, Object>(2);
 		if(carbarn==null||quantity==null){
@@ -177,26 +204,4 @@ public class CarbarnController {
 	protected int getPageCount(int size) {
 		return (size / (pageSize + 1)) + 1;
 	}
-	/*
-	 * @RequestMapping("/carbarn/search/nearbyby") public String
-	 * searchByPosition(String name) { Map<String, String> sPara = new
-	 * HashMap<String, String>(); sPara.put("region", "黄埔"); sPara.put("ak",
-	 * "F86bd27c9f27ad2db50f6802ef6809d1"); sPara.put("geotable_id", tableId);
-	 * SsbusyHttpRequest httpRequest = new SsbusyHttpRequest();
-	 * SsbusyHttpResponse response = null;
-	 * httpRequest.setContentEncoding("utf-8"); try { response =
-	 * httpRequest.sendGet(localUrl, sPara); } catch (IOException e) {
-	 * e.printStackTrace(); } JSONObject jsonObject =
-	 * JSONObject.fromObject(response.getContent()); JSONArray jsonArray =
-	 * jsonObject.getJSONArray("contents"); List<CarbarnForm> carbarnForms = new
-	 * ArrayList<CarbarnForm>(); for (int i = 0; i < jsonArray.size(); i++) {
-	 * JSONObject carbarnFormObject = (JSONObject) jsonArray.get(i); CarbarnForm
-	 * carbarnForm = (CarbarnForm) JSONObject.toBean( carbarnFormObject,
-	 * CarbarnForm.class); if (carbarnForm != null) {
-	 * carbarnForms.add(carbarnForm); } } CarbarnTotalForm carbarnTotalForm =
-	 * (CarbarnTotalForm) JSONObject .toBean(jsonObject,
-	 * CarbarnTotalForm.class); carbarnTotalForm.setContents(carbarnForms);
-	 * String res = JSONObject.fromObject(carbarnTotalForm).toString(); return
-	 * res; }
-	 */
 }

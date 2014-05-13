@@ -84,9 +84,6 @@ public class CarbarnController {
 	@RequestMapping(value = "/carbarn/carbarn-address", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public String readCarbarnsByCarbarnAddress(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			Model model,
 			@RequestParam("carbarn_address") String carbarnAddress,
 			@RequestParam(value = "page_show", required = false) Integer pageShow) {
 		List<Carbarn> carbarns = carbarnService
@@ -109,9 +106,6 @@ public class CarbarnController {
 	@RequestMapping(value = "/carbarn/latitude-longitude", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public String readCarbarnsByLatitudeAndLongitudeTest(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			Model model,
 			@RequestParam("latitude") Double latitude,
 			@RequestParam("longitude") Double longitude,
 			@RequestParam(value = "page_show", required = false) Integer pageShow,
@@ -134,9 +128,6 @@ public class CarbarnController {
 	
 	/**
 	 * 
-	 * @param request
-	 * @param response
-	 * @param model
 	 * @param latitude 纬度
 	 * @param longitude 经度
 	 * @param pageShow
@@ -146,9 +137,6 @@ public class CarbarnController {
 	@RequestMapping(value = "/carbarn/latitude-longitude/{latitude}/{longitude}", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public String readCarbarnsByLatitudeAndLongitude(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			Model model,
 			@PathVariable("latitude") Double latitude,
 			@PathVariable("longitude") Double longitude,
 			@RequestParam(value = "page_show", required = false) Integer pageShow,
@@ -172,9 +160,6 @@ public class CarbarnController {
 	@RequestMapping(value = "/carbarn/update/{id}/{quantity}", produces = { "application/json;charset=UTF-8" })//,method = RequestMethod.POST
 	@ResponseBody
 	public String updateCarbarnById(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			Model model,
 			@PathVariable("id") Long id,
 			@PathVariable("quantity") Integer quantity) {
 		Carbarn carbarn = carbarnService.readCarbarnById(id);
@@ -203,5 +188,29 @@ public class CarbarnController {
 	}
 	protected int getPageCount(int size) {
 		return (size / (pageSize + 1)) + 1;
+	}
+	/**
+	 * @author jin
+	 * @param id
+	 * @return  根据id返回车库信息
+	 */
+	@RequestMapping(value = "/carbarn/get/{id}", produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String getCarbranById(
+			@PathVariable("id") Long id){
+		Carbarn carbran = carbarnService.readCarbarnById(id);
+		Map<String,Object> returnMap = new HashMap<String, Object>(2);
+		if (carbran == null){
+			returnMap.put("status", 400);
+			returnMap.put("message", "没有相对应的数据");
+		}else{
+			returnMap.put("status", 0);
+			returnMap.put("message", "请求成功");
+			returnMap.put("data", carbran);
+		}
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[] { "carbarn" });
+		JSONObject jsonObject = JSONObject.fromObject(returnMap, jsonConfig);
+		return jsonObject.toString();
 	}
 }

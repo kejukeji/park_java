@@ -21,7 +21,7 @@
     </properties>
     <build>
         <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
-        <finalName>ssbusy</finalName>
+        <finalName>park</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

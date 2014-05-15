@@ -4,7 +4,6 @@ package com.ssbusy.core.carbarn.domain;
  * 
  */
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface Carbarn extends Serializable {
@@ -20,24 +19,33 @@ public interface Carbarn extends Serializable {
 
 	public void setAddress(String address);
 
-	public BigDecimal getPrice();
+	public String getDayPrice();
 
-	public void setPrice(BigDecimal price);
+	public void setDayPrice(String dayPrice);
 
-	public String getDetial();
+	public String getNightPrice();
 
-	public void setDetial(String detial);
+	public void setNightPrice(String nightPrice);
+
+	public Integer getTotal();
+
+	public void setTotal(Integer total);
+
+	public Integer getLast();
+
+	public void setLast(Integer last);
+
+	public String getType();
+
+	public void setType(String type);
+
+	public String getTel();
+
+	public void setTel(String tel);
 
 	public List<CarEntrance> getCartEntrances();
 
 	public void setCartEntrances(List<CarEntrance> cartEntrances);
 
-	public Integer getCarbarnTotal();
-
-	public void setCarbarnTotal(Integer carbarnTotal);
-
-	public Integer getCarbarnLast();
-
-	public void setCarbarnLast(Integer carbarnLast);
 	
 }

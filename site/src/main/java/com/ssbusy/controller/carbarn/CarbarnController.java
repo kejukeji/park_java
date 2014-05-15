@@ -95,7 +95,7 @@ public class CarbarnController {
 			br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 			String s = "";
 			while((s = br.readLine()) != null) {
-				if(s!=""){
+				if(!("".equals(s))&&s!=""){
 					if(flag){
 						try{
 							quantity = new Integer(s);
@@ -103,8 +103,9 @@ public class CarbarnController {
 							quantity = 0;
 						}
 						flag = false;
+						break;
 					}
-					if(s.contains("quantity")){
+					if(s.contains("EmptyParkSpaces")){
 						flag = true;
 					}
 				}

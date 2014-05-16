@@ -15,8 +15,6 @@ import javax.persistence.Transient;
 import org.broadleafcommerce.common.presentation.AdminPresentation;
 import org.broadleafcommerce.common.presentation.AdminPresentationClass;
 import org.broadleafcommerce.common.presentation.AdminPresentationToOneLookup;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 /**
  * 
@@ -24,9 +22,9 @@ import org.hibernate.annotations.Parameter;
  * 
  */
 @Entity
-@Table(name = "KEJUKEJI_CARENTRANCE")
+@Table(name = "PARK_ENTRANCE")
 @Inheritance(strategy = InheritanceType.JOINED)
-@AdminPresentationClass(friendlyName = "车库入口")
+@AdminPresentationClass(friendlyName = "停车场入口")
 public class CarEntranceImpl implements CarEntrance {
 
 	/**
@@ -35,67 +33,69 @@ public class CarEntranceImpl implements CarEntrance {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator = "CarEntranceId", strategy = GenerationType.TABLE)
-	@GenericGenerator(name = "CarEntranceId", strategy = "org.broadleafcommerce.common.persistence.IdOverrideTableGenerator", parameters = {
-			@Parameter(name = "table_name", value = "SEQUENCE_GENERATOR"),
-			@Parameter(name = "segment_column_name", value = "ID_NAME"),
-			@Parameter(name = "value_column_name", value = "ID_VAL"),
-			@Parameter(name = "segment_value", value = "CarEntranceImpl"),
-			@Parameter(name = "increment_size", value = "50"),
-			@Parameter(name = "entity_name", value = "com.ssbusy.core.carbarn.domain.CarEntrance") })
-	@Column(name = "CAR_ENTRANCE_ID")
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name = "ID")
 	private Long id;
-	@Column(name = "ENTRANCE_LONGITUDE")
-	@AdminPresentation(friendlyName = "经度", order = 2000, group = "车库入口", groupOrder = 2000, prominent = true, gridOrder = 2)
+	@Column(name = "LONGITUDE")
+	@AdminPresentation(friendlyName = "经度", order = 2000, group = "停车场入口", groupOrder = 2000, prominent = true, gridOrder = 2)
 	private Double longitude;
-	@Column(name = "ENTRANCE_LATITUDE")
-	@AdminPresentation(friendlyName = "维度", order = 2000, group = "车库入口", groupOrder = 2000, prominent = true, gridOrder = 3)
+	@Column(name = "LATITUDE")
+	@AdminPresentation(friendlyName = "维度", order = 2000, group = "停车场入口", groupOrder = 2000, prominent = true, gridOrder = 3)
 	private Double latitude;
 	@ManyToOne(targetEntity = CarbarnImpl.class, optional = false)
 	@JoinColumn(name = "CARBARN_ID", nullable = false)
-	@AdminPresentation(friendlyName = "车库", group = "车库", prominent = true, gridOrder = 1, groupOrder = 1, order = 1)
+	@AdminPresentation(friendlyName = "停车场", group = "停车场", prominent = true, gridOrder = 1, groupOrder = 1, order = 1)
 	@AdminPresentationToOneLookup(lookupDisplayProperty = "name")
 	private Carbarn carbarn;
-
 	@Transient
 	private Double distance;
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	@Override
 	public Double getLongitude() {
 		return longitude;
 	}
 
+	@Override
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
+	@Override
 	public Double getLatitude() {
 		return latitude;
 	}
 
+	@Override
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
+	@Override
 	public Carbarn getCarbarn() {
 		return carbarn;
 	}
 
+	@Override
 	public void setCarbarn(Carbarn carbarn) {
 		this.carbarn = carbarn;
 	}
 
+	@Override
 	public Double getDistance() {
 		return distance;
 	}
 
+	@Override
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}

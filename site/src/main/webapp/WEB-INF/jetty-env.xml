@@ -20,7 +20,7 @@ IT IS NOT RECOMMENDED TO USE JETTY IN A PRODUCTION ENVIRONMENT.
 			<Set name="driverClass">com.mysql.jdbc.Driver</Set>
 			<Set name="jdbcUrl"><![CDATA[jdbc:mysql://localhost:3306/parking?autoReconnect=true]]></Set>
 			<Set name="user">root</Set>
-			<Set name="password">root</Set>
+			<Set name="password">123456</Set>
 			<Set name="minPoolSize">1</Set>
 			<Set name="maxPoolSize">1</Set>
 			<Set name="numHelperThreads">1</Set>
@@ -35,7 +35,7 @@ IT IS NOT RECOMMENDED TO USE JETTY IN A PRODUCTION ENVIRONMENT.
 			<Set name="driverClass">com.mysql.jdbc.Driver</Set>
 			<Set name="jdbcUrl"><![CDATA[jdbc:mysql://localhost:3306/parking?autoReconnect=true]]></Set>
 			<Set name="user">root</Set>
-			<Set name="password">root</Set>
+			<Set name="password">123456</Set>
 			<Set name="minPoolSize">1</Set>
 			<Set name="maxPoolSize">1</Set>
 			<Set name="numHelperThreads">1</Set>
@@ -51,7 +51,7 @@ IT IS NOT RECOMMENDED TO USE JETTY IN A PRODUCTION ENVIRONMENT.
 			<Set name="driverClass">com.mysql.jdbc.Driver</Set>
 			<Set name="jdbcUrl"><![CDATA[jdbc:mysql://localhost:3306/parking?autoReconnect=true]]></Set>
 			<Set name="user">root</Set>
-			<Set name="password">root</Set>
+			<Set name="password">123456</Set>
 			<Set name="minPoolSize">1</Set>
 			<Set name="maxPoolSize">1</Set>
 			<Set name="numHelperThreads">1</Set>

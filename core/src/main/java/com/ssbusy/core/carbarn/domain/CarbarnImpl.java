@@ -1,6 +1,5 @@
 package com.ssbusy.core.carbarn.domain;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +20,6 @@ import org.broadleafcommerce.common.presentation.AdminPresentationCollection;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 /***
  * 
@@ -30,9 +27,9 @@ import org.hibernate.annotations.Parameter;
  * 
  */
 @Entity
-@Table(name = "KEJUKEJI_CARBARN")
+@Table(name = "PARK_CARBARN")
 @Inheritance(strategy = InheritanceType.JOINED)
-@AdminPresentationClass(friendlyName = "车库")
+@AdminPresentationClass(friendlyName = "停车场")
 public class CarbarnImpl implements Carbarn {
 
 	/**
@@ -40,29 +37,38 @@ public class CarbarnImpl implements Carbarn {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(generator = "CarbarnId", strategy = GenerationType.TABLE)
-	@GenericGenerator(name = "CarbarnId", strategy = "org.broadleafcommerce.common.persistence.IdOverrideTableGenerator", parameters = {
-			@Parameter(name = "table_name", value = "SEQUENCE_GENERATOR"),
-			@Parameter(name = "segment_column_name", value = "ID_NAME"),
-			@Parameter(name = "value_column_name", value = "ID_VAL"),
-			@Parameter(name = "segment_value", value = "CarbarnImpl"),
-			@Parameter(name = "increment_size", value = "50"),
-			@Parameter(name = "entity_name", value = "com.ssbusy.core.carbarn.domain.Carbarn") })
-	@Column(name = "CARBARN_ID")
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name = "ID")
 	private Long id;
-	@Column(name = "CARBARN_NAME")
-	@AdminPresentation(friendlyName = "车库名字", order = 2000, group = "车库", groupOrder = 2000, prominent = true, gridOrder = 2)
+	@Column(name = "NAME")
+	@AdminPresentation(friendlyName = "名字", order = 2000, group = "停车场", groupOrder = 2000, prominent = true, gridOrder = 2)
 	private String name;
-	@Column(name = "CARBARN_ADDRESS", nullable = false)
-	@AdminPresentation(friendlyName = "车库地址", order = 2000, group = "车库", groupOrder = 2000, prominent = true, gridOrder = 3)
+	@Column(name = "ADDRESS")
+	@AdminPresentation(friendlyName = "地址", order = 2000, group = "停车场", groupOrder = 2000, prominent = true, gridOrder = 3)
 	private String address;
-	@Column(name = "CARBARN_PRICE", nullable = false)
-	@AdminPresentation(friendlyName = "价格(/小时)", order = 2000, group = "车库", groupOrder = 2000, prominent = true, gridOrder = 4)
-	private BigDecimal price;
 
-	@Column(name = "CARBARN_DETIAL")
-	@AdminPresentation(friendlyName = "备注", order = 2000, group = "车库", groupOrder = 2000, prominent = true, gridOrder = 6)
-	private String detial;
+	@Column(name = "DAY_PRICE")
+	@AdminPresentation(friendlyName = "白天价格", order = 2000, group = "停车场", groupOrder = 2000, prominent = true, gridOrder = 4)
+	private String dayPrice;
+
+	@Column(name = "NIGHT_PRICE")
+	@AdminPresentation(friendlyName = "晚上价格", order = 2000, group = "停车场", groupOrder = 2000, prominent = true, gridOrder = 5)
+	private String nightPrice;
+
+	@Column(name = "TOTAL")
+	@AdminPresentation(friendlyName = "总数", order = 2000, group = "停车场", groupOrder = 2000, prominent = true, gridOrder = 6)
+	private Integer total;
+
+	@Column(name = "LAST")
+	private Integer last = 0;
+
+	@Column(name = "TYPE")
+	@AdminPresentation(friendlyName = "类型", order = 2000, group = "停车场", groupOrder = 2000, prominent = true, gridOrder = 7)
+	private String type;
+
+	@Column(name = "TEL")
+	@AdminPresentation(friendlyName = "电话", order = 2000, group = "停车场", groupOrder = 2000, prominent = true, gridOrder = 8)
+	private String tel;
 
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = CarEntranceImpl.class, mappedBy = "carbarn")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blStandardElements")
@@ -70,77 +76,104 @@ public class CarbarnImpl implements Carbarn {
 	@AdminPresentationCollection(friendlyName = "入口", order = 1000, tab = "车库入口", tabOrder = 1000)
 	private List<CarEntrance> cartEntrances = new ArrayList<CarEntrance>();
 
-	@Column(name = "CARBARN_TOTAL", nullable = false)
-	@AdminPresentation(friendlyName = "车位总数", order = 2000, group = "车库", groupOrder = 2000, prominent = true, gridOrder = 5)
-	private Integer carbarnTotal;
-
-	@Column(name = "CARBARN_LAST", nullable = false)
-	private Integer carbarnLast = 0;
-
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	@Override
 	public String getAddress() {
 		return address;
 	}
 
+	@Override
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	@Override
+	public String getDayPrice() {
+		return dayPrice;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	@Override
+	public void setDayPrice(String dayPrice) {
+		this.dayPrice = dayPrice;
 	}
 
-	public String getDetial() {
-		return detial;
+	@Override
+	public String getNightPrice() {
+		return nightPrice;
 	}
 
-	public void setDetial(String detial) {
-		this.detial = detial;
+	@Override
+	public void setNightPrice(String nightPrice) {
+		this.nightPrice = nightPrice;
 	}
 
+	@Override
+	public Integer getTotal() {
+		return total;
+	}
+
+	@Override
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	@Override
+	public Integer getLast() {
+		return last;
+	}
+
+	@Override
+	public void setLast(Integer last) {
+		this.last = last;
+	}
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String getTel() {
+		return tel;
+	}
+
+	@Override
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	@Override
 	public List<CarEntrance> getCartEntrances() {
 		return cartEntrances;
 	}
 
+	@Override
 	public void setCartEntrances(List<CarEntrance> cartEntrances) {
 		this.cartEntrances = cartEntrances;
 	}
-
-	public Integer getCarbarnTotal() {
-		return carbarnTotal;
-	}
-
-	public void setCarbarnTotal(Integer carbarnTotal) {
-		this.carbarnTotal = carbarnTotal;
-	}
-
-	public Integer getCarbarnLast() {
-		return carbarnLast;
-	}
-
-	public void setCarbarnLast(Integer carbarnLast) {
-		this.carbarnLast = carbarnLast;
-	}
-
-	
 
 }

@@ -14,7 +14,7 @@
 	</named-query>
 	<named-query name="READ_CARBARN_BY_LATITUDE_AND_LONGITUDE">
 		<query>
-        	FROM com.ssbusy.core.carbarn.domain.Carbarn cb where cb.id in(select ce.carbarn.id from com.ssbusy.core.carbarn.domain.CarEntrance ce where (ce.latitude between :beginLatitude and :endLatitude) and (ce.longitude between :beginLongitude and :endLongitude)) order by cb.price
+        	FROM com.ssbusy.core.carbarn.domain.Carbarn cb where cb.id in(select ce.carbarn.id from com.ssbusy.core.carbarn.domain.CarEntrance ce where (ce.latitude between :beginLatitude and :endLatitude) and (ce.longitude between :beginLongitude and :endLongitude)) order by cb.dayPrice
        </query>
 	</named-query>
 </entity-mappings>

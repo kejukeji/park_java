@@ -89,29 +89,24 @@ public class CarbarnController {
 			HttpServletResponse response,@PathVariable("carparkid") Long id) {
 		Integer quantity = null;
 		Carbarn carbarn = carbarnService.readCarbarnById(id);
-		BufferedReader br;
-		boolean flag = false;
+		BufferedReader bufferReader;
+		StringBuffer buffer = new StringBuffer();
 		try {
-			br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+			bufferReader = new BufferedReader(new InputStreamReader(request.getInputStream()));
 			String s = "";
-			while((s = br.readLine()) != null) {
-				if(!("".equals(s))&&s!=""){
-					if(flag){
-						try{
-							quantity = new Integer(s);
-						}catch(NumberFormatException e){
-							quantity = 0;
-						}
-						flag = false;
-						break;
-					}
-					if(s.contains("EmptyParkSpaces")){
-						flag = true;
-					}
-				}
+			while((s = bufferReader.readLine()) != null) {
+				buffer.append(s);
 			}
+			bufferReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		JSONObject paramJson = null;
+		paramJson = JSONObject.fromObject(buffer.toString());
+		try {
+			quantity = paramJson.getInt("EmptyParkSpaces");
+		} catch (Exception e) {
+			quantity = 0;
 		}
 		Map<String, Object> returnMap = new HashMap<String, Object>(2);
 		if (carbarn == null || quantity == null) {

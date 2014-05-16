@@ -60,7 +60,7 @@ public class CarbarnImpl implements Carbarn {
 	private Integer total;
 
 	@Column(name = "LAST")
-	private Integer last = 0;
+	private Integer last;
 
 	@Column(name = "TYPE")
 	@AdminPresentation(friendlyName = "类型", order = 2000, group = "停车场", groupOrder = 2000, prominent = true, gridOrder = 7)

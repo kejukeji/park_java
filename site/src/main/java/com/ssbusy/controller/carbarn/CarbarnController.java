@@ -58,10 +58,25 @@ public class CarbarnController {
 			@RequestParam("latitude") Double latitude,
 			@RequestParam("longitude") Double longitude,
 			@RequestParam(value = "page_show", required = false) Integer pageShow,
-			@RequestParam(value = "sortBy", required = false) String sortBy) {
-		List<Carbarn> carbarns = carbarnService
+			@RequestParam(value = "sortBy", required = false) String sortBy,
+			@RequestParam(value = "carbarn_name", required = false) String carbarn_name){
+		List<Carbarn> carbarns = null;
+		// 没有传入车库名根据经纬度查询,否则根据name检索
+		if (carbarn_name == null){
+		carbarns = carbarnService
 				.readCarbarnByLatitudeAndLongitude(latitude, longitude, sortBy,
 						radius);
+		}else {
+			String name = "";
+			try {
+				name = new String(carbarn_name.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			carbarns = carbarnService.
+					readCarbarnByNameAndLocation(name, latitude, longitude, sortBy, radius); // 根据车库名得到车库，车库有经纬度算出距离，反之
+		}
 		List<Carbarn> returnCarbarns = null;
 		returnCarbarns = showPage(pageShow, carbarns);
 		CarbarnForm carbarnForm = null;
@@ -86,8 +101,16 @@ public class CarbarnController {
 			@RequestParam(value = "sortBy", required = false) String sortBy
 			){
 		System.out.println(carbarn_name);
+		String name = "";
+		try {
+			name = new String(carbarn_name.getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(name);
 		List<Carbarn> carbarns = carbarnService.
-				readCarbarnByNameAndLocation(carbarn_name, latitude, longitude, sortBy, radius); // 根据车库名得到车库，车库有经纬度算出距离，反之
+				readCarbarnByNameAndLocation(name, latitude, longitude, sortBy, radius); // 根据车库名得到车库，车库有经纬度算出距离，反之
 		List<Carbarn> returnCarbarns = null;
 		returnCarbarns = showPage(pageShow, carbarns);
 		CarbarnForm carbarnForm = null;

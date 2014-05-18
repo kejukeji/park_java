@@ -201,5 +201,58 @@ public class CarbarnServiceImpl implements CarbarnService {
 			return carbarnDao.updateCarbarn(carbarn);
 		}
 	}
+	/**
+	 * 车库名返回数据
+	 */
+	@Override
+	public List<Carbarn> readCarbarnByNameAndLocation(String name,
+			Double latitude, Double longitude, String sortBy, Double radius) {
+		List<Carbarn> carbarns = carbarnDao.readCarbarnByCarbarnName(name); // 根据车库名
+		for (Carbarn carbarn : carbarns){
+			if (carbarn.getCartEntrances().isEmpty() || carbarn.getCartEntrances() == null){
+				
+			}else{
+				for (CarEntrance carEntrance : carbarn.getCartEntrances()) {
+					carEntrance.setDistance(getDistance(latitude, longitude,
+							carEntrance.getLatitude(), carEntrance.getLongitude()));
+				}
+			}
+		}
+		if (SORT_BY_PRICE.equals(sortBy)) {
+			Collections.sort(carbarns, new Comparator<Carbarn>() {
+				@Override
+				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
+					return carbarn1.getDayPrice().compareTo(
+							carbarn2.getDayPrice());
+				}
+			});
+		} else {
+			Collections.sort(carbarns, new Comparator<Carbarn>() {
+				@Override
+				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
+
+					Comparator<CarEntrance> carEntranceCompare = new Comparator<CarEntrance>() {
+						@Override
+						public int compare(CarEntrance o1, CarEntrance o2) {
+							return Double.compare(o1.getDistance(),
+									o2.getDistance());
+						}
+					};
+					Collections.sort(carbarn1.getCartEntrances(),
+							carEntranceCompare);
+					Collections.sort(carbarn2.getCartEntrances(),
+							carEntranceCompare);
+					if (carbarn1.getCartEntrances().isEmpty()
+							|| carbarn2.getCartEntrances().isEmpty()) {
+						return 0;
+					}
+					return Double.compare(carbarn1.getCartEntrances().get(0)
+							.getDistance(), carbarn2.getCartEntrances().get(0)
+							.getDistance());
+				}
+			});
+		}
+		return carbarns;
+	}
 
 }

@@ -74,6 +74,32 @@ public class CarbarnController {
 		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
 		return jsonObject.toString();
 	}
+	
+	@RequestMapping(value = "/v1/carbarn/name-latitude-longitude", produces = { "application/json;charst=UTF-8" })
+	@ResponseBody
+	public String readCarbarnsByNameAndLocation(
+			@RequestParam("carbarn_name") String carbarn_name,
+			@RequestParam("latitude") Double latitude,
+			@RequestParam("longitude") Double longitude,
+			@RequestParam(value = "page_show", required = false) Integer pageShow,
+			@RequestParam(value = "sortBy", required = false) String sortBy
+			){
+		
+		List<Carbarn> carbarns = carbarnService.
+				readCarbarnByNameAndLocation(carbarn_name, latitude, longitude, sortBy, radius); // 根据车库名得到车库，车库有经纬度算出距离，反之
+		List<Carbarn> returnCarbarns = null;
+		returnCarbarns = showPage(pageShow, carbarns);
+		CarbarnForm carbarnForm = null;
+		if (returnCarbarns.isEmpty() || returnCarbarns == null){
+			carbarnForm = new CarbarnForm(400, "没有对应数据", returnCarbarns);
+		}else{
+			carbarnForm = new CarbarnForm(0, "调用成功", returnCarbarns);
+		}
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[]{ "carbarn"});
+		JSONObject jsonObject = JSONObject.fromObject(carbarnForm, jsonConfig);
+		return jsonObject.toString();
+	}
 
 	/**
 	 * 

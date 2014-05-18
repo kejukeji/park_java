@@ -66,7 +66,4 @@ public class CarbarnDaoImpl implements CarbarnDao {
 		Carbarn resCarbarn = em.merge(carbarn);
 		return resCarbarn;
 	}
-	
-
-
 }

@@ -30,6 +30,17 @@ public interface CarbarnService {
 	 */
 	public List<Carbarn> readCarbarnByLatitudeAndLongitude(Double latitude,
 			Double longitude,String sortBy,Double radius);
+	/**
+	 * 
+	 * @param name 车库名
+	 * @param latitude  纬度
+	 * @param longitude 经度
+	 * @param sortBy 排序规则
+	 * @param radius
+	 * @return
+	 */
+	public List<Carbarn> readCarbarnByNameAndLocation(String name,
+			Double latitude, Double longitude, String sortBy, Double radius);
 
 	/**
 	 * 

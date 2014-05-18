@@ -18,7 +18,7 @@ IT IS NOT RECOMMENDED TO USE JETTY IN A PRODUCTION ENVIRONMENT.
       <Arg>
 		<New class="com.mchange.v2.c3p0.ComboPooledDataSource">
 			<Set name="driverClass">com.mysql.jdbc.Driver</Set>
-			<Set name="jdbcUrl"><![CDATA[jdbc:mysql://localhost:3306/parking?autoReconnect=true]]></Set>
+			<Set name="jdbcUrl"><![CDATA[jdbc:mysql://localhost:3306/parking?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull]]></Set>
 			<Set name="user">root</Set>
 			<Set name="password">123456</Set>
 			<Set name="minPoolSize">1</Set>

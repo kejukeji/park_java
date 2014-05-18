@@ -75,46 +75,47 @@ public class CarbarnServiceImpl implements CarbarnService {
 		}
 		List<Carbarn> carbarns = carbarnDao.readCarbarnByLatitudeAndLongitude(
 				latitude, latitude + radius, longitude, longitude + radius);
-		for (Carbarn carbarn : carbarns) {
-			for (CarEntrance carEntrance : carbarn.getCartEntrances()) {
-				carEntrance.setDistance(getDistance(latitude, longitude,
-						carEntrance.getLatitude(), carEntrance.getLongitude()));
-			}
-		}
-		if (SORT_BY_PRICE.equals(sortBy)) {
-			Collections.sort(carbarns, new Comparator<Carbarn>() {
-				@Override
-				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
-					return carbarn1.getDayPrice().compareTo(
-							carbarn2.getDayPrice());
-				}
-			});
-		} else {
-			Collections.sort(carbarns, new Comparator<Carbarn>() {
-				@Override
-				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
-
-					Comparator<CarEntrance> carEntranceCompare = new Comparator<CarEntrance>() {
-						@Override
-						public int compare(CarEntrance o1, CarEntrance o2) {
-							return Double.compare(o1.getDistance(),
-									o2.getDistance());
-						}
-					};
-					Collections.sort(carbarn1.getCartEntrances(),
-							carEntranceCompare);
-					Collections.sort(carbarn2.getCartEntrances(),
-							carEntranceCompare);
-					if (carbarn1.getCartEntrances().isEmpty()
-							|| carbarn2.getCartEntrances().isEmpty()) {
-						return 0;
-					}
-					return Double.compare(carbarn1.getCartEntrances().get(0)
-							.getDistance(), carbarn2.getCartEntrances().get(0)
-							.getDistance());
-				}
-			});
-		}
+//		for (Carbarn carbarn : carbarns) {
+//			for (CarEntrance carEntrance : carbarn.getCartEntrances()) {
+//				carEntrance.setDistance(getDistance(latitude, longitude,
+//						carEntrance.getLatitude(), carEntrance.getLongitude()));
+//			}
+//		}
+//		if (SORT_BY_PRICE.equals(sortBy)) {
+//			Collections.sort(carbarns, new Comparator<Carbarn>() {
+//				@Override
+//				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
+//					return carbarn1.getDayPrice().compareTo(
+//							carbarn2.getDayPrice());
+//				}
+//			});
+//		} else {
+//			Collections.sort(carbarns, new Comparator<Carbarn>() {
+//				@Override
+//				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
+//
+//					Comparator<CarEntrance> carEntranceCompare = new Comparator<CarEntrance>() {
+//						@Override
+//						public int compare(CarEntrance o1, CarEntrance o2) {
+//							return Double.compare(o1.getDistance(),
+//									o2.getDistance());
+//						}
+//					};
+//					Collections.sort(carbarn1.getCartEntrances(),
+//							carEntranceCompare);
+//					Collections.sort(carbarn2.getCartEntrances(),
+//							carEntranceCompare);
+//					if (carbarn1.getCartEntrances().isEmpty()
+//							|| carbarn2.getCartEntrances().isEmpty()) {
+//						return 0;
+//					}
+//					return Double.compare(carbarn1.getCartEntrances().get(0)
+//							.getDistance(), carbarn2.getCartEntrances().get(0)
+//							.getDistance());
+//				}
+//			});
+//		}
+		carbarns = compareCarbarn(carbarns, latitude, longitude, sortBy);
 		return carbarns;
 	}
 
@@ -208,6 +209,18 @@ public class CarbarnServiceImpl implements CarbarnService {
 	public List<Carbarn> readCarbarnByNameAndLocation(String name,
 			Double latitude, Double longitude, String sortBy, Double radius) {
 		List<Carbarn> carbarns = carbarnDao.readCarbarnByCarbarnName(name); // 根据车库名
+		carbarns = compareCarbarn(carbarns, latitude, longitude, sortBy);
+		return carbarns;
+	}
+	/**
+	 * 
+	 * @param carbarns 需要比较的carbarns
+	 * @param latitude 经度
+	 * @param longitude 纬度
+	 * @param sortBy 排序规则
+	 * @return
+	 */
+	public List<Carbarn> compareCarbarn(List<Carbarn> carbarns, Double latitude, Double longitude, String sortBy){
 		for (Carbarn carbarn : carbarns){
 			if (carbarn.getCartEntrances().isEmpty() || carbarn.getCartEntrances() == null){
 				
@@ -222,8 +235,12 @@ public class CarbarnServiceImpl implements CarbarnService {
 			Collections.sort(carbarns, new Comparator<Carbarn>() {
 				@Override
 				public int compare(Carbarn carbarn1, Carbarn carbarn2) {
-					return carbarn1.getDayPrice().compareTo(
-							carbarn2.getDayPrice());
+					if (carbarn1.getDayPrice() == null || carbarn2.getDayPrice() == null){
+						return -1;
+					}else{
+						return carbarn1.getDayPrice().compareTo(
+								carbarn2.getDayPrice());
+					}
 				}
 			});
 		} else {

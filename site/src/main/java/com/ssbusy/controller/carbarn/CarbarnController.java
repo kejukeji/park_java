@@ -3,6 +3,7 @@ package com.ssbusy.controller.carbarn;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +76,7 @@ public class CarbarnController {
 		return jsonObject.toString();
 	}
 	
-	@RequestMapping(value = "/v1/carbarn/name-latitude-longitude", produces = { "application/json;charst=UTF-8" })
+	@RequestMapping(value = "/v1/carbarn/name-latitude-longitude", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
 	public String readCarbarnsByNameAndLocation(
 			@RequestParam("carbarn_name") String carbarn_name,
@@ -84,7 +85,7 @@ public class CarbarnController {
 			@RequestParam(value = "page_show", required = false) Integer pageShow,
 			@RequestParam(value = "sortBy", required = false) String sortBy
 			){
-		
+		System.out.println(carbarn_name);
 		List<Carbarn> carbarns = carbarnService.
 				readCarbarnByNameAndLocation(carbarn_name, latitude, longitude, sortBy, radius); // 根据车库名得到车库，车库有经纬度算出距离，反之
 		List<Carbarn> returnCarbarns = null;
